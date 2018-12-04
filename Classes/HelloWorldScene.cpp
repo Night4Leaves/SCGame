@@ -24,6 +24,7 @@
 
 #include "HelloWorldScene.h"
 #include "SimpleAudioEngine.h"
+#include "Player.h"
 
 USING_NS_CC;
 
@@ -72,7 +73,7 @@ bool HelloWorld::init()
     {
         float x = origin.x + visibleSize.width - closeItem->getContentSize().width/2;
         float y = origin.y + closeItem->getContentSize().height/2;
-        closeItem->setPosition(Vec2(x,y));
+        closeItem->setPosition(Vec2(x, y));
     }
 
     // create menu, it's an autorelease object
@@ -135,3 +136,6 @@ void HelloWorld::menuCloseCallback(Ref* pSender)
 
 
 }
+
+
+
