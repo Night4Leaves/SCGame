@@ -14,6 +14,9 @@ public:
 
 	CREATE_FUNC(TextDisplayLayer);
 	virtual bool init();
+
+	//设置游戏标题
+	bool setGameTitle(const char* title, const char* fontType, float fontSize, Color3B color = Color3B::WHITE);
 };
 
 #endif // !__TEXT_DISPLAY_LAYER_H__

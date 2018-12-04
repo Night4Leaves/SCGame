@@ -16,7 +16,7 @@ public:
 	virtual bool init();
 
 	//根据传入的图片名字将图片创建为精灵对象并添加到背景层中
-	bool createBackgroundPicture(const char* pictureName);
+	bool setBackgroundPicture(const char* pictureName);
 };
 
 #endif // !__BACKGROUND_LAYER_H__
