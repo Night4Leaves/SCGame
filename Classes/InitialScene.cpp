@@ -42,6 +42,8 @@ bool InitialScene::init()
 		m_pGameMenuLayer = GameMenuLayer::create();
 		CC_BREAK_IF(m_pGameMenuLayer == nullptr);
 		this->addChild(m_pGameMenuLayer);
+		//创建开始界面菜单
+		m_pGameMenuLayer->setInitialMenu();
 
 		return true;
 	} while (0);

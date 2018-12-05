@@ -36,7 +36,7 @@ MenuItemSprite * MenuItemUtil::createMenuItemSprite(const ButtonType & buttontyp
 	std::string selectPic = StringUtils::format("%s_Selected.png", buttontype.picName);
 	//按钮文字
 	const char* text = buttontype.text;
-	//字体设置s
+	//字体设置
 	TTFConfig fontConfig = buttontype.fontConfig;
 
 	//创建普通状态和按下状态按钮精灵对象
