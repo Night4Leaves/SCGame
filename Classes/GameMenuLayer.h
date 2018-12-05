@@ -14,6 +14,12 @@ public:
 
 	CREATE_FUNC(GameMenuLayer);
 	virtual bool init();
+
+private:
+	void startGame(CCObject *sender);
+	void continueGame(CCObject *sender);
+	void openOptionWin(CCObject *sender);
+	void exitGame(CCObject *sender);
 };
 
 #endif // !1
