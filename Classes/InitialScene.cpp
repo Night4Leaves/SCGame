@@ -2,6 +2,7 @@
 #include "BackgroundLayer.h"
 #include "TextDisplayLayer.h"
 #include "GameMenuLayer.h"
+#include "ResourcesLoadingUtil.h"
 
 InitialScene::InitialScene()
 {
@@ -20,6 +21,8 @@ bool InitialScene::init()
 {
 	do {
 		CC_BREAK_IF(!Scene::init());
+
+		ResourcesLoadingUtil::preloadResources();
 
 		//初始化背景层并添加到场景中
 		m_pBackgroundLayer = BackgroundLayer::create();

@@ -14,8 +14,6 @@ bool GameMenuLayer::init()
 	do {
 		CC_BREAK_IF(!Layer::init());
 
-		SpriteFrameCache::getInstance()->addSpriteFramesWithFile("UI.plist");
-
 		TTFConfig fontConfig = { "fonts/arial.ttf", 40 };
 
 		ButtonType gameStartButtonType = { "Button", "Game Start", fontConfig, this, menu_selector(GameMenuLayer::startGame) };
