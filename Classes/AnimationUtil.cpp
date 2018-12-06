@@ -10,7 +10,7 @@ Animation * AnimationUtil::createAnimationWithSingleFrameName(const char * name,
 
 	do {
 		//不断获取SpriteFrame对象直到获取的值为空
-		frame = cache->getSpriteFrameByName(StringUtils::format("%s%02d.png", name, index++));
+		frame = cache->getSpriteFrameByName(StringUtils::format("%s_%02d.png", name, index++));
 		CC_BREAK_IF(frame == nullptr);
 
 		frameList.pushBack(frame);
@@ -35,7 +35,7 @@ Animation * AnimationUtil::createAnimationWithFrameNameAndNum(const char * name,
 	while(index <= num)
 	{
 		//不断获取SpriteFrame对象直到获取的值为空
-		frame = cache->getSpriteFrameByName(StringUtils::format("%s%02d.png", name, index++));
+		frame = cache->getSpriteFrameByName(StringUtils::format("%s_%02d.png", name, index++));
 		CC_BREAK_IF(frame == nullptr);
 
 		frameList.pushBack(frame);

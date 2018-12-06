@@ -7,7 +7,6 @@
 USING_NS_CC;
 
 class BackgroundLayer;
-class TextDisplayLayer;
 class GameMenuLayer;
 
 class InitialScene : public Scene
@@ -22,7 +21,6 @@ public:
 
 private:
 	BackgroundLayer* m_pBackgroundLayer;
-	TextDisplayLayer* m_pTextDisplayLayer;
 	GameMenuLayer* m_pGameMenuLayer;
 };
 

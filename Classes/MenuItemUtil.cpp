@@ -1,6 +1,6 @@
 #include "MenuItemUtil.h"
 
-Sprite * MenuItemUtil::createMenuButton(std::string picAddress, const char * text, TTFConfig fontConfig, Color3B color)
+Sprite * MenuItemUtil::createMenuButton(const char * picAddress, const char * text, TTFConfig fontConfig, Color3B color)
 {
 	//创建按钮背景
 	Sprite* buttonBg = Sprite::createWithSpriteFrameName(picAddress);
@@ -40,8 +40,8 @@ MenuItemSprite * MenuItemUtil::createMenuItemSprite(const ButtonType & buttontyp
 	TTFConfig fontConfig = buttontype.fontConfig;
 
 	//创建普通状态和按下状态按钮精灵对象
-	Sprite* normalButton = MenuItemUtil::createMenuButton(normalPic, text, fontConfig, Color3B::WHITE);
-	Sprite* selectButton = MenuItemUtil::createMenuButton(selectPic, text, fontConfig, Color3B::BLACK);
+	Sprite* normalButton = MenuItemUtil::createMenuButton(normalPic.c_str(), text, fontConfig, Color3B::WHITE);
+	Sprite* selectButton = MenuItemUtil::createMenuButton(selectPic.c_str(), text, fontConfig, Color3B::BLACK);
 
 	//创建菜单选项精灵对象
 	MenuItemSprite* buttonSprite = MenuItemSprite::create(normalButton, selectButton, buttontype.target, buttontype.selector);

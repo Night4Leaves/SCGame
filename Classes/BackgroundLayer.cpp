@@ -21,13 +21,14 @@ bool BackgroundLayer::init()
 	return false;
 }
 
-bool BackgroundLayer::setBackgroundPicture(const char * pictureName)
+void BackgroundLayer::setBackgroundPicture(const char * pictureName)
 {
 	//根据图片名创建精灵对象并添加到层中
 	Sprite* p_bgSprite = Sprite::create(pictureName);
 	if (p_bgSprite == nullptr)
 	{
 		log("setBackgroundPicture set failed!");
+		return;
 	}
 	else
 	{
@@ -45,5 +46,29 @@ bool BackgroundLayer::setBackgroundPicture(const char * pictureName)
 		p_bgSprite->setPosition(winSize.width * 0.5, winSize.height * 0.5);
 	}
 
-	return true;
+}
+
+void BackgroundLayer::setGameTitle(const char * title, const char * fontType, float fontSize, Color3B color)
+{
+	//根据传入的内容、字体种类、字号创建标题标签
+	Label* p_titleLabel = Label::create(title, fontType, fontSize);
+	if (p_titleLabel == nullptr)
+	{
+		log("Title create failed!");
+		return;
+	}
+	else
+	{
+		this->addChild(p_titleLabel);
+
+		//设置标题字体颜色
+		p_titleLabel->setColor(color);
+
+		//获取OpenGL视图规格
+		Size winSize = Director::getInstance()->getWinSize();
+
+		//设置标题中心点在窗口视图合适位置
+		p_titleLabel->setPosition(winSize.width * 0.5, winSize.height * 0.8);
+	}
+
 }
