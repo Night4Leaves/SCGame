@@ -37,7 +37,7 @@ public:
 
 private:
 	//ÃÌº”NPCµΩ≤„÷–
-	void addNPC(NPCSetInfo npcSetInfo);
+	void addNPC(const NPCSetInfo& npcSetInfo);
 };
 
 #endif // !__NPCLAYER__

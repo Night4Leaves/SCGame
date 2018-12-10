@@ -1,6 +1,6 @@
 #include "GameMenuLayer.h"
-#include "MenuItemUtil.h"
-#include "MainScene.h"
+#include "Util/MenuItemUtil.h"
+#include "Scene/MainScene.h"
 
 GameMenuLayer::GameMenuLayer()
 {
@@ -55,6 +55,7 @@ void GameMenuLayer::setInitialMenu()
 		Size winSize = Director::getInstance()->getWinSize();
 		menu->setPosition(winSize.width * 0.5, winSize.height * 0.4);
 		menu->alignItemsVerticallyWithPadding(20);
+		
 	}
 	
 }
