@@ -10,14 +10,32 @@ USING_NS_CC;
  *	@picName 按钮背景图
  *	@text	按钮显示文字
  *	@fontConfig	按钮文字字体
+ *	@scale	缩放倍率
  *	@target	按钮所在上下文(存疑)
  *	@selector	回调函数
  */
-struct ButtonType
+struct ButtonWithFontType
 {
 	const char* picName;
 	const char* text;
 	TTFConfig fontConfig;
+	float scale = 1;
+	Ref* target = nullptr;
+	SEL_MenuHandler selector = nullptr;
+};
+
+/**
+ *	按钮设置信息
+ *	@normalPicName 正常状态按钮图
+ *	@selectedPicName	选中状态按钮图
+ *	@target	按钮所在上下文(存疑)
+ *	@selector	回调函数
+ */
+struct ButtonOnlyImageType
+{
+	const char* normalPicName;
+	const char* selectedPicName;
+	float scale = 1;
 	Ref* target = nullptr;
 	SEL_MenuHandler selector = nullptr;
 };
@@ -34,8 +52,11 @@ public:
 	 */
 	static Sprite* createMenuButton(const char* picAddress, const char* text, TTFConfig fontConfig, Color3B color = Color3B::WHITE);
 
-	//创建菜单选项对象(普通:白字, 按下:黑色)
-	static MenuItemSprite* createMenuItemSprite(const ButtonType& buttontype);
+	//创建有文字的菜单选项对象(普通:白字, 按下:黑色)
+	static MenuItemSprite* createMenuItemSprite(const ButtonWithFontType& buttontype);
+
+	//创建没有文字的菜单选项对象
+	static MenuItemSprite* createMenuItemSpriteByPicture(const ButtonOnlyImageType& buttontype);
 };
 
 #endif // !__MENU_ITEM_UTIL_H__

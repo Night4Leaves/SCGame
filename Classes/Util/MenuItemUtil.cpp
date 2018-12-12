@@ -28,7 +28,7 @@ Sprite * MenuItemUtil::createMenuButton(const char * picAddress, const char * te
 	return buttonBg;
 }
 
-MenuItemSprite * MenuItemUtil::createMenuItemSprite(const ButtonType & buttontype)
+MenuItemSprite * MenuItemUtil::createMenuItemSprite(const ButtonWithFontType & buttontype)
 {
 	//普通状态背景
 	std::string normalPic = StringUtils::format("%s_Normal.png", buttontype.picName);
@@ -52,7 +52,27 @@ MenuItemSprite * MenuItemUtil::createMenuItemSprite(const ButtonType & buttontyp
 	}
 
 	//菜单选项缩放
-	buttonSprite->setScale(0.5);
+	buttonSprite->setScale(buttontype.scale);
+
+	return buttonSprite;
+}
+
+MenuItemSprite * MenuItemUtil::createMenuItemSpriteByPicture(const ButtonOnlyImageType & buttontype)
+{
+	//创建普通状态和选中状态按钮精灵对象
+	Sprite* normalButton = Sprite::createWithSpriteFrameName(buttontype.normalPicName);
+	Sprite* selectButton = Sprite::createWithSpriteFrameName(buttontype.selectedPicName);
+
+	//创建菜单选项精灵对象
+	MenuItemSprite* buttonSprite = MenuItemSprite::create(normalButton, selectButton, buttontype.target, buttontype.selector);
+	if (buttonSprite == nullptr)
+	{
+		log("MenuItemSprite create failed!");
+		return false;
+	}
+
+	//菜单选项缩放
+	buttonSprite->setScale(buttontype.scale);
 
 	return buttonSprite;
 }

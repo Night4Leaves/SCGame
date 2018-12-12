@@ -28,16 +28,16 @@ void GameMenuLayer::setInitialMenu()
 	TTFConfig fontConfig = { "fonts/arial.ttf", 40 };
 
 	//创建菜单选项
-	ButtonType gameStartButtonType = { "Button", "Game Start", fontConfig, this, menu_selector(GameMenuLayer::startGame) };
+	ButtonWithFontType gameStartButtonType = { "Button", "Game Start", fontConfig, 0.5, this, menu_selector(GameMenuLayer::startGame) };
 	MenuItemSprite* aButtonSprite = MenuItemUtil::createMenuItemSprite(gameStartButtonType);
 
-	ButtonType continueButtonType = { "Button", "Continue", fontConfig, this, menu_selector(GameMenuLayer::continueGame) };
+	ButtonWithFontType continueButtonType = { "Button", "Continue", fontConfig, 0.5, this, menu_selector(GameMenuLayer::continueGame) };
 	MenuItemSprite* bButtonSprite = MenuItemUtil::createMenuItemSprite(continueButtonType);
 
-	ButtonType optionButtonType = { "Button", "Option", fontConfig, this, menu_selector(GameMenuLayer::openOptionWin) };
+	ButtonWithFontType optionButtonType = { "Button", "Option", fontConfig, 0.5, this, menu_selector(GameMenuLayer::openOptionWin) };
 	MenuItemSprite* cButtonSprite = MenuItemUtil::createMenuItemSprite(optionButtonType);
 
-	ButtonType exitButtonType = { "Button", "Exit", fontConfig, this, menu_selector(GameMenuLayer::exitGame) };
+	ButtonWithFontType exitButtonType = { "Button", "Exit", fontConfig, 0.5, this, menu_selector(GameMenuLayer::exitGame) };
 	MenuItemSprite* dButtonSprite = MenuItemUtil::createMenuItemSprite(exitButtonType);
 
 	//创建菜单
@@ -58,6 +58,11 @@ void GameMenuLayer::setInitialMenu()
 		
 	}
 	
+}
+
+void GameMenuLayer::setMainMenu()
+{
+
 }
 
 void GameMenuLayer::startGame(CCObject * sender)

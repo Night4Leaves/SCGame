@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="left-down" width="128" height="128" tilewidth="16" tileheight="12" infinite="0" nextlayerid="3" nextobjectid="6">
+ <tileset firstgid="1" source="main_scene_bg_01_2048x1536.tsx"/>
+ <layer id="1" name="background" width="128" height="128">
+  <data encoding="base64" compression="zlib">
+   eJztzjEBAAAMAiDXv/QOQ/hAAhIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIC6dYCpBwIPAAI=
+  </data>
+ </layer>
+ <objectgroup id="2" name="objects">
+  <object id="1" name="npc_1" x="265" y="1230">
+   <point/>
+  </object>
+  <object id="2" name="npc_2" x="670" y="1230">
+   <point/>
+  </object>
+  <object id="3" name="npc_3" x="900" y="1230">
+   <point/>
+  </object>
+  <object id="4" name="npc_4" x="1490" y="1230">
+   <point/>
+  </object>
+  <object id="5" name="npc_5" x="1690" y="1230">
+   <point/>
+  </object>
+ </objectgroup>
+</map>

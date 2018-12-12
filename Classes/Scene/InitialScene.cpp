@@ -1,6 +1,7 @@
 #include "InitialScene.h"
 #include "Layer/BackgroundLayer.h"
 #include "Layer/GameMenuLayer.h"
+#include "Layer/PaneLayer.h"
 
 InitialScene::InitialScene()
 {

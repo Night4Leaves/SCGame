@@ -2,8 +2,12 @@
 #include "Layer/BackgroundLayer.h"
 #include "Layer/GameMenuLayer.h"
 #include "Layer/NPCLayer.h"
+#include "Layer/PaneLayer.h"
+#include "Entity/Player.h"
+#include "Controller/PlayerController.h"
 
 #include "Util/ResourcesLoadingUtil.h"
+#include "Util/AnimationUtil.h"
 
 MainScene::MainScene()
 {
@@ -55,6 +59,28 @@ bool MainScene::init()
 		m_pGameMenuLayer = GameMenuLayer::create();
 		CC_BREAK_IF(m_pGameMenuLayer == nullptr);
 		this->addChild(m_pGameMenuLayer);
+		//创建主界面菜单
+		m_pGameMenuLayer->setMainMenu();
+
+		Sprite* sprite = Sprite::createWithSpriteFrameName("player_01_wait.png");
+
+		Player* player = Player::create();
+		player->bindSprite(sprite);
+		player->setPosition(400, 300);
+		this->addChild(player);
+
+		PlayerController* playerController = PlayerController::create();
+		playerController->setControllerListner(player);
+
+		this->addChild(playerController);
+
+		//this->addChild(sprite);
+
+		//sprite->setPosition(400, 300);
+
+		//Animation* animation = AnimationUtil::createAnimationWithSingleFrameName("player_01_idle", 0.25f, -1);
+		//Animate* animate = Animate::create(animation);
+		//sprite->runAction(animate);
 
 		return true;
 	} while (0);

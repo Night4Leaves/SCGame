@@ -18,6 +18,9 @@ public:
 	//设置初始界面的菜单选项
 	void setInitialMenu();
 
+	//设置主界面的菜单选项
+	void setMainMenu();
+
 private:
 	//初始界面功能
 	void startGame(CCObject *sender);

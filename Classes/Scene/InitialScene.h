@@ -8,6 +8,7 @@ USING_NS_CC;
 
 class BackgroundLayer;
 class GameMenuLayer;
+class PaneLayer;
 
 class InitialScene : public Scene
 {
@@ -22,6 +23,7 @@ public:
 private:
 	BackgroundLayer* m_pBackgroundLayer;
 	GameMenuLayer* m_pGameMenuLayer;
+	PaneLayer* m_pPaneLayer;
 };
 
 #endif // !__INITIAL_SCENE_H__

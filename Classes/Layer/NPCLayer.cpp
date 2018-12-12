@@ -39,9 +39,9 @@ void NPCLayer::setMainSceneNPC()
 	Vec2 npc_5_point = Vec2(650, 150);
 
 	//NPC动画
-	NPCSetInfo npc_1 = { "npc_1", npc_1_point, 4 , 0.3f};
+	NPCSetInfo npc_1 = { "npc_1", npc_1_point, 4 , 0.25f };
 	NPCSetInfo npc_2 = { "npc_2", npc_2_point, 4 , 0.3f };
-	NPCSetInfo npc_3 = { "npc_3", npc_3_point, 4 , 0.3f };
+	NPCSetInfo npc_3 = { "npc_3", npc_3_point, 4 , 0.28f };
 
 	//添加NPC
 	addNPC(npc_1);
@@ -64,7 +64,7 @@ void NPCLayer::addNPC(const NPCSetInfo& npcSetInfo)
 	//创建精灵对象
 	Sprite* sprite = Sprite::createWithSpriteFrameName(wait);
 	this->addChild(sprite);
-	sprite->setPosition(point);
+	sprite->setPosition(point); 
 
 	//如果待机动画帧数量不为1，意味NPC采用动态待机动画
 	if (num > 1)
