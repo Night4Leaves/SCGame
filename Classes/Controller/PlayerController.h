@@ -14,12 +14,11 @@ public:
 	virtual bool init();
 	virtual void update(float dt);
 
-	void setSpeed(int iSpeed);
-
 	void onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event);
 	void onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event);
 protected:
 	int m_iSpeed;
+	bool m_bIsRight;
 };
 
 #endif // !__PLAYER_CONTROLLER_H__

@@ -140,13 +140,16 @@
     <ClInclude Include="..\Classes\Entity\Monster.h">
       <Filter>src\Entity\Monster</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Controller\ControllerListener.h">
-      <Filter>src\Controller</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\Controller\SCController.h">
       <Filter>src\Controller</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Controller\PlayerController.h">
+      <Filter>src\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Controller\PlayerControllerListener.h">
+      <Filter>src\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Controller\GeneralControllerListener.h">
       <Filter>src\Controller</Filter>
     </ClInclude>
   </ItemGroup>

@@ -67,11 +67,11 @@ bool MainScene::init()
 		Player* player = Player::create();
 		player->bindSprite(sprite);
 		player->setPosition(400, 300);
+		player->idle();
 		this->addChild(player);
 
 		PlayerController* playerController = PlayerController::create();
-		playerController->setControllerListner(player);
-
+		player->setController(playerController);
 		this->addChild(playerController);
 
 		//this->addChild(sprite);
