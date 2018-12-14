@@ -19,6 +19,8 @@ public:
 protected:
 	int m_iSpeed;
 	bool m_bIsRight;
+	int m_iIsRun;
+	bool m_bIsJump;
 };
 
 #endif // !__PLAYER_CONTROLLER_H__

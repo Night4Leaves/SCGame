@@ -34,6 +34,9 @@
     <Filter Include="src\Controller">
       <UniqueIdentifier>{e23324f3-accf-44ea-9043-83c250570992}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\TSM">
+      <UniqueIdentifier>{1b4374d9-b150-4371-bb01-47450a44fd53}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">

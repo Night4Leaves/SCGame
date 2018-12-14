@@ -12,6 +12,8 @@ public:
 	virtual Vec2 getTargetPosition() = 0;
 	virtual void setTargetPosition(Vec2 pos) = 0;
 
+	virtual void setAction(Action* action) = 0;
+
 	virtual void run() = 0;
 	virtual void attack() = 0;
 	virtual void idle() = 0;

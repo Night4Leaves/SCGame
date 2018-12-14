@@ -17,6 +17,7 @@ public:
 	void setController(SCController* controller);
 	virtual Vec2 getTargetPosition();
 	virtual void setTargetPosition(Vec2 pos);
+	virtual void setAction(Action* action);
 
 	virtual void run();
 	virtual void attack();

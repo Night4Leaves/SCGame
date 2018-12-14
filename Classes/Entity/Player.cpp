@@ -45,6 +45,11 @@ void Player::setTargetPosition(Vec2 pos)
 	this->setPosition(pos);
 }
 
+void Player::setAction(Action * action)
+{
+	m_sprite->runAction(action);
+}
+
 void Player::run()
 {
 	m_sprite->stopAllActions();
@@ -74,6 +79,12 @@ void Player::idle()
 
 void Player::hurt()
 {
+	m_sprite->stopAllActions();
+	Animation* animation = AnimationCache::getInstance()->getAnimation("player_01_hurt");
+	Animate* animate = Animate::create(animation);
+	Blink* blink = Blink::create(0.8f, 5);
+	Spawn* spawn = Spawn::create(animate, blink, nullptr);
+	m_sprite->runAction(spawn);
 }
 
 void Player::death()
@@ -82,6 +93,10 @@ void Player::death()
 
 void Player::climb()
 {
+	m_sprite->stopAllActions();
+	Animation* animation = AnimationCache::getInstance()->getAnimation("player_01_climb");
+	Animate* animate = Animate::create(animation);
+	m_sprite->runAction(animate);
 }
 
 void Player::jump()
