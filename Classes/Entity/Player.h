@@ -19,16 +19,20 @@ public:
 	virtual void setTargetPosition(Vec2 pos);
 	virtual void setAction(Action* action);
 
+	void checkControllerStatus();
+
 	virtual void run();
+	virtual void jump();
+
 	virtual void attack();
 	virtual void idle();
 	virtual void hurt();
 	virtual void death();
 	virtual void climb();
-	virtual void jump();
 	virtual void turnAround(bool isRight);
 
 private:
+	//¼ÇÂ¼¿ØÖÆÆ÷
 	SCController* m_pPlayerController;
 };
 
