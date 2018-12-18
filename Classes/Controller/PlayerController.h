@@ -23,10 +23,9 @@ protected:
 	int m_iYSpeed;	//Y速移速
 
 	bool m_bIsRight;	//是否向右
+	bool m_bIsLock;		//是否为锁死状态
 
 	int m_iIsRun;	//是否为跑动状态(判断左右移动键按下几个)
-	bool m_bIsJump;	//是否为跳跃状态
-	bool m_bIsclimb;	//是否为攀爬状态
 };
 
 #endif // !__PLAYER_CONTROLLER_H__

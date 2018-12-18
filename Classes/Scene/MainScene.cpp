@@ -66,7 +66,7 @@ bool MainScene::init()
 
 		Player* player = Player::create();
 		player->bindSprite(sprite);
-		player->setPosition(400, 300);
+		player->setPosition(100, 100);
 		player->idle();
 		this->addChild(player);
 

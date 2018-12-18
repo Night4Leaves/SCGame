@@ -43,16 +43,46 @@ Vec2 Player::getTargetPosition()
 void Player::setTargetPosition(Vec2 pos)
 {
 	this->setPosition(pos);
-}
 
-void Player::setAction(Action * action)
-{
-	m_sprite->runAction(action);
+	Player::setViewPointByPlayer();
 }
 
 void Player::checkControllerStatus()
 {
 	m_pPlayerController->checkControllerStatus();
+}
+
+void Player::setViewPointByPlayer()
+{
+	if (m_sprite == nullptr)
+	{
+		return;
+	}
+
+	//获取屏幕显示尺寸
+	Size visibleSize = Director::getInstance()->getVisibleSize();
+	//获取精灵位置
+	Point spritePosition = getPosition();
+	//获取精灵大小尺寸
+	Size contentSize = m_sprite->getContentSize();
+	//与左边界比较，防止跑到左边界外
+	float x = std::min(spritePosition.x, visibleSize.width - (contentSize.width / 2 - 10));
+	//与右边界比较，防止跑到右边界外
+	x = std::max(x, contentSize.width / 2 - 10);
+
+	Point destPos = Point(x, 100);
+
+	this->setPosition(destPos);
+
+	/*log("x: %f, y: %f", spritePosition.x, spritePosition.y);*/
+
+	//float x = std::max(spritePosition.x + (contentSize.width / 2), visibleSize.width / 2);
+	//float y = std::max(spritePosition.y + (contentSize.height / 2), visibleSize.height / 2);
+
+	//Point destPosition = Point(x, y);
+
+	//Point centerPosition = Point(visibleSize.width / 2, visibleSize.height / 2);
+
 }
 
 void Player::run()
@@ -91,20 +121,29 @@ void Player::jump()
 
 void Player::attack()
 {
+	//停止当前的动作
 	m_sprite->stopAllActions();
+	//获取已经做好的动画
 	Animation* attackAnimation = AnimationCache::getInstance()->getAnimation("player_01_attack");
-	Animation* idleAnimation = AnimationCache::getInstance()->getAnimation("player_01_idle");
+	//Animation* idleAnimation = AnimationCache::getInstance()->getAnimation("player_01_idle");
+	//生成动画动作
 	Animate* attackAnimate = Animate::create(attackAnimation);
-	Animate* idleAnimate = Animate::create(idleAnimation);
-	Sequence* actionSequnence = Sequence::create(attackAnimate, idleAnimate, nullptr);
+	//Animate* idleAnimate = Animate::create(idleAnimation);
+	//回调检查控制器状态函数
+	auto callfunc = CallFunc::create(CC_CALLBACK_0(Player::checkControllerStatus, this));
+	Sequence* actionSequnence = Sequence::create(attackAnimate, callfunc, nullptr);
 	m_sprite->runAction(actionSequnence);
 }
 
 void Player::idle()
 {
+	//停止当前的动作
 	m_sprite->stopAllActions();
+	//获取已经做好的动画
 	Animation* animation = AnimationCache::getInstance()->getAnimation("player_01_idle");
+	//生成动画动作
 	Animate* animate = Animate::create(animation);
+	//执行动画动作
 	m_sprite->runAction(animate);
 }
 
@@ -124,9 +163,13 @@ void Player::death()
 
 void Player::climb()
 {
+	//停止当前的动作
 	m_sprite->stopAllActions();
+	//获取已经做好的动画
 	Animation* animation = AnimationCache::getInstance()->getAnimation("player_01_climb");
+	//生成动画动作
 	Animate* animate = Animate::create(animation);
+	//执行动画动作
 	m_sprite->runAction(animate);
 }
 

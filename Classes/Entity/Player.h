@@ -17,9 +17,11 @@ public:
 	void setController(SCController* controller);
 	virtual Vec2 getTargetPosition();
 	virtual void setTargetPosition(Vec2 pos);
-	virtual void setAction(Action* action);
 
+	//¼ì²é¿ØÖÆÆ÷×´Ì¬
 	void checkControllerStatus();
+
+	void setViewPointByPlayer();
 
 	virtual void run();
 	virtual void jump();
@@ -29,7 +31,7 @@ public:
 	virtual void hurt();
 	virtual void death();
 	virtual void climb();
-	virtual void turnAround(bool isRight);
+	virtual void turnAround(bool b_isRight);
 
 private:
 	//¼ÇÂ¼¿ØÖÆÆ÷
