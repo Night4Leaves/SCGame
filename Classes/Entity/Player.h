@@ -5,7 +5,7 @@
 #include "Entity.h"
 #include "Controller/SCController.h"
 
-class Player : public Entity, public PlayerControllerListener
+class Player : public Entity, public GeneralControllerListener
 {
 public:
 	Player();
@@ -23,19 +23,20 @@ public:
 
 	void setViewPointByPlayer();
 
+	virtual void idle();
 	virtual void run();
 	virtual void jump();
-
+	virtual void climb();
 	virtual void attack();
-	virtual void idle();
 	virtual void hurt();
 	virtual void death();
-	virtual void climb();
 	virtual void turnAround(bool b_isRight);
 
 private:
 	//记录控制器
 	SCController* m_pPlayerController;
+	//记录角色名，用于生成角色动画
+	const char* m_strPlayerName;
 };
 
 #endif // !__PLAYER_H__

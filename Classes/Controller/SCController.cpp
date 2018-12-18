@@ -8,7 +8,7 @@ SCController::~SCController()
 {
 }
 
-void SCController::setControllerListner(PlayerControllerListener * controllerListener)
+void SCController::setControllerListner(GeneralControllerListener * controllerListener)
 {
 	this->m_pControllerListener = controllerListener;
 }

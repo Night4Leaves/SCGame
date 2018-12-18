@@ -25,6 +25,7 @@
 #include "AppDelegate.h"
 #include "HelloWorldScene.h"
 
+#include "Util/ResourcesLoadingUtil.h"
 #include "Scene/InitialScene.h"
 #include "Scene/MainScene.h"
 
@@ -119,6 +120,8 @@ bool AppDelegate::applicationDidFinishLaunching() {
     //}
 
     register_all_packages();
+
+	ResourcesLoadingUtil::preloadResources();
 
     // create a scene. it's an autorelease object
     auto scene = MainScene::createScene();

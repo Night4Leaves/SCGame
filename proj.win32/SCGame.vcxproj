@@ -173,7 +173,6 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\Controller\GeneralControllerListener.h" />
     <ClInclude Include="..\Classes\Controller\PlayerController.h" />
     <ClInclude Include="..\Classes\Controller\SCController.h" />
-    <ClInclude Include="..\Classes\Controller\PlayerControllerListener.h" />
     <ClInclude Include="..\Classes\Entity\Entity.h" />
     <ClInclude Include="..\Classes\Entity\Monster.h" />
     <ClInclude Include="..\Classes\Entity\Player.h" />

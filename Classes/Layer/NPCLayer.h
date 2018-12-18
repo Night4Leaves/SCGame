@@ -13,6 +13,7 @@ USING_NS_CC;
  *	@num	NPC动画帧数量
  *	@delay	NPC动画帧每帧间隔
  *	@loops	动画循环次数
+ *	@scale	缩放倍数
  */
 struct NPCSetInfo
 {
@@ -21,6 +22,7 @@ struct NPCSetInfo
 	int num = 1;
 	float delay = 0.1;
 	int loops = -1;
+	float scale = 1;
 };
 
 class NPCLayer : public Layer

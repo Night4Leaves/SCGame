@@ -60,11 +60,13 @@ void NPCLayer::addNPC(const NPCSetInfo& npcSetInfo)
 	float delay = npcSetInfo.delay;
 	int loops = npcSetInfo.loops;
 	Vec2 point = npcSetInfo.point;
+	float scale = npcSetInfo.scale;
 
 	//创建精灵对象
 	Sprite* sprite = Sprite::createWithSpriteFrameName(wait);
 	this->addChild(sprite);
 	sprite->setPosition(point); 
+	sprite->setScale(scale);
 
 	//如果待机动画帧数量不为1，意味NPC采用动态待机动画
 	if (num > 1)

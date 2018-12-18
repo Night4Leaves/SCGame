@@ -14,6 +14,7 @@ public:
 	virtual bool init();
 	virtual void update(float dt);
 
+	//检查控制器记录的角色状态
 	virtual void checkControllerStatus();
 
 	void onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event);

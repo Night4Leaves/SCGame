@@ -149,9 +149,6 @@
     <ClInclude Include="..\Classes\Controller\PlayerController.h">
       <Filter>src\Controller</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Controller\PlayerControllerListener.h">
-      <Filter>src\Controller</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\Controller\GeneralControllerListener.h">
       <Filter>src\Controller</Filter>
     </ClInclude>

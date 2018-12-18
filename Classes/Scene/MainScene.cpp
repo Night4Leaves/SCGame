@@ -6,7 +6,6 @@
 #include "Entity/Player.h"
 #include "Controller/PlayerController.h"
 
-#include "Util/ResourcesLoadingUtil.h"
 #include "Util/AnimationUtil.h"
 
 MainScene::MainScene()
@@ -26,8 +25,6 @@ bool MainScene::init()
 {
 	do {
 		CC_BREAK_IF(!Scene::init());
-
-		ResourcesLoadingUtil::preloadResources();
 
 		//TODO:用Tiled制作的地图加载主界面
 		//TMXTiledMap* map = TMXTiledMap::create("map/scene_main.tmx");
@@ -73,14 +70,6 @@ bool MainScene::init()
 		PlayerController* playerController = PlayerController::create();
 		player->setController(playerController);
 		this->addChild(playerController);
-
-		//this->addChild(sprite);
-
-		//sprite->setPosition(400, 300);
-
-		//Animation* animation = AnimationUtil::createAnimationWithSingleFrameName("player_01_idle", 0.25f, -1);
-		//Animate* animate = Animate::create(animation);
-		//sprite->runAction(animate);
 
 		return true;
 	} while (0);
