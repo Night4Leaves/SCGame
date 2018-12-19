@@ -19,6 +19,24 @@
     <Filter Include="src\Layer">
       <UniqueIdentifier>{d50f5e22-ec83-447e-bca8-cb47d1efa00b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Entity">
+      <UniqueIdentifier>{a9f9a030-4a35-43de-a1ed-8d85a4c3f511}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Entity\NPC">
+      <UniqueIdentifier>{395fa8c4-2ca7-4468-bf67-63a67a14f671}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Entity\Player">
+      <UniqueIdentifier>{13340fbe-a38e-4497-ae57-3d02d53f84cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Entity\Monster">
+      <UniqueIdentifier>{4c2e4eb6-7534-4e99-8952-478c4d34fcf3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Controller">
+      <UniqueIdentifier>{e23324f3-accf-44ea-9043-83c250570992}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\TSM">
+      <UniqueIdentifier>{1b4374d9-b150-4371-bb01-47450a44fd53}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -30,23 +48,53 @@
     <ClCompile Include="..\Classes\HelloWorldScene.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Player.cpp">
-      <Filter>src</Filter>
+    <ClCompile Include="..\Classes\Layer\NPCLayer.cpp">
+      <Filter>src\Layer</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\AnimationUtil.cpp">
-      <Filter>src\Utils</Filter>
+    <ClCompile Include="..\Classes\Layer\BackgroundLayer.cpp">
+      <Filter>src\Layer</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\InitialScene.cpp">
+    <ClCompile Include="..\Classes\Layer\GameMenuLayer.cpp">
+      <Filter>src\Layer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Scene\InitialScene.cpp">
       <Filter>src\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\BackgroundLayer.cpp">
+    <ClCompile Include="..\Classes\Scene\MainScene.cpp">
+      <Filter>src\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Util\AnimationUtil.cpp">
+      <Filter>src\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Util\MenuItemUtil.cpp">
+      <Filter>src\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Util\ResourcesLoadingUtil.cpp">
+      <Filter>src\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Scene\GameScene.cpp">
+      <Filter>src\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Entity\Entity.cpp">
+      <Filter>src\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Entity\Player.cpp">
+      <Filter>src\Entity\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Layer\PaneLayer.cpp">
       <Filter>src\Layer</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\TextDisplayLayer.cpp">
-      <Filter>src\Layer</Filter>
+    <ClCompile Include="..\Classes\Entity\Monster.cpp">
+      <Filter>src\Entity\Monster</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\GameMenuLayer.cpp">
-      <Filter>src\Layer</Filter>
+    <ClCompile Include="..\Classes\Controller\SCController.cpp">
+      <Filter>src\Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Controller\PlayerController.cpp">
+      <Filter>src\Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Entity\NPC.cpp">
+      <Filter>src\Entity\NPC</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -59,23 +107,56 @@
     <ClInclude Include="..\Classes\HelloWorldScene.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Player.h">
-      <Filter>src</Filter>
+    <ClInclude Include="..\Classes\Layer\NPCLayer.h">
+      <Filter>src\Layer</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\AnimationUtil.h">
-      <Filter>src\Utils</Filter>
+    <ClInclude Include="..\Classes\Layer\BackgroundLayer.h">
+      <Filter>src\Layer</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\InitialScene.h">
+    <ClInclude Include="..\Classes\Layer\GameMenuLayer.h">
+      <Filter>src\Layer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Scene\InitialScene.h">
       <Filter>src\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\BackgroundLayer.h">
+    <ClInclude Include="..\Classes\Scene\MainScene.h">
+      <Filter>src\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Util\AnimationUtil.h">
+      <Filter>src\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Util\MenuItemUtil.h">
+      <Filter>src\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Util\ResourcesLoadingUtil.h">
+      <Filter>src\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Scene\GameScene.h">
+      <Filter>src\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Entity\Entity.h">
+      <Filter>src\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Entity\Player.h">
+      <Filter>src\Entity\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Layer\PaneLayer.h">
       <Filter>src\Layer</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\TextDisplayLayer.h">
-      <Filter>src\Layer</Filter>
+    <ClInclude Include="..\Classes\Entity\Monster.h">
+      <Filter>src\Entity\Monster</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\GameMenuLayer.h">
-      <Filter>src\Layer</Filter>
+    <ClInclude Include="..\Classes\Controller\SCController.h">
+      <Filter>src\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Controller\PlayerController.h">
+      <Filter>src\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Controller\GeneralControllerListener.h">
+      <Filter>src\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Entity\NPC.h">
+      <Filter>src\Entity\NPC</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

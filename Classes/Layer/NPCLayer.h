@@ -3,25 +3,9 @@
 #define __NPC_LAYER__
 
 #include "cocos2d.h"
+#include "Entity/NPC.h"
 
 USING_NS_CC;
-
-/**
- *	NPC设置信息
- *	@name	NPC名字
- *	@point	NPC设置的位置
- *	@num	NPC动画帧数量
- *	@delay	NPC动画帧每帧间隔
- *	@loops	动画循环次数
- */
-struct NPCSetInfo
-{
-	const char* name;
-	Vec2 point;
-	int num = 1;
-	float delay = 0.1;
-	int loops = -1;
-};
 
 class NPCLayer : public Layer
 {
@@ -37,7 +21,7 @@ public:
 
 private:
 	//添加NPC到层中
-	void addNPC(const NPCSetInfo& npcSetInfo);
+	void addNPC(const NPCSetInfo& npcSetInfo, Point npcSetPosition);
 };
 
 #endif // !__NPCLAYER__

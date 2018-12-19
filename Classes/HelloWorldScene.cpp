@@ -24,7 +24,6 @@
 
 #include "HelloWorldScene.h"
 #include "SimpleAudioEngine.h"
-#include "Player.h"
 
 USING_NS_CC;
 

@@ -9,6 +9,7 @@ USING_NS_CC;
 class BackgroundLayer;
 class GameMenuLayer;
 class NPCLayer;
+class PaneLayer;
 
 class MainScene : public Scene
 {
@@ -24,6 +25,7 @@ private:
 	BackgroundLayer* m_pBackgroundLayer;
 	GameMenuLayer* m_pGameMenuLayer;
 	NPCLayer* m_pNPCLayer;
+	PaneLayer* m_pPaneLayer;
 };
 
 #endif // !__MAIN_SCENE_H__
