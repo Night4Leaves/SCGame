@@ -10,5 +10,5 @@ Monster::~Monster()
 
 bool Monster::init()
 {
-	return false;
+	return true;
 }

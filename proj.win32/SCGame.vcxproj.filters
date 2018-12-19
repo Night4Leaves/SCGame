@@ -93,6 +93,9 @@
     <ClCompile Include="..\Classes\Controller\PlayerController.cpp">
       <Filter>src\Controller</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\Entity\NPC.cpp">
+      <Filter>src\Entity\NPC</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -151,6 +154,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Controller\GeneralControllerListener.h">
       <Filter>src\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Entity\NPC.h">
+      <Filter>src\Entity\NPC</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

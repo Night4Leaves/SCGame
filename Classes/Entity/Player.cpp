@@ -9,22 +9,42 @@ Player::~Player()
 {
 }
 
-bool Player::init()
+Player * Player::create(const char* str_playerName)
 {
-	Animation* animation = AnimationUtil::createAnimationWithSingleFrameName("player_01_run", 0.04f, -1);
-	AnimationCache::getInstance()->addAnimation(animation, "player_01_run");
-	animation = AnimationUtil::createAnimationWithSingleFrameName("player_01_attack", 0.1f, 1);
-	AnimationCache::getInstance()->addAnimation(animation, "player_01_attack");
-	animation = AnimationUtil::createAnimationWithSingleFrameName("player_01_idle", 0.25f, -1);
-	AnimationCache::getInstance()->addAnimation(animation, "player_01_idle");
-	animation = AnimationUtil::createAnimationWithSingleFrameName("player_01_climb", 0.1f, -1);
-	AnimationCache::getInstance()->addAnimation(animation, "player_01_climb");
-	animation = AnimationUtil::createAnimationWithSingleFrameName("player_01_death", 0.25f, 1);
-	AnimationCache::getInstance()->addAnimation(animation, "player_01_death");
-	animation = AnimationUtil::createAnimationWithSingleFrameName("player_01_hurt", 0.1f, 1);
-	AnimationCache::getInstance()->addAnimation(animation, "player_01_hurt");
-	animation = AnimationUtil::createAnimationWithSingleFrameName("player_01_jump", 0.2f, 1);
-	AnimationCache::getInstance()->addAnimation(animation, "player_01_jump");
+	Player *pRet = new(std::nothrow) Player();
+	if (pRet && pRet->init(str_playerName))
+	{
+		pRet->autorelease();
+		return pRet;
+	}
+	else
+	{
+		delete pRet;
+		pRet = nullptr;
+		return nullptr;
+	}
+}
+
+bool Player::init(const char* str_playerName)
+{
+	m_strPlayerName = str_playerName;	//角色名称
+	std::string animationName = "";	//动画全称
+	Animation* animation = NULL;	//动画对象
+	auto num = m_strActionName.size();	//动作数量
+
+	//生成静态待机图对应的精灵
+	std::string waitAnimationName = StringUtils::format("%s_wait.png", str_playerName);
+	Sprite* sprite = Sprite::createWithSpriteFrameName(waitAnimationName.c_str());
+	this->bindSprite(sprite);
+
+	//生成角色动画并存储到动画缓存中
+	for (int i = 0; i < num; i++)
+	{
+		animationName = StringUtils::format("%s_%s", m_strPlayerName, m_strActionName.at(i));
+		log("%s, %f, %d", animationName.c_str(), m_fActionTime[i], m_iActionPlayTime[i]);
+		animation = AnimationUtil::createAnimationWithSingleFrameName(animationName.c_str(), m_fActionTime[i], m_iActionPlayTime[i]);
+		AnimationCache::getInstance()->addAnimation(animation, animationName.c_str());
+	}
 
 	return true;
 }
@@ -44,7 +64,7 @@ void Player::setTargetPosition(Vec2 pos)
 {
 	this->setPosition(pos);
 
-	Player::setViewPointByPlayer();
+	this->setViewPointByPlayer();
 }
 
 void Player::checkControllerStatus()
@@ -85,16 +105,49 @@ void Player::setViewPointByPlayer()
 
 }
 
+void Player::turnAround(bool isRight)
+{
+	m_sprite->setFlipX(!isRight);
+}
+
+
+void Player::idle()
+{
+	//停止当前的动作
+	m_sprite->stopAllActions();
+	//获取已经做好的动画
+	Animation* animation = AnimationCache::getInstance()->getAnimation(StringUtils::format("%s_idle", m_strPlayerName).c_str());
+	//生成动画动作
+	Animate* animate = Animate::create(animation);
+	//执行动画动作
+	m_sprite->runAction(animate);
+}
+
 void Player::run()
 {
 	//停止当前的动作
 	m_sprite->stopAllActions();
 	//获取已经做好的动画
-	Animation* animation = AnimationCache::getInstance()->getAnimation("player_01_run");
+	Animation* animation = AnimationCache::getInstance()->getAnimation(StringUtils::format("%s_run", m_strPlayerName).c_str());
 	//生成动画动作
 	Animate* animate = Animate::create(animation);
 	//执行动画动作
 	m_sprite->runAction(animate);
+}
+
+void Player::attack()
+{
+	//停止当前的动作
+	m_sprite->stopAllActions();
+	//获取已经做好的动画
+	Animation* attackAnimation = AnimationCache::getInstance()->getAnimation(StringUtils::format("%s_attack", m_strPlayerName).c_str());
+	//生成动画动作
+	Animate* attackAnimate = Animate::create(attackAnimation);
+	//Animate* idleAnimate = Animate::create(idleAnimation);
+	//回调检查控制器状态函数
+	auto callfunc = CallFunc::create(CC_CALLBACK_0(Player::checkControllerStatus, this));
+	Sequence* actionSequnence = Sequence::create(attackAnimate, callfunc, nullptr);
+	m_sprite->runAction(actionSequnence);
 }
 
 void Player::jump()
@@ -102,7 +155,7 @@ void Player::jump()
 	//停止当前的动作
 	m_sprite->stopAllActions();
 	//获取已经做好的动画
-	Animation* animation = AnimationCache::getInstance()->getAnimation("player_01_jump");
+	Animation* animation = AnimationCache::getInstance()->getAnimation(StringUtils::format("%s_jump", m_strPlayerName).c_str());
 	//生成动画动作
 	Animate* animate = Animate::create(animation);
 	//设置跳跃动作需要的坐标(此坐标值保证原地跳跃的可能)
@@ -119,28 +172,12 @@ void Player::jump()
 	m_sprite->runAction(sequence);
 }
 
-void Player::attack()
+void Player::climb()
 {
 	//停止当前的动作
 	m_sprite->stopAllActions();
 	//获取已经做好的动画
-	Animation* attackAnimation = AnimationCache::getInstance()->getAnimation("player_01_attack");
-	//Animation* idleAnimation = AnimationCache::getInstance()->getAnimation("player_01_idle");
-	//生成动画动作
-	Animate* attackAnimate = Animate::create(attackAnimation);
-	//Animate* idleAnimate = Animate::create(idleAnimation);
-	//回调检查控制器状态函数
-	auto callfunc = CallFunc::create(CC_CALLBACK_0(Player::checkControllerStatus, this));
-	Sequence* actionSequnence = Sequence::create(attackAnimate, callfunc, nullptr);
-	m_sprite->runAction(actionSequnence);
-}
-
-void Player::idle()
-{
-	//停止当前的动作
-	m_sprite->stopAllActions();
-	//获取已经做好的动画
-	Animation* animation = AnimationCache::getInstance()->getAnimation("player_01_idle");
+	Animation* animation = AnimationCache::getInstance()->getAnimation(StringUtils::format("%s_climb", m_strPlayerName).c_str());
 	//生成动画动作
 	Animate* animate = Animate::create(animation);
 	//执行动画动作
@@ -150,7 +187,7 @@ void Player::idle()
 void Player::hurt()
 {
 	m_sprite->stopAllActions();
-	Animation* animation = AnimationCache::getInstance()->getAnimation("player_01_hurt");
+	Animation* animation = AnimationCache::getInstance()->getAnimation(StringUtils::format("%s_hurt", m_strPlayerName).c_str());
 	Animate* animate = Animate::create(animation);
 	Blink* blink = Blink::create(0.8f, 5);
 	Spawn* spawn = Spawn::create(animate, blink, nullptr);
@@ -159,21 +196,4 @@ void Player::hurt()
 
 void Player::death()
 {
-}
-
-void Player::climb()
-{
-	//停止当前的动作
-	m_sprite->stopAllActions();
-	//获取已经做好的动画
-	Animation* animation = AnimationCache::getInstance()->getAnimation("player_01_climb");
-	//生成动画动作
-	Animate* animate = Animate::create(animation);
-	//执行动画动作
-	m_sprite->runAction(animate);
-}
-
-void Player::turnAround(bool isRight)
-{
-	m_sprite->setFlipX(!isRight);
 }

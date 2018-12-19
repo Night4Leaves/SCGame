@@ -45,12 +45,42 @@ bool MainScene::init()
 		//添加背景图片
 		m_pBackgroundLayer->setBackgroundPicture("background/main_scene_01_2048x1536.png");
 
+		Sprite* tpBackSprite = Sprite::createWithSpriteFrameName("tp_back.png");
+		Sprite* tpfrontSprite = Sprite::createWithSpriteFrameName("tp_front.png");
+
+		this->addChild(tpBackSprite);
+		tpBackSprite->addChild(tpfrontSprite);
+
+		Size tpBackSize = tpBackSprite->getContentSize();
+		tpfrontSprite->setPosition(tpBackSize.width * 0.5, tpBackSize.height * 0.5);
+
+		tpBackSprite->setPosition(Vec2(450, 150));
+		//tpfrontSprite->setPosition(Vec2(450, 150));
+
+		tpBackSprite->setScale(0.2);
+		//tpfrontSprite->setScale(0.2);
+
+		tpBackSprite->setOpacity(150);
+		//tpfrontSprite->setOpacity(200);
+
+		auto test1 = RotateBy::create(5.0f, -90.0f);
+		auto test2 = RotateBy::create(5.0f, 180.0f);
+
+		tpBackSprite->runAction(RepeatForever::create(test1));
+		tpfrontSprite->runAction(RepeatForever::create(test2));
+
 		//初始化NPC层并添加到场景中
 		m_pNPCLayer = NPCLayer::create();
 		CC_BREAK_IF(m_pNPCLayer == nullptr);
 		this->addChild(m_pNPCLayer);
 		//设置NPC
 		m_pNPCLayer->setMainSceneNPC();
+
+		//添加玩家角色
+		Player* player = Player::create("player_01");
+		player->setPosition(100, 100);
+		player->idle();
+		this->addChild(player);
 
 		//初始化菜单层并添加到场景中
 		m_pGameMenuLayer = GameMenuLayer::create();
@@ -59,14 +89,7 @@ bool MainScene::init()
 		//创建主界面菜单
 		m_pGameMenuLayer->setMainMenu();
 
-		Sprite* sprite = Sprite::createWithSpriteFrameName("player_01_wait.png");
-
-		Player* player = Player::create();
-		player->bindSprite(sprite);
-		player->setPosition(100, 100);
-		player->idle();
-		this->addChild(player);
-
+		//添加玩家控制器
 		PlayerController* playerController = PlayerController::create();
 		player->setController(playerController);
 		this->addChild(playerController);

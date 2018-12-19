@@ -22,14 +22,14 @@ public:
 	 */
 	virtual void turnAround(bool b_isRight) = 0;
 
+	virtual void idle() = 0;
 	virtual void run() = 0;
 	virtual void attack() = 0;
-	virtual void idle() = 0;
+	virtual void jump() = 0;
+	virtual void climb() = 0;
 	virtual void hurt() = 0;
 	virtual void death() = 0;
-	virtual void climb() = 0;
-	virtual void jump() = 0;
-	
+
 };
 
 
