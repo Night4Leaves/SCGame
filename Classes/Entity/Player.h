@@ -32,7 +32,7 @@ public:
 
 private:
 	Player();
-	~Player();
+	virtual ~Player();
 
 	//¼ÇÂ¼¿ØÖÆÆ÷
 	SCController* m_pPlayerController;

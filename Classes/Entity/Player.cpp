@@ -143,7 +143,6 @@ void Player::attack()
 	Animation* attackAnimation = AnimationCache::getInstance()->getAnimation(StringUtils::format("%s_attack", m_strPlayerName).c_str());
 	//生成动画动作
 	Animate* attackAnimate = Animate::create(attackAnimation);
-	//Animate* idleAnimate = Animate::create(idleAnimation);
 	//回调检查控制器状态函数
 	auto callfunc = CallFunc::create(CC_CALLBACK_0(Player::checkControllerStatus, this));
 	Sequence* actionSequnence = Sequence::create(attackAnimate, callfunc, nullptr);

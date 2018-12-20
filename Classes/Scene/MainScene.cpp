@@ -4,7 +4,9 @@
 #include "Layer/NPCLayer.h"
 #include "Layer/PaneLayer.h"
 #include "Entity/Player.h"
+#include "Entity/Monster.h"
 #include "Controller/PlayerController.h"
+#include "Controller/MonsterController.h"
 
 #include "Util/AnimationUtil.h"
 
@@ -75,6 +77,15 @@ bool MainScene::init()
 		this->addChild(m_pNPCLayer);
 		//设置NPC
 		m_pNPCLayer->setMainSceneNPC();
+
+		Monster* monster = Monster::create("boss_01");
+		monster->setPosition(600, 100);
+		monster->idle();
+		this->addChild(monster);
+
+		MonsterController* monsterController = MonsterController::create();
+		monster->setController(monsterController);
+		this->addChild(monsterController);
 
 		//添加玩家角色
 		Player* player = Player::create("player_01");
