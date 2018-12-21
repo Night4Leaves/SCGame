@@ -79,7 +79,7 @@ bool MainScene::init()
 		m_pNPCLayer->setMainSceneNPC();
 
 		Monster* monster = Monster::create("boss_01");
-		monster->setPosition(600, 100);
+		monster->setPosition(600, 68);
 		monster->idle();
 		this->addChild(monster);
 
@@ -89,9 +89,11 @@ bool MainScene::init()
 
 		//添加玩家角色
 		Player* player = Player::create("player_01");
-		player->setPosition(100, 100);
+		player->setPosition(100, 68);
 		player->idle();
 		this->addChild(player);
+		Point pos = player->getPosition();
+		log("x:%f, y:%f", pos.x, pos.y);
 
 		//初始化菜单层并添加到场景中
 		m_pGameMenuLayer = GameMenuLayer::create();
@@ -101,9 +103,9 @@ bool MainScene::init()
 		m_pGameMenuLayer->setMainMenu();
 
 		//添加玩家控制器
-		PlayerController* playerController = PlayerController::create();
+		/*PlayerController* playerController = PlayerController::create();
 		player->setController(playerController);
-		this->addChild(playerController);
+		this->addChild(playerController);*/
 
 		return true;
 	} while (0);

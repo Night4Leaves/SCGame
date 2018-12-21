@@ -38,6 +38,7 @@ void PlayerController::update(float dt)
 	pos.x += m_iXSpeed;
 	m_pControllerListener->setTargetPosition(pos);
 
+
 	/*log("x: %f, y: %f", pos.x, pos.y);*/
 
 }
@@ -164,7 +165,12 @@ void PlayerController::onKeyReleased(EventKeyboard::KeyCode keyCode, Event * eve
 		break;
 	case EventKeyboard::KeyCode::KEY_A:	//取消向左移动
 
-		m_iIsRun--;	//左右移动按键计数器-1
+		//左右移动按键计数器-1，如果小于0则置0
+		m_iIsRun--;
+		if (m_iIsRun < 0)
+		{
+			m_iIsRun = 0;
+		}
 
 		//如果是锁定状态则不执行后续代码
 		if (m_bIsLock)
@@ -194,6 +200,10 @@ void PlayerController::onKeyReleased(EventKeyboard::KeyCode keyCode, Event * eve
 	case EventKeyboard::KeyCode::KEY_D:	//取消向右移动，参考上面取消向左移动代码注释
 
 		m_iIsRun--;
+		if (m_iIsRun < 0)
+		{
+			m_iIsRun = 0;
+		}
 
 		if (m_bIsLock)
 		{

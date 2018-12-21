@@ -9,7 +9,7 @@
                 <key>aliases</key>
                 <array/>
 				<key>anchor</key>
-                <string>{0.355,0.46087}</string>
+                <string>{0.53500,0.03913}</string>
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
@@ -26,7 +26,7 @@
                 <key>aliases</key>
                 <array/>
 				<key>anchor</key>
-                <string>{0.288,0.5}</string>
+                <string>{0.31200,0.04036}</string>
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
@@ -43,7 +43,7 @@
                 <key>aliases</key>
                 <array/>
 				<key>anchor</key>
-                <string>{0.274319,0.5}</string>
+                <string>{0.34436,0.04128}</string>
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
@@ -60,7 +60,7 @@
                 <key>aliases</key>
                 <array/>
 				<key>anchor</key>
-                <string>{0.559459,0.503257}</string>
+                <string>{0.67838,0.20033}</string>
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
@@ -77,7 +77,7 @@
                 <key>aliases</key>
                 <array/>
 				<key>anchor</key>
-                <string>{0.584592,0.565693}</string>
+                <string>{0.71299,0.21898}</string>
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
@@ -93,6 +93,8 @@
             <dict>
                 <key>aliases</key>
                 <array/>
+				<key>anchor</key>
+                <string>{0.29091,0.10370}</string>
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
@@ -108,6 +110,8 @@
             <dict>
                 <key>aliases</key>
                 <array/>
+				<key>anchor</key>
+                <string>{0.43605,0.03571}</string>
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
@@ -123,6 +127,8 @@
             <dict>
                 <key>aliases</key>
                 <array/>
+				<key>anchor</key>
+                <string>{0.42373,0.03556}</string>
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
@@ -138,6 +144,8 @@
             <dict>
                 <key>aliases</key>
                 <array/>
+				<key>anchor</key>
+                <string>{0.43605,0.03571}</string>
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
@@ -153,6 +161,8 @@
             <dict>
                 <key>aliases</key>
                 <array/>
+				<key>anchor</key>
+                <string>{0.42857,0.03540}</string>
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
@@ -169,7 +179,7 @@
                 <key>aliases</key>
                 <array/>
 				<key>anchor</key>
-                <string>{0.5,0.5}</string>
+                <string>{0.46847,0.03333}</string>
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
@@ -186,7 +196,7 @@
                 <key>aliases</key>
                 <array/>
 				<key>anchor</key>
-                <string>{0.523148,0.5}</string>
+                <string>{0.48148,0.03302}</string>
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
@@ -203,7 +213,7 @@
                 <key>aliases</key>
                 <array/>
 				<key>anchor</key>
-                <string>{0.530516,0.5}</string>
+                <string>{0.48826,0.03333}</string>
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
@@ -219,6 +229,8 @@
             <dict>
                 <key>aliases</key>
                 <array/>
+				<key>anchor</key>
+                <string>{0.47619,0.04329}</string>
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>

@@ -32,7 +32,7 @@ void MonsterController::update(float dt)
 
 	if (m_bIsLock)
 	{
-		if (m_fStateTime > 8)
+		if (m_fStateTime > 6)
 		{
 			m_iXSpeed = 0;
 			m_fStateTime = 0;

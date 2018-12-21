@@ -6,6 +6,7 @@
 
 USING_NS_CC;
 
+class BackgroundLayer;
 class GameMenuLayer;
 class PaneLayer;
 
@@ -33,6 +34,7 @@ public:
 	void setScene(SceneType sign);
 
 protected:
+	BackgroundLayer* m_pBackgroundLayer;
 	TMXTiledMap* m_pMap;
 	GameMenuLayer* m_pGameMenuLayer;
 	PaneLayer* m_pPaneLayer;

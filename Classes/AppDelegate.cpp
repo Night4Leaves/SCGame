@@ -28,6 +28,7 @@
 #include "Util/ResourcesLoadingUtil.h"
 #include "Scene/InitialScene.h"
 #include "Scene/MainScene.h"
+#include "Scene/GameScene.h"
 
 // #define USE_AUDIO_ENGINE 1
 // #define USE_SIMPLE_AUDIO_ENGINE 1
@@ -124,7 +125,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
 	ResourcesLoadingUtil::preloadResources();
 
     // create a scene. it's an autorelease object
-    auto scene = MainScene::createScene();
+    auto scene = GameScene::createScene();
 
     // run
     director->runWithScene(scene);

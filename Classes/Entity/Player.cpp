@@ -67,6 +67,11 @@ void Player::setTargetPosition(Vec2 pos)
 	this->setViewPointByPlayer();
 }
 
+void Player::setMap(TMXTiledMap * p_map)
+{
+	m_pMap = p_map;
+}
+
 void Player::checkControllerStatus()
 {
 	m_pPlayerController->checkControllerStatus();
@@ -79,29 +84,45 @@ void Player::setViewPointByPlayer()
 		return;
 	}
 
+	Scene* parent = (Scene*)getParent();
+	//获得地图中图块的数量和尺寸，并计算出地图尺寸
+	Size mapTiledNum = m_pMap->getMapSize();
+	Size tiledSize = m_pMap->getTileSize();
+	Size mapSize = Size(mapTiledNum.width * tiledSize.width,
+		mapTiledNum.height * tiledSize.height);
 	//获取屏幕显示尺寸
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	//获取精灵位置
 	Point spritePosition = getPosition();
 	//获取精灵大小尺寸
 	Size contentSize = m_sprite->getContentSize();
-	//与左边界比较，防止跑到左边界外
-	float x = std::min(spritePosition.x, visibleSize.width - (contentSize.width / 2 - 10));
+
 	//与右边界比较，防止跑到右边界外
+	float x = std::min(spritePosition.x, mapSize.width - (contentSize.width / 2 - 10));
+	//与左边界比较，防止跑到左边界外
 	x = std::max(x, contentSize.width / 2 - 10);
 
-	Point destPos = Point(x, 100);
+	Point playerPos = Point(x, spritePosition.y);
 
-	this->setPosition(destPos);
+	this->setPosition(playerPos);
 
 	/*log("x: %f, y: %f", spritePosition.x, spritePosition.y);*/
 
-	//float x = std::max(spritePosition.x + (contentSize.width / 2), visibleSize.width / 2);
-	//float y = std::max(spritePosition.y + (contentSize.height / 2), visibleSize.height / 2);
+	//如果主角坐标位于屏幕中点的左下方，则取屏幕中点坐标，否则取主角坐标
+	x = std::max(spritePosition.x, visibleSize.width / 2);
+	float y = std::max(spritePosition.y, visibleSize.height / 2);
+	//如果X、Y的坐标大于右上角的极限值，则取极限值坐标
+	x = std::min(x, mapSize.width - visibleSize.width / 2);
+	y = std::min(y, mapSize.height - visibleSize.height / 2);
 
-	//Point destPosition = Point(x, y);
+	//目标点
+	Point destPosition = Point(x, y);
+	//屏幕中点
+	Point centerPosition = Point(visibleSize.width / 2, visibleSize.height / 2);
+	//屏幕中点和所要移动的目的点之间的距离
+	Point viewPos = centerPosition - destPosition;
 
-	//Point centerPosition = Point(visibleSize.width / 2, visibleSize.height / 2);
+	parent->setPosition(viewPos);
 
 }
 
@@ -160,7 +181,7 @@ void Player::jump()
 	//设置跳跃动作需要的坐标(此坐标值保证原地跳跃的可能)
 	Vec2 jumpHeight = Vec2(0.0f, 0.0f);
 	//生成跳跃位移动作
-	Action* jump = JumpBy::create(1.4f, jumpHeight, 50, 1);
+	Action* jump = JumpBy::create(1.75f, jumpHeight, 75, 1);
 	//将跳跃动画和跳跃位移动作结合
 	Spawn* spawn = Spawn::create(animate, jump, nullptr);
 	//回调检查控制器状态函数
