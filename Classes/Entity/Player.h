@@ -16,9 +16,9 @@ public:
 	virtual void setTargetPosition(Vec2 pos);
 	void setMap(TMXTiledMap* p_map);
 
-	//¼ì²é¿ØÖÆÆ÷×´Ì¬
+	//æ£€æŸ¥æ§åˆ¶å™¨çŠ¶æ€
 	void checkControllerStatus();
-	//¸ù¾İÍæ¼ÒÉèÖÃÏÔÊ¾µØÍ¼
+	//æ ¹æ®ç©å®¶è®¾ç½®æ˜¾ç¤ºåœ°å›¾
 	void setViewPointByPlayer();
 
 	virtual void turnAround(bool b_isRight);
@@ -35,17 +35,17 @@ private:
 	Player();
 	virtual ~Player();
 
-	//¼ÇÂ¼µØÍ¼
+	//è®°å½•åœ°å›¾
 	TMXTiledMap* m_pMap;
-	//¼ÇÂ¼¿ØÖÆÆ÷
+	//è®°å½•æ§åˆ¶å™¨
 	SCController* m_pPlayerController;
-	//¼ÇÂ¼½ÇÉ«Ãû£¬ÓÃÓÚÉú³É½ÇÉ«¶¯»­
+	//è®°å½•è§’è‰²åï¼Œç”¨äºç”Ÿæˆè§’è‰²åŠ¨ç”»
 	const char* m_strPlayerName;
-	//½ÇÉ«¶¯×÷Ãû
+	//è§’è‰²åŠ¨ä½œå
 	std::vector<const char*> m_strActionName = { "idle","run","attack","jump","climb","hurt","death" };
-	//¶¯»­Ö¡¼ä¸ôÊ±¼ä
+	//åŠ¨ç”»å¸§é—´éš”æ—¶é—´
 	float m_fActionTime[7] = { 0.25f, 0.04f, 0.1f, 0.25f, 0.1f, 0.1f, 0.25f };
-	//¶¯»­ÖØ¸´´ÎÊı
+	//åŠ¨ç”»é‡å¤æ¬¡æ•°
 	int m_iActionPlayTime[7] = { -1, -1, 1, 1, -1, 1, 1 };
 };
 

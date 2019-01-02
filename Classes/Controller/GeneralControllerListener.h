@@ -9,16 +9,16 @@ USING_NS_CC;
 class GeneralControllerListener
 {
 public:
-	//获取角色坐标
+	//鑾峰彇瑙掕壊鍧愭爣
 	virtual Vec2 getTargetPosition() = 0;
 	/**
-	 *	设置角色坐标
-	 *	@pos 目标位置
+	 *	璁剧疆瑙掕壊鍧愭爣
+	 *	@pos 鐩爣浣嶇疆
 	 */
 	virtual void setTargetPosition(Vec2 pos) = 0;
 	/**
-	 *	控制角色是否朝右
-	 *	@b_isRight true为向右，false向左
+	 *	鎺у埗瑙掕壊鏄惁鏈濆彸
+	 *	@b_isRight true涓哄悜鍙筹紝false鍚戝乏
 	 */
 	virtual void turnAround(bool b_isRight) = 0;
 

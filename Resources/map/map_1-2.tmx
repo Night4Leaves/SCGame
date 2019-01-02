@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.2" tiledversion="1.2.1" orientation="orthogonal" renderorder="left-down" width="100" height="9" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="3">
+ <tileset firstgid="1" source="tilesheet_complete.tsx"/>
+ <layer id="1" name="块层 1" width="100" height="9">
+  <data encoding="base64" compression="zlib">
+   eJzTZmZg0AFiXSDWA2J9IDYAYm0KxHGpIVcfMh+XGmq4ezCIhwNxBBBHAnEUEEcDcQyF4rjUkKsPmY9LDTXcPRjE3zAOL/yTGTseaHeNFDwcw5uaaYqeaXM4xgU+v5Ia/sTG0Whc0C7OSA0TaoThcI4LXGUVMWma1HAZzuE4mDCxcToaF4QxAJjLwtA=
+  </data>
+ </layer>
+ <objectgroup id="2" name="objects">
+  <object id="1" name="player" x="48" y="223">
+   <point/>
+  </object>
+  <object id="2" name="monster" x="787" y="187">
+   <point/>
+  </object>
+ </objectgroup>
+</map>

@@ -4,6 +4,9 @@
 
 #include "SCController.h"
 
+#define HORIZONTAL_SPPED 5
+#define VERTICAL_SPEED 4 
+
 class PlayerController : public SCController
 {
 public:
@@ -14,19 +17,20 @@ public:
 	virtual bool init();
 	virtual void update(float dt);
 
-	//¼ì²é¿ØÖÆÆ÷¼ÇÂ¼µÄ½ÇÉ«×´Ì¬
+	//æ£€æŸ¥æ§åˆ¶å™¨è®°å½•çš„è§’è‰²çŠ¶æ€
 	virtual void checkControllerStatus();
 
 	void onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event);
 	void onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event);
 protected:
-	int m_iXSpeed;	//XÖáÒÆËÙ
-	int m_iYSpeed;	//YËÙÒÆËÙ
+	float m_iXSpeed;	//Xè½´ç§»é€Ÿ
+	float m_iYSpeed;	//Yé€Ÿç§»é€Ÿ
 
-	bool m_bIsRight;	//ÊÇ·ñÏòÓÒ
-	bool m_bIsLock;		//ÊÇ·ñÎªËøËÀ×´Ì¬
+	bool m_bIsRight;	//æ˜¯å¦å‘å³
+	bool m_bIsLock;		//æ˜¯å¦ä¸ºé”æ­»çŠ¶æ€
 
-	int m_iIsRun;	//ÊÇ·ñÎªÅÜ¶¯×´Ì¬(ÅĞ¶Ï×óÓÒÒÆ¶¯¼ü°´ÏÂ¼¸¸ö)
+	int m_iHorizontalRun;	//æ˜¯å¦ä¸ºå·¦å³è·‘åŠ¨çŠ¶æ€(åˆ¤æ–­å·¦å³ç§»åŠ¨é”®æŒ‰ä¸‹å‡ ä¸ª)
+	int m_iVerticalRun;		//æ˜¯å¦ä¸ºä¸Šä¸‹è·‘åŠ¨çŠ¶æ€(åˆ¤æ–­ä¸Šä¸‹ç§»åŠ¨é”®æŒ‰ä¸‹å‡ ä¸ª)
 };
 
 #endif // !__PLAYER_CONTROLLER_H__

@@ -7,6 +7,7 @@
 USING_NS_CC;
 
 class BackgroundLayer;
+class GameLayer;
 class GameMenuLayer;
 class PaneLayer;
 
@@ -35,6 +36,7 @@ public:
 
 protected:
 	BackgroundLayer* m_pBackgroundLayer;
+	GameLayer* m_pGameLayer;
 	TMXTiledMap* m_pMap;
 	GameMenuLayer* m_pGameMenuLayer;
 	PaneLayer* m_pPaneLayer;

@@ -27,17 +27,17 @@ Player * Player::create(const char* str_playerName)
 
 bool Player::init(const char* str_playerName)
 {
-	m_strPlayerName = str_playerName;	//½ÇÉ«Ãû³Æ
-	std::string animationName = "";	//¶¯»­È«³Æ
-	Animation* animation = NULL;	//¶¯»­¶ÔÏó
-	auto num = m_strActionName.size();	//¶¯×÷ÊıÁ¿
+	m_strPlayerName = str_playerName;	//è§’è‰²åç§°
+	std::string animationName = "";	//åŠ¨ç”»å…¨ç§°
+	Animation* animation = NULL;	//åŠ¨ç”»å¯¹è±¡
+	auto num = m_strActionName.size();	//åŠ¨ä½œæ•°é‡
 
-	//Éú³É¾²Ì¬´ı»úÍ¼¶ÔÓ¦µÄ¾«Áé
+	//ç”Ÿæˆé™æ€å¾…æœºå›¾å¯¹åº”çš„ç²¾çµ
 	std::string waitAnimationName = StringUtils::format("%s_wait.png", str_playerName);
 	Sprite* sprite = Sprite::createWithSpriteFrameName(waitAnimationName.c_str());
 	this->bindSprite(sprite);
 
-	//Éú³É½ÇÉ«¶¯»­²¢´æ´¢µ½¶¯»­»º´æÖĞ
+	//ç”Ÿæˆè§’è‰²åŠ¨ç”»å¹¶å­˜å‚¨åˆ°åŠ¨ç”»ç¼“å­˜ä¸­
 	for (int i = 0; i < num; i++)
 	{
 		animationName = StringUtils::format("%s_%s", m_strPlayerName, m_strActionName.at(i));
@@ -84,42 +84,44 @@ void Player::setViewPointByPlayer()
 		return;
 	}
 
-	Scene* parent = (Scene*)getParent();
-	//»ñµÃµØÍ¼ÖĞÍ¼¿éµÄÊıÁ¿ºÍ³ß´ç£¬²¢¼ÆËã³öµØÍ¼³ß´ç
+	Node* parent = (Node*)getParent();
+	//è·å¾—åœ°å›¾ä¸­å›¾å—çš„æ•°é‡å’Œå°ºå¯¸ï¼Œå¹¶è®¡ç®—å‡ºåœ°å›¾å°ºå¯¸
 	Size mapTiledNum = m_pMap->getMapSize();
 	Size tiledSize = m_pMap->getTileSize();
 	Size mapSize = Size(mapTiledNum.width * tiledSize.width,
 		mapTiledNum.height * tiledSize.height);
-	//»ñÈ¡ÆÁÄ»ÏÔÊ¾³ß´ç
+	//è·å–å±å¹•æ˜¾ç¤ºå°ºå¯¸
 	Size visibleSize = Director::getInstance()->getVisibleSize();
-	//»ñÈ¡¾«ÁéÎ»ÖÃ
+	//è·å–ç²¾çµä½ç½®
 	Point spritePosition = getPosition();
-	//»ñÈ¡¾«Áé´óĞ¡³ß´ç
+	//è·å–ç²¾çµå¤§å°å°ºå¯¸
 	Size contentSize = m_sprite->getContentSize();
 
-	//ÓëÓÒ±ß½ç±È½Ï£¬·ÀÖ¹ÅÜµ½ÓÒ±ß½çÍâ
+	//ä¸å³è¾¹ç•Œæ¯”è¾ƒï¼Œé˜²æ­¢è·‘åˆ°å³è¾¹ç•Œå¤–
 	float x = std::min(spritePosition.x, mapSize.width - (contentSize.width / 2 - 10));
-	//Óë×ó±ß½ç±È½Ï£¬·ÀÖ¹ÅÜµ½×ó±ß½çÍâ
+	//ä¸å·¦è¾¹ç•Œæ¯”è¾ƒï¼Œé˜²æ­¢è·‘åˆ°å·¦è¾¹ç•Œå¤–
 	x = std::max(x, contentSize.width / 2 - 10);
+	//é˜²æ­¢è·‘åˆ°ä¸‹è¾¹ç•Œå¤–
+	float y = std::max(0.0f, spritePosition.y);
 
-	Point playerPos = Point(x, spritePosition.y);
+	Point playerPos = Point(x, y);
 
 	this->setPosition(playerPos);
 
 	/*log("x: %f, y: %f", spritePosition.x, spritePosition.y);*/
 
-	//Èç¹ûÖ÷½Ç×ø±êÎ»ÓÚÆÁÄ»ÖĞµãµÄ×óÏÂ·½£¬ÔòÈ¡ÆÁÄ»ÖĞµã×ø±ê£¬·ñÔòÈ¡Ö÷½Ç×ø±ê
+	//å¦‚æœä¸»è§’åæ ‡ä½äºå±å¹•ä¸­ç‚¹çš„å·¦ä¸‹æ–¹ï¼Œåˆ™å–å±å¹•ä¸­ç‚¹åæ ‡ï¼Œå¦åˆ™å–ä¸»è§’åæ ‡
 	x = std::max(spritePosition.x, visibleSize.width / 2);
-	float y = std::max(spritePosition.y, visibleSize.height / 2);
-	//Èç¹ûX¡¢YµÄ×ø±ê´óÓÚÓÒÉÏ½ÇµÄ¼«ÏŞÖµ£¬ÔòÈ¡¼«ÏŞÖµ×ø±ê
+	y = std::max(spritePosition.y, visibleSize.height / 2);
+	//å¦‚æœXã€Yçš„åæ ‡å¤§äºå³ä¸Šè§’çš„æé™å€¼ï¼Œåˆ™å–æé™å€¼åæ ‡
 	x = std::min(x, mapSize.width - visibleSize.width / 2);
 	y = std::min(y, mapSize.height - visibleSize.height / 2);
 
-	//Ä¿±êµã
+	//ç›®æ ‡ç‚¹
 	Point destPosition = Point(x, y);
-	//ÆÁÄ»ÖĞµã
+	//å±å¹•ä¸­ç‚¹
 	Point centerPosition = Point(visibleSize.width / 2, visibleSize.height / 2);
-	//ÆÁÄ»ÖĞµãºÍËùÒªÒÆ¶¯µÄÄ¿µÄµãÖ®¼äµÄ¾àÀë
+	//å±å¹•ä¸­ç‚¹å’Œæ‰€è¦ç§»åŠ¨çš„ç›®çš„ç‚¹ä¹‹é—´çš„è·ç¦»
 	Point viewPos = centerPosition - destPosition;
 
 	parent->setPosition(viewPos);
@@ -134,73 +136,75 @@ void Player::turnAround(bool isRight)
 
 void Player::idle()
 {
-	//Í£Ö¹µ±Ç°µÄ¶¯×÷
+	//åœæ­¢å½“å‰çš„åŠ¨ä½œ
 	m_sprite->stopAllActions();
-	//»ñÈ¡ÒÑ¾­×öºÃµÄ¶¯»­
+	//è·å–å·²ç»åšå¥½çš„åŠ¨ç”»
 	Animation* animation = AnimationCache::getInstance()->getAnimation(StringUtils::format("%s_idle", m_strPlayerName).c_str());
-	//Éú³É¶¯»­¶¯×÷
+	//ç”ŸæˆåŠ¨ç”»åŠ¨ä½œ
 	Animate* animate = Animate::create(animation);
-	//Ö´ĞĞ¶¯»­¶¯×÷
+	//æ‰§è¡ŒåŠ¨ç”»åŠ¨ä½œ
 	m_sprite->runAction(animate);
 }
 
 void Player::run()
 {
-	//Í£Ö¹µ±Ç°µÄ¶¯×÷
+	//åœæ­¢å½“å‰çš„åŠ¨ä½œ
 	m_sprite->stopAllActions();
-	//»ñÈ¡ÒÑ¾­×öºÃµÄ¶¯»­
+	//è·å–å·²ç»åšå¥½çš„åŠ¨ç”»
 	Animation* animation = AnimationCache::getInstance()->getAnimation(StringUtils::format("%s_run", m_strPlayerName).c_str());
-	//Éú³É¶¯»­¶¯×÷
+	//ç”ŸæˆåŠ¨ç”»åŠ¨ä½œ
 	Animate* animate = Animate::create(animation);
-	//Ö´ĞĞ¶¯»­¶¯×÷
+	//æ‰§è¡ŒåŠ¨ç”»åŠ¨ä½œ
 	m_sprite->runAction(animate);
 }
 
 void Player::attack()
 {
-	//Í£Ö¹µ±Ç°µÄ¶¯×÷
+	//åœæ­¢å½“å‰çš„åŠ¨ä½œ
 	m_sprite->stopAllActions();
-	//»ñÈ¡ÒÑ¾­×öºÃµÄ¶¯»­
+	//è·å–å·²ç»åšå¥½çš„åŠ¨ç”»
 	Animation* attackAnimation = AnimationCache::getInstance()->getAnimation(StringUtils::format("%s_attack", m_strPlayerName).c_str());
-	//Éú³É¶¯»­¶¯×÷
-	Animate* attackAnimate = Animate::create(attackAnimation);
-	//»Øµ÷¼ì²é¿ØÖÆÆ÷×´Ì¬º¯Êı
+	//ç”ŸæˆåŠ¨ç”»åŠ¨ä½œ
+	Animate* attackAnimate = Animate::create(attackAnimation); 
+	//å‘å‡ºäº§ç”Ÿç«çƒçš„æ¶ˆæ¯
+	auto sendAttackMsg = CallFunc::create([]() {NotificationCenter::getInstance()->postNotification("attack", NULL); });
+	//å›è°ƒæ£€æŸ¥æ§åˆ¶å™¨çŠ¶æ€å‡½æ•°
 	auto callfunc = CallFunc::create(CC_CALLBACK_0(Player::checkControllerStatus, this));
-	Sequence* actionSequnence = Sequence::create(attackAnimate, callfunc, nullptr);
+	Sequence* actionSequnence = Sequence::create(attackAnimate, sendAttackMsg, callfunc, nullptr);
 	m_sprite->runAction(actionSequnence);
 }
 
 void Player::jump()
 {
-	//Í£Ö¹µ±Ç°µÄ¶¯×÷
+	//åœæ­¢å½“å‰çš„åŠ¨ä½œ
 	m_sprite->stopAllActions();
-	//»ñÈ¡ÒÑ¾­×öºÃµÄ¶¯»­
+	//è·å–å·²ç»åšå¥½çš„åŠ¨ç”»
 	Animation* animation = AnimationCache::getInstance()->getAnimation(StringUtils::format("%s_jump", m_strPlayerName).c_str());
-	//Éú³É¶¯»­¶¯×÷
+	//ç”ŸæˆåŠ¨ç”»åŠ¨ä½œ
 	Animate* animate = Animate::create(animation);
-	//ÉèÖÃÌøÔ¾¶¯×÷ĞèÒªµÄ×ø±ê(´Ë×ø±êÖµ±£Ö¤Ô­µØÌøÔ¾µÄ¿ÉÄÜ)
+	//è®¾ç½®è·³è·ƒåŠ¨ä½œéœ€è¦çš„åæ ‡(æ­¤åæ ‡å€¼ä¿è¯åŸåœ°è·³è·ƒçš„å¯èƒ½)
 	Vec2 jumpHeight = Vec2(0.0f, 0.0f);
-	//Éú³ÉÌøÔ¾Î»ÒÆ¶¯×÷
+	//ç”Ÿæˆè·³è·ƒä½ç§»åŠ¨ä½œ
 	Action* jump = JumpBy::create(1.75f, jumpHeight, 75, 1);
-	//½«ÌøÔ¾¶¯»­ºÍÌøÔ¾Î»ÒÆ¶¯×÷½áºÏ
+	//å°†è·³è·ƒåŠ¨ç”»å’Œè·³è·ƒä½ç§»åŠ¨ä½œç»“åˆ
 	Spawn* spawn = Spawn::create(animate, jump, nullptr);
-	//»Øµ÷¼ì²é¿ØÖÆÆ÷×´Ì¬º¯Êı
+	//å›è°ƒæ£€æŸ¥æ§åˆ¶å™¨çŠ¶æ€å‡½æ•°
 	auto callfunc = CallFunc::create(CC_CALLBACK_0(Player::checkControllerStatus, this));
-	//Ë³Ğò¶¯×÷£¬ÏÈÖ´ĞĞÌøÔ¾ĞĞÎª£¬ÔÙÖ´ĞĞ»Øµ÷
+	//é¡ºåºåŠ¨ä½œï¼Œå…ˆæ‰§è¡Œè·³è·ƒè¡Œä¸ºï¼Œå†æ‰§è¡Œå›è°ƒ
 	Sequence* sequence = Sequence::create(spawn, callfunc, nullptr);
-	//Ö´ĞĞ¶¯×÷
+	//æ‰§è¡ŒåŠ¨ä½œ
 	m_sprite->runAction(sequence);
 }
 
 void Player::climb()
 {
-	//Í£Ö¹µ±Ç°µÄ¶¯×÷
+	//åœæ­¢å½“å‰çš„åŠ¨ä½œ
 	m_sprite->stopAllActions();
-	//»ñÈ¡ÒÑ¾­×öºÃµÄ¶¯»­
+	//è·å–å·²ç»åšå¥½çš„åŠ¨ç”»
 	Animation* animation = AnimationCache::getInstance()->getAnimation(StringUtils::format("%s_climb", m_strPlayerName).c_str());
-	//Éú³É¶¯»­¶¯×÷
+	//ç”ŸæˆåŠ¨ç”»åŠ¨ä½œ
 	Animate* animate = Animate::create(animation);
-	//Ö´ĞĞ¶¯»­¶¯×÷
+	//æ‰§è¡ŒåŠ¨ç”»åŠ¨ä½œ
 	m_sprite->runAction(animate);
 }
 

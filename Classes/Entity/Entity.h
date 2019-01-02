@@ -13,15 +13,16 @@ public:
 	virtual ~Entity();
 
 	/**
-	 *	绑定精灵对象
-	 *	@sprite	精灵对象
+	 *	缁戝畾绮剧伒瀵硅薄
+	 *	@sprite	绮剧伒瀵硅薄
 	 */
 	void bindSprite(Sprite* sprite);
 
 	/**
-	 *	创建角色动画加载进动画缓存
+	 *	鑾峰彇瑙掕壊纰版挒浣撶Н
+	 *	@return Sprite鐨刢ontentSize
 	 */
-	void createAnimations();
+	Size getCollisionSize();
 
 protected:
 	Sprite* m_sprite;

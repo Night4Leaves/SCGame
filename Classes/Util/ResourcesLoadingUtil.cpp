@@ -11,4 +11,5 @@ void ResourcesLoadingUtil::preloadResources()
 
 	spriteFrameCache->addSpriteFramesWithFile("player/player_01.plist");
 	spriteFrameCache->addSpriteFramesWithFile("player/player_02.plist");
+	spriteFrameCache->addSpriteFramesWithFile("player/attack.plist");
 }

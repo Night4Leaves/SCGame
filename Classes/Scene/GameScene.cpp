@@ -1,12 +1,11 @@
 #include "GameScene.h"
 
 #include "Layer/BackgroundLayer.h"
+#include "Layer/GameLayer.h"
 #include "Layer/GameMenuLayer.h"
 #include "Layer/PaneLayer.h"
-#include "Entity/Player.h"
-#include "Controller/PlayerController.h"
-#include "Entity/Monster.h"
-#include "Controller/MonsterController.h"
+
+#include "Util/MapUtil.h"
 
 GameScene::GameScene()
 {
@@ -26,49 +25,19 @@ bool GameScene::init()
 	do {
 		CC_BREAK_IF(!Scene::init());
 
-		//³õÊ¼»¯±³¾°²ã²¢Ìí¼Óµ½³¡¾°ÖÐ
+		//åˆå§‹åŒ–èƒŒæ™¯å±‚å¹¶æ·»åŠ åˆ°åœºæ™¯ä¸­
 		m_pBackgroundLayer = BackgroundLayer::create();
 		CC_BREAK_IF(m_pBackgroundLayer == nullptr);
 		this->addChild(m_pBackgroundLayer);
-		//Ìí¼Ó±³¾°Í¼Æ¬
-		//m_pBackgroundLayer->setBackgroundPicture("background/game_scene_01_2048x1536.png");
+		m_pBackgroundLayer->setPosition(Vec2(0, 200));
+		//æ·»åŠ èƒŒæ™¯å›¾ç‰‡
+		m_pBackgroundLayer->setBackgroundPicture("background/game_scene_01_2048x1536.png");
 
-		m_pMap = TMXTiledMap::create("map/map_1-1.tmx");
-		CC_BREAK_IF(m_pMap == nullptr);
-		this->addChild(m_pMap);
+		m_pGameLayer = GameLayer::create();
+		CC_BREAK_IF(m_pGameLayer == nullptr);
+		this->addChild(m_pGameLayer);
 
-		TMXObjectGroup* objGroup = m_pMap->getObjectGroup("objects");
-
-		ValueMap monsterPoint = objGroup->getObject("monster");
-
-		float monsterX = monsterPoint.at("x").asFloat();
-		float monsterY = monsterPoint.at("y").asFloat();
-
-		Monster* monster = Monster::create("boss_01");
-		monster->setPosition(Vec2(monsterX, monsterY));
-		monster->idle();
-		this->addChild(monster);
-
-		MonsterController* monsterController = MonsterController::create();
-		monster->setController(monsterController);
-		this->addChild(monsterController);
-
-		ValueMap playerPoint = objGroup->getObject("player");
-
-		float playerX = playerPoint.at("x").asFloat();
-		float playerY = playerPoint.at("y").asFloat();
-
-		Player* player = Player::create("player_01");
-		player->setMap(m_pMap);
-		player->setPosition(Vec2(playerX, playerY));
-		player->idle();
-		this->addChild(player);
-
-		PlayerController* playerController = PlayerController::create();
-		player->setController(playerController);
-		this->addChild(playerController);
-
-		//³õÊ¼»¯²Ëµ¥²ã²¢Ìí¼Óµ½³¡¾°ÖÐ
+		//åˆå§‹åŒ–èœå•å±‚å¹¶æ·»åŠ åˆ°åœºæ™¯ä¸­
 		m_pGameMenuLayer = GameMenuLayer::create();
 		CC_BREAK_IF(m_pGameMenuLayer == nullptr);
 		this->addChild(m_pGameMenuLayer);

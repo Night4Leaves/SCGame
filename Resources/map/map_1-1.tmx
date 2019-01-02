@@ -1,16 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="left-down" width="50" height="30" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="3">
+<map version="1.2" tiledversion="1.2.1" orientation="orthogonal" renderorder="left-down" width="100" height="19" tilewidth="32" tileheight="32" infinite="0" nextlayerid="37" nextobjectid="14">
  <tileset firstgid="1" source="block.tsx"/>
- <layer id="1" name="groups" width="50" height="30">
+ <tileset firstgid="49" source="C:/Users/xiaoy/Desktop/2.tsx"/>
+ <tileset firstgid="65" source="map_tiles_32x32.tsx"/>
+ <tileset firstgid="129" source="tilesheet_complete.tsx"/>
+ <layer id="35" name="new_map" width="100" height="19">
   <data encoding="base64" compression="zlib">
-   eJzt0cEJADAIA8B+OkH337UrCLagcgf5CiZrAQAAAPSxA6GWyGZTN5z0y0snkR93Ost0MK2LCi4uTgPx
+   eJztkukNwjAMhSOFNWAfWIOuAIJRYIVydJtydAmYAFcEYaLEOX7QRnpP+tT4Spy4SkEQBEEQBEEQBEEQNLRqrdSBOBIn4kw0evz+WshtBH/qudIbhd5QivtqWuJCXIkbcSe6AvytkNsJ/tRze0mx3LivZg8AAIWwmfwyJxZmvTTYOS4fr/MxJWYZdTE5vlxu2zFXP0Ox028qY3++K2LNfL6Z2PC6FGLqUt4tZR5jxO6xYut+Dg+a2VN/7Zx78T1y+4qN2/Pldu4/809CPbri28R7ufYIzShU4+u79Hm8ALkaCNA=
+  </data>
+ </layer>
+ <layer id="36" name="块层 5" width="100" height="19">
+  <data encoding="base64" compression="zlib">
+   eJzt09sNgCAMQNGSuIDuo0vpOrqPTiU/JCRiLUJ8JPf8kIC0QKsIAAAAAAAAAAD/NTqRyb19CpvZn3Nxx7E0nubsfeK9V2+YWg9zOXeI45Te3UrLs/r5zR3HFEufpfZb+1PLneNunFr57+TJ7YW2EemauucKrPU6+07br/1HX5LbC72vxWCoR627ltQozFliPFmbHWitK1w=
   </data>
  </layer>
  <objectgroup id="2" name="objects">
-  <object id="1" name="player" x="48" y="895">
+  <object id="1" name="player" x="46" y="537">
    <point/>
   </object>
-  <object id="2" name="monster" x="782" y="830">
+  <object id="2" name="monster" x="777" y="539">
    <point/>
   </object>
  </objectgroup>

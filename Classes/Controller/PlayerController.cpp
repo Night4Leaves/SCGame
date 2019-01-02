@@ -14,11 +14,12 @@ bool PlayerController::init()
 	m_iYSpeed = 0;
 	m_bIsRight = true;
 	m_bIsLock = false;
-	m_iIsRun = 0;
+	m_iHorizontalRun = 0;
+	m_iVerticalRun = 0;
 
 	this->scheduleUpdate();
 
-	//×¢²á¼üÅÌ¼àÌıÊÂ¼ş
+	//æ³¨å†Œé”®ç›˜ç›‘å¬äº‹ä»¶
 	auto listener = EventListenerKeyboard::create();
 	listener->onKeyPressed = CC_CALLBACK_2(PlayerController::onKeyPressed, this);
 	listener->onKeyReleased = CC_CALLBACK_2(PlayerController::onKeyReleased, this);
@@ -36,6 +37,7 @@ void PlayerController::update(float dt)
 
 	Vec2 pos = m_pControllerListener->getTargetPosition();
 	pos.x += m_iXSpeed;
+	pos.y += m_iYSpeed;
 	m_pControllerListener->setTargetPosition(pos);
 
 
@@ -45,36 +47,36 @@ void PlayerController::update(float dt)
 
 void PlayerController::checkControllerStatus()
 {
-	//Èç¹ûÎªËø¶¨×´Ì¬£¬Ôò½âËø
+	//å¦‚æœä¸ºé”å®šçŠ¶æ€ï¼Œåˆ™è§£é”
 	if (m_bIsLock)
 	{
 		m_bIsLock = false;
 	}
 
-	//Èç¹û×óÓÒÒÆ¶¯¼ÆÊıÆ÷²»Îª0
-	if (m_iIsRun != 0)
+	//å¦‚æœå·¦å³ç§»åŠ¨è®¡æ•°å™¨ä¸ä¸º0
+	if (m_iHorizontalRun != 0)
 	{
-		//¸ù¾İ½ÇÉ«³¯ÏòÉèÖÃÎ»ÒÆËÙ¶È
+		//æ ¹æ®è§’è‰²æœå‘è®¾ç½®ä½ç§»é€Ÿåº¦
 		if (m_bIsRight)
 		{
-			m_iXSpeed = 4;
+			m_iXSpeed = HORIZONTAL_SPPED;
 		}
 		else
 		{
-			m_iXSpeed = -4;
+			m_iXSpeed = -HORIZONTAL_SPPED;
 		}
 
-		//ÉèÖÃ½ÇÉ«³¯Ïò
+		//è®¾ç½®è§’è‰²æœå‘
 		m_pControllerListener->turnAround(m_bIsRight);
-		//ÉèÖÃ½ÇÉ«ÅÜ¶¯¶¯»­
+		//è®¾ç½®è§’è‰²è·‘åŠ¨åŠ¨ç”»
 		m_pControllerListener->run();
 	}
-	//Èç¹û×óÓÒÒÆ¶¯¼ÆÊıÆ÷Îª0
+	//å¦‚æœå·¦å³ç§»åŠ¨è®¡æ•°å™¨ä¸º0
 	else
 	{
-		m_iXSpeed = 0;	//½ÇÉ«Î»ÒÆËÙ¶ÈÖÃ0
+		m_iXSpeed = 0;	//è§’è‰²ä½ç§»é€Ÿåº¦ç½®0
 
-		//ÉèÖÃ½ÇÉ«´ı»ú¶¯»­
+		//è®¾ç½®è§’è‰²å¾…æœºåŠ¨ç”»
 		m_pControllerListener->idle();
 	}
 
@@ -85,33 +87,63 @@ void PlayerController::onKeyPressed(EventKeyboard::KeyCode keyCode, Event * even
 	switch (keyCode)
 	{
 	case EventKeyboard::KeyCode::KEY_W:
-		//m_pControllerListener->climb();
-		break;
-	case EventKeyboard::KeyCode::KEY_S:
-		//m_pControllerListener->climb();
-		break;
-	case EventKeyboard::KeyCode::KEY_A:	//Ïò×óÒÆ¶¯
+		m_iVerticalRun++;
 
-		m_iIsRun++;	//×óÓÒÒÆ¶¯°´¼ü¼ÆÊıÆ÷+1
-		m_bIsRight = false;	//ÉèÖÃÎªÏò×ó
-
-		//Èç¹ûÊÇËø¶¨×´Ì¬Ôò²»Ö´ĞĞºóĞø´úÂë
 		if (m_bIsLock)
 		{
 			break;
 		}
 
-		m_iXSpeed = -4;	//ÉèÖÃËÙ¶ÈÎª-4£¨Ïò×óÎ»ÒÆ£©
+		m_iYSpeed = VERTICAL_SPEED;
 
-		//ÉèÖÃ½ÇÉ«³¯Ïò
-		m_pControllerListener->turnAround(m_bIsRight);
-		//ÉèÖÃ½ÇÉ«ÅÜ¶¯¶¯»­
+		if (m_iHorizontalRun > 0)
+		{
+			break;
+		}
+		
+		m_pControllerListener->run();
+		
+		break;
+	case EventKeyboard::KeyCode::KEY_S:
+		m_iVerticalRun++;
+
+		if (m_bIsLock)
+		{
+			break;
+		}
+
+		m_iYSpeed = -VERTICAL_SPEED;
+
+		if (m_iHorizontalRun > 0)
+		{
+			break;
+		}
+
 		m_pControllerListener->run();
 
 		break;
-	case EventKeyboard::KeyCode::KEY_D:	//ÏòÓÒÒÆ¶¯£¬²Î¿¼ÉÏÃæÏò×óÒÆ¶¯´úÂë×¢ÊÍ
+	case EventKeyboard::KeyCode::KEY_A:	//å‘å·¦ç§»åŠ¨
 
-		m_iIsRun++;
+		m_iHorizontalRun++;	//å·¦å³ç§»åŠ¨æŒ‰é”®è®¡æ•°å™¨+1
+		m_bIsRight = false;	//è®¾ç½®ä¸ºå‘å·¦
+
+		//å¦‚æœæ˜¯é”å®šçŠ¶æ€åˆ™ä¸æ‰§è¡Œåç»­ä»£ç 
+		if (m_bIsLock)
+		{
+			break;
+		}
+
+		m_iXSpeed = -HORIZONTAL_SPPED;	//è®¾ç½®é€Ÿåº¦ä¸º-4ï¼ˆå‘å·¦ä½ç§»ï¼‰
+
+		//è®¾ç½®è§’è‰²æœå‘
+		m_pControllerListener->turnAround(m_bIsRight);
+		//è®¾ç½®è§’è‰²è·‘åŠ¨åŠ¨ç”»
+		m_pControllerListener->run();
+
+		break;
+	case EventKeyboard::KeyCode::KEY_D:	//å‘å³ç§»åŠ¨ï¼Œå‚è€ƒä¸Šé¢å‘å·¦ç§»åŠ¨ä»£ç æ³¨é‡Š
+
+		m_iHorizontalRun++;
 		m_bIsRight = true;
 
 		if (m_bIsLock)
@@ -119,35 +151,37 @@ void PlayerController::onKeyPressed(EventKeyboard::KeyCode keyCode, Event * even
 			break;
 		}
 
-		m_iXSpeed = 4;
+		m_iXSpeed = HORIZONTAL_SPPED;
 
 		m_pControllerListener->turnAround(m_bIsRight);
 		m_pControllerListener->run();
 
 		break;
-	case EventKeyboard::KeyCode::KEY_J:	//¹¥»÷
+	case EventKeyboard::KeyCode::KEY_J:	//æ”»å‡»
 
-		//Èç¹ûÊÇËø¶¨×´Ì¬Ôò²»Ö´ĞĞºóĞø´úÂë
+		//å¦‚æœæ˜¯é”å®šçŠ¶æ€åˆ™ä¸æ‰§è¡Œåç»­ä»£ç 
 		if (m_bIsLock)
 		{
 			break;
 		}
 
-		m_bIsLock = true;	//ÉèÖÃÎªËø¶¨×´Ì¬
-		m_iXSpeed = 0;	//Í£Ö¹ÒÆ¶¯
-		m_pControllerListener->attack();	//µ÷ÓÃ½ÇÉ«¹¥»÷¶¯»­
+		m_bIsLock = true;	//è®¾ç½®ä¸ºé”å®šçŠ¶æ€
+		m_iXSpeed = 0;	//åœæ­¢ç§»åŠ¨
+		m_iYSpeed = 0;
+		m_pControllerListener->attack();	//è°ƒç”¨è§’è‰²æ”»å‡»åŠ¨ç”»
 
 		break;
-	case EventKeyboard::KeyCode::KEY_K:	//ÌøÔ¾
+	case EventKeyboard::KeyCode::KEY_K:	//è·³è·ƒ
 
-		//Èç¹ûÊÇËø¶¨×´Ì¬Ôò²»Ö´ĞĞºóĞø´úÂë
+		//å¦‚æœæ˜¯é”å®šçŠ¶æ€åˆ™ä¸æ‰§è¡Œåç»­ä»£ç 
 		if (m_bIsLock)
 		{
 			break;
 		}
 
-		m_bIsLock = true;	//ÉèÖÃÎªËø¶¨×´Ì¬
-		m_pControllerListener->jump();	//ÉèÖÃ½ÇÉ«ÌøÔ¾¶¯»­
+		m_bIsLock = true;	//è®¾ç½®ä¸ºé”å®šçŠ¶æ€
+		m_iYSpeed = 0;
+		m_pControllerListener->jump();	//è®¾ç½®è§’è‰²è·³è·ƒåŠ¨ç”»
 
 		break;
 	default:
@@ -159,50 +193,109 @@ void PlayerController::onKeyReleased(EventKeyboard::KeyCode keyCode, Event * eve
 {
 	switch (keyCode)
 	{
-	case EventKeyboard::KeyCode::KEY_W:
-		break;
-	case EventKeyboard::KeyCode::KEY_S:
-		break;
-	case EventKeyboard::KeyCode::KEY_A:	//È¡ÏûÏò×óÒÆ¶¯
+	case EventKeyboard::KeyCode::KEY_W:	//å–æ¶ˆå‘ä¸Šç§»åŠ¨
 
-		//×óÓÒÒÆ¶¯°´¼ü¼ÆÊıÆ÷-1£¬Èç¹ûĞ¡ÓÚ0ÔòÖÃ0
-		m_iIsRun--;
-		if (m_iIsRun < 0)
+		//ä¸Šä¸‹ç§»åŠ¨æŒ‰é”®è®¡æ•°å™¨-1ï¼Œå¦‚æœå°äº0åˆ™ç½®0
+		m_iVerticalRun--;
+		if (m_iVerticalRun < 0)
 		{
-			m_iIsRun = 0;
+			m_iVerticalRun = 0;
 		}
 
-		//Èç¹ûÊÇËø¶¨×´Ì¬Ôò²»Ö´ĞĞºóĞø´úÂë
+		//å¦‚æœæ˜¯é”å®šçŠ¶æ€åˆ™ä¸æ‰§è¡Œåç»­ä»£ç 
 		if (m_bIsLock)
 		{
 			break;
 		}
 
-		//Èç¹û½ÇÉ«³¯Ïò×ó±ß
+		//å¦‚æœä¸Šä¸‹ç§»åŠ¨æŒ‰é”®è®¡æ•°å™¨å½’0ï¼ˆå³æ²¡æœ‰æ§åˆ¶ä¸Šä¸‹ç§»åŠ¨çš„æŒ‰é”®è¢«æŒ‰ä¸‹ï¼‰
+		if (m_iVerticalRun == 0)
+		{
+			m_iYSpeed = 0;
+
+			//å¦‚æœå·¦å³ç§»åŠ¨æŒ‰é”®è®¡æ•°å™¨ä¹Ÿå½’0
+			if (m_iHorizontalRun == 0)
+			{
+				m_pControllerListener->idle();
+			}
+		}
+		else if (m_iYSpeed == VERTICAL_SPEED)	//å¦‚æœæ­¤æ—¶ä¸ºå‘ä¸Šç§»åŠ¨
+		{
+			m_iYSpeed = -m_iYSpeed;	//åˆ™è°ƒæ•´ä¸ºå‘ä¸‹ç§»åŠ¨
+		}
+		break;
+	case EventKeyboard::KeyCode::KEY_S:	//å–æ¶ˆå‘ä¸‹ç§»åŠ¨ï¼Œå‚è€ƒä¸Šé¢å–æ¶ˆå‘ä¸‹ç§»åŠ¨ä»£ç æ³¨é‡Š
+
+		m_iVerticalRun--;
+		if (m_iVerticalRun < 0)
+		{
+			m_iVerticalRun = 0;
+		}
+
+		if (m_bIsLock)
+		{
+			break;
+		}
+
+		if (m_iVerticalRun == 0)
+		{
+			m_iYSpeed = 0;
+
+			if (m_iHorizontalRun == 0)
+			{
+				m_pControllerListener->idle();
+			}
+		}
+		else if (m_iYSpeed == -VERTICAL_SPEED)
+		{
+			m_iYSpeed = -m_iYSpeed;
+		}
+		
+		break;
+	case EventKeyboard::KeyCode::KEY_A:	//å–æ¶ˆå‘å·¦ç§»åŠ¨
+
+		//å·¦å³ç§»åŠ¨æŒ‰é”®è®¡æ•°å™¨-1ï¼Œå¦‚æœå°äº0åˆ™ç½®0
+		m_iHorizontalRun--;
+		if (m_iHorizontalRun < 0)
+		{
+			m_iHorizontalRun = 0;
+		}
+
+		//å¦‚æœæ˜¯é”å®šçŠ¶æ€åˆ™ä¸æ‰§è¡Œåç»­ä»£ç 
+		if (m_bIsLock)
+		{
+			break;
+		}
+
+		//å¦‚æœè§’è‰²æœå‘å·¦è¾¹
 		if (!m_bIsRight)
 		{
-			//Èç¹û×óÓÒÒÆ¶¯°´¼ü¼ÆÊıÆ÷¹é0£¨¼´Ã»ÓĞ¿ØÖÆ×óÓÒÒÆ¶¯µÄ°´¼ü±»°´ÏÂ£©
-			if (m_iIsRun == 0)
+			//å¦‚æœå·¦å³ç§»åŠ¨æŒ‰é”®è®¡æ•°å™¨å½’0ï¼ˆå³æ²¡æœ‰æ§åˆ¶å·¦å³ç§»åŠ¨çš„æŒ‰é”®è¢«æŒ‰ä¸‹ï¼‰
+			if (m_iHorizontalRun == 0)
 			{
-				m_iXSpeed = 0;	//ËÙ¶ÈÖÃ0
-				m_pControllerListener->idle();	//ÉèÖÃ½ÇÉ«´ı»ú¶¯»­
+				m_iXSpeed = 0;	//é€Ÿåº¦ç½®0
+				//å¦‚æœYè½´é€Ÿåº¦ä¹Ÿä¸º0
+				if (m_iYSpeed == 0)
+				{
+					m_pControllerListener->idle();	//è®¾ç½®è§’è‰²å¾…æœºåŠ¨ç”»
+				}
 			}
-			//Èç¹û×óÓÒÒÆ¶¯°´¼ü¼ÆÊıÆ÷Ã»ÓĞ¹é0£¨¼´¿ØÖÆÏòÓÒµÄ°´¼üÒÀÈ»°´ÏÂ£©
+			//å¦‚æœå·¦å³ç§»åŠ¨æŒ‰é”®è®¡æ•°å™¨æ²¡æœ‰å½’0ï¼ˆå³æ§åˆ¶å‘å³çš„æŒ‰é”®ä¾ç„¶æŒ‰ä¸‹ï¼‰
 			else
 			{
-				m_iXSpeed = -m_iXSpeed;	//ËÙ¶ÈÉèÖÃÎª·´ÏòËÙ¶È
-				m_bIsRight = !m_bIsRight;	//½ÇÉ«³¯ÏòÉèÖÃÎªÏà·´³¯Ïò
-				m_pControllerListener->turnAround(m_bIsRight);	//ÉèÖÃ½ÇÉ«³¯Ïò
+				m_iXSpeed = -m_iXSpeed;	//é€Ÿåº¦è®¾ç½®ä¸ºåå‘é€Ÿåº¦
+				m_bIsRight = !m_bIsRight;	//è§’è‰²æœå‘è®¾ç½®ä¸ºç›¸åæœå‘
+				m_pControllerListener->turnAround(m_bIsRight);	//è®¾ç½®è§’è‰²æœå‘
 			}
 		}	
 
 		break;
-	case EventKeyboard::KeyCode::KEY_D:	//È¡ÏûÏòÓÒÒÆ¶¯£¬²Î¿¼ÉÏÃæÈ¡ÏûÏò×óÒÆ¶¯´úÂë×¢ÊÍ
+	case EventKeyboard::KeyCode::KEY_D:	//å–æ¶ˆå‘å³ç§»åŠ¨ï¼Œå‚è€ƒä¸Šé¢å–æ¶ˆå‘å·¦ç§»åŠ¨ä»£ç æ³¨é‡Š
 
-		m_iIsRun--;
-		if (m_iIsRun < 0)
+		m_iHorizontalRun--;
+		if (m_iHorizontalRun < 0)
 		{
-			m_iIsRun = 0;
+			m_iHorizontalRun = 0;
 		}
 
 		if (m_bIsLock)
@@ -212,10 +305,13 @@ void PlayerController::onKeyReleased(EventKeyboard::KeyCode keyCode, Event * eve
 
 		if (m_bIsRight)
 		{
-			if (m_iIsRun == 0)
+			if (m_iHorizontalRun == 0)
 			{
 				m_iXSpeed = 0;
-				m_pControllerListener->idle();
+				if(m_iYSpeed==0)
+				{
+					m_pControllerListener->idle();
+				}
 			}
 			else
 			{

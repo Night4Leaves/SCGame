@@ -14,7 +14,7 @@ void Entity::bindSprite(Sprite * sprite)
 	this->addChild(m_sprite);
 }
 
-void Entity::createAnimations()
+Size Entity::getCollisionSize()
 {
-
+	return m_sprite->getContentSize();
 }

@@ -28,23 +28,23 @@ bool MainScene::init()
 	do {
 		CC_BREAK_IF(!Scene::init());
 
-		//TODO:ÓÃTiledÖÆ×÷µÄµØÍ¼¼ÓÔØÖ÷½çÃæ
+		//TODO:ç”¨Tiledåˆ¶ä½œçš„åœ°å›¾åŠ è½½ä¸»ç•Œé¢
 		//TMXTiledMap* map = TMXTiledMap::create("map/scene_main.tmx");
 		//this -> addChild(map);
 
-		////»ñÈ¡¾«Áé¶ÔÏóÄÚÈÝ´óÐ¡£¬¼´Í¼Æ¬´óÐ¡
+		////èŽ·å–ç²¾çµå¯¹è±¡å†…å®¹å¤§å°ï¼Œå³å›¾ç‰‡å¤§å°
 		//Size size = map->getContentSize();
-		////»ñÈ¡OpenGLÊÓÍ¼¹æ¸ñ
+		////èŽ·å–OpenGLè§†å›¾è§„æ ¼
 		//Size winSize = Director::getInstance()->getWinSize();
 
-		////¸ù¾ÝÍ¼Æ¬´óÐ¡ÓëÊÓÍ¼¹æ¸ñ±ÈÀý£¬¶Ô±³¾°Í¼Æ¬½øÐÐËõ·Å£¬È·±£±³¾°Ã»ÓÐºÚÌõ
+		////æ ¹æ®å›¾ç‰‡å¤§å°ä¸Žè§†å›¾è§„æ ¼æ¯”ä¾‹ï¼Œå¯¹èƒŒæ™¯å›¾ç‰‡è¿›è¡Œç¼©æ”¾ï¼Œç¡®ä¿èƒŒæ™¯æ²¡æœ‰é»‘æ¡
 		//map->setScale(MAX(winSize.width / size.width, winSize.height / size.height));
 
-		//³õÊ¼»¯±³¾°²ã²¢Ìí¼Óµ½³¡¾°ÖÐ
+		//åˆå§‹åŒ–èƒŒæ™¯å±‚å¹¶æ·»åŠ åˆ°åœºæ™¯ä¸­
 		m_pBackgroundLayer = BackgroundLayer::create();
 		CC_BREAK_IF(m_pBackgroundLayer == nullptr);
 		this->addChild(m_pBackgroundLayer);
-		//Ìí¼Ó±³¾°Í¼Æ¬
+		//æ·»åŠ èƒŒæ™¯å›¾ç‰‡
 		m_pBackgroundLayer->setBackgroundPicture("background/main_scene_01_2048x1536.png");
 
 		Sprite* tpBackSprite = Sprite::createWithSpriteFrameName("tp_back.png");
@@ -71,11 +71,11 @@ bool MainScene::init()
 		tpBackSprite->runAction(RepeatForever::create(test1));
 		tpfrontSprite->runAction(RepeatForever::create(test2));
 
-		//³õÊ¼»¯NPC²ã²¢Ìí¼Óµ½³¡¾°ÖÐ
+		//åˆå§‹åŒ–NPCå±‚å¹¶æ·»åŠ åˆ°åœºæ™¯ä¸­
 		m_pNPCLayer = NPCLayer::create();
 		CC_BREAK_IF(m_pNPCLayer == nullptr);
 		this->addChild(m_pNPCLayer);
-		//ÉèÖÃNPC
+		//è®¾ç½®NPC
 		m_pNPCLayer->setMainSceneNPC();
 
 		Monster* monster = Monster::create("boss_01");
@@ -87,7 +87,7 @@ bool MainScene::init()
 		monster->setController(monsterController);
 		this->addChild(monsterController);
 
-		//Ìí¼ÓÍæ¼Ò½ÇÉ«
+		//æ·»åŠ çŽ©å®¶è§’è‰²
 		Player* player = Player::create("player_01");
 		player->setPosition(100, 68);
 		player->idle();
@@ -95,17 +95,17 @@ bool MainScene::init()
 		Point pos = player->getPosition();
 		log("x:%f, y:%f", pos.x, pos.y);
 
-		//³õÊ¼»¯²Ëµ¥²ã²¢Ìí¼Óµ½³¡¾°ÖÐ
+		//åˆå§‹åŒ–èœå•å±‚å¹¶æ·»åŠ åˆ°åœºæ™¯ä¸­
 		m_pGameMenuLayer = GameMenuLayer::create();
 		CC_BREAK_IF(m_pGameMenuLayer == nullptr);
 		this->addChild(m_pGameMenuLayer);
-		//´´½¨Ö÷½çÃæ²Ëµ¥
+		//åˆ›å»ºä¸»ç•Œé¢èœå•
 		m_pGameMenuLayer->setMainMenu();
 
-		//Ìí¼ÓÍæ¼Ò¿ØÖÆÆ÷
-		/*PlayerController* playerController = PlayerController::create();
+		//æ·»åŠ çŽ©å®¶æŽ§åˆ¶å™¨
+		PlayerController* playerController = PlayerController::create();
 		player->setController(playerController);
-		this->addChild(playerController);*/
+		this->addChild(playerController);
 
 		return true;
 	} while (0);

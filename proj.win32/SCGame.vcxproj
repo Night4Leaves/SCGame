@@ -154,11 +154,13 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\Controller\PlayerController.cpp" />
     <ClCompile Include="..\Classes\Controller\SCController.cpp" />
     <ClCompile Include="..\Classes\Entity\Entity.cpp" />
+    <ClCompile Include="..\Classes\Entity\FlyingObject.cpp" />
     <ClCompile Include="..\Classes\Entity\Monster.cpp" />
     <ClCompile Include="..\Classes\Entity\NPC.cpp" />
     <ClCompile Include="..\Classes\Entity\Player.cpp" />
     <ClCompile Include="..\Classes\HelloWorldScene.cpp" />
     <ClCompile Include="..\Classes\Layer\BackgroundLayer.cpp" />
+    <ClCompile Include="..\Classes\Layer\GameLayer.cpp" />
     <ClCompile Include="..\Classes\Layer\GameMenuLayer.cpp" />
     <ClCompile Include="..\Classes\Layer\NPCLayer.cpp" />
     <ClCompile Include="..\Classes\Layer\PaneLayer.cpp" />
@@ -166,6 +168,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\Scene\InitialScene.cpp" />
     <ClCompile Include="..\Classes\Scene\MainScene.cpp" />
     <ClCompile Include="..\Classes\Util\AnimationUtil.cpp" />
+    <ClCompile Include="..\Classes\Util\MapUtil.cpp" />
     <ClCompile Include="..\Classes\Util\MenuItemUtil.cpp" />
     <ClCompile Include="..\Classes\Util\ResourcesLoadingUtil.cpp" />
     <ClCompile Include="main.cpp" />
@@ -177,11 +180,13 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\Controller\PlayerController.h" />
     <ClInclude Include="..\Classes\Controller\SCController.h" />
     <ClInclude Include="..\Classes\Entity\Entity.h" />
+    <ClInclude Include="..\Classes\Entity\FlyingObject.h" />
     <ClInclude Include="..\Classes\Entity\Monster.h" />
     <ClInclude Include="..\Classes\Entity\NPC.h" />
     <ClInclude Include="..\Classes\Entity\Player.h" />
     <ClInclude Include="..\Classes\HelloWorldScene.h" />
     <ClInclude Include="..\Classes\Layer\BackgroundLayer.h" />
+    <ClInclude Include="..\Classes\Layer\GameLayer.h" />
     <ClInclude Include="..\Classes\Layer\GameMenuLayer.h" />
     <ClInclude Include="..\Classes\Layer\NPCLayer.h" />
     <ClInclude Include="..\Classes\Layer\PaneLayer.h" />
@@ -189,6 +194,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\Scene\InitialScene.h" />
     <ClInclude Include="..\Classes\Scene\MainScene.h" />
     <ClInclude Include="..\Classes\Util\AnimationUtil.h" />
+    <ClInclude Include="..\Classes\Util\MapUtil.h" />
     <ClInclude Include="..\Classes\Util\MenuItemUtil.h" />
     <ClInclude Include="..\Classes\Util\ResourcesLoadingUtil.h" />
     <ClInclude Include="main.h" />
