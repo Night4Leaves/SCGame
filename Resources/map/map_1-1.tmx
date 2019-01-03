@@ -13,7 +13,7 @@
   </data>
  </layer>
  <objectgroup id="2" name="objects">
-  <object id="1" name="player" x="46" y="537">
+  <object id="1" name="player" x="42" y="512">
    <point/>
   </object>
   <object id="2" name="monster" x="777" y="539">
