@@ -1,16 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.1" orientation="orthogonal" renderorder="left-down" width="100" height="9" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="3">
+<map version="1.2" tiledversion="1.2.1" orientation="orthogonal" renderorder="left-down" width="100" height="19" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="3">
  <tileset firstgid="1" source="tilesheet_complete.tsx"/>
- <layer id="1" name="块层 1" width="100" height="9">
+ <layer id="3" name="terrain" width="100" height="19">
   <data encoding="base64" compression="zlib">
-   eJzTZmZg0AFiXSDWA2J9IDYAYm0KxHGpIVcfMh+XGmq4ezCIhwNxBBBHAnEUEEcDcQyF4rjUkKsPmY9LDTXcPRjE3zAOL/yTGTseaHeNFDwcw5uaaYqeaXM4xgU+v5Ia/sTG0Whc0C7OSA0TaoThcI4LXGUVMWma1HAZzuE4mDCxcToaF4QxAJjLwtA=
+   eJztVEkOwzAIdJXndP1N1/8rT2hu5VLJshjAWRQOM9JINYWEzIBLIQiCIAiCIAiCIAhibxyHUk7Cs/AivApvw7I4yplbV59Rzhp9Z4jfhQ/hU/gSvoWfhXGUM7euPqOcNfrOEP+uxPFgn9uY9r/3PBTbgls/33qvp4elrda/54ulsRaP9N9Tg3Tfy4O2nwkwshOaBv96y5+5umrv8uZL0z+D9j370fqB8i3tLd2QB9EZj+5Bj/4ZPIreLWjuJkVTaz6RL0hrSyPvPo1onMGDVh+LyLe61tJA26WIbuiOs+4wNAPZPfC+xdsZTa/aP83T+re3j94uRPakV/8sHv0AMdHGKA==
+  </data>
+ </layer>
+ <layer id="4" name="decoration" width="100" height="19">
+  <data encoding="base64" compression="zlib">
+   eJztlklOBDEMRZPqYzBKIMFNGCXGCzQ3gC3NcIHmBrBlvECzhQ3co9kys+ZHxCqX5STVvUR+UlRVSewkP3ZSzhmGYRiGYRiGYRiGYRjG/+AB5bHQ57zj3EVndN/fsPkZwy7HSeXcafX3PvDO3fu6bQ7189Vo/rhNF772or8t1G0nfB2ivtdynG70947ygfIEPZ4zmryivGX8HWHcY5QJ+J30zbZ9+D1A+cT7V6xbQN/FOFfNhuYl+wakBtq6b/F9F+uGvmmzgedmQic5FmnPbfr4PvO6PY+DSzyvqmY8ULtcQ1/4kzHKNeLapLiG7xuUJdgsC99a3uyg726cj2YToD3mfTVo3ePA9ZPzCnDtZV8O7RuPAyLEw0v0Idu7IndTeZHSiEjtEeVCCtI4xQzGnI3j0h7L86YUH6UxOJp+gVLOETS3XM7kkPko86K01tT+kd+QCzkfpHGKNaxpXayLx5em9RTapn39lGO0Ocfl+aHlnHZX8LmRBrk7hd89gVLua2jnu7zf2/pN5U9uDRxtP1cwt1VfP2U+adrKPoE251EOqcEg2nC/Mo9Kua/Fv3Z28fu9dEbxMcb5B8vlm5arPGZT/yi8D0HnkRYbUsc28TOMNto5R/Z8Hr92zI91
   </data>
  </layer>
  <objectgroup id="2" name="objects">
-  <object id="1" name="player" x="48" y="223">
+  <object id="1" name="player" x="49" y="512">
    <point/>
   </object>
-  <object id="2" name="monster" x="787" y="187">
+  <object id="2" name="monster" x="785" y="444">
    <point/>
   </object>
  </objectgroup>

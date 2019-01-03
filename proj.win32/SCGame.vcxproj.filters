@@ -22,17 +22,14 @@
     <Filter Include="src\Entity">
       <UniqueIdentifier>{a9f9a030-4a35-43de-a1ed-8d85a4c3f511}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\Entity\NPC">
-      <UniqueIdentifier>{395fa8c4-2ca7-4468-bf67-63a67a14f671}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\Entity\Player">
-      <UniqueIdentifier>{13340fbe-a38e-4497-ae57-3d02d53f84cb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\Entity\Monster">
-      <UniqueIdentifier>{4c2e4eb6-7534-4e99-8952-478c4d34fcf3}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\Controller">
       <UniqueIdentifier>{e23324f3-accf-44ea-9043-83c250570992}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Entity\Character">
+      <UniqueIdentifier>{c8c172d6-0f26-44d2-bbd6-d54c7ab34856}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Entity\FlyingObject">
+      <UniqueIdentifier>{518df1d6-81db-4f67-845f-893b6519d6d0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -75,14 +72,8 @@
     <ClCompile Include="..\Classes\Entity\Entity.cpp">
       <Filter>src\Entity</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Entity\Player.cpp">
-      <Filter>src\Entity\Player</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\Layer\PaneLayer.cpp">
       <Filter>src\Layer</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Entity\Monster.cpp">
-      <Filter>src\Entity\Monster</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Controller\SCController.cpp">
       <Filter>src\Controller</Filter>
@@ -90,20 +81,29 @@
     <ClCompile Include="..\Classes\Controller\PlayerController.cpp">
       <Filter>src\Controller</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Entity\NPC.cpp">
-      <Filter>src\Entity\NPC</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\Controller\MonsterController.cpp">
       <Filter>src\Controller</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Util\MapUtil.cpp">
       <Filter>src\Utils</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Entity\FlyingObject.cpp">
-      <Filter>src\Entity</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\Layer\GameLayer.cpp">
       <Filter>src\Layer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Entity\FlyingObject.cpp">
+      <Filter>src\Entity\FlyingObject</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Entity\Player.cpp">
+      <Filter>src\Entity\Character</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Entity\Monster.cpp">
+      <Filter>src\Entity\Character</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Entity\NPC.cpp">
+      <Filter>src\Entity\Character</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Entity\AttackFlyingObject.cpp">
+      <Filter>src\Entity\FlyingObject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -146,14 +146,8 @@
     <ClInclude Include="..\Classes\Entity\Entity.h">
       <Filter>src\Entity</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Entity\Player.h">
-      <Filter>src\Entity\Player</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\Layer\PaneLayer.h">
       <Filter>src\Layer</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Entity\Monster.h">
-      <Filter>src\Entity\Monster</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Controller\SCController.h">
       <Filter>src\Controller</Filter>
@@ -164,20 +158,29 @@
     <ClInclude Include="..\Classes\Controller\GeneralControllerListener.h">
       <Filter>src\Controller</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Entity\NPC.h">
-      <Filter>src\Entity\NPC</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\Controller\MonsterController.h">
       <Filter>src\Controller</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Util\MapUtil.h">
       <Filter>src\Utils</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Entity\FlyingObject.h">
-      <Filter>src\Entity</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\Layer\GameLayer.h">
       <Filter>src\Layer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Entity\FlyingObject.h">
+      <Filter>src\Entity\FlyingObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Entity\Player.h">
+      <Filter>src\Entity\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Entity\Monster.h">
+      <Filter>src\Entity\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Entity\NPC.h">
+      <Filter>src\Entity\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Entity\AttackFlyingObject.h">
+      <Filter>src\Entity\FlyingObject</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

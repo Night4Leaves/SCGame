@@ -7,6 +7,8 @@
 USING_NS_CC;
 
 class Player;
+class PlayerController;
+class FlyingObject;
 
 class GameLayer : public Layer
 {
@@ -17,11 +19,14 @@ public:
 	CREATE_FUNC(GameLayer);
 	virtual bool init();
 
-	void addFlyingObject(Ref* pSender);
+	void addAttackFlyingObject(Ref* pSender);
 
 private:
 	TMXTiledMap* m_pMap;
 	Player* m_pPlayer;
+	PlayerController* m_pPlayerController;
+	Vector<FlyingObject*> vector_pAttackFlyingObject;
+	int i_flyingObjectFlag;
 };
 
 #endif // !__GAME_LAYER_H__

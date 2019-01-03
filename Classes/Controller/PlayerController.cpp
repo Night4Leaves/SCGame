@@ -45,6 +45,11 @@ void PlayerController::update(float dt)
 
 }
 
+bool PlayerController::getIsRight()
+{
+	return this->m_bIsRight;
+}
+
 void PlayerController::checkControllerStatus()
 {
 	//如果为锁定状态，则解锁

@@ -16,6 +16,7 @@ public:
 	CREATE_FUNC(PlayerController);
 	virtual bool init();
 	virtual void update(float dt);
+	bool getIsRight();
 
 	//检查控制器记录的角色状态
 	virtual void checkControllerStatus();

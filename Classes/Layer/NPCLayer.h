@@ -16,11 +16,14 @@ public:
 	CREATE_FUNC(NPCLayer);
 	virtual bool init();
 
-	//ÉèÖÃÖ÷³¡¾°½çÃæµÄNPC
-	void setMainSceneNPC();
+	/**
+	 *	è®¾ç½®ä¸»åœºæ™¯ç•Œé¢çš„NPC
+	 *	@objGroup	Tiledåœ°å›¾çš„å¯¹è±¡å±‚
+	 */
+	void setMainSceneNPC(const TMXObjectGroup* objGroup);
 
 private:
-	//Ìí¼ÓNPCµ½²ãÖĞ
+	//æ·»åŠ NPCåˆ°å±‚ä¸­
 	void addNPC(const NPCSetInfo& npcSetInfo, Point npcSetPosition);
 };
 

@@ -21,31 +21,44 @@ bool NPCLayer::init()
 	return false;
 }
 
-void NPCLayer::setMainSceneNPC()
+void NPCLayer::setMainSceneNPC(const TMXObjectGroup* objGroup)
 {
-	//TODO:∏˘æ›TiledµÿÕºµƒµ„Œª…Ë÷√NPCŒª÷√
-	//TMXObjectGroup* objects = map->getObjectGroup("objects");
+	//TODO:Ê†πÊçÆTiledÂú∞ÂõæÁöÑÁÇπ‰ΩçËÆæÁΩÆNPC‰ΩçÁΩÆ
+	float x = 0.0f;
+	float y = 0.0f;
 
-	//ValueMap point = objects->getObject("npc_2");
-	//float x = point.at("x").asFloat();
-	//float y = point.at("y").asFloat();
-
-	//NPCŒª÷√
-	Vec2 npc_1_point = Vec2(100, 150);
-	Vec2 npc_2_point = Vec2(265, 150);
-	Vec2 npc_3_point = Vec2(350, 150);
-	Vec2 npc_4_point = Vec2(550, 150);
-	Vec2 npc_5_point = Vec2(650, 150);
-
-	//NPC∂Øª≠
 	NPCSetInfo npc_1 = { "npc_1", NPCType::normal, 4 , 0.25f };
-	NPCSetInfo npc_2 = { "npc_2", NPCType::normal, 4 , 0.3f };
-	NPCSetInfo npc_3 = { "npc_3", NPCType::normal, 4 , 0.28f };
 
-	//ÃÌº”NPC
-	addNPC(npc_1, npc_1_point);
-	addNPC(npc_2, npc_2_point);
-	addNPC(npc_3, npc_3_point);
+	for (int i = 1; i <= 5; i++)
+	{
+		std::string str_npcName = StringUtils::format("NPC_%02d", i);
+		ValueMap point = objGroup->getObject(str_npcName.c_str());
+		x = point.at("x").asFloat();
+		y = point.at("y").asFloat();
+		log("%s", str_npcName.c_str());
+		log("x:%f, y:%f", x, y);
+
+		Vec2 npc_1_point = Vec2(x, y);
+		addNPC(npc_1, npc_1_point);
+	}
+	
+
+	////NPC‰ΩçÁΩÆ
+	//Vec2 npc_1_point = Vec2(x, y);
+	//Vec2 npc_2_point = Vec2(265, 150);
+	//Vec2 npc_3_point = Vec2(350, 150);
+	//Vec2 npc_4_point = Vec2(550, 150);
+	//Vec2 npc_5_point = Vec2(650, 150);
+
+	////NPCÂä®Áîª
+	//NPCSetInfo npc_1 = { "npc_1", NPCType::normal, 4 , 0.25f };
+	//NPCSetInfo npc_2 = { "npc_2", NPCType::normal, 4 , 0.3f };
+	//NPCSetInfo npc_3 = { "npc_3", NPCType::normal, 4 , 0.28f };
+
+	////Ê∑ªÂä†NPC
+	//addNPC(npc_1, npc_1_point);
+	//addNPC(npc_2, npc_2_point);
+	//addNPC(npc_3, npc_3_point);
 }
 
 void NPCLayer::addNPC(const NPCSetInfo& npcSetInfo, Point npcSetPosition)
@@ -56,7 +69,7 @@ void NPCLayer::addNPC(const NPCSetInfo& npcSetInfo, Point npcSetPosition)
 
 	npc->setPosition(npcSetPosition);
 
-	//NPC…Ë÷√µƒŒª÷√
+	//NPCËÆæÁΩÆÁöÑ‰ΩçÁΩÆ
 	/*Point pos = npc->getPosition();
 	log("x:%f ,y:%f", pos.x, pos.y);*/
 }

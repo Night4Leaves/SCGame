@@ -4,9 +4,7 @@
 #include "Layer/NPCLayer.h"
 #include "Layer/PaneLayer.h"
 #include "Entity/Player.h"
-#include "Entity/Monster.h"
 #include "Controller/PlayerController.h"
-#include "Controller/MonsterController.h"
 
 #include "Util/AnimationUtil.h"
 
@@ -28,24 +26,18 @@ bool MainScene::init()
 	do {
 		CC_BREAK_IF(!Scene::init());
 
-		//TODO:用Tiled制作的地图加载主界面
-		//TMXTiledMap* map = TMXTiledMap::create("map/scene_main.tmx");
-		//this -> addChild(map);
-
-		////获取精灵对象内容大小，即图片大小
-		//Size size = map->getContentSize();
-		////获取OpenGL视图规格
-		//Size winSize = Director::getInstance()->getWinSize();
-
-		////根据图片大小与视图规格比例，对背景图片进行缩放，确保背景没有黑条
-		//map->setScale(MAX(winSize.width / size.width, winSize.height / size.height));
-
 		//初始化背景层并添加到场景中
 		m_pBackgroundLayer = BackgroundLayer::create();
 		CC_BREAK_IF(m_pBackgroundLayer == nullptr);
 		this->addChild(m_pBackgroundLayer);
 		//添加背景图片
 		m_pBackgroundLayer->setBackgroundPicture("background/main_scene_01_2048x1536.png");
+
+		m_pMap = TMXTiledMap::create("map/scene_main.tmx");
+		CC_BREAK_IF(m_pMap == nullptr);
+		this->addChild(m_pMap);
+
+		TMXObjectGroup* objGroup = m_pMap->getObjectGroup("objects");
 
 		Sprite* tpBackSprite = Sprite::createWithSpriteFrameName("tp_back.png");
 		Sprite* tpfrontSprite = Sprite::createWithSpriteFrameName("tp_front.png");
@@ -56,7 +48,12 @@ bool MainScene::init()
 		Size tpBackSize = tpBackSprite->getContentSize();
 		tpfrontSprite->setPosition(tpBackSize.width * 0.5, tpBackSize.height * 0.5);
 
-		tpBackSprite->setPosition(Vec2(450, 150));
+		ValueMap portalPoint = objGroup->getObject("portal");
+
+		float portalX = portalPoint.at("x").asFloat();
+		float portalY = portalPoint.at("y").asFloat();
+
+		tpBackSprite->setPosition(Vec2(portalX, portalY));
 		//tpfrontSprite->setPosition(Vec2(450, 150));
 
 		tpBackSprite->setScale(0.2);
@@ -76,20 +73,18 @@ bool MainScene::init()
 		CC_BREAK_IF(m_pNPCLayer == nullptr);
 		this->addChild(m_pNPCLayer);
 		//设置NPC
-		m_pNPCLayer->setMainSceneNPC();
-
-		Monster* monster = Monster::create("boss_01");
-		monster->setPosition(600, 68);
-		monster->idle();
-		this->addChild(monster);
-
-		MonsterController* monsterController = MonsterController::create();
-		monster->setController(monsterController);
-		this->addChild(monsterController);
+		m_pNPCLayer->setMainSceneNPC(objGroup);
 
 		//添加玩家角色
 		Player* player = Player::create("player_01");
-		player->setPosition(100, 68);
+		player->setMap(m_pMap);
+
+		ValueMap playerPoint = objGroup->getObject("player");
+
+		float playerX = playerPoint.at("x").asFloat();
+		float playerY = playerPoint.at("y").asFloat();
+
+		player->setPosition(Vec2(playerX, playerY));
 		player->idle();
 		this->addChild(player);
 		Point pos = player->getPosition();

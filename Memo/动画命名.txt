@@ -12,3 +12,8 @@ hurt	--	受伤
 death	--	死亡
 
 飞行物：飞行物名称_序号(01开始)
+
+地图图层
+地形层(terrain)打底
+装饰层(decoration)修饰
+对象层(objects)确定位置

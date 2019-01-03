@@ -3,7 +3,7 @@
 #include "Controller/PlayerController.h"
 #include "Entity/Monster.h"
 #include "Controller/MonsterController.h"
-#include "Entity/FlyingObject.h"
+#include "Entity/AttackFlyingObject.h"
 
 GameLayer::GameLayer()
 {
@@ -18,13 +18,15 @@ bool GameLayer::init()
 	do {
 		CC_BREAK_IF(!Layer::init());
 
+		i_flyingObjectFlag = 0;
+
 		NotificationCenter::getInstance()->addObserver(
 			this,
-			callfuncO_selector(GameLayer::addFlyingObject),
+			callfuncO_selector(GameLayer::addAttackFlyingObject),
 			"attack",
 			NULL);
 
-		m_pMap = TMXTiledMap::create("map/map_1-1.tmx");
+		m_pMap = TMXTiledMap::create("map/map_1-2.tmx");
 		CC_BREAK_IF(m_pMap == nullptr);
 		this->addChild(m_pMap);
 
@@ -57,8 +59,18 @@ bool GameLayer::init()
 		m_pPlayer = player;
 
 		PlayerController* playerController = PlayerController::create();
+		CC_BREAK_IF(playerController == nullptr);
+		m_pPlayerController = playerController;
 		player->setController(playerController);
 		this->addChild(playerController);
+
+		for (int i = 0; i < 5; i++)
+		{
+			AttackFlyingObject* flyingObject = AttackFlyingObject::create("fireball");
+			CC_BREAK_IF(flyingObject == nullptr);
+			vector_pAttackFlyingObject.pushBack(flyingObject);
+			this->addChild(flyingObject);
+		}
 
 		return true;
 	} while (0);
@@ -68,16 +80,40 @@ bool GameLayer::init()
 	return false;
 }
 
-void GameLayer::addFlyingObject(Ref * pSender)
+void GameLayer::addAttackFlyingObject(Ref * pSender)
 {
-	Point playerPoint = m_pPlayer->getPosition();
-	Size playerSize = m_pPlayer->getCollisionSize();
+	Point point_playerPoint = m_pPlayer->getPosition();		//玩家坐标
+	Size size_playerSize = m_pPlayer->getCollisionSize();	//玩家形象大小
+	bool b_isRight = m_pPlayerController->getIsRight();		//玩家是否朝右
+	Vec2 vec2_flyingDistance = Vec2();	//飞行物飞行距离
+	float f_xSpeed = 0.0f;
+	float f_ySpeed = 0.0f;
+	float f_x = 0.0f;	//飞行物X轴起始位置
+	float f_y = point_playerPoint.y + size_playerSize.height / 2;	//飞行物Y轴起始位置
 
-	float x = playerPoint.x + playerSize.width / 2;
-	float y = playerPoint.y + playerSize.height / 2;
+	//根据飞行方向设置数值
+	if (b_isRight)
+	{
+		f_x = point_playerPoint.x + size_playerSize.width / 2;	//飞行物X轴起始位置
+		vec2_flyingDistance = Vec2(HORIZONTAL_DISTANCE, 0);		//飞行物飞行距离
+		f_xSpeed = HORIZONTAL_SPPED + 1;	//飞行物X轴飞行速度
+	}
+	else
+	{
+		f_x = point_playerPoint.x - size_playerSize.width / 2;
+		vec2_flyingDistance = Vec2(-HORIZONTAL_DISTANCE, 0);
+		f_xSpeed = -HORIZONTAL_SPPED - 1;
+	}
 
-	FlyingObject* flyingObject = FlyingObject::create("fireball", Vec2(150, 0));
-	flyingObject->setCurrentPoint(Vec2(x, y));
-	flyingObject->setXSpeed(HORIZONTAL_SPPED + 1);
-	this->addChild(flyingObject);
+	AttackFlyingObject* p_flyingObject = (AttackFlyingObject*)vector_pAttackFlyingObject.at(i_flyingObjectFlag);
+	p_flyingObject->setFlyingInformation(Point(f_x, f_y), vec2_flyingDistance, Point(f_xSpeed, f_ySpeed), b_isRight);
+
+	i_flyingObjectFlag++;
+	if (i_flyingObjectFlag == 5)
+	{
+		i_flyingObjectFlag = 0;
+	}
+
+	Size test = p_flyingObject->getCollisionSize();
+	log("width:%f, height:%f", test.width, test.height);
 }

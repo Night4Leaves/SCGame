@@ -28,17 +28,17 @@ Monster * Monster::create(const char * str_monsterName)
 bool Monster::init(const char* str_monsterName)
 {
 	m_strMonsterName = str_monsterName;
-	std::string animationName = "";	//¶¯»­È«³Æ
-	Animation* animation = NULL;	//¶¯»­¶ÔÏó
-	auto num = m_strActionName.size();	//¶¯×÷ÊıÁ¿
+	std::string animationName = "";	//åŠ¨ç”»å…¨ç§°
+	Animation* animation = NULL;	//åŠ¨ç”»å¯¹è±¡
+	auto num = m_strActionName.size();	//åŠ¨ä½œæ•°é‡
 
-	//Éú³É¾²Ì¬´ı»úÍ¼¶ÔÓ¦µÄ¾«Áé
+	//ç”Ÿæˆé™æ€å¾…æœºå›¾å¯¹åº”çš„ç²¾çµ
 	std::string waitAnimationName = StringUtils::format("%s_wait.png", str_monsterName);
 	Sprite* sprite = Sprite::createWithSpriteFrameName(waitAnimationName.c_str());
 	sprite->setScale(0.35);
 	this->bindSprite(sprite);
 
-	//Éú³É½ÇÉ«¶¯»­²¢´æ´¢µ½¶¯»­»º´æÖĞ
+	//ç”Ÿæˆè§’è‰²åŠ¨ç”»å¹¶å­˜å‚¨åˆ°åŠ¨ç”»ç¼“å­˜ä¸­
 	for (int i = 0; i < num; i++)
 	{
 		animationName = StringUtils::format("%s_%s", str_monsterName, m_strActionName.at(i));
@@ -78,37 +78,37 @@ void Monster::turnAround(bool b_isRight)
 
 void Monster::idle()
 {
-	//Í£Ö¹µ±Ç°µÄ¶¯×÷
+	//åœæ­¢å½“å‰çš„åŠ¨ä½œ
 	m_sprite->stopAllActions();
-	//»ñÈ¡ÒÑ¾­×öºÃµÄ¶¯»­
+	//è·å–å·²ç»åšå¥½çš„åŠ¨ç”»
 	Animation* animation = AnimationCache::getInstance()->getAnimation(StringUtils::format("%s_idle", m_strMonsterName).c_str());
-	//Éú³É¶¯»­¶¯×÷
+	//ç”ŸæˆåŠ¨ç”»åŠ¨ä½œ
 	Animate* animate = Animate::create(animation);
-	//Ö´ĞĞ¶¯»­¶¯×÷
+	//æ‰§è¡ŒåŠ¨ç”»åŠ¨ä½œ
 	m_sprite->runAction(animate);
 }
 
 void Monster::run()
 {
-	//Í£Ö¹µ±Ç°µÄ¶¯×÷
+	//åœæ­¢å½“å‰çš„åŠ¨ä½œ
 	m_sprite->stopAllActions();
-	//»ñÈ¡ÒÑ¾­×öºÃµÄ¶¯»­
+	//è·å–å·²ç»åšå¥½çš„åŠ¨ç”»
 	Animation* animation = AnimationCache::getInstance()->getAnimation(StringUtils::format("%s_run", m_strMonsterName).c_str());
-	//Éú³É¶¯»­¶¯×÷
+	//ç”ŸæˆåŠ¨ç”»åŠ¨ä½œ
 	Animate* animate = Animate::create(animation);
-	//Ö´ĞĞ¶¯»­¶¯×÷
+	//æ‰§è¡ŒåŠ¨ç”»åŠ¨ä½œ
 	m_sprite->runAction(animate);
 }
 
 void Monster::attack()
 {
-	//Í£Ö¹µ±Ç°µÄ¶¯×÷
+	//åœæ­¢å½“å‰çš„åŠ¨ä½œ
 	m_sprite->stopAllActions();
-	//»ñÈ¡ÒÑ¾­×öºÃµÄ¶¯»­
+	//è·å–å·²ç»åšå¥½çš„åŠ¨ç”»
 	Animation* attackAnimation = AnimationCache::getInstance()->getAnimation(StringUtils::format("%s_attack", m_strMonsterName).c_str());
-	//Éú³É¶¯»­¶¯×÷
+	//ç”ŸæˆåŠ¨ç”»åŠ¨ä½œ
 	Animate* attackAnimate = Animate::create(attackAnimation);
-	//»Øµ÷¼ì²é¿ØÖÆÆ÷×´Ì¬º¯Êı
+	//å›è°ƒæ£€æŸ¥æ§åˆ¶å™¨çŠ¶æ€å‡½æ•°
 	auto callfunc = CallFunc::create(CC_CALLBACK_0(Monster::checkControllerStatus, this));
 	Sequence* actionSequnence = Sequence::create(attackAnimate, callfunc, nullptr);
 	m_sprite->runAction(actionSequnence);

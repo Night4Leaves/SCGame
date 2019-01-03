@@ -23,6 +23,7 @@ public:
 
 private:
 	BackgroundLayer* m_pBackgroundLayer;
+	TMXTiledMap* m_pMap;
 	GameMenuLayer* m_pGameMenuLayer;
 	NPCLayer* m_pNPCLayer;
 	PaneLayer* m_pPaneLayer;
