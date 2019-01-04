@@ -2,10 +2,10 @@
 
 #include "Util/AnimationUtil.h"
 
-AttackFlyingObject * AttackFlyingObject::create(const char * str_objectName)
+AttackFlyingObject * AttackFlyingObject::create(const AtkFlyObjIniInfo & objectInfo)
 {
 	AttackFlyingObject *pRet = new(std::nothrow) AttackFlyingObject();
-	if (pRet && pRet->init(str_objectName))
+	if (pRet && pRet->init(objectInfo))
 	{
 		pRet->autorelease();
 		return pRet;
@@ -18,16 +18,18 @@ AttackFlyingObject * AttackFlyingObject::create(const char * str_objectName)
 	}
 }
 
-bool AttackFlyingObject::init(const char * str_objectName)
+bool AttackFlyingObject::init(const AtkFlyObjIniInfo & objectInfo)
 {
-	m_strObjectName = str_objectName;
+	m_strObjectName = objectInfo.str_objectName;
+	m_vec2FlightDistance = objectInfo.vec2_flightDistance;
+	m_vec2Speed = objectInfo.vec2_speed;
 	m_bIsUserEffective = false;
 
-	std::string waitAnimationName = StringUtils::format("%s_01.png", str_objectName);
+	std::string waitAnimationName = StringUtils::format("%s_01.png", m_strObjectName);
 	Sprite* sprite = Sprite::createWithSpriteFrameName(waitAnimationName.c_str());
 	this->bindSprite(sprite);
 
-	Animation* animation = AnimationUtil::createAnimationWithSingleFrameName(str_objectName, 0.1f, -1);
+	Animation* animation = AnimationUtil::createAnimationWithSingleFrameName(m_strObjectName, 0.1f, -1);
 	Animate* animate = Animate::create(animation);
 	sprite->runAction(animate);
 	sprite->setOpacity(0);
@@ -41,7 +43,7 @@ void AttackFlyingObject::update(float dt)
 	pos.x += m_fXSpeed;
 	if ((m_fXSpeed > 0 && pos.x >= m_vec2TargetPoint.x) || (m_fXSpeed < 0 && pos.x <= m_vec2TargetPoint.x))
 	{
-		this->setXSpeed(0);
+		m_fXSpeed = 0;
 		m_sprite->setOpacity(0);
 		m_bIsUserEffective = false;
 		this->unscheduleUpdate();
@@ -49,23 +51,35 @@ void AttackFlyingObject::update(float dt)
 	this->setPosition(pos);
 }
 
-void AttackFlyingObject::setFlyingInformation(Point vec2_currentPoint, Point vec2_changeDistance, Point vec2_speed, bool b_isRight)
+void AttackFlyingObject::setFlyingInformation(const AtkFlyObjPosInfo & objectFlyingInfo)
 {
-	this->setXSpeed(vec2_speed.x);
-	this->setYSpeed(vec2_speed.y);
-	this->setCurrentPoint(vec2_currentPoint);
-	this->setFlightDistance(vec2_changeDistance);
-	
-	float x = vec2_currentPoint.x + vec2_changeDistance.x;
-	float y = vec2_currentPoint.y + vec2_changeDistance.y;
+	m_vec2CurrentPoint = objectFlyingInfo.vec2_currentPoint;
+	m_vec2LauncherPoint = objectFlyingInfo.vec2_launcherPoint;
+	m_bIsRight = objectFlyingInfo.b_isRight;
 
-	Point targetPoint = Point(x, y);
-	this->setTargetPoint(targetPoint);
+	if (!m_bIsRight)
+	{
+		m_fXSpeed = -m_vec2Speed.x;
+		m_fXFlightDistance = -m_vec2FlightDistance.x;
+	}
+	else
+	{
+		m_fXSpeed = m_vec2Speed.x;
+		m_fXFlightDistance = m_vec2FlightDistance.x;
+	}
 
-	m_sprite->setFlipX(!b_isRight);
+	float x = m_vec2CurrentPoint.x + m_fXFlightDistance;
+	float y = m_vec2CurrentPoint.y + m_fYFlightDistance;
+	m_vec2TargetPoint = Point(x, y);
+
+	FlyingOcjectToMonster message = { m_vec2LauncherPoint, m_vec2TargetPoint };
+
+	NotificationCenter::getInstance()->postNotification("attack_flying_object_point", (Ref*)&message);
+
+	m_sprite->setFlipX(!m_bIsRight);
 	m_sprite->setOpacity(255);
 	m_bIsUserEffective = true;
-	this->setPosition(vec2_currentPoint);
+	this->setPosition(m_vec2CurrentPoint);
 
 	this->scheduleUpdate();
 }

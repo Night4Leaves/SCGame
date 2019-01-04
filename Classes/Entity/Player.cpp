@@ -167,7 +167,7 @@ void Player::attack()
 	//生成动画动作
 	Animate* attackAnimate = Animate::create(attackAnimation); 
 	//发出产生火球的消息
-	auto sendAttackMsg = CallFunc::create([]() {NotificationCenter::getInstance()->postNotification("attack", NULL); });
+	auto sendAttackMsg = CallFunc::create([]() {NotificationCenter::getInstance()->postNotification("set_attack_flying_object", NULL); });
 	//回调检查控制器状态函数
 	auto callfunc = CallFunc::create(CC_CALLBACK_0(Player::checkControllerStatus, this));
 	Sequence* actionSequnence = Sequence::create(attackAnimate, sendAttackMsg, callfunc, nullptr);

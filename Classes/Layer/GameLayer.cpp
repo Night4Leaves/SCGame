@@ -23,7 +23,7 @@ bool GameLayer::init()
 		NotificationCenter::getInstance()->addObserver(
 			this,
 			callfuncO_selector(GameLayer::addAttackFlyingObject),
-			"attack",
+			"set_attack_flying_object",
 			NULL);
 
 		m_pMap = TMXTiledMap::create("map/map_3-1.tmx");
@@ -64,9 +64,10 @@ bool GameLayer::init()
 		player->setController(playerController);
 		this->addChild(playerController);
 
-		for (int i = 0; i < 5; i++)
+		AtkFlyObjIniInfo fireballInfo = { "fireball", Vec2(HORIZONTAL_DISTANCE, 0), Vec2(HORIZONTAL_SPPED + 1, 0) };
+		for (int i = 0; i < 3; i++)
 		{
-			AttackFlyingObject* flyingObject = AttackFlyingObject::create("fireball");
+			AttackFlyingObject* flyingObject = AttackFlyingObject::create(fireballInfo);
 			CC_BREAK_IF(flyingObject == nullptr);
 			vector_pAttackFlyingObject.pushBack(flyingObject);
 			this->addChild(flyingObject);
@@ -85,9 +86,7 @@ void GameLayer::addAttackFlyingObject(Ref * pSender)
 	Point point_playerPoint = m_pPlayer->getPosition();		//玩家坐标
 	Size size_playerSize = m_pPlayer->getCollisionSize();	//玩家形象大小
 	bool b_isRight = m_pPlayerController->getIsRight();		//玩家是否朝右
-	Vec2 vec2_flyingDistance = Vec2();	//飞行物飞行距离
-	float f_xSpeed = 0.0f;	//飞行物X轴速度
-	float f_ySpeed = 0.0f;	//飞行物Y轴速度
+
 	float f_x = 0.0f;	//飞行物X轴起始位置
 	float f_y = point_playerPoint.y + size_playerSize.height / 2;	//飞行物Y轴起始位置
 
@@ -95,21 +94,19 @@ void GameLayer::addAttackFlyingObject(Ref * pSender)
 	if (b_isRight)
 	{
 		f_x = point_playerPoint.x + size_playerSize.width / 2;	//飞行物X轴起始位置
-		vec2_flyingDistance = Vec2(HORIZONTAL_DISTANCE, 0);		//飞行物飞行距离
-		f_xSpeed = HORIZONTAL_SPPED + 1;	//飞行物X轴飞行速度
 	}
 	else
 	{
 		f_x = point_playerPoint.x - size_playerSize.width / 2;
-		vec2_flyingDistance = Vec2(-HORIZONTAL_DISTANCE, 0);
-		f_xSpeed = -HORIZONTAL_SPPED - 1;
 	}
 
+	AtkFlyObjPosInfo temp = { Point(f_x, f_y), b_isRight, point_playerPoint };
+
 	AttackFlyingObject* p_flyingObject = (AttackFlyingObject*)vector_pAttackFlyingObject.at(i_flyingObjectFlag);
-	p_flyingObject->setFlyingInformation(Point(f_x, f_y), vec2_flyingDistance, Point(f_xSpeed, f_ySpeed), b_isRight);
+	p_flyingObject->setFlyingInformation(temp);
 
 	i_flyingObjectFlag++;
-	if (i_flyingObjectFlag == 5)
+	if (i_flyingObjectFlag == 3)
 	{
 		i_flyingObjectFlag = 0;
 	}

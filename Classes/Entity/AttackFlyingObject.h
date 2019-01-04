@@ -4,6 +4,9 @@
 
 #include "FlyingObject.h"
 
+typedef FlyingObjectInitialInformation AtkFlyObjIniInfo;
+typedef FlyingObjectPositionInformation AtkFlyObjPosInfo;
+
 class AttackFlyingObject : public FlyingObject
 {
 public:
@@ -11,8 +14,8 @@ public:
 	 *	创建飞行物体
 	 *	@str_objectName	飞行物体名称
 	 */
-	static AttackFlyingObject* create(const char* str_objectName);
-	virtual bool init(const char* str_objectName);
+	static AttackFlyingObject* create(const AtkFlyObjIniInfo &objectInfo);
+	virtual bool init(const AtkFlyObjIniInfo &objectInfo);
 	virtual void update(float dt);
 
 	/**
@@ -22,7 +25,7 @@ public:
 	 *	@vec2_speed	飞行物体飞行速度，X轴与Y轴分开计算
 	 *	@b_isRight	飞行物体是否朝向右
 	 */
-	void setFlyingInformation(Point vec2_currentPoint, Point vec2_changeDistance, Point vec2_speed, bool b_isRight);
+	void setFlyingInformation(const AtkFlyObjPosInfo &objectFlyingInfo);
 
 private:
 	AttackFlyingObject();

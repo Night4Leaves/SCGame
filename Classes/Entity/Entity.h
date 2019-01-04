@@ -2,9 +2,7 @@
 #ifndef __ENTITY_H__
 #define __ENTITY_H__
 
-#include "cocos2d.h"
-
-USING_NS_CC;
+#include "CustomizeStruct.h"
 
 class Entity : public Node
 {

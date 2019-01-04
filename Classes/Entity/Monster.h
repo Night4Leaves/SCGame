@@ -12,20 +12,21 @@ public:
 	virtual bool init(const char* str_monsterName);
 
 	void setController(SCController* controller);
+	void checkAttckFlyingObjectPath(Ref* pSender);
 
-	//»ñÈ¡½ÇÉ«×ø±ê
+	//è·å–è§’è‰²åæ ‡
 	virtual Vec2 getTargetPosition();
 	/**
-	 *	ÉèÖÃ½ÇÉ«×ø±ê
-	 *	@pos Ä¿±êÎ»ÖÃ
+	 *	è®¾ç½®è§’è‰²åæ ‡
+	 *	@pos ç›®æ ‡ä½ç½®
 	 */
 	virtual void setTargetPosition(Vec2 pos);
-	//¼ì²é¿ØÖÆÆ÷×´Ì¬
+	//æ£€æŸ¥æ§åˆ¶å™¨çŠ¶æ€
 	void checkControllerStatus();
 
 	/**
-	 *	¿ØÖÆ½ÇÉ«ÊÇ·ñ³¯ÓÒ
-	 *	@b_isRight trueÎªÏòÓÒ£¬falseÏò×ó
+	 *	æ§åˆ¶è§’è‰²æ˜¯å¦æœå³
+	 *	@b_isRight trueä¸ºå‘å³ï¼Œfalseå‘å·¦
 	 */
 	virtual void turnAround(bool b_isRight);
 
@@ -41,15 +42,15 @@ private:
 	Monster();
 	virtual ~Monster();
 
-	//¼ÇÂ¼¿ØÖÆÆ÷
+	//è®°å½•æ§åˆ¶å™¨
 	SCController* m_pMonsterController;
-	//¼ÇÂ¼½ÇÉ«Ãû£¬ÓÃÓÚÉú³É½ÇÉ«¶¯»­
+	//è®°å½•è§’è‰²åï¼Œç”¨äºç”Ÿæˆè§’è‰²åŠ¨ç”»
 	const char* m_strMonsterName;
-	//½ÇÉ«¶¯×÷Ãû
+	//è§’è‰²åŠ¨ä½œå
 	std::vector<const char*> m_strActionName = { "idle","run","attack","hurt","death" };
-	//¶¯»­Ö¡¼ä¸ôÊ±¼ä
+	//åŠ¨ç”»å¸§é—´éš”æ—¶é—´
 	float m_fActionTime[7] = { 0.25f, 0.2f, 0.15f, 0.1f, 0.25f };
-	//¶¯»­ÖØ¸´´ÎÊı
+	//åŠ¨ç”»é‡å¤æ¬¡æ•°
 	int m_iActionPlayTime[7] = { -1, -1, 1, 1, 1 };
 	//int m_iActionPlayTime[7] = { -1, -1, -1, -1, -1 };
 };
