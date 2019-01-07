@@ -6,13 +6,13 @@
 USING_NS_CC;
 
 /**
- *	°´Å¥ÉèÖÃĞÅÏ¢
- *	@picName °´Å¥±³¾°Í¼
- *	@text	°´Å¥ÏÔÊ¾ÎÄ×Ö
- *	@fontConfig	°´Å¥ÎÄ×Ö×ÖÌå
- *	@scale	Ëõ·Å±¶ÂÊ
- *	@target	°´Å¥ËùÔÚÉÏÏÂÎÄ(´æÒÉ)
- *	@selector	»Øµ÷º¯Êı
+ *	æŒ‰é’®è®¾ç½®ä¿¡æ¯
+ *	@picName æŒ‰é’®èƒŒæ™¯å›¾
+ *	@text	æŒ‰é’®æ˜¾ç¤ºæ–‡å­—
+ *	@fontConfig	æŒ‰é’®æ–‡å­—å­—ä½“
+ *	@scale	ç¼©æ”¾å€ç‡
+ *	@target	æŒ‰é’®æ‰€åœ¨ä¸Šä¸‹æ–‡(å­˜ç–‘)
+ *	@selector	å›è°ƒå‡½æ•°
  */
 struct ButtonWithFontType
 {
@@ -25,11 +25,11 @@ struct ButtonWithFontType
 };
 
 /**
- *	°´Å¥ÉèÖÃĞÅÏ¢
- *	@normalPicName Õı³£×´Ì¬°´Å¥Í¼
- *	@selectedPicName	Ñ¡ÖĞ×´Ì¬°´Å¥Í¼
- *	@target	°´Å¥ËùÔÚÉÏÏÂÎÄ(´æÒÉ)
- *	@selector	»Øµ÷º¯Êı
+ *	æŒ‰é’®è®¾ç½®ä¿¡æ¯
+ *	@normalPicName æ­£å¸¸çŠ¶æ€æŒ‰é’®å›¾
+ *	@selectedPicName	é€‰ä¸­çŠ¶æ€æŒ‰é’®å›¾
+ *	@target	æŒ‰é’®æ‰€åœ¨ä¸Šä¸‹æ–‡(å­˜ç–‘)
+ *	@selector	å›è°ƒå‡½æ•°
  */
 struct ButtonOnlyImageType
 {
@@ -40,23 +40,42 @@ struct ButtonOnlyImageType
 	SEL_MenuHandler selector = nullptr;
 };
 
+/**
+ *	æŒ‰é’®è®¾ç½®ä¿¡æ¯
+ *	@picName æŒ‰é’®èƒŒæ™¯å›¾
+ *	@textPicName	æŒ‰é’®æ˜¾ç¤ºæ–‡å­—
+ *	@scale	ç¼©æ”¾å€ç‡
+ *	@target	æŒ‰é’®æ‰€åœ¨ä¸Šä¸‹æ–‡(å­˜ç–‘)
+ *	@selector	å›è°ƒå‡½æ•°
+ */
+struct ButtonWithTextPicture
+{
+	const char* picName;
+	const char* textPicName;
+	float scale = 1;
+	Ref* target = nullptr;
+	SEL_MenuHandler selector = nullptr;
+};
+
 class MenuItemUtil
 {
 public:
 	/**
-	 *	´´½¨²Ëµ¥°´Å¥
-	 *	@picAddress	°´Å¥±³¾°Í¼Æ¬
-	 *	@text	°´Å¥ÎÄ×Ö
-	 *	@fontConfig	°´Å¥ÎÄ×Ö×ÖÌå
-	 *	@color	°´Å¥ÎÄ×ÖÑÕÉ«
+	 *	åˆ›å»ºèœå•æŒ‰é’®
+	 *	@picAddress	æŒ‰é’®èƒŒæ™¯å›¾ç‰‡
+	 *	@text	æŒ‰é’®æ–‡å­—
+	 *	@fontConfig	æŒ‰é’®æ–‡å­—å­—ä½“
+	 *	@color	æŒ‰é’®æ–‡å­—é¢œè‰²
 	 */
 	static Sprite* createMenuButton(const char* picAddress, const char* text, TTFConfig fontConfig, Color3B color = Color3B::WHITE);
 
-	//´´½¨ÓĞÎÄ×ÖµÄ²Ëµ¥Ñ¡Ïî¶ÔÏó(ÆÕÍ¨:°××Ö, °´ÏÂ:ºÚÉ«)
+	//åˆ›å»ºæœ‰æ–‡å­—çš„èœå•é€‰é¡¹å¯¹è±¡(æ™®é€š:ç™½å­—, æŒ‰ä¸‹:é»‘è‰²)
 	static MenuItemSprite* createMenuItemSprite(const ButtonWithFontType& buttontype);
 
-	//´´½¨Ã»ÓĞÎÄ×ÖµÄ²Ëµ¥Ñ¡Ïî¶ÔÏó
+	//åˆ›å»ºæ²¡æœ‰æ–‡å­—çš„èœå•é€‰é¡¹å¯¹è±¡
 	static MenuItemSprite* createMenuItemSpriteByPicture(const ButtonOnlyImageType& buttontype);
+
+	static MenuItemSprite* createMenuItemSpriteByPicture(const ButtonWithTextPicture& buttontype);
 };
 
 #endif // !__MENU_ITEM_UTIL_H__

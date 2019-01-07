@@ -2,27 +2,27 @@
 
 Sprite * MenuItemUtil::createMenuButton(const char * picAddress, const char * text, TTFConfig fontConfig, Color3B color)
 {
-	//´´½¨°´Å¥±³¾°
+	//åˆ›å»ºæŒ‰é’®èƒŒæ™¯
 	Sprite* buttonBg = Sprite::createWithSpriteFrameName(picAddress);
 	if (buttonBg == nullptr)
 	{
 		log("MenuItemUtil::createMenuButton : Sprite* buttonBg create failed!");
 		return false;
 	}
-	//ÉèÖÃ±³¾°Í¸Ã÷¶È
+	//è®¾ç½®èƒŒæ™¯é€æ˜Žåº¦
 	buttonBg->setOpacity(220);
 
-	//´´½¨°´Å¥ÎÄ×Ö
+	//åˆ›å»ºæŒ‰é’®æ–‡å­—
 	Label* buttonText = Label::createWithTTF(fontConfig, text);
-	//ÉèÖÃÎÄ×ÖÑÕÉ«
+	//è®¾ç½®æ–‡å­—é¢œè‰²
 	buttonText->setColor(color);
 
-	//×éºÏ°´Å¥
+	//ç»„åˆæŒ‰é’®
 	buttonBg->addChild(buttonText);
 
-	//»ñµÃ°´Å¥±³¾°´óÐ¡
+	//èŽ·å¾—æŒ‰é’®èƒŒæ™¯å¤§å°
 	Size buttonSize = buttonBg->getContentSize();
-	//ÉèÖÃ°´Å¥ÎÄ×ÖÎ»ÖÃ
+	//è®¾ç½®æŒ‰é’®æ–‡å­—ä½ç½®
 	buttonText->setPosition(buttonSize.width * 0.5, buttonSize.height * 0.5 + 5);
 
 	return buttonBg;
@@ -30,20 +30,20 @@ Sprite * MenuItemUtil::createMenuButton(const char * picAddress, const char * te
 
 MenuItemSprite * MenuItemUtil::createMenuItemSprite(const ButtonWithFontType & buttontype)
 {
-	//ÆÕÍ¨×´Ì¬±³¾°
+	//æ™®é€šçŠ¶æ€èƒŒæ™¯
 	std::string normalPic = StringUtils::format("%s_Normal.png", buttontype.picName);
-	//°´ÏÂ×´Ì¬±³¾°
+	//æŒ‰ä¸‹çŠ¶æ€èƒŒæ™¯
 	std::string selectPic = StringUtils::format("%s_Selected.png", buttontype.picName);
-	//°´Å¥ÎÄ×Ö
+	//æŒ‰é’®æ–‡å­—
 	const char* text = buttontype.text;
-	//×ÖÌåÉèÖÃ
+	//å­—ä½“è®¾ç½®
 	TTFConfig fontConfig = buttontype.fontConfig;
 
-	//´´½¨ÆÕÍ¨×´Ì¬ºÍ°´ÏÂ×´Ì¬°´Å¥¾«Áé¶ÔÏó
+	//åˆ›å»ºæ™®é€šçŠ¶æ€å’ŒæŒ‰ä¸‹çŠ¶æ€æŒ‰é’®ç²¾çµå¯¹è±¡
 	Sprite* normalButton = MenuItemUtil::createMenuButton(normalPic.c_str(), text, fontConfig, Color3B::WHITE);
 	Sprite* selectButton = MenuItemUtil::createMenuButton(selectPic.c_str(), text, fontConfig, Color3B::BLACK);
 
-	//´´½¨²Ëµ¥Ñ¡Ïî¾«Áé¶ÔÏó
+	//åˆ›å»ºèœå•é€‰é¡¹ç²¾çµå¯¹è±¡
 	MenuItemSprite* buttonSprite = MenuItemSprite::create(normalButton, selectButton, buttontype.target, buttontype.selector);
 	if (buttonSprite == nullptr)
 	{
@@ -51,7 +51,7 @@ MenuItemSprite * MenuItemUtil::createMenuItemSprite(const ButtonWithFontType & b
 		return false;
 	}
 
-	//²Ëµ¥Ñ¡ÏîËõ·Å
+	//èœå•é€‰é¡¹ç¼©æ”¾
 	buttonSprite->setScale(buttontype.scale);
 
 	return buttonSprite;
@@ -59,11 +59,11 @@ MenuItemSprite * MenuItemUtil::createMenuItemSprite(const ButtonWithFontType & b
 
 MenuItemSprite * MenuItemUtil::createMenuItemSpriteByPicture(const ButtonOnlyImageType & buttontype)
 {
-	//´´½¨ÆÕÍ¨×´Ì¬ºÍÑ¡ÖÐ×´Ì¬°´Å¥¾«Áé¶ÔÏó
+	//åˆ›å»ºæ™®é€šçŠ¶æ€å’Œé€‰ä¸­çŠ¶æ€æŒ‰é’®ç²¾çµå¯¹è±¡
 	Sprite* normalButton = Sprite::createWithSpriteFrameName(buttontype.normalPicName);
 	Sprite* selectButton = Sprite::createWithSpriteFrameName(buttontype.selectedPicName);
 
-	//´´½¨²Ëµ¥Ñ¡Ïî¾«Áé¶ÔÏó
+	//åˆ›å»ºèœå•é€‰é¡¹ç²¾çµå¯¹è±¡
 	MenuItemSprite* buttonSprite = MenuItemSprite::create(normalButton, selectButton, buttontype.target, buttontype.selector);
 	if (buttonSprite == nullptr)
 	{
@@ -71,7 +71,54 @@ MenuItemSprite * MenuItemUtil::createMenuItemSpriteByPicture(const ButtonOnlyIma
 		return false;
 	}
 
-	//²Ëµ¥Ñ¡ÏîËõ·Å
+	//èœå•é€‰é¡¹ç¼©æ”¾
+	buttonSprite->setScale(buttontype.scale);
+
+	return buttonSprite;
+}
+
+MenuItemSprite * MenuItemUtil::createMenuItemSpriteByPicture(const ButtonWithTextPicture & buttontype)
+{
+	//æ™®é€šçŠ¶æ€å’ŒæŒ‰ä¸‹çŠ¶æ€èƒŒæ™¯
+	std::string normalBgPic = StringUtils::format("%s_Normal.png", buttontype.picName);
+	std::string selectBgPic = StringUtils::format("%s_Selected.png", buttontype.picName);
+
+	//æ™®é€šçŠ¶æ€å’ŒæŒ‰ä¸‹çŠ¶æ€æ–‡å­—
+	std::string normalTextPic = StringUtils::format("%s_normal.png", buttontype.textPicName);
+	std::string selectTextPic = StringUtils::format("%s_selected.png", buttontype.textPicName);
+
+	//åˆ›å»ºæ™®é€šçŠ¶æ€å’Œé€‰ä¸­çŠ¶æ€æŒ‰é’®ç²¾çµå¯¹è±¡
+	Sprite* normalButton = Sprite::createWithSpriteFrameName(normalBgPic.c_str());
+	Sprite* selectButton = Sprite::createWithSpriteFrameName(selectBgPic.c_str());
+
+	//åˆ›å»ºæ™®é€šçŠ¶æ€å’Œé€‰ä¸­çŠ¶æ€æ–‡å­—ç²¾çµ
+	Sprite* normalTextSprite = Sprite::createWithSpriteFrameName(normalTextPic.c_str());
+	Sprite* selectTextSprite = Sprite::createWithSpriteFrameName(selectTextPic.c_str());
+
+	//èƒŒæ™¯å›¾ä¸Žæ–‡å­—å›¾æ‹¼åˆ
+	normalButton->addChild(normalTextSprite);
+	selectButton->addChild(selectTextSprite);
+	
+	//èŽ·å–èƒŒæ™¯å›¾å¤§å°
+	Size buttonSize = normalButton->getContentSize();
+
+	//æ ¹æ®èƒŒæ™¯å›¾å¤§å°è®¾ç½®æ–‡å­—å›¾ä½ç½®
+	normalTextSprite->setPosition(buttonSize.width * 0.5, buttonSize.height * 0.5 + 5);
+	selectTextSprite->setPosition(buttonSize.width * 0.5, buttonSize.height * 0.5 + 5);
+
+	//æ–‡å­—ç¼©æ”¾ï¼Œä¸´æ—¶æ–¹å¼
+	normalTextSprite->setScale(1.5f);
+	selectTextSprite->setScale(1.5f);
+
+	//åˆ›å»ºèœå•é€‰é¡¹ç²¾çµå¯¹è±¡
+	MenuItemSprite* buttonSprite = MenuItemSprite::create(normalButton, selectButton, buttontype.target, buttontype.selector);
+	if (buttonSprite == nullptr)
+	{
+		log("MenuItemSprite create failed!");
+		return false;
+	}
+
+	//èœå•é€‰é¡¹ç¼©æ”¾
 	buttonSprite->setScale(buttontype.scale);
 
 	return buttonSprite;

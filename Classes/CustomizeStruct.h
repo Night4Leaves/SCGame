@@ -63,13 +63,13 @@ struct FlyingObjectPositionInformation
 
 /**
  *	飞行物发送给怪物的信息结构
- *	@vec2_lanucherPoint	飞行物发射台
- *	@vec2_targetPoint	飞行物目标点
+ *	@vec2_currentPoint	飞行物起始台
+ *	@vec2_flightDistance	飞行物飞行距离
  */
 struct FlyingOcjectToMonster
 {
-	Point vec2_lanucherPoint;
-	Point vec2_targetPoint;
+	Point vec2_currentPoint;
+	Point vec2_flightDistance;
 };
 
 #define poslog(name, x, y) log("%s x:%f, y:%f", name, x, y);

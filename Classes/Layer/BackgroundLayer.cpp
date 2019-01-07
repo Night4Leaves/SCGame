@@ -23,7 +23,7 @@ bool BackgroundLayer::init()
 
 void BackgroundLayer::setBackgroundPicture(const char * pictureName)
 {
-	//¸ù¾ÝÍ¼Æ¬Ãû´´½¨¾«Áé¶ÔÏó²¢Ìí¼Óµ½²ãÖÐ
+	//æ ¹æ®å›¾ç‰‡ååˆ›å»ºç²¾çµå¯¹è±¡å¹¶æ·»åŠ åˆ°å±‚ä¸­
 	Sprite* p_bgSprite = Sprite::create(pictureName);
 	if (p_bgSprite == nullptr)
 	{
@@ -34,15 +34,15 @@ void BackgroundLayer::setBackgroundPicture(const char * pictureName)
 	{
 		this->addChild(p_bgSprite);
 
-		//»ñÈ¡¾«Áé¶ÔÏóÄÚÈÝ´óÐ¡£¬¼´Í¼Æ¬´óÐ¡
+		//èŽ·å–ç²¾çµå¯¹è±¡å†…å®¹å¤§å°ï¼Œå³å›¾ç‰‡å¤§å°
 		Size size = p_bgSprite->getContentSize();
-		//»ñÈ¡OpenGLÊÓÍ¼¹æ¸ñ
+		//èŽ·å–OpenGLè§†å›¾è§„æ ¼
 		Size winSize = Director::getInstance()->getWinSize();
 
-		//¸ù¾ÝÍ¼Æ¬´óÐ¡ÓëÊÓÍ¼¹æ¸ñ±ÈÀý£¬¶Ô±³¾°Í¼Æ¬½øÐÐËõ·Å£¬È·±£±³¾°Ã»ÓÐºÚÌõ
+		//æ ¹æ®å›¾ç‰‡å¤§å°ä¸Žè§†å›¾è§„æ ¼æ¯”ä¾‹ï¼Œå¯¹èƒŒæ™¯å›¾ç‰‡è¿›è¡Œç¼©æ”¾ï¼Œç¡®ä¿èƒŒæ™¯æ²¡æœ‰é»‘æ¡
 		p_bgSprite->setScale(MAX(winSize.width / size.width, winSize.height / size.height));
 
-		//ÉèÖÃÍ¼Æ¬ÖÐÐÄµãÔÚ´°¿ÚÊÓÍ¼ÖÐÐÄ
+		//è®¾ç½®å›¾ç‰‡ä¸­å¿ƒç‚¹åœ¨çª—å£è§†å›¾ä¸­å¿ƒ
 		p_bgSprite->setPosition(winSize.width * 0.5, winSize.height * 0.5);
 	}
 
@@ -50,7 +50,7 @@ void BackgroundLayer::setBackgroundPicture(const char * pictureName)
 
 void BackgroundLayer::setGameTitle(const char * title, const char * fontType, float fontSize, Color3B color)
 {
-	//¸ù¾Ý´«ÈëµÄÄÚÈÝ¡¢×ÖÌåÖÖÀà¡¢×ÖºÅ´´½¨±êÌâ±êÇ©
+	//æ ¹æ®ä¼ å…¥çš„å†…å®¹ã€å­—ä½“ç§ç±»ã€å­—å·åˆ›å»ºæ ‡é¢˜æ ‡ç­¾
 	Label* p_titleLabel = Label::create(title, fontType, fontSize);
 	if (p_titleLabel == nullptr)
 	{
@@ -61,14 +61,37 @@ void BackgroundLayer::setGameTitle(const char * title, const char * fontType, fl
 	{
 		this->addChild(p_titleLabel);
 
-		//ÉèÖÃ±êÌâ×ÖÌåÑÕÉ«
+		//è®¾ç½®æ ‡é¢˜å­—ä½“é¢œè‰²
 		p_titleLabel->setColor(color);
 
-		//»ñÈ¡OpenGLÊÓÍ¼¹æ¸ñ
+		//èŽ·å–OpenGLè§†å›¾è§„æ ¼
 		Size winSize = Director::getInstance()->getWinSize();
 
-		//ÉèÖÃ±êÌâÖÐÐÄµãÔÚ´°¿ÚÊÓÍ¼ºÏÊÊÎ»ÖÃ
+		//è®¾ç½®æ ‡é¢˜ä¸­å¿ƒç‚¹åœ¨çª—å£è§†å›¾åˆé€‚ä½ç½®
 		p_titleLabel->setPosition(winSize.width * 0.5, winSize.height * 0.8);
 	}
 
+}
+
+void BackgroundLayer::setGameTitleByPicture(const char * picName, float scale)
+{
+	//åˆ›å»ºæ ‡é¢˜ç²¾çµ
+	Sprite* p_titleLabel = Sprite::createWithSpriteFrameName(picName);
+	if (p_titleLabel == nullptr)
+	{
+		log("Title create failed!");
+		return;
+	}
+	else
+	{
+		this->addChild(p_titleLabel);
+
+		//èŽ·å–OpenGLè§†å›¾è§„æ ¼
+		Size winSize = Director::getInstance()->getWinSize();
+
+		//è®¾ç½®æ ‡é¢˜ä¸­å¿ƒç‚¹åœ¨çª—å£è§†å›¾åˆé€‚ä½ç½®
+		p_titleLabel->setPosition(winSize.width * 0.5, winSize.height * 0.8);
+
+		p_titleLabel->setScale(scale);
+	}
 }

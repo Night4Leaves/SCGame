@@ -180,6 +180,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\Controller\MonsterController.h" />
     <ClInclude Include="..\Classes\Controller\PlayerController.h" />
     <ClInclude Include="..\Classes\Controller\SCController.h" />
+    <ClInclude Include="..\Classes\CustomizeStruct.h" />
     <ClInclude Include="..\Classes\Entity\AttackFlyingObject.h" />
     <ClInclude Include="..\Classes\Entity\Entity.h" />
     <ClInclude Include="..\Classes\Entity\FlyingObject.h" />

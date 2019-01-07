@@ -16,19 +16,26 @@ public:
 	virtual bool init();
 
 	/**
-	 *	¸ù¾İ´«ÈëµÄÍ¼Æ¬Ãû×Ö½«Í¼Æ¬´´½¨Îª¾«Áé¶ÔÏó²¢Ìí¼Óµ½±³¾°²ãÖĞ
-	 *	@pictureName	±³¾°Í¼Æ¬Ãû×Ö
+	 *	æ ¹æ®ä¼ å…¥çš„å›¾ç‰‡åå­—å°†å›¾ç‰‡åˆ›å»ºä¸ºç²¾çµå¯¹è±¡å¹¶æ·»åŠ åˆ°èƒŒæ™¯å±‚ä¸­
+	 *	@pictureName	èƒŒæ™¯å›¾ç‰‡åå­—
 	 */
 	void setBackgroundPicture(const char* pictureName);
 
 	/**
-	 *	ÉèÖÃÓÎÏ·±êÌâ
-	 *	@title	±êÌâÄÚÈİ
-	 *	@fontType	×ÖÌåÖÖÀà
-	 *	@fontSize	×ÖÌå´óĞ¡
-	 *	@color	×ÖÌåÑÕÉ«
+	 *	è®¾ç½®æ¸¸æˆæ ‡é¢˜
+	 *	@title	æ ‡é¢˜å†…å®¹
+	 *	@fontType	å­—ä½“ç§ç±»
+	 *	@fontSize	å­—ä½“å¤§å°
+	 *	@color	å­—ä½“é¢œè‰²
 	 */
 	void setGameTitle(const char* title, const char* fontType, float fontSize, Color3B color = Color3B::WHITE);
+
+	/**
+	 *	è®¾ç½®æ¸¸æˆæ ‡é¢˜(æ ‡é¢˜ä¸ºå›¾ç‰‡)
+	 *	@picName	å›¾ç‰‡å
+	 *	@scale	ç¼©æ”¾å€æ•°
+	 */
+	void setGameTitleByPicture(const char* picName, float scale = 1);
 };
 
 #endif // !__BACKGROUND_LAYER_H__

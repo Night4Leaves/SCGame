@@ -182,6 +182,9 @@
     <ClInclude Include="..\Classes\Entity\AttackFlyingObject.h">
       <Filter>src\Entity\FlyingObject</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\CustomizeStruct.h">
+      <Filter>src</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">

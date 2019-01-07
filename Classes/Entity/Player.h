@@ -12,6 +12,7 @@ public:
 	virtual bool init(const char* str_playerName);
 
 	void setController(SCController* controller);
+	virtual Size getCollisionSize();
 	virtual Vec2 getTargetPosition();
 	virtual void setTargetPosition(Vec2 pos);
 	void setMap(TMXTiledMap* p_map);

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.1" orientation="orthogonal" renderorder="left-down" width="20" height="20" tilewidth="40" tileheight="30" infinite="0" nextlayerid="3" nextobjectid="8">
+<map version="1.2" tiledversion="1.2.1" orientation="orthogonal" renderorder="left-down" width="20" height="20" tilewidth="40" tileheight="30" infinite="0" nextlayerid="4" nextobjectid="8">
+ <tileset firstgid="1" source="block.tsx"/>
  <objectgroup id="2" name="objects">
   <object id="1" name="player" x="57" y="540">
    <point/>

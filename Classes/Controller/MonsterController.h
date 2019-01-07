@@ -14,15 +14,19 @@ public:
 	virtual bool init();
 	virtual void update(float dt);
 
-	//¼ì²é¿ØÖÆÆ÷¼ÇÂ¼µÄ½ÇÉ«×´Ì¬
+	//æ£€æŸ¥æ§åˆ¶å™¨è®°å½•çš„è§’è‰²çŠ¶æ€
 	virtual void checkControllerStatus();
 
-private:
-	int m_iXSpeed;	//XÖáÒÆËÙ
+	void checkAttckFlyingObjectPath(Ref* pSender);
 
-	bool m_bIsRight;	//ÊÇ·ñÏòÓÒ
-	bool m_bIsLock;		//ÊÇ·ñÎªËøËÀ×´Ì¬
-	bool m_bIsAttack;
+private:
+	int m_iXSpeed;	//Xè½´ç§»é€Ÿ
+	int m_iYspeed;	//Yè½´ç§»é€Ÿ
+
+	bool m_bIsRight;	//æ˜¯å¦å‘å³
+	bool m_bIsLock;		//æ˜¯å¦ä¸ºé”æ­»çŠ¶æ€
+	bool m_bIsAttack;	//æ”»å‡»çŠ¶æ€
+	bool m_bIsAttacked;	//è¢«æ”»å‡»çŠ¶æ€
 
 	float m_fStateTime;
 };

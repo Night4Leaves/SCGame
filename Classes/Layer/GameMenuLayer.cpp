@@ -27,20 +27,20 @@ void GameMenuLayer::setInitialMenu()
 {
 	TTFConfig fontConfig = { "fonts/arial.ttf", 40 };
 
-	//创建菜单选项
-	ButtonWithFontType gameStartButtonType = { "Button", "Game Start", fontConfig, 0.5, this, menu_selector(GameMenuLayer::startGame) };
-	MenuItemSprite* aButtonSprite = MenuItemUtil::createMenuItemSprite(gameStartButtonType);
+	//鍒涘缓鑿滃崟閫夐」
+	ButtonWithTextPicture gameStartButtonType = { "Button", "gamestart", 0.5, this, menu_selector(GameMenuLayer::startGame) };
+	MenuItemSprite* aButtonSprite = MenuItemUtil::createMenuItemSpriteByPicture(gameStartButtonType);
 
-	ButtonWithFontType continueButtonType = { "Button", "Continue", fontConfig, 0.5, this, menu_selector(GameMenuLayer::continueGame) };
-	MenuItemSprite* bButtonSprite = MenuItemUtil::createMenuItemSprite(continueButtonType);
+	ButtonWithTextPicture continueButtonType = { "Button", "continue", 0.5, this, menu_selector(GameMenuLayer::continueGame) };
+	MenuItemSprite* bButtonSprite = MenuItemUtil::createMenuItemSpriteByPicture(continueButtonType);
 
-	ButtonWithFontType optionButtonType = { "Button", "Option", fontConfig, 0.5, this, menu_selector(GameMenuLayer::openOptionWin) };
-	MenuItemSprite* cButtonSprite = MenuItemUtil::createMenuItemSprite(optionButtonType);
+	ButtonWithTextPicture optionButtonType = { "Button", "option", 0.5, this, menu_selector(GameMenuLayer::openOptionWin) };
+	MenuItemSprite* cButtonSprite = MenuItemUtil::createMenuItemSpriteByPicture(optionButtonType);
 
-	ButtonWithFontType exitButtonType = { "Button", "Exit", fontConfig, 0.5, this, menu_selector(GameMenuLayer::exitGame) };
-	MenuItemSprite* dButtonSprite = MenuItemUtil::createMenuItemSprite(exitButtonType);
+	ButtonWithTextPicture exitButtonType = { "Button", "exit", 0.5, this, menu_selector(GameMenuLayer::exitGame) };
+	MenuItemSprite* dButtonSprite = MenuItemUtil::createMenuItemSpriteByPicture(exitButtonType);
 
-	//创建菜单
+	//鍒涘缓鑿滃崟
 	Menu* menu = Menu::create(aButtonSprite, bButtonSprite, cButtonSprite, dButtonSprite, NULL);
 	if (menu == nullptr)
 	{
@@ -51,7 +51,7 @@ void GameMenuLayer::setInitialMenu()
 	{
 		this->addChild(menu);
 
-		//设置菜单位置
+		//璁剧疆鑿滃崟浣嶇疆
 		Size winSize = Director::getInstance()->getWinSize();
 		menu->setPosition(winSize.width * 0.5, winSize.height * 0.4);
 		menu->alignItemsVerticallyWithPadding(20);

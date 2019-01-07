@@ -47,12 +47,6 @@ bool Monster::init(const char* str_monsterName)
 		AnimationCache::getInstance()->addAnimation(animation, animationName.c_str());
 	}
 
-	NotificationCenter::getInstance()->addObserver(
-		this,
-		callfuncO_selector(Monster::checkAttckFlyingObjectPath),
-		"attack_flying_object_point",
-		NULL);
-
 	return true;
 }
 
@@ -62,29 +56,9 @@ void Monster::setController(SCController * controller)
 	controller->setControllerListner(this);
 }
 
-void Monster::checkAttckFlyingObjectPath(Ref * pSender)
+Size Monster::getCollisionSize()
 {
-	FlyingOcjectToMonster* test = (FlyingOcjectToMonster*)pSender;
-	Point vec2_playerPoint = test->vec2_lanucherPoint;
-	Point vec2_attackTargetPoint = test->vec2_targetPoint;
-
-	float f_xPlayer = vec2_playerPoint.x;
-	float f_yPlayer = vec2_playerPoint.y;
-
-	float f_xCurrent = this->getPosition().x;
-	float f_yCurrent = this->getPosition().y;
-
-	poslog("player", f_xPlayer, f_yPlayer);
-	poslog("monster", f_xCurrent, f_yCurrent);
-
-	if (abs(f_yCurrent - f_yPlayer) <= 5)
-	{
-		log("hit");
-	}
-
-	Size testSize = m_sprite->getContentSize();		
-
-	return;
+	return m_sprite->getContentSize();
 }
 
 Vec2 Monster::getTargetPosition()
@@ -157,6 +131,13 @@ void Monster::climb()
 
 void Monster::hurt()
 {
+	//停止当前的动作
+	m_sprite->stopAllActions();
+	//获取已经做好的动画
+	Animation* hurtAnimation = AnimationCache::getInstance()->getAnimation(StringUtils::format("%s_hurt", m_strMonsterName).c_str());
+	//生成动画动作
+	Animate* hurtAnimate = Animate::create(hurtAnimation);
+	m_sprite->runAction(hurtAnimate);
 	return;
 }
 

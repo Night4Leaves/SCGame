@@ -55,6 +55,11 @@ void Player::setController(SCController * controller)
 	controller->setControllerListner(this);
 }
 
+Size Player::getCollisionSize()
+{
+	return m_sprite->getContentSize();
+}
+
 Vec2 Player::getTargetPosition()
 {
 	return this->getPosition();

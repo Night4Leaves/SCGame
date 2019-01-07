@@ -21,19 +21,19 @@ bool InitialScene::init()
 	do {
 		CC_BREAK_IF(!Scene::init());
 
-		//³õÊ¼»¯±³¾°²ã²¢Ìí¼Óµ½³¡¾°ÖĞ
+		//åˆå§‹åŒ–èƒŒæ™¯å±‚å¹¶æ·»åŠ åˆ°åœºæ™¯ä¸­
 		m_pBackgroundLayer = BackgroundLayer::create();
 		CC_BREAK_IF(m_pBackgroundLayer == nullptr);
 		this->addChild(m_pBackgroundLayer);
-		//Ìí¼Ó±³¾°Í¼Æ¬
+		//æ·»åŠ èƒŒæ™¯å›¾ç‰‡
 		m_pBackgroundLayer->setBackgroundPicture("background/initial_scene_01_2048x1536.png");
-		m_pBackgroundLayer->setGameTitle("SCGame", "fonts/Marker Felt.ttf", 30, Color3B::ORANGE);
+		m_pBackgroundLayer->setGameTitleByPicture("title.png");
 
-		//³õÊ¼»¯²Ëµ¥²ã²¢Ìí¼Óµ½³¡¾°ÖĞ
+		//åˆå§‹åŒ–èœå•å±‚å¹¶æ·»åŠ åˆ°åœºæ™¯ä¸­
 		m_pGameMenuLayer = GameMenuLayer::create();
 		CC_BREAK_IF(m_pGameMenuLayer == nullptr);
 		this->addChild(m_pGameMenuLayer);
-		//´´½¨¿ªÊ¼½çÃæ²Ëµ¥
+		//åˆ›å»ºå¼€å§‹ç•Œé¢èœå•
 		m_pGameMenuLayer->setInitialMenu();
 
 		return true;

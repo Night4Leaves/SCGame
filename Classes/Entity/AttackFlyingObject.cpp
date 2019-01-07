@@ -72,7 +72,7 @@ void AttackFlyingObject::setFlyingInformation(const AtkFlyObjPosInfo & objectFly
 	float y = m_vec2CurrentPoint.y + m_fYFlightDistance;
 	m_vec2TargetPoint = Point(x, y);
 
-	FlyingOcjectToMonster message = { m_vec2LauncherPoint, m_vec2TargetPoint };
+	FlyingOcjectToMonster message = { m_vec2CurrentPoint, m_vec2FlightDistance };
 
 	NotificationCenter::getInstance()->postNotification("attack_flying_object_point", (Ref*)&message);
 

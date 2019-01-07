@@ -12,8 +12,8 @@ public:
 	virtual bool init(const char* str_monsterName);
 
 	void setController(SCController* controller);
-	void checkAttckFlyingObjectPath(Ref* pSender);
 
+	virtual Size getCollisionSize();
 	//获取角色坐标
 	virtual Vec2 getTargetPosition();
 	/**
@@ -47,11 +47,11 @@ private:
 	//记录角色名，用于生成角色动画
 	const char* m_strMonsterName;
 	//角色动作名
-	std::vector<const char*> m_strActionName = { "idle","run","attack","hurt","death" };
+	std::vector<const char*> m_strActionName = { "idle","run","attack","hurt" };
 	//动画帧间隔时间
-	float m_fActionTime[7] = { 0.25f, 0.2f, 0.15f, 0.1f, 0.25f };
+	float m_fActionTime[7] = { 0.25f, 0.2f, 0.15f, 0.1f };
 	//动画重复次数
-	int m_iActionPlayTime[7] = { -1, -1, 1, 1, 1 };
+	int m_iActionPlayTime[7] = { -1, -1, 1, 1 };
 	//int m_iActionPlayTime[7] = { -1, -1, -1, -1, -1 };
 };
 

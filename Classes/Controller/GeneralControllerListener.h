@@ -11,6 +11,8 @@ class GeneralControllerListener
 public:
 	//获取角色坐标
 	virtual Vec2 getTargetPosition() = 0;
+	//获取角色碰撞体积
+	virtual Size getCollisionSize() = 0;
 	/**
 	 *	设置角色坐标
 	 *	@pos 目标位置
