@@ -159,6 +159,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\Entity\Monster.cpp" />
     <ClCompile Include="..\Classes\Entity\NPC.cpp" />
     <ClCompile Include="..\Classes\Entity\Player.cpp" />
+    <ClCompile Include="..\Classes\Entity\Portal.cpp" />
     <ClCompile Include="..\Classes\HelloWorldScene.cpp" />
     <ClCompile Include="..\Classes\Layer\BackgroundLayer.cpp" />
     <ClCompile Include="..\Classes\Layer\GameLayer.cpp" />
@@ -187,6 +188,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\Entity\Monster.h" />
     <ClInclude Include="..\Classes\Entity\NPC.h" />
     <ClInclude Include="..\Classes\Entity\Player.h" />
+    <ClInclude Include="..\Classes\Entity\Portal.h" />
     <ClInclude Include="..\Classes\HelloWorldScene.h" />
     <ClInclude Include="..\Classes\Layer\BackgroundLayer.h" />
     <ClInclude Include="..\Classes\Layer\GameLayer.h" />

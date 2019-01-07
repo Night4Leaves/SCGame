@@ -28,6 +28,7 @@ struct ButtonWithFontType
  *	按钮设置信息
  *	@normalPicName 正常状态按钮图
  *	@selectedPicName	选中状态按钮图
+ *	@scale	缩放倍数
  *	@target	按钮所在上下文(存疑)
  *	@selector	回调函数
  */

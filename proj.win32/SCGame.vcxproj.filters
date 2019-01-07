@@ -105,6 +105,9 @@
     <ClCompile Include="..\Classes\Entity\AttackFlyingObject.cpp">
       <Filter>src\Entity\FlyingObject</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\Entity\Portal.cpp">
+      <Filter>src\Entity</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -184,6 +187,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\CustomizeStruct.h">
       <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Entity\Portal.h">
+      <Filter>src\Entity</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

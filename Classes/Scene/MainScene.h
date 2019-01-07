@@ -10,6 +10,8 @@ class BackgroundLayer;
 class GameMenuLayer;
 class NPCLayer;
 class PaneLayer;
+class Player;
+class Portal;
 
 class MainScene : public Scene
 {
@@ -27,6 +29,7 @@ private:
 	GameMenuLayer* m_pGameMenuLayer;
 	NPCLayer* m_pNPCLayer;
 	PaneLayer* m_pPaneLayer;
+
 };
 
 #endif // !__MAIN_SCENE_H__

@@ -5,6 +5,7 @@
 #include "Layer/PaneLayer.h"
 #include "Entity/Player.h"
 #include "Controller/PlayerController.h"
+#include "Entity/Portal.h"
 
 #include "Util/AnimationUtil.h"
 
@@ -39,34 +40,23 @@ bool MainScene::init()
 
 		TMXObjectGroup* objGroup = m_pMap->getObjectGroup("objects");
 
-		Sprite* tpBackSprite = Sprite::createWithSpriteFrameName("tp_back.png");
-		Sprite* tpfrontSprite = Sprite::createWithSpriteFrameName("tp_front.png");
-
-		this->addChild(tpBackSprite);
-		tpBackSprite->addChild(tpfrontSprite);
-
-		Size tpBackSize = tpBackSprite->getContentSize();
-		tpfrontSprite->setPosition(tpBackSize.width * 0.5, tpBackSize.height * 0.5);
+		Portal* portal = Portal::create();
+		CC_BREAK_IF(portal == nullptr);
+		this->addChild(portal);
 
 		ValueMap portalPoint = objGroup->getObject("portal");
 
 		float portalX = portalPoint.at("x").asFloat();
 		float portalY = portalPoint.at("y").asFloat();
 
-		tpBackSprite->setPosition(Vec2(portalX, portalY));
+		portal->setPosition(Vec2(portalX, portalY));
 		//tpfrontSprite->setPosition(Vec2(450, 150));
 
-		tpBackSprite->setScale(0.2);
+		portal->setScale(0.2);
 		//tpfrontSprite->setScale(0.2);
 
-		tpBackSprite->setOpacity(150);
-		//tpfrontSprite->setOpacity(200);
-
-		auto test1 = RotateBy::create(5.0f, -90.0f);
-		auto test2 = RotateBy::create(5.0f, 180.0f);
-
-		tpBackSprite->runAction(RepeatForever::create(test1));
-		tpfrontSprite->runAction(RepeatForever::create(test2));
+		portal->setOpacity(150);
+		//tpfrontSprite->setOpacity(200);		
 
 		//初始化NPC层并添加到场景中
 		m_pNPCLayer = NPCLayer::create();
@@ -102,6 +92,9 @@ bool MainScene::init()
 		player->setController(playerController);
 		this->addChild(playerController);
 
+		m_pPaneLayer = PaneLayer::create();
+		this->addChild(m_pPaneLayer);
+
 		return true;
 	} while (0);
 
@@ -109,3 +102,4 @@ bool MainScene::init()
 
 	return false;
 }
+

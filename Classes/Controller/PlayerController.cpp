@@ -189,6 +189,9 @@ void PlayerController::onKeyPressed(EventKeyboard::KeyCode keyCode, Event * even
 		m_pControllerListener->jump();	//设置角色跳跃动画
 
 		break;
+	case EventKeyboard::KeyCode::KEY_L:
+		NotificationCenter::getInstance()->postNotification("player_point", (Ref*)&(m_pControllerListener->getTargetPosition()));
+		break;
 	default:
 		break;
 	}

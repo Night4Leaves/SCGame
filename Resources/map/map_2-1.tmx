@@ -3,7 +3,7 @@
  <tileset firstgid="1" source="tilesheet_complete.tsx"/>
  <layer id="1" name="terrain" width="100" height="19">
   <data encoding="base64" compression="zlib">
-   eJztw4kJgEAQBLATy/E5u/HtH8twuliQBNIaAAAAUG0arTrnkmv23HK37JFnXnnnk++gqqr//QGkDrJ5
+   eJztjtkJgEAMBdejG/HoRjz61hIsw/dnDCrr/ggyA0Pg5SAhAAAAAAAAAMDXVMXhkoew5ufM62eudmLupO7afswvKXff9J/+sdldrTXTyFZ2sjcWsnSZ189c7cTcSd21/ZhfUu6+6T/9Y7O7OshRTnKWW4aIiIiI+F93RZy+1w==
   </data>
  </layer>
  <layer id="2" name="decoration" width="100" height="19">
@@ -15,7 +15,7 @@
   <object id="1" name="player" x="42" y="512">
    <point/>
   </object>
-  <object id="2" name="monster" x="394" y="442">
+  <object id="2" name="monster" x="374" y="446">
    <point/>
   </object>
  </objectgroup>
