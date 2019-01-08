@@ -1,4 +1,5 @@
 #include "PaneLayer.h"
+#include "Scene/GameScene.h"
 #include "Util/MenuItemUtil.h"
 
 PaneLayer::PaneLayer()
@@ -22,16 +23,16 @@ bool PaneLayer::init()
 		color->setOpacity(0);
 		a_color = color;
 
-		Sprite* normalButton = Sprite::create("background/main_scene_01_2048x1536.png");
-		Sprite* selectButton = Sprite::create("background/main_scene_01_2048x1536.png");
-		MenuItemSprite* aButtonSprite = MenuItemSprite::create(normalButton, selectButton, nullptr, nullptr);
+		Sprite* normalButton = Sprite::create("background/game_scene_01_2048x1536.png");
+		Sprite* selectButton = Sprite::create("background/game_scene_01_2048x1536.png");
+		MenuItemSprite* aButtonSprite = MenuItemSprite::create(normalButton, selectButton, this, menu_selector(PaneLayer::startGame));
 		aButtonSprite->setScale(0.1);
-		Sprite* normalButton_1 = Sprite::create("background/main_scene_01_2048x1536.png");
-		Sprite* selectButton_1 = Sprite::create("background/main_scene_01_2048x1536.png");
+		Sprite* normalButton_1 = Sprite::create("background/game_scene_02_2048x1536.png");
+		Sprite* selectButton_1 = Sprite::create("background/game_scene_02_2048x1536.png");
 		MenuItemSprite* bButtonSprite = MenuItemSprite::create(normalButton_1, selectButton_1, nullptr, nullptr);
 		bButtonSprite->setScale(0.1);
-		Sprite* normalButton_2 = Sprite::create("background/main_scene_01_2048x1536.png");
-		Sprite* selectButton_2 = Sprite::create("background/main_scene_01_2048x1536.png");
+		Sprite* normalButton_2 = Sprite::create("background/initial_scene_01_2048x1536.png");
+		Sprite* selectButton_2 = Sprite::create("background/initial_scene_01_2048x1536.png");
 		MenuItemSprite* cButtonSprite = MenuItemSprite::create(normalButton_2, selectButton_2, nullptr, nullptr);
 		cButtonSprite->setScale(0.1);
 		Sprite* normalButton_3 = Sprite::create("background/main_scene_01_2048x1536.png");
@@ -96,4 +97,10 @@ void PaneLayer::showPaneLayer(Ref * pSender)
 		a_2->setOpacity(0);
 	}
 	
+}
+
+void PaneLayer::startGame(Ref * pSender)
+{
+	Scene* gameScene = GameScene::createScene();
+	Director::getInstance()->replaceScene(gameScene);
 }

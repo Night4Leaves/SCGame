@@ -31,7 +31,7 @@ bool GameScene::init()
 		this->addChild(m_pBackgroundLayer);
 		m_pBackgroundLayer->setPosition(Vec2(0, 200));
 		//添加背景图片
-		m_pBackgroundLayer->setBackgroundPicture("background/game_scene_02_2048x1536.png");
+		m_pBackgroundLayer->setBackgroundPicture("background/game_scene_01_2048x1536.png");
 
 		m_pGameLayer = GameLayer::create();
 		CC_BREAK_IF(m_pGameLayer == nullptr);

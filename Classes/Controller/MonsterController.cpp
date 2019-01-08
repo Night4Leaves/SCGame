@@ -40,7 +40,7 @@ void MonsterController::update(float dt)
 
 	//log("%f", m_fStateTime);
 
-	if (m_bIsLock)
+	/*if (m_bIsLock)
 	{
 		if (m_fStateTime > 6)
 		{
@@ -68,7 +68,7 @@ void MonsterController::update(float dt)
 			m_pControllerListener->run();
 		}
 		
-	}
+	}*/
 
 	if (m_bIsAttacked)
 	{
@@ -115,7 +115,7 @@ void MonsterController::checkAttckFlyingObjectPath(Ref * pSender)
 		log("hit");
 	}	
 	
-	m_bIsAttacked = true;
+	//m_bIsAttacked = true;
 
 	return;
 }

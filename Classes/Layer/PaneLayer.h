@@ -17,6 +17,8 @@ public:
 
 	void showPaneLayer(Ref* pSender);
 
+	void startGame(Ref* pSender);
+
 private:
 	bool m_bIsEffective;
 	Sprite* m_pMap;

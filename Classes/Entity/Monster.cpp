@@ -35,7 +35,6 @@ bool Monster::init(const char* str_monsterName)
 	//生成静态待机图对应的精灵
 	std::string waitAnimationName = StringUtils::format("%s_wait.png", str_monsterName);
 	Sprite* sprite = Sprite::createWithSpriteFrameName(waitAnimationName.c_str());
-	sprite->setScale(0.35);
 	this->bindSprite(sprite);
 
 	//生成角色动画并存储到动画缓存中
