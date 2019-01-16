@@ -53,22 +53,13 @@ struct FlyingObjectInitialInformation
  *	@vec2_currentPoint	飞行物起始位置
  *	@b_isRight	飞行物是否朝向右
  *	@vec2_launcherPoint	飞行物发射者位置
+ *	@vec2_flightDistance	飞行物飞行距离
  */
 struct FlyingObjectPositionInformation
 {
 	Point vec2_currentPoint;
 	bool b_isRight;
 	Point vec2_launcherPoint;
-};
-
-/**
- *	飞行物发送给怪物的信息结构
- *	@vec2_currentPoint	飞行物起始台
- *	@vec2_flightDistance	飞行物飞行距离
- */
-struct FlyingOcjectToMonster
-{
-	Point vec2_currentPoint;
 	Point vec2_flightDistance;
 };
 

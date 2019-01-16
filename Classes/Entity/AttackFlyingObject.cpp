@@ -51,7 +51,7 @@ void AttackFlyingObject::update(float dt)
 	this->setPosition(pos);
 }
 
-void AttackFlyingObject::setFlyingInformation(const AtkFlyObjPosInfo & objectFlyingInfo)
+void AttackFlyingObject::setFlyingInformation(AtkFlyObjPosInfo & objectFlyingInfo)
 {
 	m_vec2CurrentPoint = objectFlyingInfo.vec2_currentPoint;
 	m_vec2LauncherPoint = objectFlyingInfo.vec2_launcherPoint;
@@ -72,9 +72,8 @@ void AttackFlyingObject::setFlyingInformation(const AtkFlyObjPosInfo & objectFly
 	float y = m_vec2CurrentPoint.y + m_fYFlightDistance;
 	m_vec2TargetPoint = Point(x, y);
 
-	FlyingOcjectToMonster message = { m_vec2CurrentPoint, m_vec2FlightDistance };
-
-	NotificationCenter::getInstance()->postNotification("attack_flying_object_point", (Ref*)&message);
+	objectFlyingInfo.vec2_flightDistance = Point(m_fXFlightDistance, m_fYFlightDistance);
+	NotificationCenter::getInstance()->postNotification("attack_flying_object_point", (Ref*)&objectFlyingInfo);
 
 	m_sprite->setFlipX(!m_bIsRight);
 	m_sprite->setOpacity(255);

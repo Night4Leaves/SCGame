@@ -63,4 +63,5 @@ Portal::Portal()
 
 Portal::~Portal()
 {
+	NotificationCenter::getInstance()->removeAllObservers(this);
 }

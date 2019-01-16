@@ -95,27 +95,42 @@ void MonsterController::checkControllerStatus()
 
 void MonsterController::checkAttckFlyingObjectPath(Ref * pSender)
 {
-	FlyingOcjectToMonster* test = (FlyingOcjectToMonster*)pSender;
-	Point vec2_currentPoint = test->vec2_currentPoint;
-	Point vec2_flightDistance = test->vec2_flightDistance;
-	Point vec2_monsterPoing = m_pControllerListener->getTargetPosition();
+	FlyingObjectPositionInformation* test = (FlyingObjectPositionInformation*)pSender;
+	Point vec2_monsterPoint = m_pControllerListener->getTargetPosition();
 
+	float f_xMonster = vec2_monsterPoint.x;
+	float f_yMonster = vec2_monsterPoint.y;
 
-	float f_xObject = vec2_currentPoint.x;
-	float f_yObject = vec2_currentPoint.y;
+	Point vec2_launcherPoint = test->vec2_launcherPoint;
+	float f_yLauncher = vec2_launcherPoint.y;
 
-	float f_xFlight = vec2_flightDistance.x;
-	float f_yFlight = vec2_flightDistance.y;
-
-	float f_xCurrent = m_pControllerListener->getTargetPosition().x;
-	float f_yCurrent = m_pControllerListener->getTargetPosition().y;
-	
-	if (abs(f_xFlight + f_xCurrent - vec2_monsterPoing.x) <= 5)
+	//玩家坐标Y轴和怪物坐标Y轴判断双方是不是一直线
+	if (abs(f_yLauncher - f_yMonster) > 7)
 	{
-		log("hit");
-	}	
-	
-	//m_bIsAttacked = true;
+		return;
+	}
+
+	Point vec2_currentPoint = test->vec2_currentPoint;
+	float f_xObject = vec2_currentPoint.x;
+
+	Size size_monsterSize = m_pControllerListener->getCollisionSize();
+
+	//飞行物向右，初始位置在怪物右边；或者飞行物向左，初始位置在怪物左边
+	if ((test->b_isRight && f_xObject - (f_xMonster + size_monsterSize.width / 2) > 0)
+		|| (!(test->b_isRight) && f_xObject - (f_xMonster - size_monsterSize.width / 2) < 0))
+	{
+		return;
+	}
+
+	Point vec2_flightDistance = test->vec2_flightDistance;
+	float f_xFlight = vec2_flightDistance.x;
+
+	//玩家怪物一直线的情况下用飞行物的初始位置加飞行距离判断能不能打到怪
+	if ((test->b_isRight && (f_xObject + f_xFlight) - (f_xMonster - size_monsterSize.width / 2) > 0)
+		|| (!(test->b_isRight) && (f_xObject + f_xFlight) - (f_xMonster + size_monsterSize.width / 2) < 0))
+	{
+		m_pControllerListener->hurt();
+	}
 
 	return;
 }

@@ -57,7 +57,7 @@ void Monster::setController(SCController * controller)
 
 Size Monster::getCollisionSize()
 {
-	return m_sprite->getContentSize();
+	return m_sprite->getContentSize() * this->getScale();
 }
 
 Vec2 Monster::getTargetPosition()

@@ -25,7 +25,7 @@ public:
 	 *	@vec2_speed	飞行物体飞行速度，X轴与Y轴分开计算
 	 *	@b_isRight	飞行物体是否朝向右
 	 */
-	void setFlyingInformation(const AtkFlyObjPosInfo &objectFlyingInfo);
+	void setFlyingInformation(AtkFlyObjPosInfo &objectFlyingInfo);
 
 private:
 	AttackFlyingObject();

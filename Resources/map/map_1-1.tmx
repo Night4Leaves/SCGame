@@ -1,57 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.1" orientation="orthogonal" renderorder="left-down" width="100" height="19" tilewidth="32" tileheight="32" infinite="0" nextlayerid="40" nextobjectid="28">
+<map version="1.2" tiledversion="1.2.1" orientation="orthogonal" renderorder="left-down" width="110" height="19" tilewidth="32" tileheight="32" infinite="0" nextlayerid="43" nextobjectid="28">
  <tileset firstgid="1" source="block.tsx"/>
  <tileset firstgid="49" source="tilesheet_complete.tsx"/>
- <layer id="35" name="terrain" width="100" height="19">
+ <layer id="40" name="terrain" width="110" height="19">
   <data encoding="base64" compression="zlib">
-   eJztk00OgjAQhTGQ6FHcGE105Q30Cqh4FHb+wKF9xjTWpp12ENDFe8kX6HSYTt+ELKMoiqIoiqIoiqIo6tcq8yw7gCM4gQrkoOghfgZTMPPEfedq8ksh9xyora1vr+13U8M83Vx4UcOTOrRfCfe/gCu4gTtowBKseoi3YA02nrjvXE3+RchtA7W19e21/W5qmKebCy9qeFKH9hvh/nsyGNvJ73sg8fmE5qSZ36L4RNuL9K1Ur+t5mr7GmkPK3rx443ruos0L1ZZiKd9JxHpL7XdInjNwY7v8Rdfe7XXKPWMzTfG4D+/HnoHx3jcDX67bY4rP3/xDKbP4xud/nInmX+nS+xBeSnXGmtOQPsfiZu8B76bxVA==
+   eJztlk1Ow0AMhQOJgEuwZ1EEoqy4AVyhQHuU7Aq0h+ZFdISxPBO7+QGJ96RPmTgez8+TC1VFURRFURRFURRFURRFSa3qqnoGL+AVrEENmhHiG3AOLoy4tW4kf1XI3WRqR+vLdzlONdJT5+IuWtxJm/u+PsTORA25Dws9fwvewDv4ADtwA25HiO/BEtwbcWvdSP62kLvP1I7Wl+9ynGqkp87FXbS4kzb3fXeI3Ykach8Wev4TmYyHk/icRdPP5envn+0/kXzM+dnFpTfyqcfeNa+bn0T3XJpbqnfsepF9zeWX55vuK6vXOq6ab7Q3mmhernYp5plXom9v3v1OSeeVjj3WX3h+JxcDzijfPffR573HizE8mtur5JHllZVr9ZvVd/osHj+G9KTHsyF+/EXvIr3n+Z+k45gzTnHnpTpz+TmlH31x2W+lv2tp/AkkTASk
   </data>
  </layer>
- <layer id="36" name="decoration" width="100" height="19">
+ <layer id="41" name="decoration" width="110" height="19">
   <data encoding="base64" compression="zlib">
-   eJztVklOAzEQ9Mi5whdAYvkDfIH1N6yfSX4C9+QncAEJJifaglI6lbJnyIUDXVIkp9vdXb3YnpQCgUAgEAgEAoFAIBAIBAJj8GG/z78m8U8xzylddClddivZga0Pf/5P83p/yv5F/l5z387M5tz5ScIGUD1nHr/hrKD49Ga7zOs6yLbh4fN6H9hf4ryJfRzvztb33SYvxPT98WD5ja1vyY/KrRc+iww8arl4brxXxQEfb3c0Sel4stJ5mfKtasJ9Rux9J1N1L3H2aJ/KhbmORW2/l6tYym4odtGrHIFanDE51eaNeSG+72UtNte9dncMgecM83FlsutOn/cxKPfebOQ9g/rwbPocWzVkPWJCVuOgzoL3wzXm+WjVxPcQtYD9jGJ6HtxrzMeDyR67zfPubVs1wl2rZqlmx7M9HdlPBsfc9n5ozUcBnxvYcN9QC9h7n+gp8+hz+zsLOuTwZPufRZ+HvtXUTKLm8Il+zSv9hA/1Ji0rb2hLz+dox/bs5na/4IPfzdqbARS9P1eqp9jXmnfWvRiPV6qr8sH/VY6oufKp/Ay9Y1wP2Nb0zOPEOJwSD9w5AHy03k1lV4AefAGbkJ6o
+   eJztVklOAzEQdORc4Qvs/AG+wPob1s8MP4F7+AlcQILJCVuhlE6l2jNwQUJd0igT91buxZ6UAoFAIBAIBAKBQCAQCAQCgf+Lj/J8/jWJQBOznNLZJKXzyXJtr7zvf//v8modq/5zXrxzfU+Kzanxk4QNoHqDefyEs4Li0xfbeV6VYe03POy+3gf0a5w3oefFq7l/KM9FkV0K+U1Zu52s8wc3W0cLXr8q79fkR3Hqhc+6Bh7eni031lVxwMfaHUxTOpwuZXZN+VY54X5A7G2zpupT42yRntqLRe2LuyK7b/QR8x+Cp2/XFSdlNxS7ylUuAC/OmD15fcm8EN/W3IvN9fHOIgv0yE7R2x0x7xbct/CFWVXnzBhg5secQcgj97rNRSvXLEdMrHkc1GxZP1wL7qNWTmytO5NPewZ6PYbctfhy78AXZpXPGWvbyiXuAtWbnh3voxtZdwbH9M6lodls9VEFzyFsuL4zc/bhtzVj6vsAPcJ8+9z+roQMe30s+k/ke8gHdLjHURv4RF1nTt3hQ92Zc+dboCX35rJVV/io/jbKs5kXtt6dBiD/NtaYc1L1CDi25odlL4XnK+Vf+eD/KheojfKp/Azds5w32Hpy5lFxTDz47IKP6u8or+t7dsg/96PqZ9TzC9/4qPY=
   </data>
  </layer>
- <layer id="39" name="obstacle" width="100" height="19">
+ <layer id="42" name="obstacle" width="110" height="19">
   <data encoding="base64" compression="zlib">
-   eJzt1kEKwCAMRNFgPYR3ae/j5T1E6SIo3YggmIT/IPsZZhMRAAAAAAAAIJY7iZTc70mnE82NmT3kXfF1a5evfpH3qA73qOxhCnvYwh5naDa98e+wmHcHy//VP5u3PV55nRPX
+   eJzt1rEJgDAQhtEjOoS76D5Z3iHEIig2VmpO3oP0P/c1iQAAAAAAyGMuEdN4vKV8vejeeXOGvU/Yb7AOue6gW0RN2K3qpltSuuXUc7e2rb3z/6nHvW/q+T953fbXbht+ahPX
   </data>
  </layer>
  <objectgroup id="2" name="objects">
   <object id="1" name="player" x="42" y="512">
    <point/>
   </object>
-  <object id="2" name="monster_01" x="736" y="572">
+  <object id="2" name="monster_01" x="851" y="573">
    <point/>
   </object>
-  <object id="14" name="monster_02" x="737" y="449">
+  <object id="14" name="monster_02" x="852" y="450">
    <point/>
   </object>
-  <object id="15" name="monster_03" x="856" y="501">
+  <object id="15" name="monster_03" x="971" y="502">
    <point/>
   </object>
-  <object id="16" name="monster_04" x="957" y="575">
+  <object id="16" name="monster_04" x="1665" y="440">
    <point/>
   </object>
-  <object id="17" name="monster_05" x="958" y="447">
+  <object id="17" name="monster_05" x="1666" y="514">
    <point/>
   </object>
-  <object id="18" name="monster_06" x="1595" y="528">
+  <object id="18" name="monster_06" x="1773" y="474">
    <point/>
   </object>
-  <object id="19" name="monster_07" x="1593" y="433">
+  <object id="19" name="monster_07" x="2151" y="497">
    <point/>
   </object>
-  <object id="20" name="monster_08" x="1746" y="480">
+  <object id="20" name="monster_08" x="2334" y="524">
    <point/>
   </object>
-  <object id="21" name="monster_09" x="2131" y="575">
+  <object id="21" name="monster_09" x="2447" y="599">
    <point/>
   </object>
-  <object id="22" name="monster_10" x="2133" y="447">
+  <object id="22" name="monster_10" x="2517" y="465">
    <point/>
   </object>
-  <object id="23" name="boss" x="3050" y="511">
+  <object id="23" name="boss" x="3376" y="511">
    <point/>
   </object>
   <object id="25" name="sceneitem_01" x="1237" y="478">

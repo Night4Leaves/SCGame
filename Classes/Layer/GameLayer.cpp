@@ -12,6 +12,7 @@ GameLayer::GameLayer()
 
 GameLayer::~GameLayer()
 {
+	NotificationCenter::getInstance()->removeAllObservers(this);
 }
 
 bool GameLayer::init()
@@ -137,7 +138,7 @@ void GameLayer::addAttackFlyingObject(Ref * pSender)
 		f_x = point_playerPoint.x - size_playerSize.width / 2;
 	}
 
-	AtkFlyObjPosInfo temp = { Point(f_x, f_y), b_isRight, point_playerPoint };
+	AtkFlyObjPosInfo temp = { Point(f_x, f_y), b_isRight, point_playerPoint, Point() };
 
 	AttackFlyingObject* p_flyingObject = (AttackFlyingObject*)vector_pAttackFlyingObject.at(i_flyingObjectFlag);
 	p_flyingObject->setFlyingInformation(temp);
