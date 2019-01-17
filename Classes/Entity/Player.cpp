@@ -9,6 +9,27 @@ Player::~Player()
 {
 }
 
+Point Player::tileCoordForPosition(Point pos)
+{
+	Size mapTiledNum = m_pMap->getMapSize();
+	Size tiledSize = m_pMap->getTileSize();
+
+	int x = pos.x / tiledSize.width;
+
+	int y = (608 - pos.y) / tiledSize.height;
+
+	if (x > 0)
+	{
+		x -= 1;
+	}
+	if (y > 0)
+	{
+		y -= 0;
+	}
+
+	return Point(x, y);
+}
+
 Player * Player::create(const char* str_playerName)
 {
 	Player *pRet = new(std::nothrow) Player();
@@ -67,6 +88,26 @@ Vec2 Player::getTargetPosition()
 
 void Player::setTargetPosition(Vec2 pos)
 {
+	/*Point destPos = tileCoordForPosition(pos);
+
+	poslog("Point", destPos.x, destPos.y);
+
+	int tiledGid = m_pTerrain->getTileGIDAt(destPos);
+
+	log("%d", tiledGid);
+
+	if (tiledGid != 0)
+	{
+		Value properties = m_pMap->getPropertiesForGID(tiledGid);
+
+		auto prop = properties.asValueMap().at("collidable");
+
+		if (prop.asBool())
+		{
+			log("test");
+		}
+	}*/
+
 	this->setPosition(pos);
 
 	this->setViewPointByPlayer();
@@ -75,6 +116,8 @@ void Player::setTargetPosition(Vec2 pos)
 void Player::setMap(TMXTiledMap * p_map)
 {
 	m_pMap = p_map;
+
+	m_pTerrain = p_map->getLayer("terrain");
 }
 
 void Player::checkControllerStatus()

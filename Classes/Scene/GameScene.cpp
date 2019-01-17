@@ -4,6 +4,7 @@
 #include "Layer/GameLayer.h"
 #include "Layer/GameMenuLayer.h"
 #include "Layer/PaneLayer.h"
+#include "Layer/MouseMonitorLayer.h"
 
 #include "Util/MapUtil.h"
 
@@ -41,6 +42,10 @@ bool GameScene::init()
 		m_pGameMenuLayer = GameMenuLayer::create();
 		CC_BREAK_IF(m_pGameMenuLayer == nullptr);
 		this->addChild(m_pGameMenuLayer);
+
+		auto test = MouseMonitorLayer::create();
+		CC_BREAK_IF(test == nullptr);
+		this->addChild(test);
 
 		return true;
 	} while (0);

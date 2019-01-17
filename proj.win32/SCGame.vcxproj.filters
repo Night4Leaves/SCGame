@@ -108,6 +108,9 @@
     <ClCompile Include="..\Classes\Entity\Portal.cpp">
       <Filter>src\Entity</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\Layer\MouseMonitorLayer.cpp">
+      <Filter>src\Layer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -190,6 +193,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Entity\Portal.h">
       <Filter>src\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Layer\MouseMonitorLayer.h">
+      <Filter>src\Layer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

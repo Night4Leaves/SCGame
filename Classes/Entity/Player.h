@@ -36,8 +36,12 @@ private:
 	Player();
 	virtual ~Player();
 
+	Point tileCoordForPosition(Point pos);
+
 	//记录地图
 	TMXTiledMap* m_pMap;
+
+	TMXLayer* m_pTerrain;
 	//记录控制器
 	SCController* m_pPlayerController;
 	//记录角色名，用于生成角色动画

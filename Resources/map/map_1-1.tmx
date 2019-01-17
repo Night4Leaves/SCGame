@@ -3,13 +3,16 @@
  <tileset firstgid="1" source="block.tsx"/>
  <tileset firstgid="49" source="tilesheet_complete.tsx"/>
  <layer id="40" name="terrain" width="110" height="19">
+  <properties>
+   <property name="collidable" type="bool" value="true"/>
+  </properties>
   <data encoding="base64" compression="zlib">
-   eJztlk1Ow0AMhQOJgEuwZ1EEoqy4AVyhQHuU7Aq0h+ZFdISxPBO7+QGJ96RPmTgez8+TC1VFURRFURRFURRFURRFSa3qqnoGL+AVrEENmhHiG3AOLoy4tW4kf1XI3WRqR+vLdzlONdJT5+IuWtxJm/u+PsTORA25Dws9fwvewDv4ADtwA25HiO/BEtwbcWvdSP62kLvP1I7Wl+9ynGqkp87FXbS4kzb3fXeI3Ykach8Wev4TmYyHk/icRdPP5envn+0/kXzM+dnFpTfyqcfeNa+bn0T3XJpbqnfsepF9zeWX55vuK6vXOq6ab7Q3mmhernYp5plXom9v3v1OSeeVjj3WX3h+JxcDzijfPffR573HizE8mtur5JHllZVr9ZvVd/osHj+G9KTHsyF+/EXvIr3n+Z+k45gzTnHnpTpz+TmlH31x2W+lv2tp/AkkTASk
+   eJztk0EOgjAQRRsh6hE8gjuNehtQOEp3qHBovwlNJpMp0IRoF/8lL4VhGJr+4BwhhBBCCCGEEEIIkVSFczW8wwdsYAHLFeot3MG9Ube+m9JfTfS2kdmp8+W9vA4zwqp7cRYeZ+Jjz5uxthUz5D4s9fsdfMIXfMMenuB5hfoAr/Bm1K3vpvR3E71DZHbqfHkvr8OMsOpenIXHmfjY836sXcQMuQ9L/f6xpLl72Px/D3RZLlNZMce8lHmkZknzMGT0XXVezC+PbHROc700b+W/Npcr/X02S2q6/gHaQ9l7
   </data>
  </layer>
  <layer id="41" name="decoration" width="110" height="19">
   <data encoding="base64" compression="zlib">
-   eJztVklOAzEQdORc4Qvs/AG+wPob1s8MP4F7+AlcQILJCVuhlE6l2jNwQUJd0igT91buxZ6UAoFAIBAIBAKBQCAQCAQCgf+Lj/J8/jWJQBOznNLZJKXzyXJtr7zvf//v8modq/5zXrxzfU+Kzanxk4QNoHqDefyEs4Li0xfbeV6VYe03POy+3gf0a5w3oefFq7l/KM9FkV0K+U1Zu52s8wc3W0cLXr8q79fkR3Hqhc+6Bh7eni031lVxwMfaHUxTOpwuZXZN+VY54X5A7G2zpupT42yRntqLRe2LuyK7b/QR8x+Cp2/XFSdlNxS7ylUuAC/OmD15fcm8EN/W3IvN9fHOIgv0yE7R2x0x7xbct/CFWVXnzBhg5secQcgj97rNRSvXLEdMrHkc1GxZP1wL7qNWTmytO5NPewZ6PYbctfhy78AXZpXPGWvbyiXuAtWbnh3voxtZdwbH9M6lodls9VEFzyFsuL4zc/bhtzVj6vsAPcJ8+9z+roQMe30s+k/ke8gHdLjHURv4RF1nTt3hQ92Zc+dboCX35rJVV/io/jbKs5kXtt6dBiD/NtaYc1L1CDi25odlL4XnK+Vf+eD/KheojfKp/Azds5w32Hpy5lFxTDz47IKP6u8or+t7dsg/96PqZ9TzC9/4qPY=
+   eJztVklOAzEQdORc4QvsSDwBvsD6G9bPhJ/APfwELiBBcsJWKKVTVNsDFyTUJY0ycW/lXuxJKRAIBAKBQCAQCAQCgUAgEPi/eC/Px1+TCDQxzSmdjlI6Gy3Xdsr77tf/SV6tY9V/yot3ru9xsTkxfpKwAVRvMI+fcFZQfGbFdp5XZVj7DQ+7r7eOfo3zKvS8eDX39+U5L7ILIb8uazej7/zBzdbRgtcvy/sV+VGcZsJnXQMPb8+WG+uqOOBj7fbGKe2PlzK7pnyrnHA/IPamWVP1qXE2SE/txaL2xW2R3Rn5wXj5KP49ePp2XXFSdr3YVa5yAXhxhuzJ60vmhfi25l5sro93FlmgR7aK3nZDl+tWwX0LX5hVdc4MAWZ+yBmEPHKv21y0cs1yxMSax0HNlvXDteA+auXE1npi8mnPQK/HkDsANbN8uXfgC7PK54y1beUSd4HqTc+O9zEZWHcGx/TOpd5stvqogucQNlzfqTn78NuaMfV9gB5hvrPc/q6EDHt9KPqP5LvnAzrc46gNfKKuU6fu8KHuzLnzLdCSe3PZqit8VH9r5VnPC1vvTgOQfxurd05WqB4Bx9b8sOy58Hyh/Csf/F/lArVRPpWf3j3LeYOtJ2ceFUfEg88u+Kj+DvN3fc8O+ed+VP2Men4C09qqXg==
   </data>
  </layer>
  <layer id="42" name="obstacle" width="110" height="19">
@@ -18,7 +21,7 @@
   </data>
  </layer>
  <objectgroup id="2" name="objects">
-  <object id="1" name="player" x="42" y="512">
+  <object id="1" name="player" x="48" y="512">
    <point/>
   </object>
   <object id="2" name="monster_01" x="851" y="573">
