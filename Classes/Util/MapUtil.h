@@ -3,7 +3,6 @@
 #define __MAP_UTIL__
 
 #include "cocos2d.h"
-
 USING_NS_CC;
 
 class MapUtil
