@@ -15,5 +15,9 @@ public:
 	static TestScene* createScene();
 	CREATE_FUNC(TestScene);
 	virtual bool init();
+
+	void readJson();
+	void readArrayJson();
+	void writeJson();
 };
 #endif // !__TEST_SCENE_H__

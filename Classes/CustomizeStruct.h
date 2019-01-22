@@ -6,6 +6,13 @@
 
 USING_NS_CC;
 
+struct PlayerInfomation
+{
+	const char* name;
+	int hp;
+	int attack;
+};
+
 /**
  *	NPC种类
  */

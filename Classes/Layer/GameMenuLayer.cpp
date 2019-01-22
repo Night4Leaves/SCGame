@@ -1,6 +1,7 @@
 #include "GameMenuLayer.h"
 #include "Util/MenuItemUtil.h"
 #include "Scene/MainScene.h"
+#include "PaneLayer.h"
 
 GameMenuLayer::GameMenuLayer()
 {
@@ -67,8 +68,11 @@ void GameMenuLayer::setMainMenu()
 
 void GameMenuLayer::startGame(CCObject * sender)
 {
-	Scene* mainScene = MainScene::createScene();
-	Director::getInstance()->replaceScene(mainScene);
+	log("startGame");
+	NotificationCenter::getInstance()->postNotification("selectCharacter", NULL);
+
+	/*Scene* mainScene = MainScene::createScene();
+	Director::getInstance()->replaceScene(mainScene);*/
 }
 
 void GameMenuLayer::continueGame(CCObject * sender)

@@ -31,6 +31,12 @@
     <Filter Include="src\Entity\FlyingObject">
       <UniqueIdentifier>{518df1d6-81db-4f67-845f-893b6519d6d0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Json">
+      <UniqueIdentifier>{a8b09e56-8ebf-4863-91f1-e13e5141a4ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\FSM">
+      <UniqueIdentifier>{caf36d65-da86-4d64-bd35-41005abc542e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -122,6 +128,33 @@
     </ClCompile>
     <ClCompile Include="..\Classes\Util\CsvLoadUtil.cpp">
       <Filter>src\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Json\json_reader.cpp">
+      <Filter>src\Json</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Json\json_value.cpp">
+      <Filter>src\Json</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Json\json_writer.cpp">
+      <Filter>src\Json</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\FSM\mutou.cpp">
+      <Filter>src\FSM</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\FSM\StateWriteCode.cpp">
+      <Filter>src\FSM</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\FSM\StateWriteArticle.cpp">
+      <Filter>src\FSM</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\FSM\StateRest.cpp">
+      <Filter>src\FSM</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\FSM\MutouT.cpp">
+      <Filter>src\FSM</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\FSM\MutouTFSM.cpp">
+      <Filter>src\FSM</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -221,10 +254,75 @@
     <ClInclude Include="..\Classes\Util\CsvLoadUtil.h">
       <Filter>src\Utils</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\Json\autolink.h">
+      <Filter>src\Json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Json\config.h">
+      <Filter>src\Json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Json\features.h">
+      <Filter>src\Json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Json\forwards.h">
+      <Filter>src\Json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Json\json.h">
+      <Filter>src\Json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Json\json_batchallocator.h">
+      <Filter>src\Json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Json\reader.h">
+      <Filter>src\Json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Json\value.h">
+      <Filter>src\Json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Json\writer.h">
+      <Filter>src\Json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\FSM\mutou.h">
+      <Filter>src\FSM</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\FSM\state.h">
+      <Filter>src\FSM</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\FSM\StateWriteCode.h">
+      <Filter>src\FSM</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\FSM\StateWriteArticle.h">
+      <Filter>src\FSM</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\FSM\StateRest.h">
+      <Filter>src\FSM</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\FSM\MutouT.h">
+      <Filter>src\FSM</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\FSM\MutouTFSM.h">
+      <Filter>src\FSM</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\FSM\EnumMsgType.h">
+      <Filter>src\FSM</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">
       <Filter>resource</Filter>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Classes\Json\json_internalarray.inl">
+      <Filter>src\Json</Filter>
+    </None>
+    <None Include="..\Classes\Json\json_internalmap.inl">
+      <Filter>src\Json</Filter>
+    </None>
+    <None Include="..\Classes\Json\json_valueiterator.inl">
+      <Filter>src\Json</Filter>
+    </None>
+    <None Include="..\Classes\Json\sconscript">
+      <Filter>src\Json</Filter>
+    </None>
   </ItemGroup>
 </Project>

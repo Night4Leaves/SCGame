@@ -1,0 +1,15 @@
+{
+	"id": 1,
+	"name":"玩家_01",
+	"hp": 100,
+	"item":
+	{
+		"money": 1000,
+		"hpmedice": 5,
+		"sword":
+		{
+			"fire": 1,
+			"water": 3
+		}
+	}
+}

@@ -76,7 +76,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(EngineRoot);$(EngineRoot)external;$(EngineRoot)cocos\audio\include;$(EngineRoot)external\chipmunk\include\chipmunk;$(EngineRoot)extensions;..\Classes;..;%(AdditionalIncludeDirectories);$(_COCOS_HEADER_WIN32_BEGIN);$(_COCOS_HEADER_WIN32_END)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\Classes;..;$(EngineRoot);$(EngineRoot)external;$(EngineRoot)cocos\audio\include;$(EngineRoot)external\chipmunk\include\chipmunk;$(EngineRoot)extensions;%(AdditionalIncludeDirectories);$(_COCOS_HEADER_WIN32_BEGIN);$(_COCOS_HEADER_WIN32_END)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USE_MATH_DEFINES;GL_GLEXT_PROTOTYPES;CC_ENABLE_CHIPMUNK_INTEGRATION=1;COCOS2D_DEBUG=1;_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -161,7 +161,16 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\Entity\NPC.cpp" />
     <ClCompile Include="..\Classes\Entity\Player.cpp" />
     <ClCompile Include="..\Classes\Entity\Portal.cpp" />
+    <ClCompile Include="..\Classes\FSM\mutou.cpp" />
+    <ClCompile Include="..\Classes\FSM\MutouT.cpp" />
+    <ClCompile Include="..\Classes\FSM\MutouTFSM.cpp" />
+    <ClCompile Include="..\Classes\FSM\StateRest.cpp" />
+    <ClCompile Include="..\Classes\FSM\StateWriteArticle.cpp" />
+    <ClCompile Include="..\Classes\FSM\StateWriteCode.cpp" />
     <ClCompile Include="..\Classes\HelloWorldScene.cpp" />
+    <ClCompile Include="..\Classes\Json\json_reader.cpp" />
+    <ClCompile Include="..\Classes\Json\json_value.cpp" />
+    <ClCompile Include="..\Classes\Json\json_writer.cpp" />
     <ClCompile Include="..\Classes\Layer\BackgroundLayer.cpp" />
     <ClCompile Include="..\Classes\Layer\GameLayer.cpp" />
     <ClCompile Include="..\Classes\Layer\GameMenuLayer.cpp" />
@@ -195,7 +204,24 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\Entity\NPC.h" />
     <ClInclude Include="..\Classes\Entity\Player.h" />
     <ClInclude Include="..\Classes\Entity\Portal.h" />
+    <ClInclude Include="..\Classes\FSM\EnumMsgType.h" />
+    <ClInclude Include="..\Classes\FSM\mutou.h" />
+    <ClInclude Include="..\Classes\FSM\MutouT.h" />
+    <ClInclude Include="..\Classes\FSM\MutouTFSM.h" />
+    <ClInclude Include="..\Classes\FSM\state.h" />
+    <ClInclude Include="..\Classes\FSM\StateRest.h" />
+    <ClInclude Include="..\Classes\FSM\StateWriteArticle.h" />
+    <ClInclude Include="..\Classes\FSM\StateWriteCode.h" />
     <ClInclude Include="..\Classes\HelloWorldScene.h" />
+    <ClInclude Include="..\Classes\Json\autolink.h" />
+    <ClInclude Include="..\Classes\Json\config.h" />
+    <ClInclude Include="..\Classes\Json\features.h" />
+    <ClInclude Include="..\Classes\Json\forwards.h" />
+    <ClInclude Include="..\Classes\Json\json.h" />
+    <ClInclude Include="..\Classes\Json\json_batchallocator.h" />
+    <ClInclude Include="..\Classes\Json\reader.h" />
+    <ClInclude Include="..\Classes\Json\value.h" />
+    <ClInclude Include="..\Classes\Json\writer.h" />
     <ClInclude Include="..\Classes\Layer\BackgroundLayer.h" />
     <ClInclude Include="..\Classes\Layer\GameLayer.h" />
     <ClInclude Include="..\Classes\Layer\GameMenuLayer.h" />
@@ -225,6 +251,12 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Classes\Json\json_internalarray.inl" />
+    <None Include="..\Classes\Json\json_internalmap.inl" />
+    <None Include="..\Classes\Json\json_valueiterator.inl" />
+    <None Include="..\Classes\Json\sconscript" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

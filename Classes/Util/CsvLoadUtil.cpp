@@ -115,5 +115,5 @@ const Size CsvLoadUtil::getFileRowColNum(const char * ch_csvFilePath)
 
 const int CsvLoadUtil::findValueInWithLine(const char * ch_value, int i_valueCol, const char * ch_csvFilePath)
 {
-	return 0;
+	return -1;
 }

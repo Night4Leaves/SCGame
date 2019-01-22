@@ -2,6 +2,7 @@
 #include "Layer/BackgroundLayer.h"
 #include "Layer/GameMenuLayer.h"
 #include "Layer/PaneLayer.h"
+#include "Util/ResourcesLoadingUtil.h"
 
 InitialScene::InitialScene()
 {
@@ -21,6 +22,8 @@ bool InitialScene::init()
 	do {
 		CC_BREAK_IF(!Scene::init());
 
+		ResourcesLoadingUtil::preloadResources();
+
 		//初始化背景层并添加到场景中
 		m_pBackgroundLayer = BackgroundLayer::create();
 		CC_BREAK_IF(m_pBackgroundLayer == nullptr);
@@ -35,6 +38,10 @@ bool InitialScene::init()
 		this->addChild(m_pGameMenuLayer);
 		//创建开始界面菜单
 		m_pGameMenuLayer->setInitialMenu();
+
+		m_pPaneLayer = PaneLayer::create();
+		CC_BREAK_IF(m_pPaneLayer == nullptr);
+		this->addChild(m_pPaneLayer);
 
 		return true;
 	} while (0);
