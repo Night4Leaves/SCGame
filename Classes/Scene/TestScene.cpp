@@ -6,6 +6,8 @@
 #include "FSM/MutouT.h"
 #include "FSM/MutouTFSM.h"
 #include "Layer/PaneLayer.h"
+#include "CustomizeEnum.h"
+
 TestScene::TestScene()
 {
 }
@@ -28,7 +30,11 @@ bool TestScene::init()
 		CC_BREAK_IF(test == nullptr);
 		this->addChild(test);
 
-		NotificationCenter::getInstance()->postNotification("selectCharacter", NULL);
+		NotificationCenter::getInstance()->postNotification("show_PaneLayer", (Ref *)en_paneMsg_selectCharacter);
+		NotificationCenter::getInstance()->postNotification("show_PaneLayer", (Ref *)en_paneMsg_loadFile);
+		NotificationCenter::getInstance()->postNotification("show_PaneLayer", (Ref *)en_paneMsg_openStore);
+		NotificationCenter::getInstance()->postNotification("show_PaneLayer", (Ref *)en_paneMsg_pause);
+		NotificationCenter::getInstance()->postNotification("show_PaneLayer", (Ref *)en_paneMsg_selectGameScene);
 
 	} while (0);
 

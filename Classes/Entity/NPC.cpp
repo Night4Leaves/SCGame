@@ -27,30 +27,30 @@ NPC * NPC::create(const NPCSetInfo& npcSetInfo)
 
 bool NPC::init(const NPCSetInfo& npcSetInfo)
 {
-	m_strNPCName = npcSetInfo.name;
+	m_strNPCName = npcSetInfo.cs_name;
 	m_NPCType = npcSetInfo.npcType;
 
-	//¸ù¾Ý´«ÈëµÄ½ÇÉ«ÃûÉú³É¾²Ì¬¶¯»­Ö¡Ãû³Æ
+	//æ ¹æ®ä¼ å…¥çš„è§’è‰²åç”Ÿæˆé™æ€åŠ¨ç”»å¸§åç§°
 	std::string wait = StringUtils::format("%s_wait.png", m_strNPCName);
 
 	log("Picture name is: %s", wait.c_str());
 
-	int num = npcSetInfo.num;
-	float delay = npcSetInfo.delay;
-	int loops = npcSetInfo.loops;
-	float scale = npcSetInfo.scale;
+	int num = npcSetInfo.i_num;
+	float delay = npcSetInfo.f_delay;
+	int loops = npcSetInfo.i_loops;
+	float scale = npcSetInfo.f_scale;
 
-	//´´½¨¾«Áé¶ÔÏó
+	//åˆ›å»ºç²¾çµå¯¹è±¡
 	Sprite* sprite = Sprite::createWithSpriteFrameName(wait.c_str());
 
 	this->bindSprite(sprite);
 
 	sprite->setScale(scale);
 
-	//Èç¹û´ý»ú¶¯»­Ö¡ÊýÁ¿²»Îª1£¬ÒâÎ¶NPC²ÉÓÃ¶¯Ì¬´ý»ú¶¯»­
+	//å¦‚æžœå¾…æœºåŠ¨ç”»å¸§æ•°é‡ä¸ä¸º1ï¼Œæ„å‘³NPCé‡‡ç”¨åŠ¨æ€å¾…æœºåŠ¨ç”»
 	if (num > 1)
 	{
-		std::string idle = StringUtils::format("%s_idle", npcSetInfo.name);
+		std::string idle = StringUtils::format("%s_idle", npcSetInfo.cs_name);
 
 		log("Picture name is: %s", idle.c_str());
 

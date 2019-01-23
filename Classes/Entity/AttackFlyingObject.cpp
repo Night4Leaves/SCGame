@@ -20,7 +20,7 @@ AttackFlyingObject * AttackFlyingObject::create(const AtkFlyObjIniInfo & objectI
 
 bool AttackFlyingObject::init(const AtkFlyObjIniInfo & objectInfo)
 {
-	m_strObjectName = objectInfo.str_objectName;
+	m_strObjectName = objectInfo.cs_objectName;
 	m_vec2FlightDistance = objectInfo.vec2_flightDistance;
 	m_vec2Speed = objectInfo.vec2_speed;
 	m_bIsUserEffective = false;

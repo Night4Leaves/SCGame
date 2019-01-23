@@ -6,11 +6,17 @@
 
 USING_NS_CC;
 
+/**
+ *	玩家信息
+ *	@str_name	角色名
+ *	@i_hp	角色血量
+ *	@i_attack	角色攻击力
+ */
 struct PlayerInfomation
 {
-	const char* name;
-	int hp;
-	int attack;
+	std::string str_name;
+	int i_hp;
+	int i_attack;
 };
 
 /**
@@ -25,32 +31,32 @@ enum NPCType
 
 /**
  *	NPC设置信息
- *	@name	NPC名字
+ *	@cs_name	NPC名字
  *	@npcType	NPC种类
- *	@num	NPC动画帧数量
- *	@delay	NPC动画帧每帧间隔
- *	@loops	动画循环次数
- *	@scale	缩放倍数
+ *	@i_num	NPC动画帧数量
+ *	@f_delay	NPC动画帧每帧间隔
+ *	@i_loops	动画循环次数
+ *	@f_scale	缩放倍数
  */
 struct NPCSetInfo
 {
-	const char* name;
+	const char* cs_name;
 	NPCType npcType = NPCType::normal;
-	int num = 1;
-	float delay = 0.1;
-	int loops = -1;
-	float scale = 1;
+	int i_num = 1;
+	float f_delay = 0.1;
+	int i_loops = -1;
+	float f_scale = 1;
 };
 
 /**
  *	飞行物位置信息
- *	@str_objectName	飞行物名称
+ *	@cs_objectName	飞行物名称
  *	@vec2_changeDistance	飞行物飞行距离
  *	@vec2_speed	飞行物速度
  */
 struct FlyingObjectInitialInformation
 {
-	const char* str_objectName;
+	const char* cs_objectName;
 	Point vec2_flightDistance;
 	Point vec2_speed;
 };
