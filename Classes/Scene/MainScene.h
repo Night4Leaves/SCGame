@@ -19,9 +19,9 @@ public:
 	MainScene();
 	~MainScene();
 
-	static Scene* createScene();
-	CREATE_FUNC(MainScene);
-	virtual bool init();
+	static Scene* createSceneWithPlayer(Player *p_player);
+	static MainScene* create(Player *p_player);
+	virtual bool init(Player *p_player);
 
 private:
 	BackgroundLayer* m_pBackgroundLayer;

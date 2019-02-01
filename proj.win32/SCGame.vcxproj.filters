@@ -156,6 +156,12 @@
     <ClCompile Include="..\Classes\FSM\MutouTFSM.cpp">
       <Filter>src\FSM</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\Layer\ScoreCountLayer.cpp">
+      <Filter>src\Layer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\ScoreCount.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -306,6 +312,12 @@
       <Filter>src\FSM</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\CustomizeEnum.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Layer\ScoreCountLayer.h">
+      <Filter>src\Layer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\ScoreCount.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

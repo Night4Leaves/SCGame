@@ -17,12 +17,28 @@ MainScene::~MainScene()
 {
 }
 
-Scene * MainScene::createScene()
+Scene * MainScene::createSceneWithPlayer(Player *p_player)
 {
-	return MainScene::create();
+	return MainScene::create(p_player);
 }
 
-bool MainScene::init()
+MainScene * MainScene::create(Player *p_player)
+{
+	MainScene *pRet = new(std::nothrow) MainScene();
+	if (pRet && pRet->init(p_player))
+	{
+		pRet->autorelease();
+		return pRet;
+	}
+	else
+	{
+		delete pRet;
+		pRet = nullptr;
+		return nullptr;
+	}
+}
+
+bool MainScene::init(Player *p_player)
 {
 	do {
 		CC_BREAK_IF(!Scene::init());
@@ -66,18 +82,18 @@ bool MainScene::init()
 		m_pNPCLayer->setMainSceneNPC(objGroup);
 
 		//添加玩家角色
-		Player* player = Player::create("player_01");
-		player->setMap(m_pMap);
+		//Player* player = Player::create("player_01");
+		p_player->setMap(m_pMap);
 
 		ValueMap playerPoint = objGroup->getObject("player");
 
 		float playerX = playerPoint.at("x").asFloat();
 		float playerY = playerPoint.at("y").asFloat();
 
-		player->setPosition(Vec2(playerX, playerY));
-		player->idle();
-		this->addChild(player);
-		Point pos = player->getPosition();
+		p_player->setPosition(Vec2(playerX, playerY));
+		p_player->idle();
+		this->addChild(p_player);
+		Point pos = p_player->getPosition();
 		log("x:%f, y:%f", pos.x, pos.y);
 
 		//初始化菜单层并添加到场景中
@@ -89,7 +105,7 @@ bool MainScene::init()
 
 		//添加玩家控制器
 		PlayerController* playerController = PlayerController::create();
-		player->setController(playerController);
+		p_player->setController(playerController);
 		this->addChild(playerController);
 
 		m_pPaneLayer = PaneLayer::create();

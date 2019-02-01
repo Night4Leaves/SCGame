@@ -177,10 +177,12 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\Layer\MouseMonitorLayer.cpp" />
     <ClCompile Include="..\Classes\Layer\NPCLayer.cpp" />
     <ClCompile Include="..\Classes\Layer\PaneLayer.cpp" />
+    <ClCompile Include="..\Classes\Layer\ScoreCountLayer.cpp" />
     <ClCompile Include="..\Classes\Scene\GameScene.cpp" />
     <ClCompile Include="..\Classes\Scene\InitialScene.cpp" />
     <ClCompile Include="..\Classes\Scene\MainScene.cpp" />
     <ClCompile Include="..\Classes\Scene\TestScene.cpp" />
+    <ClCompile Include="..\Classes\ScoreCount.cpp" />
     <ClCompile Include="..\Classes\Util\AnimationUtil.cpp" />
     <ClCompile Include="..\Classes\Util\CsvAnalyzeUtil.cpp" />
     <ClCompile Include="..\Classes\Util\CsvLoadUtil.cpp" />
@@ -229,10 +231,12 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\Layer\MouseMonitorLayer.h" />
     <ClInclude Include="..\Classes\Layer\NPCLayer.h" />
     <ClInclude Include="..\Classes\Layer\PaneLayer.h" />
+    <ClInclude Include="..\Classes\Layer\ScoreCountLayer.h" />
     <ClInclude Include="..\Classes\Scene\GameScene.h" />
     <ClInclude Include="..\Classes\Scene\InitialScene.h" />
     <ClInclude Include="..\Classes\Scene\MainScene.h" />
     <ClInclude Include="..\Classes\Scene\TestScene.h" />
+    <ClInclude Include="..\Classes\ScoreCount.h" />
     <ClInclude Include="..\Classes\Util\AnimationUtil.h" />
     <ClInclude Include="..\Classes\Util\CsvAnalyzeUtil.h" />
     <ClInclude Include="..\Classes\Util\CsvLoadUtil.h" />

@@ -10,6 +10,7 @@ void ResourcesLoadingUtil::preloadResources()
 	spriteFrameCache->addSpriteFramesWithFile("monster.plist");
 	spriteFrameCache->addSpriteFramesWithFile("text.plist");
 	spriteFrameCache->addSpriteFramesWithFile("sceneitem.plist");
+	spriteFrameCache->addSpriteFramesWithFile("Number.plist");
 
 	spriteFrameCache->addSpriteFramesWithFile("player/player_01.plist");
 	spriteFrameCache->addSpriteFramesWithFile("player/player_02.plist");

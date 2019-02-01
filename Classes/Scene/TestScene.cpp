@@ -7,6 +7,7 @@
 #include "FSM/MutouTFSM.h"
 #include "Layer/PaneLayer.h"
 #include "CustomizeEnum.h"
+#include "Layer/ScoreCountLayer.h"
 
 TestScene::TestScene()
 {
@@ -25,16 +26,7 @@ bool TestScene::init()
 {
 	do 
 	{
-		
-		auto test = PaneLayer::create();
-		CC_BREAK_IF(test == nullptr);
-		this->addChild(test);
-
-		NotificationCenter::getInstance()->postNotification("show_PaneLayer", (Ref *)en_paneMsg_selectCharacter);
-		NotificationCenter::getInstance()->postNotification("show_PaneLayer", (Ref *)en_paneMsg_loadFile);
-		NotificationCenter::getInstance()->postNotification("show_PaneLayer", (Ref *)en_paneMsg_openStore);
-		NotificationCenter::getInstance()->postNotification("show_PaneLayer", (Ref *)en_paneMsg_pause);
-		NotificationCenter::getInstance()->postNotification("show_PaneLayer", (Ref *)en_paneMsg_selectGameScene);
+		this->addChild(ScoreCountLayer::create(765432));
 
 	} while (0);
 
