@@ -29,18 +29,31 @@ bool ScoreCount::init(Array * presenters, int digit)
 	do
 	{
 		CC_BREAK_IF(!Node::init());
+
 		node_pPresenter = Node::create();
 		Object* object = NULL;
 		int i = 0;
+
 		CCARRAY_FOREACH(presenters, object)
 		{
 			Node* node = (Node*)object;
 			node_pPresenter->addChild(node, 0, i);
-			node->setPosition(Point(0, node->getContentSize().height * i));
+			node->setPosition(Point(0, node->getContentSize().height * i * 0.15));
 			++i;
 		}
-		this->addChild(node_pPresenter);
+		
+		ClippingNode* cliper = ClippingNode::create();
+		DrawNode* drawNode = DrawNode::create();
+
+		drawNode->drawSolidRect(Vec2(0, 0), Vec2(15, 20), Color4F::WHITE);
+		drawNode->setPosition(-8, -10);
+		
+		cliper->setStencil(drawNode);
+		cliper->addChild(node_pPresenter);
+
+		this->addChild(cliper);
 		this->setDigit(digit);
+
 		return true;
 	} while (0);
 	return false;
@@ -51,7 +64,7 @@ void ScoreCount::animation(int digit)
 	Node* node = (Node*)node_pPresenter->getChildByTag(i_digit);
 	Point position = node->getPosition();
 	node_pPresenter->stopActionByTag(0);
-	MoveTo* moveTo = MoveTo::create(0.5f, Point(0, -position.y));
+	MoveTo* moveTo = MoveTo::create(0.1f, Point(0, -position.y));
 	moveTo->setTag(0);
 	node_pPresenter->runAction(moveTo);
 }
@@ -61,16 +74,16 @@ int ScoreCount::getDigit()
 	return i_digit;
 }
 
-void ScoreCount::ScoreCountVisit()
-{
-	Node* presenter = node_pPresenter->getChildByTag(i_digit);
-	Size size = presenter->getContentSize();
-	Point location = this->getParent()->convertToWorldSpace(this->getPosition());
-	glScissor((location.x - size.width * 0.5) * 0.4,
-		(location.y - size.height * 0.5) * 0.4,
-		size.width * 0.4, size.height * 0.4);
-	Node::visit();
-}
+//void ScoreCount::ScoreCountVisit()
+//{
+//	Node* presenter = node_pPresenter->getChildByTag(i_digit);
+//	Size size = presenter->getContentSize();
+//	Point location = this->getParent()->convertToWorldSpace(this->getPosition());
+//	glScissor((location.x - size.width * 0.5) * 0.4,
+//		(location.y - size.height * 0.5) * 0.4,
+//		size.width * 0.4, size.height * 0.4);
+//	Node::visit();
+//}
 
 void ScoreCount::setDigit(int digit)
 {

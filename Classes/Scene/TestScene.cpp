@@ -26,11 +26,27 @@ bool TestScene::init()
 {
 	do 
 	{
-		this->addChild(ScoreCountLayer::create(765432));
+		testDt = 0.0;
+		testNum = 6542;
+		testLayer = ScoreCountLayer::create(testNum);
+		this->addChild(testLayer);
+		this->scheduleUpdate();
 
 	} while (0);
 
 	return true;
+}
+
+void TestScene::update(float dt)
+{
+	testDt += dt;
+	if (testDt - 3 > 0)
+	{
+		testDt = 0;
+		testNum++;
+		testLayer->setNumber(testNum);
+		log("%d", testNum);
+	}
 }
 
 void TestScene::readJson()

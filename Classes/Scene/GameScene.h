@@ -10,6 +10,7 @@ class BackgroundLayer;
 class GameLayer;
 class GameMenuLayer;
 class PaneLayer;
+class ScoreCountLayer;
 
 enum SceneType
 {
@@ -40,6 +41,7 @@ protected:
 	TMXTiledMap* m_pMap;
 	GameMenuLayer* m_pGameMenuLayer;
 	PaneLayer* m_pPaneLayer;
+	ScoreCountLayer* m_pScoreCountLayer;
 };
 
 #endif // !__GAME_SCENE_H__

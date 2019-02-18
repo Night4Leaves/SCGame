@@ -4,6 +4,7 @@
 #include "Layer/GameLayer.h"
 #include "Layer/GameMenuLayer.h"
 #include "Layer/PaneLayer.h"
+#include "Layer/ScoreCountLayer.h"
 #include "Layer/MouseMonitorLayer.h"
 
 #include "Util/MapUtil.h"
@@ -42,6 +43,11 @@ bool GameScene::init()
 		m_pGameMenuLayer = GameMenuLayer::create();
 		CC_BREAK_IF(m_pGameMenuLayer == nullptr);
 		this->addChild(m_pGameMenuLayer);
+
+		//初始化分数显示层并添加到场景中
+		m_pScoreCountLayer = ScoreCountLayer::create(0);
+		CC_BREAK_IF(m_pScoreCountLayer == nullptr);
+		this->addChild(m_pScoreCountLayer);
 
 		auto test = MouseMonitorLayer::create();
 		CC_BREAK_IF(test == nullptr);

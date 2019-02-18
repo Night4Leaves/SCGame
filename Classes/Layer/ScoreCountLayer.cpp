@@ -33,17 +33,15 @@ bool ScoreCountLayer::init(int number)
 
 		for (int i = 0; i < 6; ++i)
 		{
-			Array *array = Array::createWithCapacity(10);
+			Array* array = Array::createWithCapacity(10);
 			float f_width = 0.0;
-
-			log("%d", i);
-
+			
 			for (int ii = 0; ii < 10; ++ii)
 			{
 				std::string numberPictrueName = StringUtils::format("number_%d.png", ii);
 				log("%s", numberPictrueName.c_str());
 
-				Sprite *numSprite = Sprite::createWithSpriteFrameName(numberPictrueName.c_str());
+				Sprite* numSprite = Sprite::createWithSpriteFrameName(numberPictrueName.c_str());
 				f_width = numSprite->getContentSize().width;
 
 				array->addObject(numSprite);
