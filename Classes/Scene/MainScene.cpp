@@ -17,15 +17,10 @@ MainScene::~MainScene()
 {
 }
 
-Scene * MainScene::createSceneWithPlayer(Player *p_player)
-{
-	return MainScene::create(p_player);
-}
-
-MainScene * MainScene::create(Player *p_player)
+Scene * MainScene::create(Player *player)
 {
 	MainScene *pRet = new(std::nothrow) MainScene();
-	if (pRet && pRet->init(p_player))
+	if (pRet && pRet->init(player))
 	{
 		pRet->autorelease();
 		return pRet;
@@ -38,7 +33,7 @@ MainScene * MainScene::create(Player *p_player)
 	}
 }
 
-bool MainScene::init(Player *p_player)
+bool MainScene::init(Player *player)
 {
 	do {
 		CC_BREAK_IF(!Scene::init());
@@ -50,12 +45,14 @@ bool MainScene::init(Player *p_player)
 		//添加背景图片
 		m_pBackgroundLayer->setBackgroundPicture("background/main_scene_01_2048x1536.png");
 
+		//地图层(记录了各物品位置信息)
 		m_pMap = TMXTiledMap::create("map/scene_main.tmx");
 		CC_BREAK_IF(m_pMap == nullptr);
 		this->addChild(m_pMap);
 
 		TMXObjectGroup* objGroup = m_pMap->getObjectGroup("objects");
 
+		//场景物品传送门
 		Portal* portal = Portal::create();
 		CC_BREAK_IF(portal == nullptr);
 		this->addChild(portal);
@@ -66,13 +63,8 @@ bool MainScene::init(Player *p_player)
 		float portalY = portalPoint.at("y").asFloat();
 
 		portal->setPosition(Vec2(portalX, portalY));
-		//tpfrontSprite->setPosition(Vec2(450, 150));
-
 		portal->setScale(0.2);
-		//tpfrontSprite->setScale(0.2);
-
-		portal->setOpacity(150);
-		//tpfrontSprite->setOpacity(200);		
+		portal->setOpacity(150);	
 
 		//初始化NPC层并添加到场景中
 		m_pNPCLayer = NPCLayer::create();
@@ -82,19 +74,23 @@ bool MainScene::init(Player *p_player)
 		m_pNPCLayer->setMainSceneNPC(objGroup);
 
 		//添加玩家角色
-		//Player* player = Player::create("player_01");
-		p_player->setMap(m_pMap);
+		m_pPlayer = player;
 
 		ValueMap playerPoint = objGroup->getObject("player");
 
 		float playerX = playerPoint.at("x").asFloat();
 		float playerY = playerPoint.at("y").asFloat();
 
-		p_player->setPosition(Vec2(playerX, playerY));
-		p_player->idle();
-		this->addChild(p_player);
-		Point pos = p_player->getPosition();
-		log("x:%f, y:%f", pos.x, pos.y);
+		m_pPlayer->setPosition(Vec2(playerX, playerY));
+		m_pPlayer->idle();
+		this->addChild(m_pPlayer);
+
+		//添加玩家控制器
+		PlayerController* playerController = PlayerController::create();
+		m_pPlayer->setController(playerController);
+		this->addChild(playerController);
+
+		playerController->setMap(m_pMap);
 
 		//初始化菜单层并添加到场景中
 		m_pGameMenuLayer = GameMenuLayer::create();
@@ -103,12 +99,9 @@ bool MainScene::init(Player *p_player)
 		//创建主界面菜单
 		m_pGameMenuLayer->setMainMenu();
 
-		//添加玩家控制器
-		PlayerController* playerController = PlayerController::create();
-		p_player->setController(playerController);
-		this->addChild(playerController);
-
+		//特殊层(商店、技能、关卡选择等)
 		m_pPaneLayer = PaneLayer::create();
+		CC_BREAK_IF(m_pPaneLayer == nullptr);
 		this->addChild(m_pPaneLayer);
 
 		return true;

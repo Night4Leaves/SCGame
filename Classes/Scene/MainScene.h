@@ -19,17 +19,16 @@ public:
 	MainScene();
 	~MainScene();
 
-	static Scene* createSceneWithPlayer(Player *p_player);
-	static MainScene* create(Player *p_player);
-	virtual bool init(Player *p_player);
+	static Scene* create(Player *player);
+	virtual bool init(Player *player);
 
 private:
 	BackgroundLayer* m_pBackgroundLayer;
 	TMXTiledMap* m_pMap;
-	GameMenuLayer* m_pGameMenuLayer;
 	NPCLayer* m_pNPCLayer;
+	Player* m_pPlayer;
+	GameMenuLayer* m_pGameMenuLayer;
 	PaneLayer* m_pPaneLayer;
-
 };
 
 #endif // !__MAIN_SCENE_H__

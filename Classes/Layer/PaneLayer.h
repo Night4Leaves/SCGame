@@ -14,13 +14,9 @@ public:
 	virtual ~PaneLayer();
 
 	CREATE_FUNC(PaneLayer);
-	virtual bool init();
-
-	
+	virtual bool init();	
 
 private:
-	bool m_bIsEffective;
-
 	void readPlayerJson(std::vector<PlayerInfomation> &vec_playerInfoList);
 
 	void showPaneLayer(Ref* pSender);
@@ -31,8 +27,17 @@ private:
 	void startPause();
 	void selectGameScene();
 
+	void openBackpack();
+
 	void changeGameScene(Ref* pSender);
-	void changeMainScene(Ref* pSender);
+	void changeMainScene();
+
+	void menuCloseCallback(Ref* pSender);
+
+	MenuItemSprite* createPlayerSelectItem(const std::vector<PlayerInfomation> &vec_playerInfoList, int i, const SEL_MenuHandler &selector);
+	void selectPlayer_1(Ref* pSender);
+	void selectPlayer_2(Ref* pSender);
+
 };
 
 #endif // !__PANE_LAYER_H__

@@ -15,12 +15,9 @@ public:
 	virtual Size getCollisionSize();
 	virtual Vec2 getTargetPosition();
 	virtual void setTargetPosition(Vec2 pos);
-	void setMap(TMXTiledMap* p_map);
 
 	//检查控制器状态
 	void checkControllerStatus();
-	//根据玩家设置显示地图
-	void setViewPointByPlayer();
 
 	virtual void turnAround(bool b_isRight);
 
@@ -36,12 +33,6 @@ private:
 	Player();
 	virtual ~Player();
 
-	Point tileCoordForPosition(Point pos);
-
-	//记录地图
-	TMXTiledMap* m_pMap;
-
-	TMXLayer* m_pTerrain;
 	//记录控制器
 	SCController* m_pPlayerController;
 	//记录角色名，用于生成角色动画
@@ -52,6 +43,7 @@ private:
 	float m_fActionTime[7] = { 0.25f, 0.04f, 0.1f, 0.25f, 0.1f, 0.1f, 0.25f };
 	//动画重复次数
 	int m_iActionPlayTime[7] = { -1, -1, 1, 1, -1, 1, 1 };
+
 };
 
 #endif // !__PLAYER_H__

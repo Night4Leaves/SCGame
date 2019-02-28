@@ -2,6 +2,7 @@
 #include "Util/MenuItemUtil.h"
 #include "Scene/MainScene.h"
 #include "PaneLayer.h"
+#include "CustomizeEnum.h"
 
 GameMenuLayer::GameMenuLayer()
 {
@@ -28,56 +29,61 @@ void GameMenuLayer::setInitialMenu()
 {
 	TTFConfig fontConfig = { "fonts/arial.ttf", 40 };
 
+	Menu* menu = Menu::create();
+
 	//创建菜单选项
-	ButtonWithTextPicture gameStartButtonType = { "Button", "gamestart", 0.5, this, menu_selector(GameMenuLayer::startGame) };
-	MenuItemSprite* aButtonSprite = MenuItemUtil::createMenuItemSpriteByPicture(gameStartButtonType);
+	ButtonWithTextPicture buttonType = { "Button", "gamestart", 0.5, this, menu_selector(GameMenuLayer::startGame) };
+	menu->addChild(MenuItemUtil::createMenuItemSpriteByPicture(buttonType));
 
-	ButtonWithTextPicture continueButtonType = { "Button", "continue", 0.5, this, menu_selector(GameMenuLayer::continueGame) };
-	MenuItemSprite* bButtonSprite = MenuItemUtil::createMenuItemSpriteByPicture(continueButtonType);
+	buttonType = { "Button", "continue", 0.5, this, menu_selector(GameMenuLayer::continueGame) };
+	menu->addChild(MenuItemUtil::createMenuItemSpriteByPicture(buttonType));
 
-	ButtonWithTextPicture optionButtonType = { "Button", "option", 0.5, this, menu_selector(GameMenuLayer::openOptionWin) };
-	MenuItemSprite* cButtonSprite = MenuItemUtil::createMenuItemSpriteByPicture(optionButtonType);
+	buttonType = { "Button", "option", 0.5, this, menu_selector(GameMenuLayer::openOptionWin) };
+	menu->addChild(MenuItemUtil::createMenuItemSpriteByPicture(buttonType));
 
-	ButtonWithTextPicture exitButtonType = { "Button", "exit", 0.5, this, menu_selector(GameMenuLayer::exitGame) };
-	MenuItemSprite* dButtonSprite = MenuItemUtil::createMenuItemSpriteByPicture(exitButtonType);
+	buttonType = { "Button", "exit", 0.5, this, menu_selector(GameMenuLayer::exitGame) };
+	menu->addChild(MenuItemUtil::createMenuItemSpriteByPicture(buttonType));
 
-	//创建菜单
-	Menu* menu = Menu::create(aButtonSprite, bButtonSprite, cButtonSprite, dButtonSprite, NULL);
-	if (menu == nullptr)
-	{
-		log("setInitialMenu set failed!");
-		return;
-	}
-	else
-	{
-		this->addChild(menu);
+	this->addChild(menu);
 
-		//设置菜单位置
-		Size winSize = Director::getInstance()->getWinSize();
-		menu->setPosition(winSize.width * 0.5, winSize.height * 0.4);
-		menu->alignItemsVerticallyWithPadding(20);
-		
-	}
-	
+	//设置菜单位置
+	Size winSize = Director::getInstance()->getWinSize();
+	menu->setPosition(winSize.width * 0.5, winSize.height * 0.4);
+	menu->alignItemsVerticallyWithPadding(20);
+
 }
 
 void GameMenuLayer::setMainMenu()
 {
+	TTFConfig fontConfig = { "fonts/arial.ttf", 40 };
 
+	Menu* menu = Menu::create();
+
+	ButtonOnlyImageType buttonInfo = { "menubar_01.png", "menubar_01.png", 0.5, this, menu_selector(GameMenuLayer::openBackpack) };
+	menu->addChild(MenuItemUtil::createMenuItemSpriteByPicture(buttonInfo));
+
+	buttonInfo = { "menubar_02.png", "menubar_02.png", 0.5, this, menu_selector(GameMenuLayer::openSkillList) };
+	menu->addChild(MenuItemUtil::createMenuItemSpriteByPicture(buttonInfo));
+
+	buttonInfo = { "menubar_03.png", "menubar_03.png", 0.5, this, menu_selector(GameMenuLayer::openSkillList) };
+	menu->addChild(MenuItemUtil::createMenuItemSpriteByPicture(buttonInfo));
+
+	Size winSize = Director::getInstance()->getWinSize();
+	menu->setPosition(winSize.width * 0.87, winSize.height * 0.06);
+	menu->alignItemsHorizontallyWithPadding(8);
+	this->addChild(menu);
 }
 
 void GameMenuLayer::startGame(CCObject * sender)
 {
 	log("startGame");
-	NotificationCenter::getInstance()->postNotification("selectCharacter", NULL);
-
-	/*Scene* mainScene = MainScene::createScene();
-	Director::getInstance()->replaceScene(mainScene);*/
+	NotificationCenter::getInstance()->postNotification("show_PaneLayer", (Ref*)en_paneMsg_selectCharacter);
 }
 
 void GameMenuLayer::continueGame(CCObject * sender)
 {
 	log("continueGame");
+	NotificationCenter::getInstance()->postNotification("show_PaneLayer", (Ref*)en_paneMsg_loadFile);
 }
 
 void GameMenuLayer::openOptionWin(CCObject * sender)
@@ -93,4 +99,19 @@ void GameMenuLayer::exitGame(CCObject * sender)
 void GameMenuLayer::selectGameScene(CCObject * sender)
 {
 	log("selectGameScene");
+}
+
+void GameMenuLayer::openBackpack(CCObject * sender)
+{
+	log("openBackpack");
+}
+
+void GameMenuLayer::openSkillList(CCObject * sender)
+{
+	log("openSkillList");
+}
+
+void GameMenuLayer::openOption(CCObject * sender)
+{
+	log("openOption");
 }

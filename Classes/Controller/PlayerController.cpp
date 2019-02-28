@@ -38,16 +38,31 @@ void PlayerController::update(float dt)
 	Vec2 pos = m_pControllerListener->getTargetPosition();
 	pos.x += m_iXSpeed;
 	pos.y += m_iYSpeed;
-	m_pControllerListener->setTargetPosition(pos);
 
-
-	/*log("x: %f, y: %f", pos.x, pos.y);*/
-
+	this->setPlayerPosition(pos);
 }
 
 bool PlayerController::getIsRight()
 {
 	return this->m_bIsRight;
+}
+
+void PlayerController::setMap(TMXTiledMap * p_map)
+{
+	m_pMap = p_map;
+
+	Size mapTiledNum = m_pMap->getMapSize();
+	Size tiledSize = m_pMap->getTileSize();
+
+	m_fMapWidth = mapTiledNum.width * tiledSize.width;
+	m_fMapHeight = mapTiledNum.height * tiledSize.height;
+
+	log("Map width:%f, height:%f", m_fMapWidth, m_fMapHeight);
+
+	m_pMeta = p_map->getLayer("meta");
+
+	m_pMeta->setVisible(false);
+
 }
 
 void PlayerController::checkControllerStatus()
@@ -105,9 +120,9 @@ void PlayerController::onKeyPressed(EventKeyboard::KeyCode keyCode, Event * even
 		{
 			break;
 		}
-		
+
 		m_pControllerListener->run();
-		
+
 		break;
 	case EventKeyboard::KeyCode::KEY_S:
 		m_iVerticalRun++;
@@ -258,7 +273,7 @@ void PlayerController::onKeyReleased(EventKeyboard::KeyCode keyCode, Event * eve
 		{
 			m_iYSpeed = -m_iYSpeed;
 		}
-		
+
 		break;
 	case EventKeyboard::KeyCode::KEY_A:	//取消向左移动
 
@@ -295,7 +310,7 @@ void PlayerController::onKeyReleased(EventKeyboard::KeyCode keyCode, Event * eve
 				m_bIsRight = !m_bIsRight;	//角色朝向设置为相反朝向
 				m_pControllerListener->turnAround(m_bIsRight);	//设置角色朝向
 			}
-		}	
+		}
 
 		break;
 	case EventKeyboard::KeyCode::KEY_D:	//取消向右移动，参考上面取消向左移动代码注释
@@ -316,7 +331,7 @@ void PlayerController::onKeyReleased(EventKeyboard::KeyCode keyCode, Event * eve
 			if (m_iHorizontalRun == 0)
 			{
 				m_iXSpeed = 0;
-				if(m_iYSpeed==0)
+				if (m_iYSpeed == 0)
 				{
 					m_pControllerListener->idle();
 				}
@@ -333,4 +348,127 @@ void PlayerController::onKeyReleased(EventKeyboard::KeyCode keyCode, Event * eve
 	default:
 		break;
 	}
+}
+
+Point PlayerController::tileCoordForPosition(Point pos)
+{
+	Size mapTiledNum = m_pMap->getMapSize();
+	Size tiledSize = m_pMap->getTileSize();
+
+	float x = pos.x / tiledSize.width * 1.0;
+
+	float y = (m_fMapHeight - pos.y) / tiledSize.height * 1.0;
+
+	if (x - mapTiledNum.width >= 0)
+	{
+		x = mapTiledNum.width - 1;
+	}
+	else if (x < 0)
+	{
+		x = 0;
+	}
+
+	if (y - mapTiledNum.height >= 0)
+	{
+		y = mapTiledNum.height - 1;
+	}
+	else if (y < 0)
+	{
+		y = 0;
+	}
+
+	return Point(x, y);
+}
+
+void PlayerController::setViewPointByPlayer(Point pos)
+{
+	Node* parent = (Node*)getParent();
+	//获得地图中图块的数量和尺寸，并计算出地图尺寸
+	Size mapTiledNum = m_pMap->getMapSize();
+	Size tiledSize = m_pMap->getTileSize();
+	Size mapSize = Size(mapTiledNum.width * tiledSize.width,
+		mapTiledNum.height * tiledSize.height);
+	//获取屏幕显示尺寸
+	Size visibleSize = Director::getInstance()->getVisibleSize();
+	//获取被控制角色位置
+	//Point playerPosition = m_pControllerListener->getTargetPosition();
+	//获取被控制角色精灵大小尺寸
+	Size contentSize = m_pControllerListener->getCollisionSize();
+	if (contentSize.width == -1)
+	{
+		log("Player no sprite!");
+		return;
+	}
+
+	//与右边界比较，防止跑到右边界外
+	float x = std::min(pos.x, mapSize.width - (contentSize.width / 2 - 10));
+	//与左边界比较，防止跑到左边界外
+	x = std::max(x, contentSize.width / 2 - 10);
+	//防止跑到下边界外
+	float y = std::max(0.0f, pos.y);
+
+	Point playerPos = Point(x, y);
+
+	m_pControllerListener->setTargetPosition(playerPos);
+
+	//如果主角坐标位于屏幕中点的左下方，则取屏幕中点坐标，否则取主角坐标
+	x = std::max(pos.x, visibleSize.width / 2);
+	y = std::max(pos.y, visibleSize.height / 2);
+	//如果X、Y的坐标大于右上角的极限值，则取极限值坐标
+	x = std::min(x, mapSize.width - visibleSize.width / 2);
+	y = std::min(y, mapSize.height - visibleSize.height / 2);
+
+	//目标点
+	Point destPosition = Point(x, y);
+	//屏幕中点
+	Point centerPosition = Point(visibleSize.width / 2, visibleSize.height / 2);
+	//屏幕中点和所要移动的目的点之间的距离
+	Point viewPos = centerPosition - destPosition;
+
+	parent->setPosition(viewPos);
+}
+
+void PlayerController::setPlayerPosition(Point pos)
+{
+	Size playerSize = m_pControllerListener->getCollisionSize();
+
+	Point destPos = Point();
+
+	if (m_iXSpeed > 0)
+	{
+		destPos = Point(pos.x + playerSize.width / 2, pos.y);
+	}
+	else if (m_iXSpeed < 0)
+	{
+		destPos = Point(pos.x - playerSize.width / 2, pos.y);
+	}
+	else
+	{
+		destPos = pos;
+	}
+
+	Point tiledPos = tileCoordForPosition(destPos);
+
+	log("Point:x%f, y%f", destPos.x, destPos.y);
+
+	int tiledGid = m_pMeta->getTileGIDAt(tiledPos);
+
+	log("%d", tiledGid);
+
+	if (tiledGid != 0)
+	{
+		Value properties = m_pMap->getPropertiesForGID(tiledGid);
+
+		auto prop = properties.asValueMap().at("Collidable");
+
+		if (prop.asBool())
+		{
+			log("test");
+			return;
+		}
+	}
+
+	//m_pControllerListener->setTargetPosition(pos);
+
+	this->setViewPointByPlayer(pos);
 }

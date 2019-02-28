@@ -76,7 +76,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>..\Classes;..;$(EngineRoot);$(EngineRoot)external;$(EngineRoot)cocos\audio\include;$(EngineRoot)external\chipmunk\include\chipmunk;$(EngineRoot)extensions;%(AdditionalIncludeDirectories);$(_COCOS_HEADER_WIN32_BEGIN);$(_COCOS_HEADER_WIN32_END)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\Classes;..;$(EngineRoot);$(EngineRoot)external;$(EngineRoot)cocos\audio\include;$(EngineRoot)external\chipmunk\include\chipmunk;$(EngineRoot)extensions;%(AdditionalIncludeDirectories);$(_COCOS_HEADER_WIN32_BEGIN);$(_COCOS_HEADER_WIN32_END);$(EngineRoot)external\lua;$(EngineRoot)external\lua\luajit\include</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USE_MATH_DEFINES;GL_GLEXT_PROTOTYPES;CC_ENABLE_CHIPMUNK_INTEGRATION=1;COCOS2D_DEBUG=1;_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -89,7 +89,7 @@
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>libcurl.lib;%(AdditionalDependencies);$(_COCOS_LIB_WIN32_BEGIN);$(_COCOS_LIB_WIN32_END)</AdditionalDependencies>
+      <AdditionalDependencies>lua51.lib;libcurl.lib;%(AdditionalDependencies);$(_COCOS_LIB_WIN32_BEGIN);$(_COCOS_LIB_WIN32_END)</AdditionalDependencies>
       <OutputFile>$(OutDir)$(ProjectName).exe</OutputFile>
       <AdditionalLibraryDirectories>$(OutDir);%(AdditionalLibraryDirectories);$(_COCOS_LIB_PATH_WIN32_BEGIN);$(_COCOS_LIB_PATH_WIN32_END)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -167,6 +167,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\FSM\StateRest.cpp" />
     <ClCompile Include="..\Classes\FSM\StateWriteArticle.cpp" />
     <ClCompile Include="..\Classes\FSM\StateWriteCode.cpp" />
+    <ClCompile Include="..\Classes\HelloLua.cpp" />
     <ClCompile Include="..\Classes\HelloWorldScene.cpp" />
     <ClCompile Include="..\Classes\Json\json_reader.cpp" />
     <ClCompile Include="..\Classes\Json\json_value.cpp" />
@@ -174,10 +175,10 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\Layer\BackgroundLayer.cpp" />
     <ClCompile Include="..\Classes\Layer\GameLayer.cpp" />
     <ClCompile Include="..\Classes\Layer\GameMenuLayer.cpp" />
-    <ClCompile Include="..\Classes\Layer\MouseMonitorLayer.cpp" />
     <ClCompile Include="..\Classes\Layer\NPCLayer.cpp" />
     <ClCompile Include="..\Classes\Layer\PaneLayer.cpp" />
     <ClCompile Include="..\Classes\Layer\ScoreCountLayer.cpp" />
+    <ClCompile Include="..\Classes\Layer\ShieldLayer.cpp" />
     <ClCompile Include="..\Classes\Scene\GameScene.cpp" />
     <ClCompile Include="..\Classes\Scene\InitialScene.cpp" />
     <ClCompile Include="..\Classes\Scene\MainScene.cpp" />
@@ -215,6 +216,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\FSM\StateRest.h" />
     <ClInclude Include="..\Classes\FSM\StateWriteArticle.h" />
     <ClInclude Include="..\Classes\FSM\StateWriteCode.h" />
+    <ClInclude Include="..\Classes\HelloLua.h" />
     <ClInclude Include="..\Classes\HelloWorldScene.h" />
     <ClInclude Include="..\Classes\Json\autolink.h" />
     <ClInclude Include="..\Classes\Json\config.h" />
@@ -228,10 +230,10 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\Layer\BackgroundLayer.h" />
     <ClInclude Include="..\Classes\Layer\GameLayer.h" />
     <ClInclude Include="..\Classes\Layer\GameMenuLayer.h" />
-    <ClInclude Include="..\Classes\Layer\MouseMonitorLayer.h" />
     <ClInclude Include="..\Classes\Layer\NPCLayer.h" />
     <ClInclude Include="..\Classes\Layer\PaneLayer.h" />
     <ClInclude Include="..\Classes\Layer\ScoreCountLayer.h" />
+    <ClInclude Include="..\Classes\Layer\ShieldLayer.h" />
     <ClInclude Include="..\Classes\Scene\GameScene.h" />
     <ClInclude Include="..\Classes\Scene\InitialScene.h" />
     <ClInclude Include="..\Classes\Scene\MainScene.h" />

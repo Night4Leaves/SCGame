@@ -25,6 +25,10 @@ public:
 
 	void setSceneItem();
 
+	void setTestGameScene();
+
+	void setGameScene_1_1();
+
 private:
 	TMXTiledMap* m_pMap;
 	Player* m_pPlayer;

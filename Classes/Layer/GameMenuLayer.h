@@ -15,21 +15,24 @@ public:
 	CREATE_FUNC(GameMenuLayer);
 	virtual bool init();
 
-	//ÉèÖÃ³õÊ¼½çÃæµÄ²Ëµ¥Ñ¡Ïî
+	//è®¾ç½®åˆå§‹ç•Œé¢çš„èœå•é€‰é¡¹
 	void setInitialMenu();
 
-	//ÉèÖÃÖ÷½çÃæµÄ²Ëµ¥Ñ¡Ïî
+	//è®¾ç½®ä¸»ç•Œé¢çš„èœå•é€‰é¡¹
 	void setMainMenu();
 
 private:
-	//³õÊ¼½çÃæ¹¦ÄÜ
+	//åˆå§‹ç•Œé¢åŠŸèƒ½
 	void startGame(CCObject *sender);
 	void continueGame(CCObject *sender);
 	void openOptionWin(CCObject *sender);
 	void exitGame(CCObject *sender);
 
-	//Ö÷½çÃæ¹¦ÄÜ
+	//ä¸»ç•Œé¢åŠŸèƒ½
 	void selectGameScene(CCObject *sender);
+	void openBackpack(CCObject *sender);
+	void openSkillList(CCObject *sender);
+	void openOption(CCObject *sender);
 };
 
 #endif // !1

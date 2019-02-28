@@ -2,10 +2,11 @@
 #include "Scene/GameScene.h"
 #include "Scene/MainScene.h"
 #include "Util/MenuItemUtil.h"
-#include "Json/json.h"
 #include "Util/AnimationUtil.h"
-#include "CustomizeEnum.h"
 #include "Entity/Player.h"
+#include "Json/json.h"
+#include "CustomizeEnum.h"
+#include "ShieldLayer.h"
 
 PaneLayer::PaneLayer()
 {
@@ -19,8 +20,6 @@ bool PaneLayer::init()
 {
 	do {
 		CC_BREAK_IF(!Layer::init());
-
-		m_bIsEffective = false;
 
 		NotificationCenter::getInstance()->addObserver(
 			this,
@@ -55,20 +54,6 @@ void PaneLayer::showPaneLayer(Ref * pSender)
 	default:
 		break;
 	}
-
-	//m_bIsEffective = !m_bIsEffective;
-	//if (m_bIsEffective)
-	//{
-	//	a_color->setOpacity(200);
-	//	//a_1->setOpacity(255);
-	//	//a_2->setOpacity(255);
-	//}
-	//else
-	//{
-	//	a_color->setOpacity(0);
-	//	//a_1->setOpacity(0);
-	//	//a_2->setOpacity(0);
-	//}
 	
 }
 
@@ -78,71 +63,129 @@ void PaneLayer::changeGameScene(Ref * pSender)
 	Director::getInstance()->replaceScene(gameScene);
 }
 
-void PaneLayer::changeMainScene(Ref * pSender)
+void PaneLayer::changeMainScene()
 {
+	log("PaneLayer::changeMainScene");
 	//Scene* mainScene = MainScene::createScene();
 	//Director::getInstance()->replaceScene(mainScene);
+}
+
+void PaneLayer::menuCloseCallback(Ref * pSender)
+{
+	log("ok");
+	this->removeAllChildren();
+}
+
+MenuItemSprite * PaneLayer::createPlayerSelectItem(const std::vector<PlayerInfomation> &vec_playerList, int i, const SEL_MenuHandler &selector)
+{
+	log("name = %s", vec_playerList[i].str_name.c_str());
+	log("%s", StringUtils::format("%s_wait.png", vec_playerList[i].str_name.c_str()).c_str());
+	Sprite *sprite = Sprite::createWithSpriteFrameName(StringUtils::format("%s_wait.png", vec_playerList[i].str_name.c_str()).c_str());
+	auto animation = AnimationUtil::createAnimationWithSingleFrameName(StringUtils::format("%s_idle", vec_playerList[i].str_name.c_str()).c_str(), 0.25f, -1);
+	auto animate = Animate::create(animation);
+
+	sprite->setScale(1 / 0.3);
+	sprite->setPosition(100, 80);
+	sprite->runAction(animate);
+
+	const char* cs_playerName = vec_playerList[i].str_name.c_str();
+	auto nameLabel = Label::create(StringUtils::format("%s", cs_playerName), "fonts/arial.ttf", 20);
+	nameLabel->setPosition(205, 360);
+	nameLabel->setScale(1 / 0.3);
+	nameLabel->setColor(Color3B::GRAY);
+
+	auto atkLabel = Label::create(StringUtils::format("Atk:%d", vec_playerList[i].i_attack), "fonts/arial.ttf", 15);
+	atkLabel->setPosition(275, 130);
+	atkLabel->setScale(1 / 0.3);
+	atkLabel->setColor(Color3B::GRAY);
+
+	auto hpLabel = Label::create(StringUtils::format("HP:%d", vec_playerList[i].i_hp), "fonts/arial.ttf", 15);
+	hpLabel->setPosition(275, 220);
+	hpLabel->setScale(1 / 0.3);
+	hpLabel->setColor(Color3B::GRAY);
+
+	ButtonOnlyImageType menuItemInfo = { "charater_select.png", "charater_select.png", 0.3, this, selector };
+	MenuItemSprite* menuItem = MenuItemUtil::createMenuItemSpriteByPicture(menuItemInfo);
+
+	menuItem->addChild(sprite);
+	menuItem->addChild(nameLabel);
+	menuItem->addChild(atkLabel);
+	menuItem->addChild(hpLabel);
+
+	return menuItem;
+}
+
+void PaneLayer::selectPlayer_1(Ref * pSender)
+{
+	log("selectPlayer_1");
+	Player* player = Player::create("player_01");
+	Scene* mainScene = MainScene::create(player);
+	Director::getInstance()->replaceScene(mainScene);
+}
+
+void PaneLayer::selectPlayer_2(Ref * pSender)
+{
+	log("selectPlayer_2");
+	Player* player = Player::create("player_02");
+	Scene* mainScene = MainScene::create(player);
+	Director::getInstance()->replaceScene(mainScene);
 }
 
 void PaneLayer::selectCharacter()
 {
 	log("PaneLayer::selectCharacter");
 
+	this->addChild(ShieldLayer::create());
+
+	auto colortest = LayerColor::create(Color4B::BLACK);
+	this->addChild(colortest);
+
 	std::vector<PlayerInfomation> vec_playerList;
 	this->readPlayerJson(vec_playerList);
 
-	int i_num = vec_playerList.size();
+	auto menu = Menu::create();
 
-	auto menuTest = Menu::create();
+	auto menuItem = this->createPlayerSelectItem(vec_playerList, 0, menu_selector(PaneLayer::selectPlayer_1));
+	menu->addChild(menuItem);
 
-	for (int i = 0; i < i_num; i++)
-	{
-		log("name = %s", vec_playerList[i].str_name.c_str());
-		log("%s", StringUtils::format("%s_wait.png", vec_playerList[i].str_name.c_str()).c_str());
-		Sprite *sprite = Sprite::createWithSpriteFrameName(StringUtils::format("%s_wait.png", vec_playerList[i].str_name.c_str()).c_str());
-		auto animation = AnimationUtil::createAnimationWithSingleFrameName(StringUtils::format("%s_idle", vec_playerList[i].str_name.c_str()).c_str(), 0.25f, -1);
-		auto animate = Animate::create(animation);
+	menuItem = this->createPlayerSelectItem(vec_playerList, 1, menu_selector(PaneLayer::selectPlayer_2));
+	menu->addChild(menuItem);
+	
 
-		sprite->setScale(1 / 0.3);
-		sprite->setPosition(100, 80);
-		sprite->runAction(animate);
+	menu->setPosition(400, 300);
+	menu->alignItemsHorizontallyWithPadding(50);
+	this->addChild(menu);
 
-		const char* cs_playerName = vec_playerList[i].str_name.c_str();
-		auto nameLabel = Label::create(StringUtils::format("%s", cs_playerName), "fonts/arial.ttf", 20);
-		nameLabel->setPosition(205, 360);
-		nameLabel->setScale(1 / 0.3);
-		nameLabel->setColor(Color3B::GRAY);
+	//测试按钮
+	auto closeItem = MenuItemImage::create(
+		"CloseNormal.png",
+		"CloseSelected.png",
+		CC_CALLBACK_1(PaneLayer::menuCloseCallback, this));
 
-		auto atkLabel = Label::create(StringUtils::format("Atk:%d", vec_playerList[i].i_attack), "fonts/arial.ttf", 15);
-		atkLabel->setPosition(275, 130);
-		atkLabel->setScale(1 / 0.3);
-		atkLabel->setColor(Color3B::GRAY);
-
-		auto hpLabel = Label::create(StringUtils::format("HP:%d", vec_playerList[i].i_hp), "fonts/arial.ttf", 15);
-		hpLabel->setPosition(275, 220);
-		hpLabel->setScale(1 / 0.3);
-		hpLabel->setColor(Color3B::GRAY);
-
-		ButtonOnlyImageType menuItemInfo = { "charater_select.png", "charater_select.png", 0.3, this, menu_selector(PaneLayer::changeMainScene) };
-		auto menuItem = MenuItemUtil::createMenuItemSpriteByPicture(menuItemInfo);
-
-		//menuItem->setScale(0.3);
-		menuItem->addChild(sprite);
-		menuItem->addChild(nameLabel);
-		menuItem->addChild(atkLabel);
-		menuItem->addChild(hpLabel);
-
-		menuTest->addChild(menuItem);
-	}
-
-	menuTest->setPosition(400, 300);
-	menuTest->alignItemsHorizontallyWithPadding(50);
-	this->addChild(menuTest);
+	Menu* closeMenu = Menu::create(closeItem, NULL);
+	this->addChild(closeMenu);
+	closeMenu->setPosition(400, 300);
 }
 
 void PaneLayer::loadFile()
 {
 	log("PaneLayer::loadFile");
+
+	this->addChild(ShieldLayer::create());
+
+	auto colortest = LayerColor::create(Color4B::BLACK);
+	this->addChild(colortest);
+
+	auto closeItem = MenuItemImage::create(
+		"CloseNormal.png",
+		"CloseSelected.png",
+		CC_CALLBACK_1(PaneLayer::menuCloseCallback, this));
+
+	auto menu = Menu::create(closeItem, NULL);
+	this->addChild(menu);
+	menu->setPosition(400, 300);
+
+	
 }
 
 void PaneLayer::openStore()
@@ -199,6 +242,14 @@ void PaneLayer::selectGameScene()
 	//	menu_2->alignItemsHorizontallyWithPadding(20);
 
 	//}
+}
+
+void PaneLayer::openBackpack()
+{
+	auto test = Sprite::createWithSpriteFrameName("backpack.png");
+	this->addChild(test);
+	test->setPosition(400, 300);
+	test->setScale(0.5);
 }
 
 void PaneLayer::readPlayerJson(std::vector<PlayerInfomation>& vec_playerInfoList)

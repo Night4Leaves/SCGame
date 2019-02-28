@@ -34,75 +34,7 @@ bool GameLayer::init()
 			"player_point",
 			NULL);
 
-		m_pMap = TMXTiledMap::create("map/map_1-1.tmx");
-		CC_BREAK_IF(m_pMap == nullptr);
-		this->addChild(m_pMap);
-
-		TMXObjectGroup* objGroup = m_pMap->getObjectGroup("objects");
-		
-		int i = 1;
-		while (true)
-		{
-			std::string monsterPointID = StringUtils::format("monster_%02d", i++);
-			ValueMap monsterPoint = objGroup->getObject(monsterPointID.c_str());
-			CC_BREAK_IF(monsterPoint.empty());
-
-			float monsterX = monsterPoint.at("x").asFloat();
-			float monsterY = monsterPoint.at("y").asFloat();
-
-			Monster* monster = Monster::create("boss_01");
-			monster->setPosition(Vec2(monsterX, monsterY));
-			monster->idle();
-			monster->setScale(0.35);
-			this->addChild(monster);
-
-			MonsterController* monsterController = MonsterController::create();
-			monster->setController(monsterController);
-			this->addChild(monsterController);
-		}
-
-		this->setSceneItem();
-
-		ValueMap bossPoint = objGroup->getObject("boss");
-
-		float bossX = bossPoint.at("x").asFloat();
-		float bossY = bossPoint.at("y").asFloat();
-
-		Monster* boss = Monster::create("boss_01");
-		boss->setPosition(Vec2(bossX, bossY));
-		boss->idle();
-		this->addChild(boss);
-
-		MonsterController* monsterController = MonsterController::create();
-		boss->setController(monsterController);
-		this->addChild(monsterController);
-
-		ValueMap playerPoint = objGroup->getObject("player");
-
-		float playerX = playerPoint.at("x").asFloat();
-		float playerY = playerPoint.at("y").asFloat();
-
-		Player* player = Player::create("player_01");
-		player->setMap(m_pMap);
-		player->setPosition(Vec2(playerX, playerY));
-		player->idle();
-		this->addChild(player);
-		m_pPlayer = player;
-
-		PlayerController* playerController = PlayerController::create();
-		CC_BREAK_IF(playerController == nullptr);
-		m_pPlayerController = playerController;
-		player->setController(playerController);
-		this->addChild(playerController);
-
-		AtkFlyObjIniInfo fireballInfo = { "fireball", Vec2(HORIZONTAL_DISTANCE, 0), Vec2(HORIZONTAL_SPPED + 1, 0) };
-		for (int i = 0; i < 3; i++)
-		{
-			AttackFlyingObject* flyingObject = AttackFlyingObject::create(fireballInfo);
-			CC_BREAK_IF(flyingObject == nullptr);
-			vector_pAttackFlyingObject.pushBack(flyingObject);
-			this->addChild(flyingObject);
-		}
+		this->setGameScene_1_1();
 
 		return true;
 	} while (0);
@@ -191,4 +123,101 @@ void GameLayer::setSceneItem()
 	monster_01->addChild(monster);
 
 	poslog("lever", monster->getPosition().x, monster->getPosition().y);
+}
+
+void GameLayer::setTestGameScene()
+{
+	TMXTiledMap* map = TMXTiledMap::create("map/test_map.tmx");
+	this->addChild(map);
+
+	Player* player = Player::create("player_01");
+	this->addChild(player);
+	player->setPosition(400, 300);
+	player->idle();
+	//player->setMap(map);
+
+	PlayerController* playerController = PlayerController::create();
+	player->setController(playerController);
+	this->addChild(playerController);
+	playerController->setMap(map);
+}
+
+void GameLayer::setGameScene_1_1()
+{
+	m_pMap = TMXTiledMap::create("map/map_1-1.tmx");
+	if (m_pMap == nullptr)
+	{
+		log("map error");
+		return;
+	}
+	this->addChild(m_pMap);
+
+	TMXObjectGroup* objGroup = m_pMap->getObjectGroup("objects");
+
+	int i = 1;
+	while (true)
+	{
+		std::string monsterPointID = StringUtils::format("monster_%02d", i++);
+		ValueMap monsterPoint = objGroup->getObject(monsterPointID.c_str());
+		CC_BREAK_IF(monsterPoint.empty());
+
+		float monsterX = monsterPoint.at("x").asFloat();
+		float monsterY = monsterPoint.at("y").asFloat();
+
+		Monster* monster = Monster::create("boss_01");
+		monster->setPosition(Vec2(monsterX, monsterY));
+		monster->idle();
+		monster->setScale(0.35);
+		this->addChild(monster);
+
+		MonsterController* monsterController = MonsterController::create();
+		monster->setController(monsterController);
+		this->addChild(monsterController);
+	}
+
+	this->setSceneItem();
+
+	ValueMap bossPoint = objGroup->getObject("boss");
+
+	float bossX = bossPoint.at("x").asFloat();
+	float bossY = bossPoint.at("y").asFloat();
+
+	Monster* boss = Monster::create("boss_01");
+	boss->setPosition(Vec2(bossX, bossY));
+	boss->idle();
+	this->addChild(boss);
+
+	MonsterController* monsterController = MonsterController::create();
+	boss->setController(monsterController);
+	this->addChild(monsterController);
+
+	ValueMap playerPoint = objGroup->getObject("player");
+
+	float playerX = playerPoint.at("x").asFloat();
+	float playerY = playerPoint.at("y").asFloat();
+
+	Player* player = Player::create("player_01");
+	//player->setMap(m_pMap);
+	player->setPosition(Vec2(playerX, playerY));
+	player->idle();
+	this->addChild(player);
+	m_pPlayer = player;
+
+	PlayerController* playerController = PlayerController::create();
+	if(playerController == nullptr);
+	{
+		return;
+	}
+	m_pPlayerController = playerController;
+	player->setController(playerController);
+	this->addChild(playerController);
+
+	AtkFlyObjIniInfo fireballInfo = { "fireball", Vec2(HORIZONTAL_DISTANCE, 0), Vec2(HORIZONTAL_SPPED + 1, 0) };
+	for (int i = 0; i < 3; i++)
+	{
+		AttackFlyingObject* flyingObject = AttackFlyingObject::create(fireballInfo);
+		CC_BREAK_IF(flyingObject == nullptr);
+		vector_pAttackFlyingObject.pushBack(flyingObject);
+		this->addChild(flyingObject);
+	}
 }

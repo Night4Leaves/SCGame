@@ -15,7 +15,7 @@
                 <key>spriteSourceSize</key>
                 <string>{380,110}</string>
                 <key>textureRect</key>
-                <string>{{2,2},{380,110}}</string>
+                <string>{{2,843},{380,110}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -30,7 +30,22 @@
                 <key>spriteSourceSize</key>
                 <string>{380,110}</string>
                 <key>textureRect</key>
-                <string>{{2,114},{380,110}}</string>
+                <string>{{384,843},{380,110}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>backpack.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{683,839}</string>
+                <key>spriteSourceSize</key>
+                <string>{683,839}</string>
+                <key>textureRect</key>
+                <string>{{2,2},{683,839}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -45,7 +60,52 @@
                 <key>spriteSourceSize</key>
                 <string>{406,467}</string>
                 <key>textureRect</key>
-                <string>{{2,226},{406,467}}</string>
+                <string>{{2,955},{406,467}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>menubar_01.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{118,101}</string>
+                <key>spriteSourceSize</key>
+                <string>{118,101}</string>
+                <key>textureRect</key>
+                <string>{{410,955},{118,101}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>menubar_02.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{110,109}</string>
+                <key>spriteSourceSize</key>
+                <string>{110,109}</string>
+                <key>textureRect</key>
+                <string>{{530,955},{110,109}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>menubar_03.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{110,102}</string>
+                <key>spriteSourceSize</key>
+                <string>{110,102}</string>
+                <key>textureRect</key>
+                <string>{{642,955},{110,102}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -61,9 +121,9 @@
             <key>realTextureFileName</key>
             <string>UI.png</string>
             <key>size</key>
-            <string>{410,695}</string>
+            <string>{766,1424}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:e51a6bcdeb24b061bb3a8d46ec7d237d:172beae40c55126dfa21dc8aa57d3acf:4d1c460786d5294715f9f3e199a00761$</string>
+            <string>$TexturePacker:SmartUpdate:1d94d8e4c1dd7aeec3ea0da916ec8100:d78632c5a4d7b1d7e640df5292980cd1:4d1c460786d5294715f9f3e199a00761$</string>
             <key>textureFileName</key>
             <string>UI.png</string>
         </dict>

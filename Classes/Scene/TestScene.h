@@ -5,8 +5,6 @@
 #include "cocos2d.h"
 USING_NS_CC;
 
-#include "Layer/ScoreCountLayer.h"
-
 /*测试用场景类，最后要删除*/
 class TestScene : public Scene
 {
@@ -23,8 +21,5 @@ public:
 	void readArrayJson();
 	void writeJson();
 
-	float testDt;
-	int testNum;
-	ScoreCountLayer* testLayer;
 };
 #endif // !__TEST_SCENE_H__

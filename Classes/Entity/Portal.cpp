@@ -1,4 +1,5 @@
 #include "Portal.h"
+#include "CustomizeEnum.h"
 
 bool Portal::init()
 {
@@ -52,7 +53,7 @@ void Portal::checkPlayerPoint(Ref * pSender)
 		&& (f_YPlayer - (f_YPortal - f_portalHeight * 0.5 * f_scale - 20)) > 0)
 	{
 		log("ok");
-		NotificationCenter::getInstance()->postNotification("show_PaneLayer", NULL);
+		NotificationCenter::getInstance()->postNotification("show_PaneLayer", (Ref*)en_paneMsg_selectGameScene);
 	}
 	
 }

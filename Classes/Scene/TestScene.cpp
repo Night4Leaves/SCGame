@@ -1,13 +1,25 @@
 #include "TestScene.h"
+
 #include "Util/CsvAnalyzeUtil.h"
 #include "Util/CsvLoadUtil.h"
+
 #include "Json/json.h"
+
 #include "FSM/mutou.h"
 #include "FSM/MutouT.h"
 #include "FSM/MutouTFSM.h"
+
 #include "Layer/PaneLayer.h"
-#include "CustomizeEnum.h"
 #include "Layer/ScoreCountLayer.h"
+#include "Layer/GameMenuLayer.h"
+#include "Layer/GameLayer.h"
+
+#include "CustomizeEnum.h"
+#include "HelloLua.h"
+
+#include "Entity/Player.h"
+
+#include "Controller/PlayerController.h"
 
 TestScene::TestScene()
 {
@@ -26,11 +38,41 @@ bool TestScene::init()
 {
 	do 
 	{
-		testDt = 0.0;
-		testNum = 6542;
-		testLayer = ScoreCountLayer::create(testNum);
-		this->addChild(testLayer);
-		this->scheduleUpdate();
+		//TMXTiledMap* map = TMXTiledMap::create("map/test_map.tmx");
+		//this->addChild(map);
+
+		//Player* player = Player::create("player_01");
+		//this->addChild(player);
+		//player->setPosition(400, 300);
+		//player->idle();
+		////player->setMap(map);
+
+		//PlayerController* playerController = PlayerController::create();
+		//player->setController(playerController);
+		//this->addChild(playerController);
+		//playerController->setMap(map);
+
+		//this->scheduleUpdate();
+
+		//auto test = Sprite::createWithSpriteFrameName("backpack.png");
+		//this->addChild(test);
+		//test->setPosition(400, 300);
+		//test->setScale(0.5);
+
+		/*auto gameLayer = GameLayer::create();
+		this->addChild(gameLayer);
+		gameLayer->setTestGameScene();*/
+
+		auto test = GameMenuLayer::create();
+		this->addChild(test);
+		test->setInitialMenu();
+
+		auto panetest = PaneLayer::create();
+		this->addChild(panetest);
+
+		//HelloLua::create();
+
+		
 
 	} while (0);
 
@@ -39,14 +81,7 @@ bool TestScene::init()
 
 void TestScene::update(float dt)
 {
-	testDt += dt;
-	if (testDt - 3 > 0)
-	{
-		testDt = 0;
-		testNum++;
-		testLayer->setNumber(testNum);
-		log("%d", testNum);
-	}
+	
 }
 
 void TestScene::readJson()

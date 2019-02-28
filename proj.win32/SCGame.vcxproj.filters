@@ -114,9 +114,6 @@
     <ClCompile Include="..\Classes\Entity\Portal.cpp">
       <Filter>src\Entity</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Layer\MouseMonitorLayer.cpp">
-      <Filter>src\Layer</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\Util\CsvAnalyzeUtil.cpp">
       <Filter>src\Utils</Filter>
     </ClCompile>
@@ -160,6 +157,12 @@
       <Filter>src\Layer</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\ScoreCount.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Layer\ShieldLayer.cpp">
+      <Filter>src\Layer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\HelloLua.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
@@ -245,9 +248,6 @@
     <ClInclude Include="..\Classes\Entity\Portal.h">
       <Filter>src\Entity</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Layer\MouseMonitorLayer.h">
-      <Filter>src\Layer</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\Util\CsvAnalyzeUtil.h">
       <Filter>src\Utils</Filter>
     </ClInclude>
@@ -318,6 +318,12 @@
       <Filter>src\Layer</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\ScoreCount.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Layer\ShieldLayer.h">
+      <Filter>src\Layer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\HelloLua.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>
