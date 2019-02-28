@@ -4,9 +4,8 @@
 #include "Layer/NPCLayer.h"
 #include "Layer/PaneLayer.h"
 #include "Entity/Player.h"
-#include "Controller/PlayerController.h"
 #include "Entity/Portal.h"
-
+#include "Controller/PlayerController.h"
 #include "Util/AnimationUtil.h"
 
 MainScene::MainScene()

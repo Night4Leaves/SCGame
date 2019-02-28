@@ -74,17 +74,6 @@ int ScoreCount::getDigit()
 	return i_digit;
 }
 
-//void ScoreCount::ScoreCountVisit()
-//{
-//	Node* presenter = node_pPresenter->getChildByTag(i_digit);
-//	Size size = presenter->getContentSize();
-//	Point location = this->getParent()->convertToWorldSpace(this->getPosition());
-//	glScissor((location.x - size.width * 0.5) * 0.4,
-//		(location.y - size.height * 0.5) * 0.4,
-//		size.width * 0.4, size.height * 0.4);
-//	Node::visit();
-//}
-
 void ScoreCount::setDigit(int digit)
 {
 	if (i_digit != digit)

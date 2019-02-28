@@ -24,6 +24,5 @@ protected:
 	int i_digit;
 	Node* node_pPresenter;
 
-	//void ScoreCountVisit();
 };
 #endif // !__SCORE_COUNT_H__

@@ -32,9 +32,7 @@ bool NPC::init(const NPCSetInfo& npcSetInfo)
 
 	//根据传入的角色名生成静态动画帧名称
 	std::string wait = StringUtils::format("%s_wait.png", m_strNPCName);
-
-	log("Picture name is: %s", wait.c_str());
-
+	
 	int num = npcSetInfo.i_num;
 	float delay = npcSetInfo.f_delay;
 	int loops = npcSetInfo.i_loops;
@@ -51,9 +49,7 @@ bool NPC::init(const NPCSetInfo& npcSetInfo)
 	if (num > 1)
 	{
 		std::string idle = StringUtils::format("%s_idle", npcSetInfo.cs_name);
-
-		log("Picture name is: %s", idle.c_str());
-
+		
 		Animation* animation = AnimationUtil::createAnimationWithFrameNameAndNum(idle.c_str(), delay, loops, num);
 		Animate* animate = Animate::create(animation);
 		sprite->runAction(animate);

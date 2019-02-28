@@ -1,10 +1,10 @@
 #include "GameLayer.h"
 #include "Scene/MainScene.h"
 #include "Entity/Player.h"
-#include "Controller/PlayerController.h"
 #include "Entity/Monster.h"
-#include "Controller/MonsterController.h"
 #include "Entity/AttackFlyingObject.h"
+#include "Controller/PlayerController.h"
+#include "Controller/MonsterController.h"
 
 GameLayer::GameLayer()
 {
@@ -197,7 +197,6 @@ void GameLayer::setGameScene_1_1()
 	float playerY = playerPoint.at("y").asFloat();
 
 	Player* player = Player::create("player_01");
-	//player->setMap(m_pMap);
 	player->setPosition(Vec2(playerX, playerY));
 	player->idle();
 	this->addChild(player);

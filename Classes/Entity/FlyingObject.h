@@ -20,13 +20,15 @@ protected:
 
 	float m_fXSpeed;	//X轴速度
 	float m_fYSpeed;	//Y轴速度
+
 	float m_fXFlightDistance;	//X轴飞行距离
 	float m_fYFlightDistance;	//Y轴飞行距离
-	bool m_bIsRight;	//飞行方向是否向右
+
 	Point m_vec2CurrentPoint;	//初始坐标
 	Point m_vec2TargetPoint;	//目标坐标，视情况可理解为消失坐标
 	Point m_vec2LauncherPoint;	//发射台发射时坐标
 
+	bool m_bIsRight;	//飞行方向是否向右
 	bool m_bIsUserEffective;	//是否为有效状态
 
 };

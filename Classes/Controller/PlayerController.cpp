@@ -56,9 +56,7 @@ void PlayerController::setMap(TMXTiledMap * p_map)
 
 	m_fMapWidth = mapTiledNum.width * tiledSize.width;
 	m_fMapHeight = mapTiledNum.height * tiledSize.height;
-
-	log("Map width:%f, height:%f", m_fMapWidth, m_fMapHeight);
-
+	
 	m_pMeta = p_map->getLayer("meta");
 
 	m_pMeta->setVisible(false);
@@ -390,8 +388,6 @@ void PlayerController::setViewPointByPlayer(Point pos)
 		mapTiledNum.height * tiledSize.height);
 	//获取屏幕显示尺寸
 	Size visibleSize = Director::getInstance()->getVisibleSize();
-	//获取被控制角色位置
-	//Point playerPosition = m_pControllerListener->getTargetPosition();
 	//获取被控制角色精灵大小尺寸
 	Size contentSize = m_pControllerListener->getCollisionSize();
 	if (contentSize.width == -1)
@@ -448,12 +444,8 @@ void PlayerController::setPlayerPosition(Point pos)
 	}
 
 	Point tiledPos = tileCoordForPosition(destPos);
-
-	log("Point:x%f, y%f", destPos.x, destPos.y);
-
+	
 	int tiledGid = m_pMeta->getTileGIDAt(tiledPos);
-
-	log("%d", tiledGid);
 
 	if (tiledGid != 0)
 	{
@@ -463,12 +455,9 @@ void PlayerController::setPlayerPosition(Point pos)
 
 		if (prop.asBool())
 		{
-			log("test");
 			return;
 		}
 	}
-
-	//m_pControllerListener->setTargetPosition(pos);
 
 	this->setViewPointByPlayer(pos);
 }

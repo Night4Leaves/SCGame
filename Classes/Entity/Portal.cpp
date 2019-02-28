@@ -52,7 +52,7 @@ void Portal::checkPlayerPoint(Ref * pSender)
 		&& (f_XPlayer - (f_XPortal + f_portalWidth * 0.5 * f_scale)) < 0
 		&& (f_YPlayer - (f_YPortal - f_portalHeight * 0.5 * f_scale - 20)) > 0)
 	{
-		log("ok");
+		log("activate select game scene");
 		NotificationCenter::getInstance()->postNotification("show_PaneLayer", (Ref*)en_paneMsg_selectGameScene);
 	}
 	
