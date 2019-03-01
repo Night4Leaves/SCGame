@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.1" orientation="orthogonal" renderorder="left-down" width="100" height="19" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="3">
+<map version="1.2" tiledversion="1.2.1" orientation="orthogonal" renderorder="left-down" width="100" height="19" tilewidth="32" tileheight="32" infinite="0" nextlayerid="7" nextobjectid="3">
  <tileset firstgid="1" source="tilesheet_complete.tsx"/>
+ <tileset firstgid="1057" source="block.tsx"/>
  <layer id="3" name="terrain" width="100" height="19">
   <data encoding="base64" compression="zlib">
    eJztVEkOwzAIdJXndP1N1/8rT2hu5VLJshjAWRQOM9JINYWEzIBLIQiCIAiCIAiCIAhibxyHUk7Cs/AivApvw7I4yplbV59Rzhp9Z4jfhQ/hU/gSvoWfhXGUM7euPqOcNfrOEP+uxPFgn9uY9r/3PBTbgls/33qvp4elrda/54ulsRaP9N9Tg3Tfy4O2nwkwshOaBv96y5+5umrv8uZL0z+D9j370fqB8i3tLd2QB9EZj+5Bj/4ZPIreLWjuJkVTaz6RL0hrSyPvPo1onMGDVh+LyLe61tJA26WIbuiOs+4wNAPZPfC+xdsZTa/aP83T+re3j94uRPakV/8sHv0AMdHGKA==
@@ -19,4 +20,9 @@
    <point/>
   </object>
  </objectgroup>
+ <layer id="6" name="meta" width="100" height="19">
+  <data encoding="base64" compression="zlib">
+   eJztw0EJAAAIBLB7WMT+JU3gW5ANlgAAAADXutQtAAB8Nr2HHOk=
+  </data>
+ </layer>
 </map>

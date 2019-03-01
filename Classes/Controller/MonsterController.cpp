@@ -7,6 +7,7 @@ MonsterController::MonsterController()
 
 MonsterController::~MonsterController()
 {
+	NotificationCenter::getInstance()->removeAllObservers(this);
 }
 
 bool MonsterController::init()

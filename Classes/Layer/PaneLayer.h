@@ -7,6 +7,8 @@
 
 USING_NS_CC;
 
+class Player;
+
 class PaneLayer : public Layer
 {
 public:
@@ -16,10 +18,12 @@ public:
 	CREATE_FUNC(PaneLayer);
 	virtual bool init();	
 
-private:
-	void readPlayerJson(std::vector<PlayerInfomation> &vec_playerInfoList);
+	void savePlayer(Player* player);
 
+private:
 	void showPaneLayer(Ref* pSender);
+
+	void readPlayerJson(std::vector<PlayerInfomation> &vec_playerInfoList);
 
 	void selectCharacter();
 	void loadFile();
@@ -33,11 +37,15 @@ private:
 	void changeMainScene();
 
 	void menuCloseCallback(Ref* pSender);
+	int checkSaveData();
+	void createNewData();
 
 	MenuItemSprite* createPlayerSelectItem(const std::vector<PlayerInfomation> &vec_playerInfoList, int i, const SEL_MenuHandler &selector);
 	void selectPlayer_1(Ref* pSender);
 	void selectPlayer_2(Ref* pSender);
 
+private:
+	Player* m_pPlayer;
 };
 
 #endif // !__PANE_LAYER_H__

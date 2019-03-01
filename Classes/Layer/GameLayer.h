@@ -21,13 +21,10 @@ public:
 	virtual void update(float dt);
 
 	void addAttackFlyingObject(Ref* pSender);
-	void stoneRush(Ref* pSender);
-
-	void setSceneItem();
 
 	void setTestGameScene();
 
-	void setGameScene_1_1();
+	void setGameScene_1_1(Player* player);
 
 private:
 	TMXTiledMap* m_pMap;
@@ -36,9 +33,6 @@ private:
 	Vector<FlyingObject*> vector_pAttackFlyingObject;
 	int i_flyingObjectFlag;
 
-	Sprite* m_lever;
-	Sprite* m_stone;
-	int stoneSpeed;
 };
 
 #endif // !__GAME_LAYER_H__

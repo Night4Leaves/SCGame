@@ -21,7 +21,7 @@ public:
 
 	static Scene* create(Player *player);
 	virtual bool init(Player *player);
-
+	
 private:
 	BackgroundLayer* m_pBackgroundLayer;
 	TMXTiledMap* m_pMap;

@@ -5,17 +5,12 @@
 
 #include "Json/json.h"
 
-#include "FSM/mutou.h"
-#include "FSM/MutouT.h"
-#include "FSM/MutouTFSM.h"
-
 #include "Layer/PaneLayer.h"
 #include "Layer/ScoreCountLayer.h"
 #include "Layer/GameMenuLayer.h"
 #include "Layer/GameLayer.h"
 
 #include "CustomizeEnum.h"
-#include "HelloLua.h"
 
 #include "Entity/Player.h"
 

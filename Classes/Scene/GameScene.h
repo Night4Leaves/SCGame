@@ -11,6 +11,7 @@ class GameLayer;
 class GameMenuLayer;
 class PaneLayer;
 class ScoreCountLayer;
+class Player;
 
 enum SceneType
 {
@@ -29,11 +30,11 @@ public:
 	GameScene();
 	virtual ~GameScene();
 
-	static Scene* createScene();
+	static GameScene* createScene();
 	CREATE_FUNC(GameScene);
 	virtual bool init();
 
-	void setScene(SceneType sign);
+	void setScene(SceneType sign, Player* player);
 
 protected:
 	BackgroundLayer* m_pBackgroundLayer;

@@ -34,9 +34,6 @@
     <Filter Include="src\Json">
       <UniqueIdentifier>{a8b09e56-8ebf-4863-91f1-e13e5141a4ee}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\FSM">
-      <UniqueIdentifier>{caf36d65-da86-4d64-bd35-41005abc542e}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -135,24 +132,6 @@
     <ClCompile Include="..\Classes\Json\json_writer.cpp">
       <Filter>src\Json</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\FSM\mutou.cpp">
-      <Filter>src\FSM</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\FSM\StateWriteCode.cpp">
-      <Filter>src\FSM</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\FSM\StateWriteArticle.cpp">
-      <Filter>src\FSM</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\FSM\StateRest.cpp">
-      <Filter>src\FSM</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\FSM\MutouT.cpp">
-      <Filter>src\FSM</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\FSM\MutouTFSM.cpp">
-      <Filter>src\FSM</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\Layer\ScoreCountLayer.cpp">
       <Filter>src\Layer</Filter>
     </ClCompile>
@@ -161,9 +140,6 @@
     </ClCompile>
     <ClCompile Include="..\Classes\Layer\ShieldLayer.cpp">
       <Filter>src\Layer</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\HelloLua.cpp">
-      <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -287,30 +263,6 @@
     <ClInclude Include="..\Classes\Json\writer.h">
       <Filter>src\Json</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\FSM\mutou.h">
-      <Filter>src\FSM</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\FSM\state.h">
-      <Filter>src\FSM</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\FSM\StateWriteCode.h">
-      <Filter>src\FSM</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\FSM\StateWriteArticle.h">
-      <Filter>src\FSM</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\FSM\StateRest.h">
-      <Filter>src\FSM</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\FSM\MutouT.h">
-      <Filter>src\FSM</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\FSM\MutouTFSM.h">
-      <Filter>src\FSM</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\FSM\EnumMsgType.h">
-      <Filter>src\FSM</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\CustomizeEnum.h">
       <Filter>src</Filter>
     </ClInclude>
@@ -322,9 +274,6 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Layer\ShieldLayer.h">
       <Filter>src\Layer</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\HelloLua.h">
-      <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

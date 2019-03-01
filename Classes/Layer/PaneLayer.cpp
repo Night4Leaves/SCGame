@@ -14,6 +14,7 @@ PaneLayer::PaneLayer()
 
 PaneLayer::~PaneLayer()
 {
+	NotificationCenter::getInstance()->removeAllObservers(this);
 }
 
 bool PaneLayer::init()
@@ -57,23 +58,52 @@ void PaneLayer::showPaneLayer(Ref * pSender)
 	
 }
 
+void PaneLayer::savePlayer(Player * player)
+{
+	m_pPlayer = player;
+}
+
+
 void PaneLayer::changeGameScene(Ref * pSender)
 {
-	Scene* gameScene = GameScene::createScene();
+	GameScene* gameScene = GameScene::createScene();
+	gameScene->setScene(Scene_1, m_pPlayer);
 	Director::getInstance()->replaceScene(gameScene);
 }
 
 void PaneLayer::changeMainScene()
 {
 	log("PaneLayer::changeMainScene");
-	//Scene* mainScene = MainScene::createScene();
-	//Director::getInstance()->replaceScene(mainScene);
 }
 
 void PaneLayer::menuCloseCallback(Ref * pSender)
 {
 	log("ok");
 	this->removeAllChildren();
+}
+
+int PaneLayer::checkSaveData()
+{
+	Json::Reader reader;
+	Json::Value root;
+
+	std::string saveData = FileUtils::getInstance()->getStringFromFile("json/savedata.json");
+
+	if (reader.parse(saveData, root, false) == true)
+	{
+		log("save data num is %d", root.size());
+		return root.size();
+	}
+	else
+	{
+		log("can't open save data file");
+		return -1;
+	}
+	
+}
+
+void PaneLayer::createNewData()
+{
 }
 
 MenuItemSprite * PaneLayer::createPlayerSelectItem(const std::vector<PlayerInfomation> &vec_playerList, int i, const SEL_MenuHandler &selector)
@@ -118,6 +148,11 @@ MenuItemSprite * PaneLayer::createPlayerSelectItem(const std::vector<PlayerInfom
 void PaneLayer::selectPlayer_1(Ref * pSender)
 {
 	log("selectPlayer_1");
+	int dataNum = checkSaveData();
+	if (dataNum == 4)
+	{
+		return;
+	}
 	Player* player = Player::create("player_01");
 	Scene* mainScene = MainScene::create(player);
 	Director::getInstance()->replaceScene(mainScene);
@@ -126,6 +161,11 @@ void PaneLayer::selectPlayer_1(Ref * pSender)
 void PaneLayer::selectPlayer_2(Ref * pSender)
 {
 	log("selectPlayer_2");
+	int dataNum = checkSaveData();
+	if (dataNum == 4)
+	{
+		return;
+	}
 	Player* player = Player::create("player_02");
 	Scene* mainScene = MainScene::create(player);
 	Director::getInstance()->replaceScene(mainScene);
@@ -137,8 +177,8 @@ void PaneLayer::selectCharacter()
 
 	this->addChild(ShieldLayer::create());
 
-	auto colortest = LayerColor::create(Color4B::BLACK);
-	this->addChild(colortest);
+	auto backColor = LayerColor::create(Color4B::BLACK);
+	this->addChild(backColor);
 
 	std::vector<PlayerInfomation> vec_playerList;
 	this->readPlayerJson(vec_playerList);
@@ -173,8 +213,8 @@ void PaneLayer::loadFile()
 
 	this->addChild(ShieldLayer::create());
 
-	auto colortest = LayerColor::create(Color4B::BLACK);
-	this->addChild(colortest);
+	auto backColor = LayerColor::create(Color4B::BLACK);
+	this->addChild(backColor);
 
 	auto closeItem = MenuItemImage::create(
 		"CloseNormal.png",
@@ -185,7 +225,6 @@ void PaneLayer::loadFile()
 	this->addChild(menu);
 	menu->setPosition(400, 300);
 
-	
 }
 
 void PaneLayer::openStore()
@@ -202,46 +241,60 @@ void PaneLayer::selectGameScene()
 {
 	log("PaneLayer::selectGameScene");
 
-	//Sprite* normalButton = Sprite::create("background/game_scene_01_2048x1536.png");
-	//Sprite* selectButton = Sprite::create("background/game_scene_01_2048x1536.png");
-	//MenuItemSprite* aButtonSprite = MenuItemSprite::create(normalButton, selectButton, this, menu_selector(PaneLayer::changeGameScene));
-	//aButtonSprite->setScale(0.1);
-	//Sprite* normalButton_1 = Sprite::create("background/game_scene_02_2048x1536.png");
-	//Sprite* selectButton_1 = Sprite::create("background/game_scene_02_2048x1536.png");
-	//MenuItemSprite* bButtonSprite = MenuItemSprite::create(normalButton_1, selectButton_1, nullptr, nullptr);
-	//bButtonSprite->setScale(0.1);
-	//Sprite* normalButton_2 = Sprite::create("background/initial_scene_01_2048x1536.png");
-	//Sprite* selectButton_2 = Sprite::create("background/initial_scene_01_2048x1536.png");
-	//MenuItemSprite* cButtonSprite = MenuItemSprite::create(normalButton_2, selectButton_2, nullptr, nullptr);
-	//cButtonSprite->setScale(0.1);
-	//Sprite* normalButton_3 = Sprite::create("background/main_scene_01_2048x1536.png");
-	//Sprite* selectButton_3 = Sprite::create("background/main_scene_01_2048x1536.png");
-	//MenuItemSprite* dButtonSprite = MenuItemSprite::create(normalButton_3, selectButton_3, nullptr, nullptr);
-	//dButtonSprite->setScale(0.1);
+	this->addChild(ShieldLayer::create());
 
-	//Menu* menu_1 = Menu::create(aButtonSprite, bButtonSprite, NULL);
-	//Menu* menu_2 = Menu::create(cButtonSprite, dButtonSprite, NULL);
-	//if (menu_1 == nullptr)
-	//{
-	//	log("setInitialMenu set failed!");
-	//	return;
-	//}
-	//else
-	//{
-	//	this->addChild(menu_1);
+	auto backColor = LayerColor::create(Color4B::BLACK);
+	this->addChild(backColor);
 
-	//	//设置菜单位置
-	//	Size winSize = Director::getInstance()->getWinSize();
-	//	menu_1->setPosition(winSize.width * 0.5, winSize.height * 0.5 + 90);
-	//	menu_1->alignItemsHorizontallyWithPadding(20);
+	auto closeItem = MenuItemImage::create(
+		"CloseNormal.png",
+		"CloseSelected.png",
+		CC_CALLBACK_1(PaneLayer::menuCloseCallback, this));
 
-	//	this->addChild(menu_2);
+	auto menu = Menu::create(closeItem, NULL);
+	this->addChild(menu);
+	menu->setPosition(400, 500);
 
-	//	//设置菜单位置
-	//	menu_2->setPosition(winSize.width * 0.5, winSize.height * 0.5 - 90);
-	//	menu_2->alignItemsHorizontallyWithPadding(20);
+	Sprite* normalButton = Sprite::create("background/game_scene_01_2048x1536.png");
+	Sprite* selectButton = Sprite::create("background/game_scene_01_2048x1536.png");
+	MenuItemSprite* aButtonSprite = MenuItemSprite::create(normalButton, selectButton, this, menu_selector(PaneLayer::changeGameScene));
+	aButtonSprite->setScale(0.1);
+	Sprite* normalButton_1 = Sprite::create("background/game_scene_02_2048x1536.png");
+	Sprite* selectButton_1 = Sprite::create("background/game_scene_02_2048x1536.png");
+	MenuItemSprite* bButtonSprite = MenuItemSprite::create(normalButton_1, selectButton_1, nullptr, nullptr);
+	bButtonSprite->setScale(0.1);
+	Sprite* normalButton_2 = Sprite::create("background/initial_scene_01_2048x1536.png");
+	Sprite* selectButton_2 = Sprite::create("background/initial_scene_01_2048x1536.png");
+	MenuItemSprite* cButtonSprite = MenuItemSprite::create(normalButton_2, selectButton_2, nullptr, nullptr);
+	cButtonSprite->setScale(0.1);
+	Sprite* normalButton_3 = Sprite::create("background/main_scene_01_2048x1536.png");
+	Sprite* selectButton_3 = Sprite::create("background/main_scene_01_2048x1536.png");
+	MenuItemSprite* dButtonSprite = MenuItemSprite::create(normalButton_3, selectButton_3, nullptr, nullptr);
+	dButtonSprite->setScale(0.1);
 
-	//}
+	Menu* menu_1 = Menu::create(aButtonSprite, bButtonSprite, NULL);
+	Menu* menu_2 = Menu::create(cButtonSprite, dButtonSprite, NULL);
+	if (menu_1 == nullptr)
+	{
+		log("setInitialMenu set failed!");
+		return;
+	}
+	else
+	{
+		this->addChild(menu_1);
+
+		//设置菜单位置
+		Size winSize = Director::getInstance()->getWinSize();
+		menu_1->setPosition(winSize.width * 0.5, winSize.height * 0.5 + 90);
+		menu_1->alignItemsHorizontallyWithPadding(20);
+
+		this->addChild(menu_2);
+
+		//设置菜单位置
+		menu_2->setPosition(winSize.width * 0.5, winSize.height * 0.5 - 90);
+		menu_2->alignItemsHorizontallyWithPadding(20);
+
+	}
 }
 
 void PaneLayer::openBackpack()

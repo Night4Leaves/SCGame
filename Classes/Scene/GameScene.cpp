@@ -6,6 +6,8 @@
 #include "Layer/PaneLayer.h"
 #include "Layer/ScoreCountLayer.h"
 
+#include "Entity/Player.h"
+
 #include "Util/MapUtil.h"
 
 GameScene::GameScene()
@@ -16,7 +18,7 @@ GameScene::~GameScene()
 {
 }
 
-Scene * GameScene::createScene()
+GameScene * GameScene::createScene()
 {
 	return GameScene::create();
 }
@@ -31,9 +33,7 @@ bool GameScene::init()
 		CC_BREAK_IF(m_pBackgroundLayer == nullptr);
 		this->addChild(m_pBackgroundLayer);
 		m_pBackgroundLayer->setPosition(Vec2(0, 200));
-		//添加背景图片
-		m_pBackgroundLayer->setBackgroundPicture("background/game_scene_01_2048x1536.png");
-
+		
 		m_pGameLayer = GameLayer::create();
 		CC_BREAK_IF(m_pGameLayer == nullptr);
 		this->addChild(m_pGameLayer);
@@ -48,6 +48,10 @@ bool GameScene::init()
 		CC_BREAK_IF(m_pScoreCountLayer == nullptr);
 		this->addChild(m_pScoreCountLayer);
 
+		m_pPaneLayer = PaneLayer::create();
+		CC_BREAK_IF(m_pPaneLayer == nullptr);
+		this->addChild(m_pPaneLayer);
+
 		return true;
 	} while (0);
 
@@ -56,11 +60,14 @@ bool GameScene::init()
 	return false;
 }
 
-void GameScene::setScene(SceneType sign)
+void GameScene::setScene(SceneType sign, Player* player)
 {
 	switch (sign)
 	{
 	case Scene_1:
+		//添加背景图片
+		m_pBackgroundLayer->setBackgroundPicture("background/game_scene_01_2048x1536.png");
+		m_pGameLayer->setGameScene_1_1(player);
 		break;
 	case Scene_2:
 		break;

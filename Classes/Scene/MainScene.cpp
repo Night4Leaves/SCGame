@@ -102,6 +102,7 @@ bool MainScene::init(Player *player)
 		m_pPaneLayer = PaneLayer::create();
 		CC_BREAK_IF(m_pPaneLayer == nullptr);
 		this->addChild(m_pPaneLayer);
+		m_pPaneLayer->savePlayer(m_pPlayer);
 
 		return true;
 	} while (0);
@@ -110,4 +111,3 @@ bool MainScene::init(Player *player)
 
 	return false;
 }
-

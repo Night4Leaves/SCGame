@@ -28,14 +28,7 @@ bool GameLayer::init()
 			"set_attack_flying_object",
 			NULL);
 
-		NotificationCenter::getInstance()->addObserver(
-			this,
-			callfuncO_selector(GameLayer::stoneRush),
-			"player_point",
-			NULL);
-
-		this->setGameScene_1_1();
-
+		
 		return true;
 	} while (0);
 
@@ -46,9 +39,7 @@ bool GameLayer::init()
 
 void GameLayer::update(float dt)
 {
-	Point stonePoint = m_stone->getPosition();
-	stonePoint.x += stoneSpeed;
-	m_stone->setPosition(stonePoint);
+	
 }
 
 void GameLayer::addAttackFlyingObject(Ref * pSender)
@@ -82,49 +73,6 @@ void GameLayer::addAttackFlyingObject(Ref * pSender)
 	}
 }
 
-void GameLayer::stoneRush(Ref * pSender)
-{
-	auto leverAction = RotateBy::create(1.0f, -30);
-	auto stoneAction = RotateBy::create(1.0f, 90);
-
-	m_lever->runAction(leverAction);
-	m_stone->runAction(RepeatForever::create(stoneAction));
-
-	stoneSpeed = 4;
-
-	this->scheduleUpdate();
-}
-
-void GameLayer::setSceneItem()
-{
-	TMXObjectGroup* objGroup = m_pMap->getObjectGroup("objects");
-
-	ValueMap monsterPoint = objGroup->getObject("sceneitem_01");
-
-	float monsterX = monsterPoint.at("x").asFloat();
-	float monsterY = monsterPoint.at("y").asFloat();
-
-	Sprite* monster_01 = Sprite::createWithSpriteFrameName("sceneitem_01.png");
-	monster_01->setPosition(Vec2(monsterX, monsterY));
-	this->addChild(monster_01);
-
-	monsterPoint = objGroup->getObject("sceneitem_02");
-
-	monsterX = monsterPoint.at("x").asFloat();
-	monsterY = monsterPoint.at("y").asFloat();
-
-	Sprite* monster = Sprite::createWithSpriteFrameName("sceneitem_02.png"); m_stone = monster;
-	monster->setPosition(Vec2(monsterX, monsterY));
-	this->addChild(monster);
-
-	monster = Sprite::createWithSpriteFrameName("sceneitem_03.png"); m_lever = monster;
-	monster->setPosition(Vec2(0, 20));
-	monster->setRotation(15);
-	monster_01->addChild(monster);
-
-	poslog("lever", monster->getPosition().x, monster->getPosition().y);
-}
-
 void GameLayer::setTestGameScene()
 {
 	TMXTiledMap* map = TMXTiledMap::create("map/test_map.tmx");
@@ -134,15 +82,14 @@ void GameLayer::setTestGameScene()
 	this->addChild(player);
 	player->setPosition(400, 300);
 	player->idle();
-	//player->setMap(map);
-
+	
 	PlayerController* playerController = PlayerController::create();
 	player->setController(playerController);
 	this->addChild(playerController);
 	playerController->setMap(map);
 }
 
-void GameLayer::setGameScene_1_1()
+void GameLayer::setGameScene_1_1(Player* player)
 {
 	m_pMap = TMXTiledMap::create("map/map_1-1.tmx");
 	if (m_pMap == nullptr)
@@ -175,8 +122,6 @@ void GameLayer::setGameScene_1_1()
 		this->addChild(monsterController);
 	}
 
-	this->setSceneItem();
-
 	ValueMap bossPoint = objGroup->getObject("boss");
 
 	float bossX = bossPoint.at("x").asFloat();
@@ -196,11 +141,10 @@ void GameLayer::setGameScene_1_1()
 	float playerX = playerPoint.at("x").asFloat();
 	float playerY = playerPoint.at("y").asFloat();
 
-	Player* player = Player::create("player_01");
-	player->setPosition(Vec2(playerX, playerY));
-	player->idle();
-	this->addChild(player);
 	m_pPlayer = player;
+	m_pPlayer->setPosition(Vec2(playerX, playerY));
+	m_pPlayer->idle();
+	this->addChild(m_pPlayer);
 
 	PlayerController* playerController = PlayerController::create();
 	if(playerController == nullptr);
@@ -208,8 +152,9 @@ void GameLayer::setGameScene_1_1()
 		return;
 	}
 	m_pPlayerController = playerController;
-	player->setController(playerController);
+	m_pPlayer->setController(playerController);
 	this->addChild(playerController);
+	m_pPlayerController->setMap(m_pMap);
 
 	AtkFlyObjIniInfo fireballInfo = { "fireball", Vec2(HORIZONTAL_DISTANCE, 0), Vec2(HORIZONTAL_SPPED + 1, 0) };
 	for (int i = 0; i < 3; i++)
