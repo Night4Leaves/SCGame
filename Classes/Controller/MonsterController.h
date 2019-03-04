@@ -18,6 +18,7 @@ public:
 	virtual void checkControllerStatus();
 
 	void checkAttckFlyingObjectPath(Ref* pSender);
+	void checkBeHit(Ref* pSender);
 
 private:
 	int m_iXSpeed;	//X轴移速

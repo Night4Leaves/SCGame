@@ -16,6 +16,7 @@ public:
 	virtual bool init(int number);
 
 	void setNumber(int number, int ceiling = 999999);
+	int getNumber();
 
 private:
 	int i_number;

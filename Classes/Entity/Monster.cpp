@@ -27,6 +27,8 @@ Monster * Monster::create(const char * str_monsterName)
 
 bool Monster::init(const char* str_monsterName)
 {
+	m_iHP = 3;
+	m_iMoney = 10;
 	m_strMonsterName = str_monsterName;
 	std::string animationName = "";	//动画全称
 	Animation* animation = NULL;	//动画对象
@@ -132,15 +134,38 @@ void Monster::hurt()
 {
 	//停止当前的动作
 	m_sprite->stopAllActions();
+
+	--m_iHP;
+	if (m_iHP == 0)
+	{
+		this->death();
+		return;
+	}
+
 	//获取已经做好的动画
 	Animation* hurtAnimation = AnimationCache::getInstance()->getAnimation(StringUtils::format("%s_hurt", m_strMonsterName).c_str());
 	//生成动画动作
 	Animate* hurtAnimate = Animate::create(hurtAnimation);
-	m_sprite->runAction(hurtAnimate);
+	
+	auto callfunc = CallFunc::create(CC_CALLBACK_0(Monster::idle, this));
+	Sequence* actionSequnence = Sequence::create(hurtAnimate, callfunc, NULL);
+	m_sprite->runAction(actionSequnence);
 	return;
 }
 
 void Monster::death()
 {
+	//获取已经做好的动画
+	Animation* hurtAnimation = AnimationCache::getInstance()->getAnimation(StringUtils::format("%s_hurt", m_strMonsterName).c_str());
+	//生成动画动作
+	Animate* hurtAnimate = Animate::create(hurtAnimation);
+
+	Blink* blinkAction = Blink::create(3.0f, 3);
+	auto sendScoreMsg = CallFunc::create([&]() {NotificationCenter::getInstance()->postNotification("update_score", (Ref*)m_iMoney); });
+
+	Spawn* spawnList = Spawn::create(hurtAnimate, blinkAction, NULL);
+	Sequence* actionSequnence = Sequence::create(spawnList, sendScoreMsg, NULL);
+	m_sprite->runAction(actionSequnence);
+
 	return;
 }

@@ -49,6 +49,11 @@ bool Player::init(const char* str_playerName)
 	return true;
 }
 
+const char * Player::getSpriteName()
+{
+	return m_strPlayerName;
+}
+
 void Player::setController(SCController * controller)
 {
 	m_pPlayerController = controller;

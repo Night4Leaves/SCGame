@@ -24,7 +24,7 @@ public:
 
 	void setTestGameScene();
 
-	void setGameScene_1_1(Player* player);
+	void setGameScene_1_1(const char* player);
 
 private:
 	TMXTiledMap* m_pMap;

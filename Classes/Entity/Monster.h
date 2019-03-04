@@ -42,6 +42,10 @@ private:
 	Monster();
 	virtual ~Monster();
 
+private:
+	int m_iHP;
+	//分数（暂定）
+	int m_iMoney;
 	//记录控制器
 	SCController* m_pMonsterController;
 	//记录角色名，用于生成角色动画

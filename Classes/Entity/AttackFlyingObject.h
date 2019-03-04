@@ -27,6 +27,8 @@ public:
 	 */
 	void setFlyingInformation(AtkFlyObjPosInfo &objectFlyingInfo);
 
+	void stopFlying(Ref* pSender);
+
 private:
 	AttackFlyingObject();
 	virtual ~AttackFlyingObject();

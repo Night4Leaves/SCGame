@@ -89,7 +89,7 @@ void GameLayer::setTestGameScene()
 	playerController->setMap(map);
 }
 
-void GameLayer::setGameScene_1_1(Player* player)
+void GameLayer::setGameScene_1_1(const char* player)
 {
 	m_pMap = TMXTiledMap::create("map/map_1-1.tmx");
 	if (m_pMap == nullptr)
@@ -141,19 +141,16 @@ void GameLayer::setGameScene_1_1(Player* player)
 	float playerX = playerPoint.at("x").asFloat();
 	float playerY = playerPoint.at("y").asFloat();
 
-	m_pPlayer = player;
+	m_pPlayer = Player::create(player);
 	m_pPlayer->setPosition(Vec2(playerX, playerY));
 	m_pPlayer->idle();
 	this->addChild(m_pPlayer);
 
 	PlayerController* playerController = PlayerController::create();
-	if(playerController == nullptr);
-	{
-		return;
-	}
 	m_pPlayerController = playerController;
-	m_pPlayer->setController(playerController);
-	this->addChild(playerController);
+	m_pPlayer->setController(m_pPlayerController);
+	this->addChild(m_pPlayerController);
+
 	m_pPlayerController->setMap(m_pMap);
 
 	AtkFlyObjIniInfo fireballInfo = { "fireball", Vec2(HORIZONTAL_DISTANCE, 0), Vec2(HORIZONTAL_SPPED + 1, 0) };

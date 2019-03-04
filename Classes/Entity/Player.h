@@ -11,6 +11,7 @@ public:
 	static Player* create(const char* str_playerName);
 	virtual bool init(const char* str_playerName);
 
+	const char* getSpriteName();
 	void setController(SCController* controller);
 	virtual Size getCollisionSize();
 	virtual Vec2 getTargetPosition();

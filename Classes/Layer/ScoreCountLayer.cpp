@@ -80,3 +80,8 @@ void ScoreCountLayer::setNumber(int number, int ceiling)
 	}
 }
 
+int ScoreCountLayer::getNumber()
+{
+	return i_number;
+}
+

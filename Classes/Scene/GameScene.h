@@ -34,7 +34,9 @@ public:
 	CREATE_FUNC(GameScene);
 	virtual bool init();
 
-	void setScene(SceneType sign, Player* player);
+	void setScene(SceneType sign, const char* player);
+
+	void updateScore(Ref* pSender);
 
 protected:
 	BackgroundLayer* m_pBackgroundLayer;

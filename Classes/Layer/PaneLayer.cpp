@@ -22,6 +22,8 @@ bool PaneLayer::init()
 	do {
 		CC_BREAK_IF(!Layer::init());
 
+		is_open = false;
+
 		NotificationCenter::getInstance()->addObserver(
 			this,
 			callfuncO_selector(PaneLayer::showPaneLayer),
@@ -60,9 +62,8 @@ void PaneLayer::showPaneLayer(Ref * pSender)
 
 void PaneLayer::savePlayer(Player * player)
 {
-	m_pPlayer = player;
+	m_pPlayer = player->getSpriteName();
 }
-
 
 void PaneLayer::changeGameScene(Ref * pSender)
 {
@@ -229,6 +230,11 @@ void PaneLayer::loadFile()
 
 void PaneLayer::openStore()
 {
+	if (is_open)
+	{
+		return;
+	}
+
 	log("PaneLayer::openStore");
 }
 
@@ -239,6 +245,13 @@ void PaneLayer::startPause()
 
 void PaneLayer::selectGameScene()
 {
+	if (is_open)
+	{
+		return;
+	}
+
+	is_open = true;
+
 	log("PaneLayer::selectGameScene");
 
 	this->addChild(ShieldLayer::create());

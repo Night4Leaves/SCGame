@@ -34,6 +34,12 @@ bool AttackFlyingObject::init(const AtkFlyObjIniInfo & objectInfo)
 	sprite->runAction(animate);
 	sprite->setOpacity(0);
 
+	NotificationCenter::getInstance()->addObserver(
+		this,
+		callfuncO_selector(AttackFlyingObject::stopFlying),
+		"stop_flying",
+		NULL);
+
 	return true;
 }
 
@@ -41,14 +47,26 @@ void AttackFlyingObject::update(float dt)
 {
 	Vec2 pos = this->getPosition();
 	pos.x += m_fXSpeed;
+
 	if ((m_fXSpeed > 0 && pos.x >= m_vec2TargetPoint.x) || (m_fXSpeed < 0 && pos.x <= m_vec2TargetPoint.x))
 	{
-		m_fXSpeed = 0;
-		m_sprite->setOpacity(0);
-		m_bIsUserEffective = false;
-		this->unscheduleUpdate();
+		this->stopFlying(NULL);
 	}
+
+	float spriteWidth = m_sprite->getContentSize().width;
+
 	this->setPosition(pos);
+
+	if (m_fXSpeed > 0)
+	{
+		Point checkPoint = Point(pos.x + spriteWidth, pos.y);
+		NotificationCenter::getInstance()->postNotification("attack_flying_object_check_point", (Ref*)&checkPoint);
+	}
+	else if (m_fXSpeed < 0)
+	{
+		Point checkPoint = Point(pos.x - spriteWidth, pos.y);
+		NotificationCenter::getInstance()->postNotification("attack_flying_object_check_point", (Ref*)&checkPoint);
+	}
 }
 
 void AttackFlyingObject::setFlyingInformation(AtkFlyObjPosInfo & objectFlyingInfo)
@@ -83,10 +101,20 @@ void AttackFlyingObject::setFlyingInformation(AtkFlyObjPosInfo & objectFlyingInf
 	this->scheduleUpdate();
 }
 
+void AttackFlyingObject::stopFlying(Ref * pSender)
+{
+	m_fXSpeed = 0;
+	m_sprite->setOpacity(0);
+	m_bIsUserEffective = false;
+	this->unscheduleUpdate();
+	return;
+}
+
 AttackFlyingObject::AttackFlyingObject()
 {
 }
 
 AttackFlyingObject::~AttackFlyingObject()
 {
+	NotificationCenter::getInstance()->removeAllObservers(this);
 }

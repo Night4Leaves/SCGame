@@ -45,7 +45,8 @@ private:
 	void selectPlayer_2(Ref* pSender);
 
 private:
-	Player* m_pPlayer;
+	const char* m_pPlayer;
+	bool is_open;
 };
 
 #endif // !__PANE_LAYER_H__

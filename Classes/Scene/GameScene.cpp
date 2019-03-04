@@ -16,6 +16,7 @@ GameScene::GameScene()
 
 GameScene::~GameScene()
 {
+	NotificationCenter::getInstance()->removeAllObservers(this);
 }
 
 GameScene * GameScene::createScene()
@@ -52,6 +53,12 @@ bool GameScene::init()
 		CC_BREAK_IF(m_pPaneLayer == nullptr);
 		this->addChild(m_pPaneLayer);
 
+		NotificationCenter::getInstance()->addObserver(
+			this,
+			callfuncO_selector(GameScene::updateScore),
+			"update_score",
+			NULL);
+
 		return true;
 	} while (0);
 
@@ -60,7 +67,7 @@ bool GameScene::init()
 	return false;
 }
 
-void GameScene::setScene(SceneType sign, Player* player)
+void GameScene::setScene(SceneType sign, const char* player)
 {
 	switch (sign)
 	{
@@ -84,4 +91,11 @@ void GameScene::setScene(SceneType sign, Player* player)
 	default:
 		break;
 	}
+}
+
+void GameScene::updateScore(Ref * pSender)
+{
+	int number = m_pScoreCountLayer->getNumber();
+	number += (int)pSender;
+	m_pScoreCountLayer->setNumber(number);
 }
