@@ -36,6 +36,8 @@ struct PlayerData
  *	@i_attack	怪物攻击力
  *	@i_money	击败怪物后获得的分数/金钱
  *	@i_warningRange	怪物警戒范围
+ *	@i_xSpeed	X轴移动速度
+ *	@i_ySpeed	Y轴移动速度
  */
 struct MonsterData
 {
@@ -44,6 +46,8 @@ struct MonsterData
 	int i_attack;
 	int i_money = 0;
 	int i_warningRange = 0;
+	int i_xSpeed = 0;
+	int i_ySpeed = 0;
 };
 
 /**

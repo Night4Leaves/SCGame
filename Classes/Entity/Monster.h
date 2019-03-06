@@ -3,65 +3,51 @@
 #define __MONSTER_H__
 
 #include "Entity.h"
-#include "Controller/SCController.h"
+#include "CustomizeStruct.h"
 
-static int monFlag = 0;
-
-class Monster : public Entity, public GeneralControllerListener
+class Monster : public Entity
 {
 public:
-	static Monster* create(const char* str_monsterName);
-	virtual bool init(const char* str_monsterName);
+	static Monster* create(MonsterData monsterData);
+	virtual bool init(MonsterData monsterData);
+	virtual void update(float dt);
 
-	void setController(SCController* controller);
-	void setAlpha(int alpha);
+	void setMonsterPosition(Point pos);
 
-	virtual Size getCollisionSize();
-	//获取角色坐标
-	virtual Vec2 getTargetPosition();
-	/**
-	 *	设置角色坐标
-	 *	@pos 目标位置
-	 */
-	virtual void setTargetPosition(Vec2 pos);
-	//检查控制器状态
-	void checkControllerStatus();
-
-	/**
-	 *	控制角色是否朝右
-	 *	@b_isRight true为向右，false向左
-	 */
-	virtual void turnAround(bool b_isRight);
-
-	virtual void idle();
-	virtual void run();
-	virtual void attack();
-	virtual void jump();
-	virtual void climb();
-	virtual void hurt();
-	virtual void death();
+	void idle();
+	void run();
+	void attack();
+	void hurt();
+	void death();
 
 private:
 	Monster();
 	virtual ~Monster();
 
+	void checkAttckFlyingObjectPath(Ref* pSender);
+	void checkBeHit(Ref* pSender);
+
 private:
-	int i_warningRange;
-	int m_iMonFlag;
-	int m_iHP;
-	//分数（暂定）
-	int m_iMoney;
-	//记录控制器
-	SCController* m_pMonsterController;
-	//记录角色名，用于生成角色动画
-	const char* m_strMonsterName;
+	MonsterData m_sctMonsterData;
 	//角色动作名
 	std::vector<const char*> m_strActionName = { "idle","run","attack","hurt" };
 	//动画帧间隔时间
 	float m_fActionTime[7] = { 0.25f, 0.2f, 0.15f, 0.1f };
 	//动画重复次数
 	int m_iActionPlayTime[7] = { -1, -1, 1, 1 };
-	//int m_iActionPlayTime[7] = { -1, -1, -1, -1, -1 };
+
+	int m_iXSpeed;	//X轴移速
+	int m_iYspeed;	//Y轴移速
+
+	bool m_bIsRight;	//是否向右
+	bool m_bIsLock;		//是否为锁死状态
+	bool m_bIsAttack;	//攻击状态
+	bool m_bIsAttacked;	//被攻击状态
+	bool m_bIsDeath;	//是否为死亡状态
+
+	float m_fStateTime;
+
+	Point m_pointOriginalPos;
 };
 
 #endif // !__MONSTER_H__

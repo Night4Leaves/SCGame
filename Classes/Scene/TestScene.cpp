@@ -13,6 +13,7 @@
 #include "CustomizeEnum.h"
 
 #include "Entity/Player.h"
+#include "Entity/Monster.h"
 
 #include "Controller/PlayerController.h"
 
@@ -67,7 +68,12 @@ bool TestScene::init()
 
 		//HelloLua::create();
 
-		this->writeJson();
+		MonsterData monsterData = { "boss_01", 100, 10, 10, 100, 5, 5 };
+		Monster* monster = Monster::create(monsterData);
+		monster->setMonsterPosition(Point(400,300));
+		monster->idle();
+		monster->setScale(0.35);
+		this->addChild(monster);
 
 	} while (0);
 

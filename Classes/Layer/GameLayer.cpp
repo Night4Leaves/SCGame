@@ -3,7 +3,7 @@
 #include "Entity/Monster.h"
 #include "Entity/AttackFlyingObject.h"
 #include "Controller/PlayerController.h"
-#include "Controller/MonsterController.h"
+#include "CustomizeStruct.h"
 
 GameLayer::GameLayer()
 {
@@ -100,6 +100,8 @@ void GameLayer::setGameScene_1_1(PlayerData & playerData)
 
 	TMXObjectGroup* objGroup = m_pMap->getObjectGroup("objects");
 
+	MonsterData monsterData = { "boss_01", 100, 10, 10, 50, 5, 5 };
+
 	int i = 1;
 	while (true)
 	{
@@ -110,15 +112,11 @@ void GameLayer::setGameScene_1_1(PlayerData & playerData)
 		float monsterX = monsterPoint.at("x").asFloat();
 		float monsterY = monsterPoint.at("y").asFloat();
 
-		Monster* monster = Monster::create("boss_01");
+		Monster* monster = Monster::create(monsterData);
 		monster->setPosition(Vec2(monsterX, monsterY));
 		monster->idle();
 		monster->setScale(0.35);
 		this->addChild(monster);
-
-		MonsterController* monsterController = MonsterController::create();
-		monster->setController(monsterController);
-		this->addChild(monsterController);
 	}
 
 	ValueMap bossPoint = objGroup->getObject("boss");
@@ -126,14 +124,10 @@ void GameLayer::setGameScene_1_1(PlayerData & playerData)
 	float bossX = bossPoint.at("x").asFloat();
 	float bossY = bossPoint.at("y").asFloat();
 
-	Monster* boss = Monster::create("boss_01");
+	Monster* boss = Monster::create(monsterData);
 	boss->setPosition(Vec2(bossX, bossY));
 	boss->idle();
 	this->addChild(boss);
-
-	MonsterController* monsterController = MonsterController::create();
-	boss->setController(monsterController);
-	this->addChild(monsterController);
 
 	ValueMap playerPoint = objGroup->getObject("player");
 

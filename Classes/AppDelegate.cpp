@@ -130,7 +130,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
 	ResourcesLoadingUtil::preloadResources();
 
     // create a scene. it's an autorelease object
-    auto scene = InitialScene::createScene();
+    auto scene = TestScene::createScene();
 
     // run
     director->runWithScene(scene);

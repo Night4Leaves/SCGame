@@ -150,7 +150,6 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
-    <ClCompile Include="..\Classes\Controller\MonsterController.cpp" />
     <ClCompile Include="..\Classes\Controller\PlayerController.cpp" />
     <ClCompile Include="..\Classes\Controller\SCController.cpp" />
     <ClCompile Include="..\Classes\CsvData.cpp" />
@@ -188,7 +187,6 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate.h" />
     <ClInclude Include="..\Classes\Controller\GeneralControllerListener.h" />
-    <ClInclude Include="..\Classes\Controller\MonsterController.h" />
     <ClInclude Include="..\Classes\Controller\PlayerController.h" />
     <ClInclude Include="..\Classes\Controller\SCController.h" />
     <ClInclude Include="..\Classes\CsvData.h" />

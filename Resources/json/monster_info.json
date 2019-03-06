@@ -1,0 +1,11 @@
+[
+    {
+        "monsterName" : "boss_01",
+        "Hp" : 100,
+        "attack" : 10,
+        "money" : 10,
+        "warningRange" : 50,
+        "xSpeed" : 4,
+        "ySpeed" : 5
+    }
+]
