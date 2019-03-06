@@ -23,16 +23,15 @@ public:
 
 private:
 	//初始界面功能
-	void startGame(CCObject *sender);
-	void continueGame(CCObject *sender);
-	void openOptionWin(CCObject *sender);
-	void exitGame(CCObject *sender);
+	void startGame(Ref* sender);
+	void continueGame(Ref* sender);
+	void openOptionWin(Ref* sender);
+	void exitGame(Ref* sender);
 
 	//主界面功能
-	void selectGameScene(CCObject *sender);
-	void openBackpack(CCObject *sender);
-	void openSkillList(CCObject *sender);
-	void openOption(CCObject *sender);
+	void openBackpack(Ref* sender);
+	void openSkillList(Ref* sender);
+	void openOption(Ref* sender);
 };
 
 #endif // !1

@@ -19,12 +19,20 @@ bool MonsterController::init()
 	m_bIsAttack = false;
 	m_bIsAttacked = false;
 	m_fStateTime = 0;
-
+	m_bIsDeath = false;
+	m_iMonConFlag = monConFlag;
+	++monConFlag;
 
 	NotificationCenter::getInstance()->addObserver(
 		this,
 		callfuncO_selector(MonsterController::checkAttckFlyingObjectPath),
 		"attack_flying_object_point",
+		NULL);
+
+	NotificationCenter::getInstance()->addObserver(
+		this,
+		callfuncO_selector(MonsterController::updateStatus),
+		"set_death",
 		NULL);
 
 	this->scheduleUpdate();
@@ -37,12 +45,10 @@ void MonsterController::update(float dt)
 	if (m_pControllerListener == nullptr)
 	{
 		return;
-	}
+	}	
 
 	if (m_bIsAttacked)
 	{
-
-
 		m_iXSpeed = 0;
 		m_iYspeed = 0;
 
@@ -64,6 +70,11 @@ void MonsterController::checkControllerStatus()
 
 void MonsterController::checkAttckFlyingObjectPath(Ref * pSender)
 {
+	if (m_bIsDeath)
+	{
+		return;
+	}
+
 	FlyingObjectPositionInformation* flyingObjectInfo = (FlyingObjectPositionInformation*)pSender;
 	Point vec2_monsterPoint = m_pControllerListener->getTargetPosition();
 
@@ -110,6 +121,11 @@ void MonsterController::checkAttckFlyingObjectPath(Ref * pSender)
 
 void MonsterController::checkBeHit(Ref * pSender)
 {
+	if (m_bIsDeath)
+	{
+		return;
+	}
+
 	Point* objectPoint = (Point*)pSender;
 	float objectX = objectPoint->x;
 	float objectY = objectPoint->y;
@@ -131,5 +147,13 @@ void MonsterController::checkBeHit(Ref * pSender)
 	{
 		NotificationCenter::getInstance()->postNotification("stop_flying", NULL);
 		m_pControllerListener->hurt();
+	}
+}
+
+void MonsterController::updateStatus(Ref * pSender)
+{
+	if ((int)pSender == m_iMonConFlag)
+	{
+		m_bIsDeath = true;
 	}
 }

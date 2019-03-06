@@ -451,9 +451,9 @@ void PlayerController::setPlayerPosition(Point pos)
 	{
 		Value properties = m_pMap->getPropertiesForGID(tiledGid);
 
-		auto prop = properties.asValueMap().at("Collidable");
+		auto collidableProp = properties.asValueMap().at("Collidable");
 
-		if (prop.asBool())
+		if (collidableProp.asBool())
 		{
 			return;
 		}

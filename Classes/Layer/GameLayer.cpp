@@ -1,5 +1,4 @@
 #include "GameLayer.h"
-#include "Scene/MainScene.h"
 #include "Entity/Player.h"
 #include "Entity/Monster.h"
 #include "Entity/AttackFlyingObject.h"
@@ -89,7 +88,7 @@ void GameLayer::setTestGameScene()
 	playerController->setMap(map);
 }
 
-void GameLayer::setGameScene_1_1(const char* player)
+void GameLayer::setGameScene_1_1(PlayerData & playerData)
 {
 	m_pMap = TMXTiledMap::create("map/map_1-1.tmx");
 	if (m_pMap == nullptr)
@@ -141,7 +140,9 @@ void GameLayer::setGameScene_1_1(const char* player)
 	float playerX = playerPoint.at("x").asFloat();
 	float playerY = playerPoint.at("y").asFloat();
 
-	m_pPlayer = Player::create(player);
+	m_sctPlayerData = playerData;
+
+	m_pPlayer = Player::create(m_sctPlayerData.str_characterName.c_str());
 	m_pPlayer->setPosition(Vec2(playerX, playerY));
 	m_pPlayer->idle();
 	this->addChild(m_pPlayer);

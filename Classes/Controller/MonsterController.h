@@ -4,6 +4,8 @@
 
 #include "SCController.h"
 
+static int monConFlag = 0;
+
 class MonsterController : public SCController
 {
 public:
@@ -19,8 +21,11 @@ public:
 
 	void checkAttckFlyingObjectPath(Ref* pSender);
 	void checkBeHit(Ref* pSender);
+	void updateStatus(Ref* pSender);
 
 private:
+	bool m_bIsDeath;
+
 	int m_iXSpeed;	//X轴移速
 	int m_iYspeed;	//Y轴移速
 
@@ -30,6 +35,7 @@ private:
 	bool m_bIsAttacked;	//被攻击状态
 
 	float m_fStateTime;
+	int m_iMonConFlag;
 };
 
 #endif // !__MONSTER_CONTROLLER_H__

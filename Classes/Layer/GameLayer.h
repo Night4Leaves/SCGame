@@ -3,6 +3,7 @@
 #define __GAME_LAYER_H__
 
 #include "cocos2d.h"
+#include "CustomizeStruct.h"
 
 USING_NS_CC;
 
@@ -24,11 +25,12 @@ public:
 
 	void setTestGameScene();
 
-	void setGameScene_1_1(const char* player);
+	void setGameScene_1_1(PlayerData &playerData);
 
 private:
 	TMXTiledMap* m_pMap;
 	Player* m_pPlayer;
+	PlayerData m_sctPlayerData;
 	PlayerController* m_pPlayerController;
 	Vector<FlyingObject*> vector_pAttackFlyingObject;
 	int i_flyingObjectFlag;

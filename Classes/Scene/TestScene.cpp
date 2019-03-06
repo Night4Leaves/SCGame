@@ -58,16 +58,16 @@ bool TestScene::init()
 		this->addChild(gameLayer);
 		gameLayer->setTestGameScene();*/
 
-		auto test = GameMenuLayer::create();
+		/*auto test = GameMenuLayer::create();
 		this->addChild(test);
 		test->setInitialMenu();
 
 		auto panetest = PaneLayer::create();
-		this->addChild(panetest);
+		this->addChild(panetest);*/
 
 		//HelloLua::create();
 
-		
+		this->writeJson();
 
 	} while (0);
 

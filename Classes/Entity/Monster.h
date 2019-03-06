@@ -5,6 +5,8 @@
 #include "Entity.h"
 #include "Controller/SCController.h"
 
+static int monFlag = 0;
+
 class Monster : public Entity, public GeneralControllerListener
 {
 public:
@@ -12,6 +14,7 @@ public:
 	virtual bool init(const char* str_monsterName);
 
 	void setController(SCController* controller);
+	void setAlpha(int alpha);
 
 	virtual Size getCollisionSize();
 	//获取角色坐标
@@ -43,6 +46,8 @@ private:
 	virtual ~Monster();
 
 private:
+	int i_warningRange;
+	int m_iMonFlag;
 	int m_iHP;
 	//分数（暂定）
 	int m_iMoney;

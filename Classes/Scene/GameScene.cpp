@@ -67,8 +67,10 @@ bool GameScene::init()
 	return false;
 }
 
-void GameScene::setScene(SceneType sign, const char* player)
+void GameScene::setScene(SceneType sign, PlayerData & player)
 {
+	m_pPaneLayer->savePlayerData(player);
+
 	switch (sign)
 	{
 	case Scene_1:

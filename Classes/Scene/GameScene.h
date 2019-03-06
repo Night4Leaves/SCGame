@@ -3,6 +3,7 @@
 #define __GAME_SCENE_H__
 
 #include "cocos2d.h"
+#include "CustomizeStruct.h"
 
 USING_NS_CC;
 
@@ -34,7 +35,7 @@ public:
 	CREATE_FUNC(GameScene);
 	virtual bool init();
 
-	void setScene(SceneType sign, const char* player);
+	void setScene(SceneType sign, PlayerData &player);
 
 	void updateScore(Ref* pSender);
 

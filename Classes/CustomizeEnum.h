@@ -8,7 +8,8 @@ enum PaneLayerStatus
 	en_paneMsg_loadFile,
 	en_paneMsg_openStore,
 	en_paneMsg_pause,
-	en_paneMsg_selectGameScene
+	en_paneMsg_selectGameScene,
+	en_paneMsg_openBackpack
 };
 
 #endif // !__CUSTOMIZE_ENUM_H__

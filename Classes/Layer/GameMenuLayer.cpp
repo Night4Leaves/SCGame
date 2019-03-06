@@ -65,7 +65,7 @@ void GameMenuLayer::setMainMenu()
 	buttonInfo = { "menubar_02.png", "menubar_02.png", 0.5, this, menu_selector(GameMenuLayer::openSkillList) };
 	menu->addChild(MenuItemUtil::createMenuItemSpriteByPicture(buttonInfo));
 
-	buttonInfo = { "menubar_03.png", "menubar_03.png", 0.5, this, menu_selector(GameMenuLayer::openSkillList) };
+	buttonInfo = { "menubar_03.png", "menubar_03.png", 0.5, this, menu_selector(GameMenuLayer::openOption) };
 	menu->addChild(MenuItemUtil::createMenuItemSpriteByPicture(buttonInfo));
 
 	Size winSize = Director::getInstance()->getWinSize();
@@ -74,44 +74,40 @@ void GameMenuLayer::setMainMenu()
 	this->addChild(menu);
 }
 
-void GameMenuLayer::startGame(CCObject * sender)
+void GameMenuLayer::startGame(Ref * sender)
 {
 	log("startGame");
 	NotificationCenter::getInstance()->postNotification("show_PaneLayer", (Ref*)en_paneMsg_selectCharacter);
 }
 
-void GameMenuLayer::continueGame(CCObject * sender)
+void GameMenuLayer::continueGame(Ref * sender)
 {
 	log("continueGame");
 	NotificationCenter::getInstance()->postNotification("show_PaneLayer", (Ref*)en_paneMsg_loadFile);
 }
 
-void GameMenuLayer::openOptionWin(CCObject * sender)
+void GameMenuLayer::openOptionWin(Ref * sender)
 {
 	log("openOptionWin");
 }
 
-void GameMenuLayer::exitGame(CCObject * sender)
+void GameMenuLayer::exitGame(Ref * sender)
 {
 	Director::getInstance()->end();
 }
 
-void GameMenuLayer::selectGameScene(CCObject * sender)
-{
-	log("selectGameScene");
-}
-
-void GameMenuLayer::openBackpack(CCObject * sender)
+void GameMenuLayer::openBackpack(Ref * sender)
 {
 	log("openBackpack");
+	NotificationCenter::getInstance()->postNotification("show_PaneLayer", (Ref*)en_paneMsg_openBackpack);
 }
 
-void GameMenuLayer::openSkillList(CCObject * sender)
+void GameMenuLayer::openSkillList(Ref * sender)
 {
 	log("openSkillList");
 }
 
-void GameMenuLayer::openOption(CCObject * sender)
+void GameMenuLayer::openOption(Ref * sender)
 {
 	log("openOption");
 }

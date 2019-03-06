@@ -18,15 +18,14 @@ public:
 	CREATE_FUNC(PaneLayer);
 	virtual bool init();	
 
-	void savePlayer(Player* player);
+	void savePlayerData(PlayerData &playerData);
 
 private:
 	void showPaneLayer(Ref* pSender);
 
-	void readPlayerJson(std::vector<PlayerInfomation> &vec_playerInfoList);
+	void readPlayerJson(std::vector<PlayerData> &vec_playerInfoList, const char* fileName);
+	void readSaveDataJson(std::vector<PlayerData> &vec_playerInfoList, const char* fileName);
 
-	void selectCharacter();
-	void loadFile();
 	void openStore();
 	void startPause();
 	void selectGameScene();
@@ -34,19 +33,33 @@ private:
 	void openBackpack();
 
 	void changeGameScene(Ref* pSender);
-	void changeMainScene();
+	void enterMainScene(PlayerData &playerData);
+	void changeMainScene(Ref* pSender);;
 
 	void menuCloseCallback(Ref* pSender);
-	int checkSaveData();
 	void createNewData();
 
-	MenuItemSprite* createPlayerSelectItem(const std::vector<PlayerInfomation> &vec_playerInfoList, int i, const SEL_MenuHandler &selector);
+	void selectCharacter();
 	void selectPlayer_1(Ref* pSender);
 	void selectPlayer_2(Ref* pSender);
 
+	void loadFile();
+	void selectSavedata_1(Ref* pSender);
+	void selectSavedata_2(Ref* pSender);
+	void selectSavedata_3(Ref* pSender);
+	void selectSavedata_4(Ref* pSender);
+
+	MenuItemSprite* createCharacterSelectItem(const std::vector<PlayerData> &vec_characterInfoList, int i, const SEL_MenuHandler &selector, bool is_savedata);
+
 private:
 	const char* m_pPlayer;
-	bool is_open;
+
+	bool m_isOpen;
+	bool m_isLoadSavedata;
+
+	std::vector<PlayerData> m_vecCharacterList;
+	std::vector<PlayerData> m_vecSavedataList;
+	PlayerData m_sctPlayerData;
 };
 
 #endif // !__PANE_LAYER_H__

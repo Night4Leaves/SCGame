@@ -27,6 +27,8 @@ Monster * Monster::create(const char * str_monsterName)
 
 bool Monster::init(const char* str_monsterName)
 {
+	m_iMonFlag = monFlag;
+	++monFlag;
 	m_iHP = 3;
 	m_iMoney = 10;
 	m_strMonsterName = str_monsterName;
@@ -35,7 +37,7 @@ bool Monster::init(const char* str_monsterName)
 	auto num = m_strActionName.size();	//动作数量
 
 	//生成静态待机图对应的精灵
-	std::string waitAnimationName = StringUtils::format("%s_wait.png", str_monsterName);
+	std::string waitAnimationName = StringUtils::format("%s_idle_01.png", str_monsterName);
 	Sprite* sprite = Sprite::createWithSpriteFrameName(waitAnimationName.c_str());
 	this->bindSprite(sprite);
 
@@ -55,6 +57,11 @@ void Monster::setController(SCController * controller)
 {
 	m_pMonsterController = controller;
 	controller->setControllerListner(this);
+}
+
+void Monster::setAlpha(int alpha)
+{
+	m_sprite->setOpacity(alpha);
 }
 
 Size Monster::getCollisionSize()
@@ -160,11 +167,15 @@ void Monster::death()
 	//生成动画动作
 	Animate* hurtAnimate = Animate::create(hurtAnimation);
 
-	Blink* blinkAction = Blink::create(3.0f, 3);
-	auto sendScoreMsg = CallFunc::create([&]() {NotificationCenter::getInstance()->postNotification("update_score", (Ref*)m_iMoney); });
+	Blink* blinkAction = Blink::create(1.5f, 3);
+	auto sendScoreMsg = CallFunc::create([&]() { NotificationCenter::getInstance()->postNotification("update_score", (Ref*)m_iMoney); });
+	auto sendDeathMsg = CallFunc::create([&]() { NotificationCenter::getInstance()->postNotification("set_death", (Ref*)m_iMonFlag); });
+	auto callfunc = CallFunc::create(CC_CALLBACK_0(Monster::setAlpha, this, 0));
+	
+	Spawn* actionList = Spawn::create(hurtAnimate, blinkAction, nullptr);
+	Spawn* sendMsgList = Spawn::create(sendScoreMsg, sendDeathMsg, nullptr);
+	Sequence* actionSequnence = Sequence::create(sendMsgList, actionList, callfunc, nullptr);
 
-	Spawn* spawnList = Spawn::create(hurtAnimate, blinkAction, NULL);
-	Sequence* actionSequnence = Sequence::create(spawnList, sendScoreMsg, NULL);
 	m_sprite->runAction(actionSequnence);
 
 	return;

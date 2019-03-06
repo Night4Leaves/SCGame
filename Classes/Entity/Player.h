@@ -11,7 +11,7 @@ public:
 	static Player* create(const char* str_playerName);
 	virtual bool init(const char* str_playerName);
 
-	const char* getSpriteName();
+	std::string getSpriteName();
 	void setController(SCController* controller);
 	virtual Size getCollisionSize();
 	virtual Vec2 getTargetPosition();
@@ -37,7 +37,7 @@ private:
 	//记录控制器
 	SCController* m_pPlayerController;
 	//记录角色名，用于生成角色动画
-	const char* m_strPlayerName;
+	std::string m_strPlayerName;
 	//角色动作名
 	std::vector<const char*> m_strActionName = { "idle","run","attack","jump","climb","hurt","death" };
 	//动画帧间隔时间

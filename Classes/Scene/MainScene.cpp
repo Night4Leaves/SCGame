@@ -16,10 +16,10 @@ MainScene::~MainScene()
 {
 }
 
-Scene * MainScene::create(Player *player)
+MainScene * MainScene::create(PlayerData &playerData)
 {
 	MainScene *pRet = new(std::nothrow) MainScene();
-	if (pRet && pRet->init(player))
+	if (pRet && pRet->init(playerData))
 	{
 		pRet->autorelease();
 		return pRet;
@@ -32,7 +32,7 @@ Scene * MainScene::create(Player *player)
 	}
 }
 
-bool MainScene::init(Player *player)
+bool MainScene::init(PlayerData &playerData)
 {
 	do {
 		CC_BREAK_IF(!Scene::init());
@@ -72,21 +72,21 @@ bool MainScene::init(Player *player)
 		//设置NPC
 		m_pNPCLayer->setMainSceneNPC(objGroup);
 
-		//添加玩家角色
-		m_pPlayer = player;
+		//创建角色
+		Player* player = Player::create(playerData.str_characterName.c_str());
 
 		ValueMap playerPoint = objGroup->getObject("player");
 
 		float playerX = playerPoint.at("x").asFloat();
 		float playerY = playerPoint.at("y").asFloat();
 
-		m_pPlayer->setPosition(Vec2(playerX, playerY));
-		m_pPlayer->idle();
-		this->addChild(m_pPlayer);
+		player->setPosition(Vec2(playerX, playerY));
+		player->idle();
+		this->addChild(player);
 
 		//添加玩家控制器
 		PlayerController* playerController = PlayerController::create();
-		m_pPlayer->setController(playerController);
+		player->setController(playerController);
 		this->addChild(playerController);
 
 		playerController->setMap(m_pMap);
@@ -102,7 +102,7 @@ bool MainScene::init(Player *player)
 		m_pPaneLayer = PaneLayer::create();
 		CC_BREAK_IF(m_pPaneLayer == nullptr);
 		this->addChild(m_pPaneLayer);
-		m_pPaneLayer->savePlayer(m_pPlayer);
+		m_pPaneLayer->savePlayerData(playerData);
 
 		return true;
 	} while (0);

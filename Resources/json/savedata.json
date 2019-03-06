@@ -1,17 +1,84 @@
 [
 	{
-		"name": "player_01",
-		"hp": 100,
-		"attack": 10
+		"playerName" : "4_leaves",
+		"characterName" : "player_01",
+		"HP" : 100,
+		"attack" : 10,
+		"money" : 100,
+		"backpackItems" : 
+		{
+			"item01name" : "stone",
+			"item01num" : 1,
+			"item02name" : "pen",
+			"item02num" : 1,
+			"item03name" : "apple",
+			"item03num" : 1
+		},
+		"skillList" : 
+		{
+			"dynamics" : true,
+			"neutralization" : true,
+			"optics" : true,
+			"electromagnetism" : true,
+			"chemistry" : false,
+			"battery" : false
+		},
+		"level" : 5
 	},
 	{
-		"name": "player_02",
-		"hp": 90,
-		"attack": 15
+		"playerName" : "shadow",
+		"characterName" : "player_02",
+		"HP" : 50,
+		"attack" : 5,
+		"money" : 30,
+		"backpackItems" : 
+		{
+			"item01name" : "bear",
+			"item01num" : 1,
+			"item02name" : "pencil",
+			"item02num" : 1,
+			"item03name" : "apple",
+			"item03num" : 1
+		},
+		"skillList" : 
+		{
+			"dynamics" : true,
+			"neutralization" : false,
+			"optics" : false,
+			"electromagnetism" : false,
+			"chemistry" : false,
+			"battery" : false
+		},
+		"level" : 2
 	},
 	{
-		"name": "player_03",
-		"hp": 90,
-		"attack": 15
-	},
+		"playerName" : "copy",
+		"characterName" : "player_01",
+		"HP" : 100,
+		"attack" : 20,
+		"money" : 365,
+		"backpackItems" : 
+		{
+			"item01name" : "bear",
+			"item01num" : 1,
+			"item02name" : "pencil",
+			"item02num" : 3,
+			"item03name" : "apple",
+			"item03num" : 6,
+			"item04name": "apple",
+			"item04num" : 1,
+			"item05name": "stone",
+			"item05num" : 2
+		},
+		"skillList" : 
+		{
+			"dynamics" : true,
+			"neutralization" : true,
+			"optics" : true,
+			"electromagnetism" : true,
+			"chemistry" : true,
+			"battery" : true
+		},
+		"level" : 7
+	}
 ]

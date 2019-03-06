@@ -40,7 +40,7 @@ bool Player::init(const char* str_playerName)
 	//生成角色动画并存储到动画缓存中
 	for (int i = 0; i < num; i++)
 	{
-		animationName = StringUtils::format("%s_%s", m_strPlayerName, m_strActionName.at(i));
+		animationName = StringUtils::format("%s_%s", m_strPlayerName.c_str(), m_strActionName.at(i));
 		log("%s, %f, %d", animationName.c_str(), m_fActionTime[i], m_iActionPlayTime[i]);
 		animation = AnimationUtil::createAnimationWithSingleFrameName(animationName.c_str(), m_fActionTime[i], m_iActionPlayTime[i]);
 		AnimationCache::getInstance()->addAnimation(animation, animationName.c_str());
@@ -49,7 +49,7 @@ bool Player::init(const char* str_playerName)
 	return true;
 }
 
-const char * Player::getSpriteName()
+std::string Player::getSpriteName()
 {
 	return m_strPlayerName;
 }
@@ -96,7 +96,7 @@ void Player::idle()
 	//停止当前的动作
 	m_sprite->stopAllActions();
 	//获取已经做好的动画
-	Animation* animation = AnimationCache::getInstance()->getAnimation(StringUtils::format("%s_idle", m_strPlayerName).c_str());
+	Animation* animation = AnimationCache::getInstance()->getAnimation(StringUtils::format("%s_idle", m_strPlayerName.c_str()).c_str());
 	//生成动画动作
 	Animate* animate = Animate::create(animation);
 	//执行动画动作
@@ -108,7 +108,7 @@ void Player::run()
 	//停止当前的动作
 	m_sprite->stopAllActions();
 	//获取已经做好的动画
-	Animation* animation = AnimationCache::getInstance()->getAnimation(StringUtils::format("%s_run", m_strPlayerName).c_str());
+	Animation* animation = AnimationCache::getInstance()->getAnimation(StringUtils::format("%s_run", m_strPlayerName.c_str()).c_str());
 	//生成动画动作
 	Animate* animate = Animate::create(animation);
 	//执行动画动作
@@ -120,7 +120,7 @@ void Player::attack()
 	//停止当前的动作
 	m_sprite->stopAllActions();
 	//获取已经做好的动画
-	Animation* attackAnimation = AnimationCache::getInstance()->getAnimation(StringUtils::format("%s_attack", m_strPlayerName).c_str());
+	Animation* attackAnimation = AnimationCache::getInstance()->getAnimation(StringUtils::format("%s_attack", m_strPlayerName.c_str()).c_str());
 	//生成动画动作
 	Animate* attackAnimate = Animate::create(attackAnimation); 
 	//发出产生火球的消息
@@ -136,7 +136,7 @@ void Player::jump()
 	//停止当前的动作
 	m_sprite->stopAllActions();
 	//获取已经做好的动画
-	Animation* animation = AnimationCache::getInstance()->getAnimation(StringUtils::format("%s_jump", m_strPlayerName).c_str());
+	Animation* animation = AnimationCache::getInstance()->getAnimation(StringUtils::format("%s_jump", m_strPlayerName.c_str()).c_str());
 	//生成动画动作
 	Animate* animate = Animate::create(animation);
 	//设置跳跃动作需要的坐标(此坐标值保证原地跳跃的可能)
@@ -158,7 +158,7 @@ void Player::climb()
 	//停止当前的动作
 	m_sprite->stopAllActions();
 	//获取已经做好的动画
-	Animation* animation = AnimationCache::getInstance()->getAnimation(StringUtils::format("%s_climb", m_strPlayerName).c_str());
+	Animation* animation = AnimationCache::getInstance()->getAnimation(StringUtils::format("%s_climb", m_strPlayerName.c_str()).c_str());
 	//生成动画动作
 	Animate* animate = Animate::create(animation);
 	//执行动画动作
@@ -168,7 +168,7 @@ void Player::climb()
 void Player::hurt()
 {
 	m_sprite->stopAllActions();
-	Animation* animation = AnimationCache::getInstance()->getAnimation(StringUtils::format("%s_hurt", m_strPlayerName).c_str());
+	Animation* animation = AnimationCache::getInstance()->getAnimation(StringUtils::format("%s_hurt", m_strPlayerName.c_str()).c_str());
 	Animate* animate = Animate::create(animation);
 	Blink* blink = Blink::create(0.8f, 5);
 	Spawn* spawn = Spawn::create(animate, blink, nullptr);

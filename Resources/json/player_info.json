@@ -1,12 +1,12 @@
 [
 	{
-		"name": "player_01",
-		"hp": 100,
+		"characterName": "player_01",
+		"HP": 100,
 		"attack": 10
 	},
 	{
-		"name": "player_02",
-		"hp": 90,
+		"characterName": "player_02",
+		"HP": 90,
 		"attack": 15
 	}
 ]

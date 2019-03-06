@@ -8,15 +8,42 @@ USING_NS_CC;
 
 /**
  *	玩家信息
- *	@str_name	角色名
+ *	@str_playerName	玩家名
+ *	@str_characterName	角色名
  *	@i_hp	角色血量
  *	@i_attack	角色攻击力
+ *	@i_money	角色分数/金钱
+ *	@map_backpackItems	背包物品
+ *	@map_skillList	技能列表
+ *	@i_level	等级(解锁情况)
  */
-struct PlayerInfomation
+struct PlayerData
 {
-	std::string str_name;
-	int i_hp;
+	std::string str_playerName;
+	std::string str_characterName;
+	int i_HP;
 	int i_attack;
+	int i_money = 0;
+	std::map<std::string, int> map_backpackItems;
+	std::map<std::string, bool> map_skillList;
+	int i_level = 1;
+};
+
+/**
+ *	怪物信息
+ *	@str_monsterName	怪物名
+ *	@i_hp	怪物血量
+ *	@i_attack	怪物攻击力
+ *	@i_money	击败怪物后获得的分数/金钱
+ *	@i_warningRange	怪物警戒范围
+ */
+struct MonsterData
+{
+	std::string str_monsterName;
+	int i_HP;
+	int i_attack;
+	int i_money = 0;
+	int i_warningRange = 0;
 };
 
 /**
