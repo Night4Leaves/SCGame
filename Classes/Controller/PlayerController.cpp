@@ -1,6 +1,14 @@
 #include "PlayerController.h"
 
 PlayerController::PlayerController()
+	: m_fMapWidth(0.0)
+	, m_fMapHeight(0.0)
+	, m_iXSpeed(0)
+	, m_iYSpeed(0)
+	, m_bIsRight(true)
+	, m_bIsLock(false)
+	, m_iHorizontalRun(0)
+	, m_iVerticalRun(0)
 {
 }
 
@@ -77,11 +85,11 @@ void PlayerController::checkControllerStatus()
 		//根据角色朝向设置位移速度
 		if (m_bIsRight)
 		{
-			m_iXSpeed = HORIZONTAL_SPPED;
+			m_iXSpeed = m_pControllerListener->getXMaxSpeed();
 		}
 		else
 		{
-			m_iXSpeed = -HORIZONTAL_SPPED;
+			m_iXSpeed = -m_pControllerListener->getXMaxSpeed();
 		}
 
 		//设置角色朝向
@@ -112,7 +120,7 @@ void PlayerController::onKeyPressed(EventKeyboard::KeyCode keyCode, Event * even
 			break;
 		}
 
-		m_iYSpeed = VERTICAL_SPEED;
+		m_iYSpeed = m_pControllerListener->getYMaxSpeed();
 
 		if (m_iHorizontalRun > 0)
 		{
@@ -130,7 +138,7 @@ void PlayerController::onKeyPressed(EventKeyboard::KeyCode keyCode, Event * even
 			break;
 		}
 
-		m_iYSpeed = -VERTICAL_SPEED;
+		m_iYSpeed = -m_pControllerListener->getYMaxSpeed();
 
 		if (m_iHorizontalRun > 0)
 		{
@@ -151,7 +159,7 @@ void PlayerController::onKeyPressed(EventKeyboard::KeyCode keyCode, Event * even
 			break;
 		}
 
-		m_iXSpeed = -HORIZONTAL_SPPED;	//设置速度为-4（向左位移）
+		m_iXSpeed = -m_pControllerListener->getXMaxSpeed();	//设置速度为-4（向左位移）
 
 		//设置角色朝向
 		m_pControllerListener->turnAround(m_bIsRight);
@@ -169,7 +177,7 @@ void PlayerController::onKeyPressed(EventKeyboard::KeyCode keyCode, Event * even
 			break;
 		}
 
-		m_iXSpeed = HORIZONTAL_SPPED;
+		m_iXSpeed = m_pControllerListener->getXMaxSpeed();
 
 		m_pControllerListener->turnAround(m_bIsRight);
 		m_pControllerListener->run();
@@ -240,7 +248,7 @@ void PlayerController::onKeyReleased(EventKeyboard::KeyCode keyCode, Event * eve
 				m_pControllerListener->idle();
 			}
 		}
-		else if (m_iYSpeed == VERTICAL_SPEED)	//如果此时为向上移动
+		else if (m_iYSpeed == m_pControllerListener->getYMaxSpeed())	//如果此时为向上移动
 		{
 			m_iYSpeed = -m_iYSpeed;	//则调整为向下移动
 		}
@@ -267,7 +275,7 @@ void PlayerController::onKeyReleased(EventKeyboard::KeyCode keyCode, Event * eve
 				m_pControllerListener->idle();
 			}
 		}
-		else if (m_iYSpeed == -VERTICAL_SPEED)
+		else if (m_iYSpeed == -m_pControllerListener->getYMaxSpeed())
 		{
 			m_iYSpeed = -m_iYSpeed;
 		}

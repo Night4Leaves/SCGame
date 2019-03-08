@@ -5,6 +5,11 @@
 		"HP" : 100,
 		"attack" : 10,
 		"money" : 100,
+		"xSpeed" : 6,
+		"ySpeed" : 6,
+		"actionName" : ["idle","run","attack","jump","hurt","death"],
+		"actionTime" : [0.25, 0.04, 0.1, 0.25, 0.1, 0.25],
+		"actionPlayTime" : [-1, -1, 1, 1, 1, 1],
 		"backpackItems" : 
 		{
 			"item01name" : "stone",
@@ -31,6 +36,11 @@
 		"HP" : 50,
 		"attack" : 5,
 		"money" : 30,
+		"xSpeed" : 6,
+		"ySpeed" : 6,
+		"actionName" : ["idle","run","attack","jump","hurt","death"],
+		"actionTime" : [0.25, 0.04, 0.1, 0.25, 0.1, 0.25],
+		"actionPlayTime" : [-1, -1, 1, 1, 1, 1],
 		"backpackItems" : 
 		{
 			"item01name" : "bear",
@@ -57,6 +67,11 @@
 		"HP" : 100,
 		"attack" : 20,
 		"money" : 365,
+		"xSpeed" : 6,
+		"ySpeed" : 6,
+		"actionName" : ["idle","run","attack","jump","hurt","death"],
+		"actionTime" : [0.25, 0.04, 0.1, 0.25, 0.1, 0.25],
+		"actionPlayTime" : [-1, -1, 1, 1, 1, 1],
 		"backpackItems" : 
 		{
 			"item01name" : "bear",

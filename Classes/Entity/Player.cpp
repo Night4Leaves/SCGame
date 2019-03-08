@@ -9,10 +9,10 @@ Player::~Player()
 {
 }
 
-Player * Player::create(const char* str_playerName)
+Player * Player::create(const PlayerData & playerData)
 {
 	Player *pRet = new(std::nothrow) Player();
-	if (pRet && pRet->init(str_playerName))
+	if (pRet && pRet->init(playerData))
 	{
 		pRet->autorelease();
 		return pRet;
@@ -25,33 +25,21 @@ Player * Player::create(const char* str_playerName)
 	}
 }
 
-bool Player::init(const char* str_playerName)
+bool Player::init(const PlayerData & playerData)
 {
-	m_strPlayerName = str_playerName;	//角色名称
-	std::string animationName = "";	//动画全称
-	Animation* animation = NULL;	//动画对象
-	auto num = m_strActionName.size();	//动作数量
+	CombatEntity::saveCombatEntityData(playerData);
 
-	//生成静态待机图对应的精灵
-	std::string waitAnimationName = StringUtils::format("%s_wait.png", str_playerName);
-	Sprite* sprite = Sprite::createWithSpriteFrameName(waitAnimationName.c_str());
-	this->bindSprite(sprite);
-
-	//生成角色动画并存储到动画缓存中
-	for (int i = 0; i < num; i++)
-	{
-		animationName = StringUtils::format("%s_%s", m_strPlayerName.c_str(), m_strActionName.at(i));
-		log("%s, %f, %d", animationName.c_str(), m_fActionTime[i], m_iActionPlayTime[i]);
-		animation = AnimationUtil::createAnimationWithSingleFrameName(animationName.c_str(), m_fActionTime[i], m_iActionPlayTime[i]);
-		AnimationCache::getInstance()->addAnimation(animation, animationName.c_str());
-	}
+	m_strPlayerName = playerData.str_playerName;
+	m_mapBackpackItems = playerData.map_backpackItems;
+	m_mapSkillList = playerData.map_skillList;
+	m_iLevel = playerData.i_level;
 
 	return true;
 }
 
 std::string Player::getSpriteName()
 {
-	return m_strPlayerName;
+	return m_strCharacterName;
 }
 
 void Player::setController(SCController * controller)
@@ -62,12 +50,12 @@ void Player::setController(SCController * controller)
 
 Size Player::getCollisionSize()
 {
-	if (m_sprite == nullptr)
+	if (m_pSprite == nullptr)
 	{
 		return Size(-1, -1);
 	}
 
-	return m_sprite->getContentSize();
+	return m_pSprite->getContentSize();
 }
 
 Vec2 Player::getTargetPosition()
@@ -75,9 +63,24 @@ Vec2 Player::getTargetPosition()
 	return this->getPosition();
 }
 
+int Player::getXMaxSpeed()
+{
+	return m_iXMaxSpeed;
+}
+
+int Player::getYMaxSpeed()
+{
+	return m_iYMaxSpeed;
+}
+
 void Player::setTargetPosition(Vec2 pos)
 {
 	this->setPosition(pos);
+}
+
+void Player::turnAround(bool isRight)
+{
+	m_pSprite->setFlipX(!isRight);
 }
 
 void Player::checkControllerStatus()
@@ -85,42 +88,22 @@ void Player::checkControllerStatus()
 	m_pPlayerController->checkControllerStatus();
 }
 
-void Player::turnAround(bool isRight)
-{
-	m_sprite->setFlipX(!isRight);
-}
-
-
 void Player::idle()
 {
-	//停止当前的动作
-	m_sprite->stopAllActions();
-	//获取已经做好的动画
-	Animation* animation = AnimationCache::getInstance()->getAnimation(StringUtils::format("%s_idle", m_strPlayerName.c_str()).c_str());
-	//生成动画动作
-	Animate* animate = Animate::create(animation);
-	//执行动画动作
-	m_sprite->runAction(animate);
+	CombatEntity::idle();
 }
 
 void Player::run()
 {
-	//停止当前的动作
-	m_sprite->stopAllActions();
-	//获取已经做好的动画
-	Animation* animation = AnimationCache::getInstance()->getAnimation(StringUtils::format("%s_run", m_strPlayerName.c_str()).c_str());
-	//生成动画动作
-	Animate* animate = Animate::create(animation);
-	//执行动画动作
-	m_sprite->runAction(animate);
+	CombatEntity::run();
 }
 
 void Player::attack()
 {
 	//停止当前的动作
-	m_sprite->stopAllActions();
+	m_pSprite->stopAllActions();
 	//获取已经做好的动画
-	Animation* attackAnimation = AnimationCache::getInstance()->getAnimation(StringUtils::format("%s_attack", m_strPlayerName.c_str()).c_str());
+	Animation* attackAnimation = AnimationCache::getInstance()->getAnimation(StringUtils::format("%s_attack", m_strCharacterName.c_str()).c_str());
 	//生成动画动作
 	Animate* attackAnimate = Animate::create(attackAnimation); 
 	//发出产生火球的消息
@@ -128,15 +111,15 @@ void Player::attack()
 	//回调检查控制器状态函数
 	auto callfunc = CallFunc::create(CC_CALLBACK_0(Player::checkControllerStatus, this));
 	Sequence* actionSequnence = Sequence::create(attackAnimate, sendAttackMsg, callfunc, nullptr);
-	m_sprite->runAction(actionSequnence);
+	m_pSprite->runAction(actionSequnence);
 }
 
 void Player::jump()
 {
 	//停止当前的动作
-	m_sprite->stopAllActions();
+	m_pSprite->stopAllActions();
 	//获取已经做好的动画
-	Animation* animation = AnimationCache::getInstance()->getAnimation(StringUtils::format("%s_jump", m_strPlayerName.c_str()).c_str());
+	Animation* animation = AnimationCache::getInstance()->getAnimation(StringUtils::format("%s_jump", m_strCharacterName.c_str()).c_str());
 	//生成动画动作
 	Animate* animate = Animate::create(animation);
 	//设置跳跃动作需要的坐标(此坐标值保证原地跳跃的可能)
@@ -150,31 +133,10 @@ void Player::jump()
 	//顺序动作，先执行跳跃行为，再执行回调
 	Sequence* sequence = Sequence::create(spawn, callfunc, nullptr);
 	//执行动作
-	m_sprite->runAction(sequence);
-}
-
-void Player::climb()
-{
-	//停止当前的动作
-	m_sprite->stopAllActions();
-	//获取已经做好的动画
-	Animation* animation = AnimationCache::getInstance()->getAnimation(StringUtils::format("%s_climb", m_strPlayerName.c_str()).c_str());
-	//生成动画动作
-	Animate* animate = Animate::create(animation);
-	//执行动画动作
-	m_sprite->runAction(animate);
+	m_pSprite->runAction(sequence);
 }
 
 void Player::hurt()
 {
-	m_sprite->stopAllActions();
-	Animation* animation = AnimationCache::getInstance()->getAnimation(StringUtils::format("%s_hurt", m_strPlayerName.c_str()).c_str());
-	Animate* animate = Animate::create(animation);
-	Blink* blink = Blink::create(0.8f, 5);
-	Spawn* spawn = Spawn::create(animate, blink, nullptr);
-	m_sprite->runAction(spawn);
-}
-
-void Player::death()
-{
+	CombatEntity::hurt();
 }

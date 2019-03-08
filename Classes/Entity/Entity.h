@@ -16,14 +16,8 @@ public:
 	 */
 	void bindSprite(Sprite* sprite);
 
-	/**
-	 *	获取角色碰撞体积
-	 *	@return Sprite的contentSize
-	 */
-	Size getCollisionSize();
-
 protected:
-	Sprite* m_sprite;
+	Sprite* m_pSprite;
 };
 
 #endif // !__ENTITY_H__

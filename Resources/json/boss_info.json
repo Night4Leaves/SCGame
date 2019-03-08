@@ -1,0 +1,19 @@
+[
+    {
+        "characterName" : "boss_01",
+        "HP" : 200,
+        "attack" : 30,
+        "money" : 50,
+        "xSpeed" : 6,
+        "ySpeed" : 6,
+        "actionName" : ["idle","run","attack","hurt"],
+		"actionTime" : [0.25, 0.2, 0.15, 0.1],
+        "actionPlayTime" : [-1, -1, 1, 1],
+        "firstSkillDamage" : 40,
+        "firstSkillCDTime" : 5,
+        "secondSkillDamage" : 50,
+        "secondSkillCDTime" : 8,
+        "thirdSkillDamage" : 35,
+        "thirdSkillCDTime" : 3
+    }
+]

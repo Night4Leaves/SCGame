@@ -1,12 +1,24 @@
 [
 	{
-		"characterName": "player_01",
-		"HP": 100,
-		"attack": 10
+		"characterName" : "player_01",
+		"HP" : 100,
+		"attack" : 10,
+		"money" : 0,
+		"xSpeed" : 6,
+		"ySpeed" : 6,
+		"actionName" : ["idle","run","attack","jump","hurt","death"],
+		"actionTime" : [0.25, 0.04, 0.1, 0.25, 0.1, 0.25],
+		"actionPlayTime" : [-1, -1, 1, 1, 1, 1]
 	},
 	{
-		"characterName": "player_02",
-		"HP": 90,
-		"attack": 15
+		"characterName" : "player_02",
+		"HP" : 90,
+		"attack" : 15,
+		"money" : 0,
+		"xSpeed" : 6,
+		"ySpeed" : 6,
+		"actionName" : ["idle","run","attack","jump","hurt","death"],
+		"actionTime" : [0.25, 0.04, 0.1, 0.25, 0.1, 0.25],
+		"actionPlayTime" : [-1, -1, 1, 1, 1, 1]
 	}
 ]

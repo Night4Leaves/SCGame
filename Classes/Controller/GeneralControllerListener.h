@@ -13,6 +13,11 @@ public:
 	virtual Vec2 getTargetPosition() = 0;
 	//获取角色碰撞体积
 	virtual Size getCollisionSize() = 0;
+	//获取角色X轴设定速度
+	virtual int getXMaxSpeed() = 0;
+	//获取角色Y轴设定速度
+	virtual int getYMaxSpeed() = 0;
+
 	/**
 	 *	设置角色坐标
 	 *	@pos 目标位置
@@ -28,9 +33,7 @@ public:
 	virtual void run() = 0;
 	virtual void attack() = 0;
 	virtual void jump() = 0;
-	virtual void climb() = 0;
 	virtual void hurt() = 0;
-	virtual void death() = 0;
 
 };
 

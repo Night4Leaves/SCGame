@@ -1,11 +1,14 @@
 [
     {
-        "monsterName" : "boss_01",
-        "Hp" : 100,
+        "characterName" : "boss_01",
+        "HP" : 100,
         "attack" : 10,
         "money" : 10,
-        "warningRange" : 50,
         "xSpeed" : 4,
-        "ySpeed" : 5
+        "ySpeed" : 5,
+        "actionName" : ["idle","run","attack","hurt"],
+		"actionTime" : [0.25, 0.2, 0.15, 0.1],
+        "actionPlayTime" : [-1, -1, 1, 1],
+        "warningRange" : 50
     }
 ]

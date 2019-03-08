@@ -2,8 +2,8 @@
 #ifndef __GAME_LAYER_H__
 #define __GAME_LAYER_H__
 
+#include "Util/JsonUtil.h"
 #include "cocos2d.h"
-#include "CustomizeStruct.h"
 
 USING_NS_CC;
 
@@ -22,8 +22,6 @@ public:
 	virtual void update(float dt);
 
 	void addAttackFlyingObject(Ref* pSender);
-
-	void setTestGameScene();
 
 	void setGameScene_1_1(PlayerData &playerData);
 

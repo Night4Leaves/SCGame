@@ -14,6 +14,9 @@
 
 #include "Entity/Player.h"
 #include "Entity/Monster.h"
+#include "Entity/Boss.h"
+#include "Entity/BossTianzhao.h"
+#include "Entity/CombatEntity.h"
 
 #include "Controller/PlayerController.h"
 
@@ -34,21 +37,32 @@ bool TestScene::init()
 {
 	do 
 	{
-		//TMXTiledMap* map = TMXTiledMap::create("map/test_map.tmx");
-		//this->addChild(map);
+		TMXTiledMap* map = TMXTiledMap::create("map/test_map.tmx");
+		this->addChild(map);
 
-		//Player* player = Player::create("player_01");
-		//this->addChild(player);
-		//player->setPosition(400, 300);
-		//player->idle();
-		////player->setMap(map);
+		PlayerData playerData;
+		playerData.str_playerName = "4_leaves";
+		playerData.str_characterName = "player_01";
+		playerData.i_HP = 10;
+		playerData.i_attack = 10;
+		playerData.i_xSpeed = 4;
+		playerData.i_ySpeed = 4;
+		playerData.vec_csActionName = { "idle","run","attack","jump","hurt","death" };
+		playerData.vec_dActionTime = { 0.25, 0.04, 0.1, 0.25, 0.1, 0.25 };
+		playerData.vec_iActionPlayTime = { -1, -1, 1, 1, 1, 1 };
 
-		//PlayerController* playerController = PlayerController::create();
-		//player->setController(playerController);
-		//this->addChild(playerController);
-		//playerController->setMap(map);
+		Player* player = Player::create(playerData);
+		this->addChild(player);
+		player->setPosition(400, 300);
+		player->idle();
+		//player->setMap(map);
 
-		//this->scheduleUpdate();
+		PlayerController* playerController = PlayerController::create();
+		player->setController(playerController);
+		this->addChild(playerController);
+		playerController->setMap(map);
+
+		this->scheduleUpdate();
 
 		//auto test = Sprite::createWithSpriteFrameName("backpack.png");
 		//this->addChild(test);
@@ -68,12 +82,22 @@ bool TestScene::init()
 
 		//HelloLua::create();
 
-		MonsterData monsterData = { "boss_01", 100, 10, 10, 100, 5, 5 };
+		/*MonsterData monsterData;
+		monsterData.str_characterName = "boss_01";
+		monsterData.i_HP = 10;
+		monsterData.i_attack = 10;
+		std::vector<const char*> vec_csActionName = { "idle","run","attack","hurt" };
+		monsterData.vec_csActionName = vec_csActionName;
+		float p_fActionTime[4] = { 0.25f, 0.2f, 0.15f, 0.1f };
+		monsterData.p_fActionTime = p_fActionTime;
+		int m_iActionPlayTime[4] = { -1, -1, 1, 1 };
+		monsterData.p_iActionPlayTime = m_iActionPlayTime;
+
 		Monster* monster = Monster::create(monsterData);
-		monster->setMonsterPosition(Point(400,300));
+		monster->setMonsterPosition(Point(400, 300));
 		monster->idle();
 		monster->setScale(0.35);
-		this->addChild(monster);
+		this->addChild(monster);*/
 
 	} while (0);
 
@@ -109,7 +133,7 @@ void TestScene::readArrayJson()
 	Json::Reader reader;
 	Json::Value root;
 
-	std::string data = FileUtils::getInstance()->getStringFromFile("json/player_info.json");
+	std::string data = FileUtils::getInstance()->getStringFromFile("json/test.json");
 
 	if (reader.parse(data, root, false) == true)
 	{
@@ -117,8 +141,13 @@ void TestScene::readArrayJson()
 		for (int i = 0; i < num; i++)
 		{
 			log("name = %s", root[i]["name"].asCString());
-			log("hp = %d", root[i]["hp"].asInt());
-			log("attack = %d", root[i]["attack"].asInt());
+			auto jsonTest = root[i]["array"];
+			int ii = jsonTest.size();
+			for (int iii = 0; iii < ii; ++iii)
+			{
+				log("%d", jsonTest[iii].asInt());
+			}
+			
 		}
 	}
 }

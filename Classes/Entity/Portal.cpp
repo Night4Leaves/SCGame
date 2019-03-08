@@ -33,7 +33,7 @@ void Portal::checkPlayerPoint(Ref * pSender)
 {
 	Point* playerPoint = (Point*)pSender;
 	Point portalPoint = this->getPosition();
-	Size portalSize = m_sprite->getContentSize();
+	Size portalSize = m_pSprite->getContentSize();
 	float f_scale = this->getScale();
 	
 	float f_XPlayer = playerPoint->x;

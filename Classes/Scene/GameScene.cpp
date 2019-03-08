@@ -8,8 +8,6 @@
 
 #include "Entity/Player.h"
 
-#include "Util/MapUtil.h"
-
 GameScene::GameScene()
 {
 }

@@ -4,8 +4,8 @@
 #include "Scene/InitialScene.h"
 #include "Util/MenuItemUtil.h"
 #include "Util/AnimationUtil.h"
+#include "Util/JsonUtil.h"
 #include "Entity/Player.h"
-#include "Json/json.h"
 #include "CustomizeEnum.h"
 #include "ShieldLayer.h"
 
@@ -13,7 +13,7 @@ PaneLayer::PaneLayer()
 	: m_isOpen(false)
 	, m_isLoadSavedata(true)
 {
-	this->readSaveDataJson(m_vecSavedataList, "json/savedata.json");
+	JsonUtil::getInstance()->readSavedata(m_vecSavedataList);
 }
 
 PaneLayer::~PaneLayer()
@@ -108,7 +108,7 @@ void PaneLayer::selectCharacter()
 	auto backColor = LayerColor::create(Color4B::BLACK);
 	this->addChild(backColor);
 
-	this->readPlayerJson(m_vecCharacterList, "json/player_info.json");
+	JsonUtil::getInstance()->readPlayerInfo(m_vecCharacterList);
 
 	auto menu = Menu::create();
 
@@ -271,85 +271,6 @@ void PaneLayer::openBackpack()
 	this->addChild(test);
 	test->setPosition(400, 300);
 	test->setScale(0.5);
-}
-
-void PaneLayer::readPlayerJson(std::vector<PlayerData>& vec_playerInfoList, const char* fileName)
-{
-	Json::Reader reader;
-	Json::Value root;
-
-	std::string data = FileUtils::getInstance()->getStringFromFile(fileName);
-
-	if (reader.parse(data, root, false) == true)
-	{
-		int num = root.size();
-		for (int i = 0; i < num; i++)
-		{
-			PlayerData player = { 
-				"",
-				root[i]["characterName"].asCString(),
-				root[i]["HP"].asInt() ,
-				root[i]["attack"].asInt() };
-
-			player.map_skillList["dynamics"] = true;
-			player.map_skillList["neutralization"] = false;
-			player.map_skillList["dynaopticsmics"] = false;
-			player.map_skillList["electromagnetism"] = false;
-			player.map_skillList["chemistry"] = false;
-			player.map_skillList["battery"] = false;
-
-			vec_playerInfoList.push_back(player);
-		}
-	}
-
-}
-
-void PaneLayer::readSaveDataJson(std::vector<PlayerData>& vec_playerInfoList, const char * fileName)
-{
-	Json::Reader reader;
-	Json::Value root;
-
-	std::string data = FileUtils::getInstance()->getStringFromFile(fileName);
-
-	if (reader.parse(data, root, false) == true)
-	{
-		int num = root.size();
-		for (int i = 0; i < num; i++)
-		{
-			PlayerData player = {
-				root[i]["playerName"].asCString(),
-				root[i]["characterName"].asCString() ,
-				root[i]["HP"].asInt(),
-				root[i]["attack"].asInt(),
-				root[i]["money"].asInt()
-			};
-
-			int backpackArraySize = root[i]["backpackItems"].size();
-			int backpackSize = backpackArraySize / 2;
-
-			for (int ii = 1; ii < backpackSize + 1; ++ii)
-			{
-				std::string itemNamePIN = StringUtils::format("item%02dname", ii);
-				std::string itemNumberPIN = StringUtils::format("item%02dnum", ii);
-				
-				const char* itemName = root[i]["backpackItems"][itemNamePIN].asCString();
-				int itemNumber = root[i]["backpackItems"][itemNumberPIN].asInt();
-
-				player.map_backpackItems[itemName] = itemNumber;
-			}
-
-			player.map_skillList["dynamics"] = root[i]["skillList"]["dynamics"].asBool();
-			player.map_skillList["neutralization"] = root[i]["skillList"]["neutralization"].asBool();
-			player.map_skillList["dynaopticsmics"] = root[i]["skillList"]["optics"].asBool();
-			player.map_skillList["electromagnetism"] = root[i]["skillList"]["electromagnetism"].asBool();
-			player.map_skillList["chemistry"] = root[i]["skillList"]["chemistry"].asBool();
-			player.map_skillList["battery"] = root[i]["skillList"]["battery"].asBool();
-
-			player.i_level = root[i]["level"].asInt();
-
-			vec_playerInfoList.push_back(player);
-		}
-	}
 }
 
 MenuItemSprite * PaneLayer::createCharacterSelectItem(const std::vector<PlayerData>& vec_characterInfoList, int i, const SEL_MenuHandler & selector, bool is_savedata)

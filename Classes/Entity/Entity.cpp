@@ -10,11 +10,7 @@ Entity::~Entity()
 
 void Entity::bindSprite(Sprite * sprite)
 {
-	m_sprite = sprite;
-	this->addChild(m_sprite);
+	m_pSprite = sprite;
+	this->addChild(m_pSprite);
 }
 
-Size Entity::getCollisionSize()
-{
-	return m_sprite->getContentSize();
-}

@@ -23,9 +23,6 @@ public:
 private:
 	void showPaneLayer(Ref* pSender);
 
-	void readPlayerJson(std::vector<PlayerData> &vec_playerInfoList, const char* fileName);
-	void readSaveDataJson(std::vector<PlayerData> &vec_playerInfoList, const char* fileName);
-
 	void openStore();
 	void startPause();
 	void selectGameScene();
@@ -52,8 +49,6 @@ private:
 	MenuItemSprite* createCharacterSelectItem(const std::vector<PlayerData> &vec_characterInfoList, int i, const SEL_MenuHandler &selector, bool is_savedata);
 
 private:
-	const char* m_pPlayer;
-
 	bool m_isOpen;
 	bool m_isLoadSavedata;
 

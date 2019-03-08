@@ -7,23 +7,42 @@
 USING_NS_CC;
 
 /**
- *	玩家信息
- *	@str_playerName	玩家名
- *	@str_characterName	角色名
- *	@i_hp	角色血量
- *	@i_attack	角色攻击力
- *	@i_money	角色分数/金钱
- *	@map_backpackItems	背包物品
- *	@map_skillList	技能列表
- *	@i_level	等级(解锁情况)
- */
-struct PlayerData
+*	作战实体信息
+*	@str_characterName角色名
+*	@i_hp	角色血量
+*	@i_attack	角色攻击力
+*	@i_money	角色分数/金钱
+*	@i_xSpeed	X轴移动速度
+*	@i_ySpeed	Y轴移动速度
+*	@vec_csActionName	角色动作名
+*	@p_fActionTime		动画帧间隔时间
+*	@p_iActionPlayTime	动画重复次数
+*	@b_isMonster	这个角色是否为怪物
+*/
+struct CombatEntityData
 {
-	std::string str_playerName;
 	std::string str_characterName;
 	int i_HP;
 	int i_attack;
 	int i_money = 0;
+	int i_xSpeed = 0;
+	int i_ySpeed = 0;
+	std::vector<std::string> vec_csActionName;
+	std::vector<double> vec_dActionTime;
+	std::vector<int> vec_iActionPlayTime;
+	bool b_isMonster = true;
+};
+
+/**
+ *	玩家信息
+ *	@str_playerName	玩家名
+ *	@map_backpackItems	背包物品
+ *	@map_skillList	技能列表
+ *	@i_level	等级(解锁情况)
+ */
+struct PlayerData : CombatEntityData
+{
+	std::string str_playerName;
 	std::map<std::string, int> map_backpackItems;
 	std::map<std::string, bool> map_skillList;
 	int i_level = 1;
@@ -31,23 +50,30 @@ struct PlayerData
 
 /**
  *	怪物信息
- *	@str_monsterName	怪物名
- *	@i_hp	怪物血量
- *	@i_attack	怪物攻击力
- *	@i_money	击败怪物后获得的分数/金钱
  *	@i_warningRange	怪物警戒范围
- *	@i_xSpeed	X轴移动速度
- *	@i_ySpeed	Y轴移动速度
  */
-struct MonsterData
+struct MonsterData : CombatEntityData
 {
-	std::string str_monsterName;
-	int i_HP;
-	int i_attack;
-	int i_money = 0;
 	int i_warningRange = 0;
-	int i_xSpeed = 0;
-	int i_ySpeed = 0;
+};
+
+/**
+*	Boss信息
+*	@i_firstSkill	第一技能伤害
+*	@i_firstSkillCDTime		第一技能冷却时间
+*	@i_secondSkill	第二技能伤害
+*	@i_secondSkillCDTime	第二技能冷却时间
+*	@i_thirdSkill	第三技能伤害
+*	@i_thirdSkillCDTime		第三技能冷却时间
+*/
+struct BossData : CombatEntityData
+{
+	int i_firstSkillDamage = 0;
+	int i_firstSkillCDTime = 0;
+	int i_secondSkillDamage = 0;
+	int i_secondSkillCDTime = 0;
+	int i_thirdSkillDamage = 0;
+	int i_thirdSkillCDTime = 0;
 };
 
 /**

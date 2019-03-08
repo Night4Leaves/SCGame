@@ -73,7 +73,7 @@ bool MainScene::init(PlayerData &playerData)
 		m_pNPCLayer->setMainSceneNPC(objGroup);
 
 		//创建角色
-		Player* player = Player::create(playerData.str_characterName.c_str());
+		Player* player = Player::create(playerData);
 
 		ValueMap playerPoint = objGroup->getObject("player");
 

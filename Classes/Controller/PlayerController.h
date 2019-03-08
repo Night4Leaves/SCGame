@@ -4,9 +4,6 @@
 
 #include "SCController.h"
 
-#define HORIZONTAL_SPPED 5
-#define VERTICAL_SPEED 4 
-
 class PlayerController : public SCController
 {
 public:

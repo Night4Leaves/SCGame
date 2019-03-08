@@ -3,7 +3,6 @@
 #include "Entity/Monster.h"
 #include "Entity/AttackFlyingObject.h"
 #include "Controller/PlayerController.h"
-#include "CustomizeStruct.h"
 
 GameLayer::GameLayer()
 {
@@ -72,22 +71,6 @@ void GameLayer::addAttackFlyingObject(Ref * pSender)
 	}
 }
 
-void GameLayer::setTestGameScene()
-{
-	TMXTiledMap* map = TMXTiledMap::create("map/test_map.tmx");
-	this->addChild(map);
-
-	Player* player = Player::create("player_01");
-	this->addChild(player);
-	player->setPosition(400, 300);
-	player->idle();
-	
-	PlayerController* playerController = PlayerController::create();
-	player->setController(playerController);
-	this->addChild(playerController);
-	playerController->setMap(map);
-}
-
 void GameLayer::setGameScene_1_1(PlayerData & playerData)
 {
 	m_pMap = TMXTiledMap::create("map/map_1-1.tmx");
@@ -100,7 +83,8 @@ void GameLayer::setGameScene_1_1(PlayerData & playerData)
 
 	TMXObjectGroup* objGroup = m_pMap->getObjectGroup("objects");
 
-	MonsterData monsterData = { "boss_01", 100, 10, 10, 50, 5, 5 };
+	std::vector<MonsterData> monsterInfoList;
+	JsonUtil::getInstance()->readMonsterInfo(monsterInfoList);
 
 	int i = 1;
 	while (true)
@@ -112,8 +96,8 @@ void GameLayer::setGameScene_1_1(PlayerData & playerData)
 		float monsterX = monsterPoint.at("x").asFloat();
 		float monsterY = monsterPoint.at("y").asFloat();
 
-		Monster* monster = Monster::create(monsterData);
-		monster->setPosition(Vec2(monsterX, monsterY));
+		Monster* monster = Monster::create(monsterInfoList[0]);
+		monster->setMonsterPosition(Vec2(monsterX, monsterY));
 		monster->idle();
 		monster->setScale(0.35);
 		this->addChild(monster);
@@ -124,8 +108,8 @@ void GameLayer::setGameScene_1_1(PlayerData & playerData)
 	float bossX = bossPoint.at("x").asFloat();
 	float bossY = bossPoint.at("y").asFloat();
 
-	Monster* boss = Monster::create(monsterData);
-	boss->setPosition(Vec2(bossX, bossY));
+	Monster* boss = Monster::create(monsterInfoList[0]);
+	boss->setMonsterPosition(Vec2(bossX, bossY));
 	boss->idle();
 	this->addChild(boss);
 
@@ -136,7 +120,7 @@ void GameLayer::setGameScene_1_1(PlayerData & playerData)
 
 	m_sctPlayerData = playerData;
 
-	m_pPlayer = Player::create(m_sctPlayerData.str_characterName.c_str());
+	m_pPlayer = Player::create(m_sctPlayerData);
 	m_pPlayer->setPosition(Vec2(playerX, playerY));
 	m_pPlayer->idle();
 	this->addChild(m_pPlayer);
@@ -148,7 +132,7 @@ void GameLayer::setGameScene_1_1(PlayerData & playerData)
 
 	m_pPlayerController->setMap(m_pMap);
 
-	AtkFlyObjIniInfo fireballInfo = { "fireball", Vec2(HORIZONTAL_DISTANCE, 0), Vec2(HORIZONTAL_SPPED + 1, 0) };
+	AtkFlyObjIniInfo fireballInfo = { "fireball", Vec2(HORIZONTAL_DISTANCE, 0), Vec2(m_sctPlayerData.i_xSpeed + 1, 0) };
 	for (int i = 0; i < 3; i++)
 	{
 		AttackFlyingObject* flyingObject = AttackFlyingObject::create(fireballInfo);

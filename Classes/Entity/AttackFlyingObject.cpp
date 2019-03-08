@@ -53,7 +53,7 @@ void AttackFlyingObject::update(float dt)
 		this->stopFlying(NULL);
 	}
 
-	float spriteWidth = m_sprite->getContentSize().width;
+	float spriteWidth = m_pSprite->getContentSize().width;
 
 	this->setPosition(pos);
 
@@ -93,8 +93,8 @@ void AttackFlyingObject::setFlyingInformation(AtkFlyObjPosInfo & objectFlyingInf
 	objectFlyingInfo.vec2_flightDistance = Point(m_fXFlightDistance, m_fYFlightDistance);
 	NotificationCenter::getInstance()->postNotification("attack_flying_object_point", (Ref*)&objectFlyingInfo);
 
-	m_sprite->setFlipX(!m_bIsRight);
-	m_sprite->setOpacity(255);
+	m_pSprite->setFlipX(!m_bIsRight);
+	m_pSprite->setOpacity(255);
 	m_bIsUserEffective = true;
 	this->setPosition(m_vec2CurrentPoint);
 
@@ -104,7 +104,7 @@ void AttackFlyingObject::setFlyingInformation(AtkFlyObjPosInfo & objectFlyingInf
 void AttackFlyingObject::stopFlying(Ref * pSender)
 {
 	m_fXSpeed = 0;
-	m_sprite->setOpacity(0);
+	m_pSprite->setOpacity(0);
 	m_bIsUserEffective = false;
 	this->unscheduleUpdate();
 	return;

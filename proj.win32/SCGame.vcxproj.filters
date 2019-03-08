@@ -34,6 +34,9 @@
     <Filter Include="src\Json">
       <UniqueIdentifier>{a8b09e56-8ebf-4863-91f1-e13e5141a4ee}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Entity\Character\Boss">
+      <UniqueIdentifier>{02cb032b-86cd-409c-88ce-cab906056138}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -80,9 +83,6 @@
     </ClCompile>
     <ClCompile Include="..\Classes\Controller\PlayerController.cpp">
       <Filter>src\Controller</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Util\MapUtil.cpp">
-      <Filter>src\Utils</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Layer\GameLayer.cpp">
       <Filter>src\Layer</Filter>
@@ -138,6 +138,15 @@
     <ClCompile Include="..\Classes\HelloWorldScene.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\Entity\Boss.cpp">
+      <Filter>src\Entity\Character\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Entity\CombatEntity.cpp">
+      <Filter>src\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Util\JsonUtil.cpp">
+      <Filter>src\Utils</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -190,9 +199,6 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Controller\GeneralControllerListener.h">
       <Filter>src\Controller</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Util\MapUtil.h">
-      <Filter>src\Utils</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Layer\GameLayer.h">
       <Filter>src\Layer</Filter>
@@ -268,6 +274,18 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Layer\ShieldLayer.h">
       <Filter>src\Layer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Entity\Boss.h">
+      <Filter>src\Entity\Character\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Entity\BossTianzhao.h">
+      <Filter>src\Entity\Character\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Entity\CombatEntity.h">
+      <Filter>src\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Util\JsonUtil.h">
+      <Filter>src\Utils</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

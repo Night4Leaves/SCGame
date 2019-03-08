@@ -154,6 +154,8 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\Controller\SCController.cpp" />
     <ClCompile Include="..\Classes\CsvData.cpp" />
     <ClCompile Include="..\Classes\Entity\AttackFlyingObject.cpp" />
+    <ClCompile Include="..\Classes\Entity\Boss.cpp" />
+    <ClCompile Include="..\Classes\Entity\CombatEntity.cpp" />
     <ClCompile Include="..\Classes\Entity\Entity.cpp" />
     <ClCompile Include="..\Classes\Entity\FlyingObject.cpp" />
     <ClCompile Include="..\Classes\Entity\Monster.cpp" />
@@ -179,7 +181,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\Util\AnimationUtil.cpp" />
     <ClCompile Include="..\Classes\Util\CsvAnalyzeUtil.cpp" />
     <ClCompile Include="..\Classes\Util\CsvLoadUtil.cpp" />
-    <ClCompile Include="..\Classes\Util\MapUtil.cpp" />
+    <ClCompile Include="..\Classes\Util\JsonUtil.cpp" />
     <ClCompile Include="..\Classes\Util\MenuItemUtil.cpp" />
     <ClCompile Include="..\Classes\Util\ResourcesLoadingUtil.cpp" />
     <ClCompile Include="main.cpp" />
@@ -193,6 +195,9 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\CustomizeEnum.h" />
     <ClInclude Include="..\Classes\CustomizeStruct.h" />
     <ClInclude Include="..\Classes\Entity\AttackFlyingObject.h" />
+    <ClInclude Include="..\Classes\Entity\Boss.h" />
+    <ClInclude Include="..\Classes\Entity\BossTianzhao.h" />
+    <ClInclude Include="..\Classes\Entity\CombatEntity.h" />
     <ClInclude Include="..\Classes\Entity\Entity.h" />
     <ClInclude Include="..\Classes\Entity\FlyingObject.h" />
     <ClInclude Include="..\Classes\Entity\Monster.h" />
@@ -224,7 +229,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\Util\AnimationUtil.h" />
     <ClInclude Include="..\Classes\Util\CsvAnalyzeUtil.h" />
     <ClInclude Include="..\Classes\Util\CsvLoadUtil.h" />
-    <ClInclude Include="..\Classes\Util\MapUtil.h" />
+    <ClInclude Include="..\Classes\Util\JsonUtil.h" />
     <ClInclude Include="..\Classes\Util\MenuItemUtil.h" />
     <ClInclude Include="..\Classes\Util\ResourcesLoadingUtil.h" />
     <ClInclude Include="main.h" />
