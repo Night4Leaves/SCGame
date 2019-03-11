@@ -18,7 +18,7 @@
 		"xSpeed" : 6,
 		"ySpeed" : 6,
 		"actionName" : ["idle","run","attack","jump","hurt","death"],
-		"actionTime" : [0.25, 0.04, 0.1, 0.25, 0.1, 0.25],
+		"actionTime" : [0.25, 0.04, 0.1, 0.29, 0.1, 0.25],
 		"actionPlayTime" : [-1, -1, 1, 1, 1, 1]
 	}
 ]

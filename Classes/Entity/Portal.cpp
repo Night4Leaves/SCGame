@@ -23,7 +23,7 @@ bool Portal::init()
 	NotificationCenter::getInstance()->addObserver(
 		this,
 		callfuncO_selector(Portal::checkPlayerPoint),
-		"player_point",
+		"player_check_point",
 		NULL);
 
 	return true;
@@ -34,23 +34,23 @@ void Portal::checkPlayerPoint(Ref * pSender)
 	Point* playerPoint = (Point*)pSender;
 	Point portalPoint = this->getPosition();
 	Size portalSize = m_pSprite->getContentSize();
-	float f_scale = this->getScale();
+	float scale = this->getScale();
 	
-	float f_XPlayer = playerPoint->x;
-	float f_YPlayer = playerPoint->y;
-	poslog("player", f_XPlayer, f_YPlayer);
+	float xPlayer = playerPoint->x;
+	float yPlayer = playerPoint->y;
+	poslog("player", xPlayer, yPlayer);
 
-	float f_XPortal = portalPoint.x;
-	float f_YPortal = portalPoint.y;
-	poslog("portal pos", f_XPortal, f_YPortal);
+	float xPortal = portalPoint.x;
+	float yPortal = portalPoint.y;
+	poslog("portal pos", xPortal, yPortal);
 
-	float f_portalWidth = portalSize.width;
-	float f_portalHeight = portalSize.height;
-	poslog("portal size", f_portalWidth * f_scale, f_portalHeight * f_scale);
+	float portalWidth = portalSize.width * scale;
+	float portalHeight = portalSize.height * scale;
+	poslog("portal size", portalWidth, portalHeight);
 
-	if ((f_XPlayer - (f_XPortal - f_portalWidth * 0.5 * f_scale)) > 0
-		&& (f_XPlayer - (f_XPortal + f_portalWidth * 0.5 * f_scale)) < 0
-		&& (f_YPlayer - (f_YPortal - f_portalHeight * 0.5 * f_scale - 20)) > 0)
+	if ((xPlayer - (xPortal - portalWidth * 0.5)) > 0
+		&& (xPlayer - (xPortal + portalWidth * 0.5)) < 0
+		&& (yPlayer - (yPortal - portalHeight * 0.5 - 20)) > 0)
 	{
 		log("activate select game scene");
 		NotificationCenter::getInstance()->postNotification("show_PaneLayer", (Ref*)en_paneMsg_selectGameScene);

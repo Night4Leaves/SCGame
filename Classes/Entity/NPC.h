@@ -10,14 +10,16 @@ public:
 	static NPC* create(const NPCSetInfo& npcSetInfo);
 	virtual bool init(const NPCSetInfo& npcSetInfo);
 
+	void checkPlayerPoint(Ref* pSender);
+
 private:
 	NPC();
 	~NPC();
 
 	//NPC名字
-	const char* m_strNPCName;
+	std::string m_strNPCName;
 	//NPC种类
-	NPCType m_NPCType;
+	NPCType m_enumNPCType;
 };
 
 #endif // !__NPC_H__

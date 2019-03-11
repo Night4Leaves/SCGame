@@ -19,7 +19,6 @@ public:
 
 	CREATE_FUNC(GameLayer);
 	virtual bool init();
-	virtual void update(float dt);
 
 	void addAttackFlyingObject(Ref* pSender);
 
@@ -31,7 +30,9 @@ private:
 	PlayerData m_sctPlayerData;
 	PlayerController* m_pPlayerController;
 	Vector<FlyingObject*> vector_pAttackFlyingObject;
-	int i_flyingObjectFlag;
+
+	int m_iFlyingObjectFlag;
+	int m_iMonsterWarningRange;
 
 };
 

@@ -18,13 +18,6 @@ PlayerController::~PlayerController()
 
 bool PlayerController::init()
 {
-	m_iXSpeed = 0;
-	m_iYSpeed = 0;
-	m_bIsRight = true;
-	m_bIsLock = false;
-	m_iHorizontalRun = 0;
-	m_iVerticalRun = 0;
-
 	this->scheduleUpdate();
 
 	//注册键盘监听事件
@@ -211,7 +204,7 @@ void PlayerController::onKeyPressed(EventKeyboard::KeyCode keyCode, Event * even
 
 		break;
 	case EventKeyboard::KeyCode::KEY_L:
-		NotificationCenter::getInstance()->postNotification("player_point", (Ref*)&(m_pControllerListener->getTargetPosition()));
+		NotificationCenter::getInstance()->postNotification("player_check_point", (Ref*)&(m_pControllerListener->getTargetPosition()));
 		break;
 	default:
 		break;
@@ -414,6 +407,7 @@ void PlayerController::setViewPointByPlayer(Point pos)
 	Point playerPos = Point(x, y);
 
 	m_pControllerListener->setTargetPosition(playerPos);
+	NotificationCenter::getInstance()->postNotification("player_point", (Ref*)&playerPos);
 
 	//如果主角坐标位于屏幕中点的左下方，则取屏幕中点坐标，否则取主角坐标
 	x = std::max(pos.x, visibleSize.width / 2);

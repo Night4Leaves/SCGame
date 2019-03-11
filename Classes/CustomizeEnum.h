@@ -6,7 +6,8 @@ enum PaneLayerStatus
 {
 	en_paneMsg_selectCharacter,
 	en_paneMsg_loadFile,
-	en_paneMsg_openStore,
+	en_paneMsg_openItemStore,
+	en_paneMsg_openSkillStore,
 	en_paneMsg_pause,
 	en_paneMsg_selectGameScene,
 	en_paneMsg_openBackpack

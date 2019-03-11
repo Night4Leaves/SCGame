@@ -88,21 +88,22 @@ enum NPCType
 
 /**
  *	NPC设置信息
- *	@cs_name	NPC名字
- *	@npcType	NPC种类
+ *	@str_npcName	NPC名字
+ *	@enum_npcTypes	NPC种类
+ *	@f_scale	缩放倍数
  *	@i_num	NPC动画帧数量
  *	@f_delay	NPC动画帧每帧间隔
  *	@i_loops	动画循环次数
- *	@f_scale	缩放倍数
  */
 struct NPCSetInfo
 {
-	const char* cs_name;
-	NPCType npcType = NPCType::normal;
+	std::string str_npcName;
+	NPCType enum_npcType = NPCType::normal;
+	float f_scale = 1;
 	int i_num = 1;
 	float f_delay = 0.1;
 	int i_loops = -1;
-	float f_scale = 1;
+	
 };
 
 /**

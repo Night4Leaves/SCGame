@@ -39,7 +39,6 @@ bool ScoreCountLayer::init(int number)
 			for (int ii = 0; ii < 10; ++ii)
 			{
 				std::string numberPictrueName = StringUtils::format("number_%d.png", ii);
-				log("%s", numberPictrueName.c_str());
 
 				Sprite* numSprite = Sprite::createWithSpriteFrameName(numberPictrueName.c_str());
 				f_width = numSprite->getContentSize().width;

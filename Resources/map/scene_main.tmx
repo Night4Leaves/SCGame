@@ -5,19 +5,19 @@
   <object id="1" name="player" x="57" y="540">
    <point/>
   </object>
-  <object id="2" name="NPC_01" x="90" y="455">
+  <object id="2" name="NPC_01" x="92" y="480">
    <point/>
   </object>
-  <object id="3" name="NPC_02" x="200" y="455">
+  <object id="3" name="NPC_02" x="204" y="480">
    <point/>
   </object>
-  <object id="4" name="NPC_03" x="345" y="455">
+  <object id="4" name="NPC_03" x="343" y="480">
    <point/>
   </object>
-  <object id="5" name="NPC_04" x="567" y="455">
+  <object id="5" name="NPC_04" x="567" y="480">
    <point/>
   </object>
-  <object id="6" name="NPC_05" x="698" y="455">
+  <object id="6" name="NPC_05" x="699" y="480">
    <point/>
   </object>
   <object id="7" name="portal" x="470" y="440">

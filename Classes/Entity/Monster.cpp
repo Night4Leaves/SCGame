@@ -9,6 +9,7 @@ Monster::Monster()
 	, m_bIsAttack(false)
 	, m_bIsAttacked(false)
 	, m_bIsDeath(false)
+	, m_bIsBattle(false)
 	, m_fStateTime(0.0)
 {
 	srand((unsigned)time(nullptr));
@@ -40,11 +41,17 @@ bool Monster::init(const MonsterData & monsterData)
 	CombatEntity::saveCombatEntityData(monsterData);
 
 	m_iWarningRange = monsterData.i_warningRange;
-
+	
 	NotificationCenter::getInstance()->addObserver(
 		this,
 		callfuncO_selector(Monster::checkAttckFlyingObjectPath),
 		"attack_flying_object_point",
+		NULL);
+
+	NotificationCenter::getInstance()->addObserver(
+		this,
+		callfuncO_selector(Monster::checkDistanceWithPlayer),
+		"player_point",
 		NULL);
 
 	this->scheduleUpdate();
@@ -54,27 +61,30 @@ bool Monster::init(const MonsterData & monsterData)
 
 void Monster::update(float dt)
 {
-	m_fStateTime += dt;
-	
-	if (m_fStateTime > 5)
+	if (!m_bIsBattle)
 	{
-		m_fStateTime = 0;
+		m_fStateTime += dt;
 
-		int r = rand() % 2;
-
-		if (r == 1)
+		if (m_fStateTime > 5)
 		{
-			m_iXSpeed = m_iXMaxSpeed;
-			m_bIsRight = true;
-		}
-		else
-		{
-			m_iXSpeed = -m_iXMaxSpeed;
-			m_bIsRight = false;
-		}
+			m_fStateTime = 0;
 
-		m_pSprite->setFlipX(m_bIsRight);
-		this->run();
+			int r = rand() % 2;
+
+			if (r == 1)
+			{
+				m_iXSpeed = m_iXMaxSpeed;
+				m_bIsRight = true;
+			}
+			else
+			{
+				m_iXSpeed = -m_iXMaxSpeed;
+				m_bIsRight = false;
+			}
+
+			m_pSprite->setFlipX(m_bIsRight);
+			this->run();
+		}
 	}
 
 	Point pos = this->getPosition();
@@ -94,14 +104,6 @@ void Monster::update(float dt)
 	}
 
 	this->setPosition(pos);
-
-	/*if (m_bIsAttacked)
-	{
-		m_iXSpeed = 0;
-		m_iYspeed = 0;
-
-		this->hurt();
-	}	*/
 }
 
 void Monster::setMonsterPosition(Point pos)
@@ -118,7 +120,7 @@ void Monster::checkAttckFlyingObjectPath(Ref * pSender)
 	}
 
 	FlyingObjectPositionInformation* flyingObjectInfo = (FlyingObjectPositionInformation*)pSender;
-	Point vec2_monsterPoint = m_pSprite->getPosition();
+	Point vec2_monsterPoint = this->getPosition();
 
 	float f_xMonster = vec2_monsterPoint.x;
 	float f_yMonster = vec2_monsterPoint.y;
@@ -170,8 +172,8 @@ void Monster::checkBeHit(Ref * pSender)
 	float objectX = objectPoint->x;
 	float objectY = objectPoint->y;
 
-	Point monsterPoint = m_pSprite->getPosition();
-	Size monsterSize = m_pSprite->getContentSize() * m_pSprite->getScale();
+	Point monsterPoint = this->getPosition();
+	Size monsterSize = m_pSprite->getContentSize() * this->getScale();
 
 	float monsterYCheck = monsterPoint.y + monsterSize.height / 2;
 
@@ -188,4 +190,47 @@ void Monster::checkBeHit(Ref * pSender)
 		NotificationCenter::getInstance()->postNotification("stop_flying", NULL);
 		this->hurt();
 	}
+}
+
+void Monster::checkDistanceWithPlayer(Ref * pSender)
+{
+	Point* playerPoint = (Point*)pSender;
+
+	if (playerPoint->x < m_pointOriginalPos.x - m_iWarningRange
+		|| playerPoint->x > m_pointOriginalPos.x + m_iWarningRange)
+	{
+		m_bIsBattle = false;
+		return;
+	}
+
+	//if (playerPoint->y < m_pointOriginalPos.y - m_iWarningRange
+	//	|| playerPoint->y > m_pointOriginalPos.y + m_iWarningRange)
+	//{
+	//	m_bIsBattle = false;
+	//	return;
+	//}
+
+	Point monsterPoint = this->getPosition();
+
+	if (playerPoint->x < monsterPoint.x)
+	{
+		m_iXSpeed = -m_iXMaxSpeed;
+		m_bIsRight = false;
+	}
+	else if(playerPoint->x > monsterPoint.x)
+	{
+		m_iXSpeed = m_iXMaxSpeed;
+		m_bIsRight = true;
+	}
+
+	//if (playerPoint->y > monsterPoint.y)
+	//{
+	//	m_iYspeed = m_iYMaxSpeed;
+	//}
+	//else if (playerPoint->y < monsterPoint.y)
+	//{
+	//	m_iYspeed = -m_iYMaxSpeed;
+	//}
+
+	m_bIsBattle = true;
 }

@@ -5,6 +5,8 @@
 #include "Controller/PlayerController.h"
 
 GameLayer::GameLayer()
+	: m_iFlyingObjectFlag(0)
+	, m_iMonsterWarningRange(0)
 {
 }
 
@@ -18,14 +20,11 @@ bool GameLayer::init()
 	do {
 		CC_BREAK_IF(!Layer::init());
 
-		i_flyingObjectFlag = 0;
-
 		NotificationCenter::getInstance()->addObserver(
 			this,
 			callfuncO_selector(GameLayer::addAttackFlyingObject),
 			"set_attack_flying_object",
 			NULL);
-
 		
 		return true;
 	} while (0);
@@ -33,11 +32,6 @@ bool GameLayer::init()
 	log("GameLayer initialize failed!");
 
 	return false;
-}
-
-void GameLayer::update(float dt)
-{
-	
 }
 
 void GameLayer::addAttackFlyingObject(Ref * pSender)
@@ -61,13 +55,13 @@ void GameLayer::addAttackFlyingObject(Ref * pSender)
 
 	AtkFlyObjPosInfo temp = { Point(f_x, f_y), b_isRight, point_playerPoint, Point() };
 
-	AttackFlyingObject* p_flyingObject = (AttackFlyingObject*)vector_pAttackFlyingObject.at(i_flyingObjectFlag);
+	AttackFlyingObject* p_flyingObject = (AttackFlyingObject*)vector_pAttackFlyingObject.at(m_iFlyingObjectFlag);
 	p_flyingObject->setFlyingInformation(temp);
 
-	i_flyingObjectFlag++;
-	if (i_flyingObjectFlag == 3)
+	m_iFlyingObjectFlag++;
+	if (m_iFlyingObjectFlag == 3)
 	{
-		i_flyingObjectFlag = 0;
+		m_iFlyingObjectFlag = 0;
 	}
 }
 

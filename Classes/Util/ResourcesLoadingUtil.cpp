@@ -5,14 +5,14 @@ void ResourcesLoadingUtil::preloadResources()
 	SpriteFrameCache* spriteFrameCache = SpriteFrameCache::getInstance();
 
 	spriteFrameCache->addSpriteFramesWithFile("UI.plist");
-	spriteFrameCache->addSpriteFramesWithFile("NPC.plist");
 	spriteFrameCache->addSpriteFramesWithFile("TP.plist");
 	spriteFrameCache->addSpriteFramesWithFile("monster.plist");
 	spriteFrameCache->addSpriteFramesWithFile("text.plist");
 	spriteFrameCache->addSpriteFramesWithFile("sceneitem.plist");
 	spriteFrameCache->addSpriteFramesWithFile("Number.plist");
+	spriteFrameCache->addSpriteFramesWithFile("attack.plist");
 
-	spriteFrameCache->addSpriteFramesWithFile("player/player_01.plist");
-	spriteFrameCache->addSpriteFramesWithFile("player/player_02.plist");
-	spriteFrameCache->addSpriteFramesWithFile("player/attack.plist");
+	spriteFrameCache->addSpriteFramesWithFile("character/player_01.plist");
+	spriteFrameCache->addSpriteFramesWithFile("character/player_02.plist");
+	spriteFrameCache->addSpriteFramesWithFile("character/NPC.plist");
 }

@@ -155,6 +155,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\CsvData.cpp" />
     <ClCompile Include="..\Classes\Entity\AttackFlyingObject.cpp" />
     <ClCompile Include="..\Classes\Entity\Boss.cpp" />
+    <ClCompile Include="..\Classes\Entity\BossTianzhao.cpp" />
     <ClCompile Include="..\Classes\Entity\CombatEntity.cpp" />
     <ClCompile Include="..\Classes\Entity\Entity.cpp" />
     <ClCompile Include="..\Classes\Entity\FlyingObject.cpp" />

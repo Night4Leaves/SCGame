@@ -147,6 +147,9 @@
     <ClCompile Include="..\Classes\Util\JsonUtil.cpp">
       <Filter>src\Utils</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\Entity\BossTianzhao.cpp">
+      <Filter>src\Entity\Character\Boss</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">

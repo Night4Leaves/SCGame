@@ -19,6 +19,7 @@ private:
 
 	void checkAttckFlyingObjectPath(Ref* pSender);
 	void checkBeHit(Ref* pSender);
+	void checkDistanceWithPlayer(Ref* pSender);
 
 private:
 	int m_iXSpeed;	//X轴移速
@@ -29,6 +30,7 @@ private:
 	bool m_bIsAttack;	//攻击状态
 	bool m_bIsAttacked;	//被攻击状态
 	bool m_bIsDeath;	//是否为死亡状态
+	bool m_bIsBattle;	//战斗状态
 
 	float m_fStateTime;	//计时器
 

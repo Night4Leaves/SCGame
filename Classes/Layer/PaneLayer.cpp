@@ -55,7 +55,10 @@ void PaneLayer::showPaneLayer(Ref * pSender)
 	case en_paneMsg_selectGameScene:
 		this->selectGameScene();
 		break;
-	case en_paneMsg_openStore:
+	case en_paneMsg_openItemStore:
+		this->openStore();
+		break;
+	case en_paneMsg_openSkillStore:
 		this->openStore();
 		break;
 	case en_paneMsg_loadFile:
