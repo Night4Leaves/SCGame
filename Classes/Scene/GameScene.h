@@ -13,6 +13,7 @@ class GameMenuLayer;
 class PaneLayer;
 class ScoreCountLayer;
 class Player;
+class HeartCount;
 
 enum SceneType
 {
@@ -45,6 +46,7 @@ protected:
 	GameMenuLayer* m_pGameMenuLayer;
 	PaneLayer* m_pPaneLayer;
 	ScoreCountLayer* m_pScoreCountLayer;
+	HeartCount* m_pHeartCount;
 };
 
 #endif // !__GAME_SCENE_H__

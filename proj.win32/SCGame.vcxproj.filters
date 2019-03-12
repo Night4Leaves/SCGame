@@ -150,6 +150,9 @@
     <ClCompile Include="..\Classes\Entity\BossTianzhao.cpp">
       <Filter>src\Entity\Character\Boss</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\HeartCount.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -289,6 +292,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Util\JsonUtil.h">
       <Filter>src\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\HeartCount.h">
+      <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -3,10 +3,12 @@
 #include "Layer/GameMenuLayer.h"
 #include "Layer/NPCLayer.h"
 #include "Layer/PaneLayer.h"
+#include "Layer/ScoreCountLayer.h"
 #include "Entity/Player.h"
 #include "Entity/Portal.h"
 #include "Controller/PlayerController.h"
 #include "Util/AnimationUtil.h"
+#include "HeartCount.h"
 
 MainScene::MainScene()
 {
@@ -90,6 +92,15 @@ bool MainScene::init(PlayerData &playerData)
 		this->addChild(playerController);
 
 		playerController->setMap(m_pMap);
+
+		m_pHeartCount = HeartCount::create(playerData.i_HP);
+		CC_BREAK_IF(m_pHeartCount == nullptr);
+		this->addChild(m_pHeartCount);
+		m_pHeartCount->setPosition(0, 570);
+
+		m_pScoreCountLayer = ScoreCountLayer::create(playerData.i_money);
+		CC_BREAK_IF(m_pScoreCountLayer == nullptr);
+		this->addChild(m_pScoreCountLayer);
 
 		//初始化菜单层并添加到场景中
 		m_pGameMenuLayer = GameMenuLayer::create();

@@ -8,6 +8,8 @@
 
 #include "Entity/Player.h"
 
+#include "HeartCount.h"
+
 GameScene::GameScene()
 {
 }
@@ -69,12 +71,17 @@ void GameScene::setScene(SceneType sign, PlayerData & player)
 {
 	m_pPaneLayer->savePlayerData(player);
 
+	m_pHeartCount = HeartCount::create(player.i_HP);
+	this->addChild(m_pHeartCount);
+	m_pHeartCount->setPosition(0, 570);
+
 	switch (sign)
 	{
 	case Scene_1:
 		//添加背景图片
 		m_pBackgroundLayer->setBackgroundPicture("background/game_scene_01_2048x1536.png");
 		m_pGameLayer->setGameScene_1_1(player);
+		m_pScoreCountLayer->setNumber(player.i_money);
 		break;
 	case Scene_2:
 		break;

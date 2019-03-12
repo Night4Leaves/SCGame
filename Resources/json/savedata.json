@@ -2,7 +2,7 @@
 	{
 		"playerName" : "4_leaves",
 		"characterName" : "player_01",
-		"HP" : 100,
+		"HP" : 3,
 		"attack" : 10,
 		"money" : 100,
 		"xSpeed" : 6,
@@ -33,7 +33,7 @@
 	{
 		"playerName" : "shadow",
 		"characterName" : "player_02",
-		"HP" : 50,
+		"HP" : 4,
 		"attack" : 5,
 		"money" : 30,
 		"xSpeed" : 6,
@@ -64,7 +64,7 @@
 	{
 		"playerName" : "copy",
 		"characterName" : "player_01",
-		"HP" : 100,
+		"HP" : 3,
 		"attack" : 20,
 		"money" : 365,
 		"xSpeed" : 6,

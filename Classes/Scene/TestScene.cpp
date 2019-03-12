@@ -11,6 +11,7 @@
 #include "Layer/GameLayer.h"
 
 #include "CustomizeEnum.h"
+#include "HeartCount.h"
 
 #include "Entity/Player.h"
 #include "Entity/Monster.h"
@@ -37,32 +38,32 @@ bool TestScene::init()
 {
 	do 
 	{
-		TMXTiledMap* map = TMXTiledMap::create("map/test_map.tmx");
-		this->addChild(map);
+		//TMXTiledMap* map = TMXTiledMap::create("map/test_map.tmx");
+		//this->addChild(map);
 
-		PlayerData playerData;
-		playerData.str_playerName = "4_leaves";
-		playerData.str_characterName = "player_01";
-		playerData.i_HP = 10;
-		playerData.i_attack = 10;
-		playerData.i_xSpeed = 4;
-		playerData.i_ySpeed = 4;
-		playerData.vec_csActionName = { "idle","run","attack","jump","hurt","death" };
-		playerData.vec_dActionTime = { 0.25, 0.04, 0.1, 0.25, 0.1, 0.25 };
-		playerData.vec_iActionPlayTime = { -1, -1, 1, 1, 1, 1 };
+		//PlayerData playerData;
+		//playerData.str_playerName = "4_leaves";
+		//playerData.str_characterName = "player_01";
+		//playerData.i_HP = 10;
+		//playerData.i_attack = 10;
+		//playerData.i_xSpeed = 4;
+		//playerData.i_ySpeed = 4;
+		//playerData.vec_csActionName = { "idle","run","attack","jump","hurt","death" };
+		//playerData.vec_dActionTime = { 0.25, 0.04, 0.1, 0.25, 0.1, 0.25 };
+		//playerData.vec_iActionPlayTime = { -1, -1, 1, 1, 1, 1 };
 
-		Player* player = Player::create(playerData);
-		this->addChild(player);
-		player->setPosition(400, 300);
-		player->idle();
-		//player->setMap(map);
+		//Player* player = Player::create(playerData);
+		//this->addChild(player);
+		//player->setPosition(400, 300);
+		//player->idle();
+		////player->setMap(map);
 
-		PlayerController* playerController = PlayerController::create();
-		player->setController(playerController);
-		this->addChild(playerController);
-		playerController->setMap(map);
+		//PlayerController* playerController = PlayerController::create();
+		//player->setController(playerController);
+		//this->addChild(playerController);
+		//playerController->setMap(map);
 
-		this->scheduleUpdate();
+		//this->scheduleUpdate();
 
 		//auto test = Sprite::createWithSpriteFrameName("backpack.png");
 		//this->addChild(test);
@@ -99,6 +100,7 @@ bool TestScene::init()
 		monster->setScale(0.35);
 		this->addChild(monster);*/
 
+
 	} while (0);
 
 	return true;
@@ -118,13 +120,9 @@ void TestScene::readJson()
 
 	if (reader.parse(data, root, false) == true)
 	{
-		log("id = %d", root["id"].asInt());
+		
 		log("name = %s", root["name"].asCString());
-		log("HP = %f", root["hp"].asDouble());
-		log("money = %d", root["item"]["money"].asInt());
-		log("HP medice = %d", root["item"]["hpmedice"].asInt());
-		log("sword fire = %d", root["item"]["sword"]["fire"].asInt());
-		log("sword water = %d", root["item"]["sword"]["water"].asInt());
+		
 	}
 }
 

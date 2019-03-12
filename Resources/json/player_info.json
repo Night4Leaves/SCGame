@@ -1,7 +1,7 @@
 [
 	{
 		"characterName" : "player_01",
-		"HP" : 100,
+		"HP" : 3,
 		"attack" : 10,
 		"money" : 0,
 		"xSpeed" : 6,
@@ -12,7 +12,7 @@
 	},
 	{
 		"characterName" : "player_02",
-		"HP" : 90,
+		"HP" : 4,
 		"attack" : 15,
 		"money" : 0,
 		"xSpeed" : 6,

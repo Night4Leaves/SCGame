@@ -5,6 +5,8 @@
 #include "cocos2d.h"
 USING_NS_CC;
 
+class HeartCount;
+
 /*测试用场景类，最后要删除*/
 class TestScene : public Scene
 {
@@ -20,6 +22,10 @@ public:
 	void readJson();
 	void readArrayJson();
 	void writeJson();
+
+private:
+	float dtCount;
+	HeartCount* test;
 
 };
 #endif // !__TEST_SCENE_H__

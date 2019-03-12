@@ -12,6 +12,8 @@ class GameMenuLayer;
 class NPCLayer;
 class PaneLayer;
 class Portal;
+class ScoreCountLayer;
+class HeartCount;
 
 class MainScene : public Scene
 {
@@ -28,6 +30,8 @@ private:
 	NPCLayer* m_pNPCLayer;
 	GameMenuLayer* m_pGameMenuLayer;
 	PaneLayer* m_pPaneLayer;
+	ScoreCountLayer* m_pScoreCountLayer;
+	HeartCount* m_pHeartCount;
 };
 
 #endif // !__MAIN_SCENE_H__

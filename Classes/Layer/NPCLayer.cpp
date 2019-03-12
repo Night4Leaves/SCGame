@@ -23,14 +23,24 @@ bool NPCLayer::init()
 
 void NPCLayer::setMainSceneNPC(const TMXObjectGroup* objGroup)
 {
-	//TODO:根据Tiled地图的点位设置NPC位置
-	float x = 0.0f;
-	float y = 0.0f;
-
+	std::vector<NPCSetInfo> npcInfoVector;
 	NPCSetInfo npc = { "NPC_01", NPCType::store, 0.15 };
+	npcInfoVector.push_back(npc);
+	npc.enum_npcType = skill;
+	npc.str_npcName = "NPC_02";
+	npcInfoVector.push_back(npc);
+	npc.enum_npcType = normal;
+	npc.str_npcName = "NPC_03";
+	npcInfoVector.push_back(npc);
+	npc.str_npcName = "NPC_04";
+	npcInfoVector.push_back(npc);
+	npc.str_npcName = "NPC_05";
+	npcInfoVector.push_back(npc);
 
 	for (int i = 1; i <= 5; i++)
 	{
+		float x = 0.0f;
+		float y = 0.0f;
 		std::string str_npcName = StringUtils::format("NPC_%02d", i);
 		npc.str_npcName = str_npcName;
 		ValueMap point = objGroup->getObject(str_npcName.c_str());
@@ -40,7 +50,7 @@ void NPCLayer::setMainSceneNPC(const TMXObjectGroup* objGroup)
 		log("x:%f, y:%f", x, y);
 
 		Vec2 npc_point = Vec2(x, y);
-		addNPC(npc, npc_point);
+		addNPC(npcInfoVector[i-1], npc_point);
 	}
 	
 }

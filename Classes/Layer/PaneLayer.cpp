@@ -52,6 +52,9 @@ void PaneLayer::showPaneLayer(Ref * pSender)
 	case en_paneMsg_openBackpack:
 		this->openBackpack();
 		break;
+	case en_paneMsg_openSkilllist:
+		this->openSkilllist();
+		break;
 	case en_paneMsg_selectGameScene:
 		this->selectGameScene();
 		break;
@@ -121,20 +124,24 @@ void PaneLayer::selectCharacter()
 	menuItem = this->createCharacterSelectItem(m_vecCharacterList, 1, menu_selector(PaneLayer::selectPlayer_2), false);
 	menu->addChild(menuItem);
 
-
 	menu->setPosition(400, 300);
 	menu->alignItemsHorizontallyWithPadding(50);
 	this->addChild(menu);
 
-	//测试按钮
-	auto closeItem = MenuItemImage::create(
-		"CloseNormal.png",
-		"CloseSelected.png",
-		CC_CALLBACK_1(PaneLayer::menuCloseCallback, this));
+	Sprite* buttonNormal = Sprite::createWithSpriteFrameName("Button_Back_Normal.png");
+	Sprite* buttonSelected = Sprite::createWithSpriteFrameName("Button_Back_Selected.png");
 
-	Menu* closeMenu = Menu::create(closeItem, NULL);
-	this->addChild(closeMenu);
-	closeMenu->setPosition(400, 300);
+	auto backMenuItem = MenuItemSprite::create(
+		buttonNormal,
+		buttonSelected,
+		this,
+		menu_selector(PaneLayer::menuCloseCallback)
+	);
+	backMenuItem->setScale(0.2);
+
+	Menu* backMenu = Menu::create(backMenuItem, NULL);
+	this->addChild(backMenu);
+	backMenu->setPosition(400, 180);
 }
 
 void PaneLayer::loadFile()
@@ -149,14 +156,20 @@ void PaneLayer::loadFile()
 	auto savedataNum = m_vecSavedataList.size();
 	log("save data num is %d", m_vecSavedataList.size());
 
-	auto closeItem = MenuItemImage::create(
-		"CloseNormal.png",
-		"CloseSelected.png",
-		CC_CALLBACK_1(PaneLayer::menuCloseCallback, this));
+	Sprite* buttonNormal = Sprite::createWithSpriteFrameName("Button_Back_Normal.png");
+	Sprite* buttonSelected = Sprite::createWithSpriteFrameName("Button_Back_Selected.png");
 
-	Menu* menu = Menu::create(closeItem, NULL);
-	this->addChild(menu);
-	menu->setPosition(200, 450);
+	auto backMenuItem = MenuItemSprite::create(
+		buttonNormal,
+		buttonSelected,
+		this,
+		menu_selector(PaneLayer::menuCloseCallback)
+	);
+	backMenuItem->setScale(0.2);
+
+	Menu* backMenu = Menu::create(backMenuItem, NULL);
+	this->addChild(backMenu);
+	backMenu->setPosition(400, 180);
 
 	Menu* savedataListMenu = Menu::create();
 	MenuItemSprite* menuItem;
@@ -179,7 +192,7 @@ void PaneLayer::loadFile()
 		menuItem = this->createCharacterSelectItem(m_vecSavedataList, 0, menu_selector(PaneLayer::selectSavedata_1), true);
 		savedataListMenu->addChild(menuItem);
 	default:
-		savedataListMenu->setPosition(400, 280);
+		savedataListMenu->setPosition(400, 300);
 		savedataListMenu->alignItemsHorizontallyWithPadding(45);
 		this->addChild(savedataListMenu);
 		break;
@@ -193,7 +206,35 @@ void PaneLayer::openStore()
 		return;
 	}
 
+	m_isOpen = true;
+
 	log("PaneLayer::openStore");
+
+	this->addChild(ShieldLayer::create());
+
+	auto backColor = LayerColor::create(Color4B::BLACK);
+	backColor->setOpacity(100);
+	this->addChild(backColor);
+
+	Sprite* test = Sprite::createWithSpriteFrameName("backpack.png");
+	test->setScale(0.5);
+	test->setPosition(400, 300);
+	this->addChild(test);
+
+	Sprite* buttonNormal = Sprite::createWithSpriteFrameName("Button_Close_Normal.png");
+	Sprite* buttonSelected = Sprite::createWithSpriteFrameName("Button_Close_Selected.png");
+
+	auto closeMenuItem = MenuItemSprite::create(
+		buttonNormal,
+		buttonSelected,
+		this,
+		menu_selector(PaneLayer::menuCloseCallback)
+	);
+	closeMenuItem->setScale(0.2);
+
+	Menu* closeMenu = Menu::create(closeMenuItem, NULL);
+	this->addChild(closeMenu);
+	closeMenu->setPosition(400, 110);
 }
 
 void PaneLayer::startPause()
@@ -217,14 +258,20 @@ void PaneLayer::selectGameScene()
 	auto backColor = LayerColor::create(Color4B::BLACK);
 	this->addChild(backColor);
 
-	auto closeItem = MenuItemImage::create(
-		"CloseNormal.png",
-		"CloseSelected.png",
-		CC_CALLBACK_1(PaneLayer::menuCloseCallback, this));
+	Sprite* buttonNormal = Sprite::createWithSpriteFrameName("Button_Back_Normal.png");
+	Sprite* buttonSelected = Sprite::createWithSpriteFrameName("Button_Back_Selected.png");
 
-	auto menu = Menu::create(closeItem, NULL);
-	this->addChild(menu);
-	menu->setPosition(400, 500);
+	auto backMenuItem = MenuItemSprite::create(
+		buttonNormal,
+		buttonSelected,
+		this,
+		menu_selector(PaneLayer::menuCloseCallback)
+	);
+	backMenuItem->setScale(0.2);
+
+	Menu* backMenu = Menu::create(backMenuItem, NULL);
+	this->addChild(backMenu);
+	backMenu->setPosition(400, 110);
 
 	Sprite* normalButton = Sprite::create("background/game_scene_01_2048x1536.png");
 	Sprite* selectButton = Sprite::create("background/game_scene_01_2048x1536.png");
@@ -247,7 +294,7 @@ void PaneLayer::selectGameScene()
 	Menu* menu_2 = Menu::create(cButtonSprite, dButtonSprite, NULL);
 	if (menu_1 == nullptr)
 	{
-		log("setInitialMenu set failed!");
+		log("selectGameSceneMenu set failed!");
 		return;
 	}
 	else
@@ -256,13 +303,13 @@ void PaneLayer::selectGameScene()
 
 		//设置菜单位置
 		Size winSize = Director::getInstance()->getWinSize();
-		menu_1->setPosition(winSize.width * 0.5, winSize.height * 0.5 + 90);
+		menu_1->setPosition(winSize.width * 0.5, winSize.height * 0.5 + 120);
 		menu_1->alignItemsHorizontallyWithPadding(20);
 
 		this->addChild(menu_2);
 
 		//设置菜单位置
-		menu_2->setPosition(winSize.width * 0.5, winSize.height * 0.5 - 90);
+		menu_2->setPosition(winSize.width * 0.5, winSize.height * 0.5 - 60);
 		menu_2->alignItemsHorizontallyWithPadding(20);
 
 	}
@@ -270,10 +317,78 @@ void PaneLayer::selectGameScene()
 
 void PaneLayer::openBackpack()
 {
-	auto test = Sprite::createWithSpriteFrameName("backpack.png");
-	this->addChild(test);
-	test->setPosition(400, 300);
+	if (m_isOpen)
+	{
+		return;
+	}
+
+	m_isOpen = true;
+
+	log("PaneLayer::openStore");
+
+	this->addChild(ShieldLayer::create());
+
+	auto backColor = LayerColor::create(Color4B::BLACK);
+	backColor->setOpacity(100);
+	this->addChild(backColor);
+
+	Sprite* test = Sprite::createWithSpriteFrameName("backpack.png");
 	test->setScale(0.5);
+	test->setPosition(400, 300);
+	this->addChild(test);
+
+	Sprite* buttonNormal = Sprite::createWithSpriteFrameName("Button_Close_Normal.png");
+	Sprite* buttonSelected = Sprite::createWithSpriteFrameName("Button_Close_Selected.png");
+
+	auto closeMenuItem = MenuItemSprite::create(
+		buttonNormal,
+		buttonSelected,
+		this,
+		menu_selector(PaneLayer::menuCloseCallback)
+	);
+	closeMenuItem->setScale(0.2);
+
+	Menu* closeMenu = Menu::create(closeMenuItem, NULL);
+	this->addChild(closeMenu);
+	closeMenu->setPosition(400, 110);
+}
+
+void PaneLayer::openSkilllist()
+{
+	if (m_isOpen)
+	{
+		return;
+	}
+
+	m_isOpen = true;
+
+	log("PaneLayer::openSkilllist");
+
+	this->addChild(ShieldLayer::create());
+
+	auto backColor = LayerColor::create(Color4B::BLACK);
+	backColor->setOpacity(100);
+	this->addChild(backColor);
+
+	Sprite* test = Sprite::createWithSpriteFrameName("skill_list.png");
+	test->setScale(0.4);
+	test->setPosition(400, 300);
+	this->addChild(test);
+
+	Sprite* buttonNormal = Sprite::createWithSpriteFrameName("Button_Close_Normal.png");
+	Sprite* buttonSelected = Sprite::createWithSpriteFrameName("Button_Close_Selected.png");
+
+	auto closeMenuItem = MenuItemSprite::create(
+		buttonNormal,
+		buttonSelected,
+		this,
+		menu_selector(PaneLayer::menuCloseCallback)
+	);
+	closeMenuItem->setScale(0.2);
+
+	Menu* closeMenu = Menu::create(closeMenuItem, NULL);
+	this->addChild(closeMenu);
+	closeMenu->setPosition(400, 70);
 }
 
 MenuItemSprite * PaneLayer::createCharacterSelectItem(const std::vector<PlayerData>& vec_characterInfoList, int i, const SEL_MenuHandler & selector, bool is_savedata)

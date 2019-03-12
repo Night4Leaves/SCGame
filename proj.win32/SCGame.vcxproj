@@ -163,6 +163,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\Entity\NPC.cpp" />
     <ClCompile Include="..\Classes\Entity\Player.cpp" />
     <ClCompile Include="..\Classes\Entity\Portal.cpp" />
+    <ClCompile Include="..\Classes\HeartCount.cpp" />
     <ClCompile Include="..\Classes\HelloWorldScene.cpp" />
     <ClCompile Include="..\Classes\Json\json_reader.cpp" />
     <ClCompile Include="..\Classes\Json\json_value.cpp" />
@@ -205,6 +206,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\Entity\NPC.h" />
     <ClInclude Include="..\Classes\Entity\Player.h" />
     <ClInclude Include="..\Classes\Entity\Portal.h" />
+    <ClInclude Include="..\Classes\HeartCount.h" />
     <ClInclude Include="..\Classes\HelloWorldScene.h" />
     <ClInclude Include="..\Classes\Json\autolink.h" />
     <ClInclude Include="..\Classes\Json\config.h" />

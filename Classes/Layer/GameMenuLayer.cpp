@@ -105,6 +105,7 @@ void GameMenuLayer::openBackpack(Ref * sender)
 void GameMenuLayer::openSkillList(Ref * sender)
 {
 	log("openSkillList");
+	NotificationCenter::getInstance()->postNotification("show_PaneLayer", (Ref*)en_paneMsg_openSkilllist);
 }
 
 void GameMenuLayer::openOption(Ref * sender)

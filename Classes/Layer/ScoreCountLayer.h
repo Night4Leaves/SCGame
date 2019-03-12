@@ -15,7 +15,7 @@ public:
 	static ScoreCountLayer* create(int number);
 	virtual bool init(int number);
 
-	void setNumber(int number, int ceiling = 999999);
+	void setNumber(int number, int ceiling = 999);
 	int getNumber();
 
 private:

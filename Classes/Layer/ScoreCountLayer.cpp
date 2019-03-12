@@ -1,5 +1,6 @@
 #include "ScoreCountLayer.h"
 #include "ScoreCount.h"
+#include "HeartCount.h"
 
 ScoreCountLayer::ScoreCountLayer()
 {
@@ -31,7 +32,11 @@ bool ScoreCountLayer::init(int number)
 	{
 		CC_BREAK_IF(!Node::init());
 
-		for (int i = 0; i < 6; ++i)
+		Sprite* coin = Sprite::createWithSpriteFrameName("coin.png");
+		coin->setPosition(40, 540);
+		this->addChild(coin);
+
+		for (int i = 0; i < 3; ++i)
 		{
 			Array* array = Array::createWithCapacity(10);
 			float f_width = 0.0;
@@ -50,7 +55,7 @@ bool ScoreCountLayer::init(int number)
 
 			ScoreCount* scoreCount = ScoreCount::create(array);
 			this->addChild(scoreCount, 0, i);
-			scoreCount->setPosition(f_width * i * 0.15 + 700, 550);
+			scoreCount->setPosition(f_width * i * 0.15 + 60, 540);
 		}
 		
 		this->setNumber(number);
@@ -71,7 +76,7 @@ void ScoreCountLayer::setNumber(int number, int ceiling)
 	}
 	i_number = number;
 
-	for (int i = 5; i >= 0; --i)
+	for (int i = 2; i >= 0; --i)
 	{
 		ScoreCount* scoreCount = (ScoreCount*)getChildByTag(i);
 		scoreCount->setDigit(number % 10);

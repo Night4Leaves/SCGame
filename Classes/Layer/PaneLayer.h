@@ -28,6 +28,7 @@ private:
 	void selectGameScene();
 
 	void openBackpack();
+	void openSkilllist();
 
 	void changeGameScene(Ref* pSender);
 	void enterMainScene(PlayerData &playerData);
