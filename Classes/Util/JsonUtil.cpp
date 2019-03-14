@@ -43,6 +43,7 @@ void JsonUtil::combatEntityDataLoading(CombatEntityData& combatEntityData, const
 	combatEntityData.i_money = data["money"].asInt();
 	combatEntityData.i_xSpeed = data["xSpeed"].asInt();
 	combatEntityData.i_ySpeed = data["ySpeed"].asInt();
+	combatEntityData.i_attackRange = data["attackRange"].asInt();
 
 	Json::Value tempArr = data["actionName"];
 	int tempArrSize = tempArr.size();

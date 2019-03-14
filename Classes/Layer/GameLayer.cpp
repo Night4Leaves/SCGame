@@ -94,9 +94,7 @@ void GameLayer::setGameScene_1_1(PlayerData & playerData)
 		monster->setMonsterPosition(Vec2(monsterX, monsterY));
 		monster->idle();
 		monster->setScale(0.35);
-		monster->setMonsterNumber(i - 1);
 		this->addChild(monster);
-		vector_pMonster.pushBack(monster);
 	}
 
 	ValueMap bossPoint = objGroup->getObject("boss");
@@ -128,7 +126,7 @@ void GameLayer::setGameScene_1_1(PlayerData & playerData)
 
 	m_pPlayerController->setMap(m_pMap);
 
-	AtkFlyObjIniInfo fireballInfo = { "fireball", Vec2(HORIZONTAL_DISTANCE, 0), Vec2(m_sctPlayerData.i_xSpeed + 1, 0) };
+	AtkFlyObjIniInfo fireballInfo = { "fireball", Vec2(m_sctPlayerData.i_attack, 0), Vec2(m_sctPlayerData.i_xSpeed + 1, 0) };
 	for (int i = 0; i < 3; i++)
 	{
 		AttackFlyingObject* flyingObject = AttackFlyingObject::create(fireballInfo);

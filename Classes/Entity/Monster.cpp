@@ -8,6 +8,7 @@ Monster::Monster()
 	, m_iAttackCDTime(0)
 	, m_bIsDeath(false)
 	, m_fStateTime(0.0)
+	, m_fAttackTime(0.0)
 {
 	srand((unsigned)time(nullptr));
 }
@@ -15,11 +16,6 @@ Monster::Monster()
 Monster::~Monster()
 {
 	NotificationCenter::getInstance()->removeAllObservers(this);
-}
-
-void Monster::setMonsterNumber(int monsterNumber)
-{
-	m_iMonsterNumber = monsterNumber;
 }
 
 void Monster::patrolLogic()
@@ -76,12 +72,12 @@ void Monster::warnLogic()
 		m_iYSpeed = 0;
 	}
 	
-	if (m_pointPlayerPos.x < monsterPoint.x - 50)
+	if (m_pointPlayerPos.x < monsterPoint.x - m_iAttackRange)
 	{
 		m_iXSpeed = -m_iXMaxSpeed;
 		m_bIsRight = false;
 	}
-	else if (m_pointPlayerPos.x > monsterPoint.x + 50)
+	else if (m_pointPlayerPos.x > monsterPoint.x + m_iAttackRange)
 	{
 		m_iXSpeed = m_iXMaxSpeed;
 		m_bIsRight = true;
@@ -94,29 +90,56 @@ void Monster::warnLogic()
 
 void Monster::attackLogic()
 {
-	Point monsterPoint = this->getPosition();
-
-	m_iXSpeed = 0;
-	m_iYSpeed = 0;
-
-	if (m_pointPlayerPos.x < monsterPoint.x)
+	if (m_fAttackTime > m_iAttackCDTime)
 	{
-		m_bIsRight = false;
+		m_fAttackTime = 0;
 
+		Point monsterPoint = this->getPosition();
+
+		m_iXSpeed = 0;
+		m_iYSpeed = 0;
+
+		if (m_pointPlayerPos.x < monsterPoint.x)
+		{
+			m_bIsRight = false;
+
+		}
+		else if (m_pointPlayerPos.x > monsterPoint.x)
+		{
+			m_bIsRight = true;
+		}
+
+		m_pSprite->setFlipX(m_bIsRight);
+
+		this->attack();
 	}
-	else if (m_pointPlayerPos.x > monsterPoint.x)
-	{
-		m_bIsRight = true;
-	}
-
-	m_pSprite->setFlipX(m_bIsRight);
-
-	this->attack();
 
 }
 
 void Monster::attackedLogic()
 {
+}
+
+void Monster::attackEndLogic()
+{
+	Point monsterPoint = this->getPosition();
+
+	if (abs(m_pointPlayerPos.y - monsterPoint.y) < 8)
+	{
+		if ((!m_bIsRight
+			&& m_pointPlayerPos.x < monsterPoint.x
+			&& m_pointPlayerPos.x > monsterPoint.x - m_iAttackRange)
+			|| 
+			(m_bIsRight
+			&& m_pointPlayerPos.x > monsterPoint.x
+			&& m_pointPlayerPos.x < monsterPoint.x + m_iAttackRange)
+			)
+		{
+			NotificationCenter::getInstance()->postNotification("monster_attack", NULL);
+		}
+	}
+	m_enMonsterState = en_ms_warn;
+	return;
 }
 
 Monster * Monster::create(const MonsterData & monsterData)
@@ -141,6 +164,19 @@ bool Monster::init(const MonsterData & monsterData)
 
 	m_iWarningRange = monsterData.i_warningRange;
 	m_iAttackCDTime = monsterData.i_attackCDTime;
+	m_iMaxHP = m_iHP;
+
+	Sprite* empty = Sprite::createWithSpriteFrameName("HP_Bar_Empty.png");
+	m_pHPBar = LoadingBar::create("HP_Bar.png");
+	empty->addChild(m_pHPBar);
+	this->addChild(empty);
+
+	m_pHPBar->setDirection(LoadingBar::Direction::LEFT);
+	m_pHPBar->setPercent(m_iHP / m_iMaxHP * 100);
+	m_pHPBar->setPosition(Vec2(459, 44));
+
+	empty->setPosition(Vec2(10, 220));
+	empty->setScale(0.2);
 	
 	NotificationCenter::getInstance()->addObserver(
 		this,
@@ -162,6 +198,7 @@ bool Monster::init(const MonsterData & monsterData)
 void Monster::update(float dt)
 {
 	m_fStateTime += dt;
+	m_fAttackTime += dt;
 
 	switch (m_enMonsterState)
 	{
@@ -176,6 +213,9 @@ void Monster::update(float dt)
 		break;
 	case en_ms_attacked:
 		this->attackedLogic();
+		break;
+	case en_ms_attack_end:
+		this->attackEndLogic();
 		break;
 	default:
 		break;
@@ -304,25 +344,20 @@ void Monster::checkBeHit(Ref * pSender)
 
 void Monster::checkDistanceWithPlayer(Ref * pSender)
 {
+	Point* playerPoint = (Point*)pSender;
+	m_pointPlayerPos = Point(playerPoint->x, playerPoint->y);
+
 	if (m_enActionState == en_as_attack)
 	{
 		return;
 	}
 
-	Point* playerPoint = (Point*)pSender;
-	m_pointPlayerPos = Point(playerPoint->x, playerPoint->y);
 	Point monsterPoint = this->getPosition();
 
 	if (abs(m_pointPlayerPos.y - monsterPoint.y) < 8
-		&& m_pointPlayerPos.x > monsterPoint.x - 50
-		&& m_pointPlayerPos.x < monsterPoint.x + 50)
+		&& m_pointPlayerPos.x > monsterPoint.x - m_iAttackRange
+		&& m_pointPlayerPos.x < monsterPoint.x + m_iAttackRange)
 	{
-		if (m_enMonsterState == en_ms_attack_end)
-		{
-			m_enMonsterState = en_ms_patrol;
-			NotificationCenter::getInstance()->postNotification("monster_attack", NULL);
-			return;
-		}
 		m_enMonsterState = en_ms_attack;
 		return;
 	}

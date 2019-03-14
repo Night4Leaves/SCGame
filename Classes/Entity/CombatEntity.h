@@ -3,6 +3,8 @@
 #define __COMBAT_ENTITY_H__
 
 #include "CustomizeStruct.h"
+#include "ui/CocosGUI.h"
+using namespace cocos2d::ui;
 
 enum MonsterState
 {
@@ -52,6 +54,7 @@ protected:
 	int m_iMoney;	//分数/金钱
 	int m_iXMaxSpeed;	//X轴设定速度
 	int m_iYMaxSpeed;	//Y轴设定速度
+	int m_iAttackRange;	//攻击距离
 
 	bool m_bIsMonster;	//是否是怪物
 	bool m_bIsRight;	//是否向右

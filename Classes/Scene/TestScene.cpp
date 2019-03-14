@@ -39,9 +39,24 @@ bool TestScene::init()
 {
 	do 
 	{
-		
+		hp = 100;
+		dtCount = 0;
 
-		TMXTiledMap* map = TMXTiledMap::create("map/test_map.tmx");
+		Sprite* empty = Sprite::createWithSpriteFrameName("HP_Bar_Empty.png");
+		hpBar = LoadingBar::create("HP_Bar.png");
+		empty->addChild(hpBar);
+		this->addChild(empty);
+
+		hpBar->setDirection(LoadingBar::Direction::LEFT);
+		hpBar->setPercent(hp);
+		hpBar->setPosition(Vec2(459, 44));
+
+		empty->setPosition(Vec2(400, 300));
+		empty->setScale(0.5);
+
+		this->scheduleUpdate();
+
+		/*TMXTiledMap* map = TMXTiledMap::create("map/test_map.tmx");
 		this->addChild(map);
 
 		std::vector<PlayerData> m_vecCharacterList;
@@ -49,7 +64,7 @@ bool TestScene::init()
 
 		auto gameLayer = GameLayer::create();
 		this->addChild(gameLayer);
-		gameLayer->setGameScene_1_1(m_vecCharacterList[0]);
+		gameLayer->setGameScene_1_1(m_vecCharacterList[0]);*/
 
 		/*Player* player = Player::create(m_vecCharacterList[0]);
 		this->addChild(player);
@@ -61,7 +76,7 @@ bool TestScene::init()
 		this->addChild(playerController);
 		playerController->setMap(map);*/
 
-		//this->scheduleUpdate();
+		
 
 		//auto test = Sprite::createWithSpriteFrameName("backpack.png");
 		//this->addChild(test);
@@ -94,7 +109,13 @@ bool TestScene::init()
 
 void TestScene::update(float dt)
 {
-	
+	dtCount += dt;
+	if (dtCount > 2 && hp > 0)
+	{
+		hp -= 10;
+		hpBar->setPercent(hp);
+		dtCount = 0;
+	}
 }
 
 void TestScene::readJson()

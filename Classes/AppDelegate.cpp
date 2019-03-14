@@ -23,7 +23,6 @@
  ****************************************************************************/
 
 #include "AppDelegate.h"
-#include "HelloWorldScene.h"
 
 #include "Util/ResourcesLoadingUtil.h"
 #include "Scene/InitialScene.h"

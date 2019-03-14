@@ -56,6 +56,7 @@ void CombatEntity::saveCombatEntityData(const CombatEntityData & combatEntityDat
 	m_iMoney = combatEntityData.i_money;
 	m_iXMaxSpeed = combatEntityData.i_xSpeed;
 	m_iYMaxSpeed = combatEntityData.i_ySpeed;
+	m_iAttackRange = combatEntityData.i_attackRange;
 	m_bIsMonster = combatEntityData.b_isMonster;
 
 	this->init(combatEntityData.vec_csActionName, combatEntityData.vec_dActionTime, combatEntityData.vec_iActionPlayTime);

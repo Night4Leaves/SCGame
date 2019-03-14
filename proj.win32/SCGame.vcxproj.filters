@@ -135,9 +135,6 @@
     <ClCompile Include="..\Classes\Layer\ShieldLayer.cpp">
       <Filter>src\Layer</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\HelloWorldScene.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\Entity\Boss.cpp">
       <Filter>src\Entity\Character\Boss</Filter>
     </ClCompile>
@@ -159,9 +156,6 @@
       <Filter>win32</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\AppDelegate.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\HelloWorldScene.h">
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Layer\NPCLayer.h">

@@ -59,6 +59,12 @@ bool GameScene::init()
 			"update_score",
 			NULL);
 
+		NotificationCenter::getInstance()->addObserver(
+			this,
+			callfuncO_selector(GameScene::playerReduceHeart),
+			"monster_attack",
+			NULL);
+
 		return true;
 	} while (0);
 
@@ -105,4 +111,9 @@ void GameScene::updateScore(Ref * pSender)
 	int number = m_pScoreCountLayer->getNumber();
 	number += (int)pSender;
 	m_pScoreCountLayer->setNumber(number);
+}
+
+void GameScene::playerReduceHeart(Ref * pSender)
+{
+	m_pHeartCount->reduceHP();
 }

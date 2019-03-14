@@ -55,6 +55,11 @@ bool HeartCount::init(int digit)
 
 void HeartCount::reduceHP()
 {
+	if (m_iHP == 0)
+	{
+		return;
+	}
+
 	Node* node = (Node*)node_pPresenter->getChildByTag(m_iHP - 1);
 
 	MoveBy* moveBy = MoveBy::create(1.5f, Vec2(0, 15));

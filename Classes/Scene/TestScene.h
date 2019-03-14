@@ -3,6 +3,8 @@
 #define __TEST_SCENE_H__
 
 #include "cocos2d.h"
+#include "ui/CocosGUI.h"
+using namespace cocos2d::ui;
 USING_NS_CC;
 
 class HeartCount;
@@ -24,7 +26,9 @@ public:
 	void writeJson();
 
 private:
+	int hp;
 	float dtCount;
+	LoadingBar* hpBar;
 	HeartCount* test;
 
 };

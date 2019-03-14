@@ -27,6 +27,7 @@ struct CombatEntityData
 	int i_money = 0;
 	int i_xSpeed = 0;
 	int i_ySpeed = 0;
+	int i_attackRange = 0;
 	std::vector<std::string> vec_csActionName;
 	std::vector<double> vec_dActionTime;
 	std::vector<int> vec_iActionPlayTime;

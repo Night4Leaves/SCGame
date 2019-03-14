@@ -39,6 +39,7 @@ public:
 	void setScene(SceneType sign, PlayerData &player);
 
 	void updateScore(Ref* pSender);
+	void playerReduceHeart(Ref* pSender);
 
 protected:
 	BackgroundLayer* m_pBackgroundLayer;
