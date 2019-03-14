@@ -4,6 +4,7 @@ PlayerController-----player_check_point-----Portal
 PlayerController-----player_point-----Monster
 
 Monster-----stop_flying-----AttackFlyingObject
+Monster(CombatEntity)-----monster_attack_end-----PlayerController
 
 Player-----set_attack_flying_object-----GameLayer
 

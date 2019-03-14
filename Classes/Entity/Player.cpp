@@ -100,6 +100,12 @@ void Player::run()
 
 void Player::attack()
 {
+	if (m_enActionState == en_as_attack)
+	{
+		return;
+	}
+	m_enActionState = en_as_attack;
+
 	//停止当前的动作
 	m_pSprite->stopAllActions();
 	//获取已经做好的动画
@@ -138,5 +144,36 @@ void Player::jump()
 
 void Player::hurt()
 {
-	CombatEntity::hurt();
+	if (m_enActionState == en_as_attacked)
+	{
+		return;
+	}
+	m_enActionState = en_as_attacked;
+
+	m_pSprite->stopAllActions();
+
+	//--m_iHP;
+	//if (m_iHP == 0)
+	//{
+	//	if (m_bIsMonster)
+	//	{
+	//		this->monsterDeath();
+	//	}
+	//	else
+	//	{
+	//		this->playerDeath();
+	//	}
+	//	return;
+	//}
+
+	//获取已经做好的动画
+	Animation* hurtAnimation = AnimationCache::getInstance()->getAnimation(StringUtils::format("%s_hurt", m_strCharacterName.c_str()).c_str());
+	//生成动画动作
+	Animate* hurtAnimate = Animate::create(hurtAnimation);
+
+	//auto callfunc = CallFunc::create(CC_CALLBACK_0(CombatEntity::idle, this));
+	auto checkControllerStatus = CallFunc::create([&]() {m_pPlayerController->checkControllerStatus(); });
+	
+	Sequence* actionSequnence = Sequence::create(hurtAnimate, checkControllerStatus, /*callfunc,*/ NULL);
+	m_pSprite->runAction(actionSequnence);
 }

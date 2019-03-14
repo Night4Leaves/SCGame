@@ -14,6 +14,7 @@ PlayerController::PlayerController()
 
 PlayerController::~PlayerController()
 {
+	NotificationCenter::getInstance()->removeAllObservers(this);
 }
 
 bool PlayerController::init()
@@ -25,6 +26,12 @@ bool PlayerController::init()
 	listener->onKeyPressed = CC_CALLBACK_2(PlayerController::onKeyPressed, this);
 	listener->onKeyReleased = CC_CALLBACK_2(PlayerController::onKeyReleased, this);
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
+
+	NotificationCenter::getInstance()->addObserver(
+		this,
+		callfuncO_selector(PlayerController::getDamage),
+		"monster_attack",
+		NULL);
 
 	return true;
 }
@@ -190,19 +197,19 @@ void PlayerController::onKeyPressed(EventKeyboard::KeyCode keyCode, Event * even
 		m_pControllerListener->attack();	//调用角色攻击动画
 
 		break;
-	case EventKeyboard::KeyCode::KEY_K:	//跳跃
+	//case EventKeyboard::KeyCode::KEY_K:	//跳跃
 
-		//如果是锁定状态则不执行后续代码
-		if (m_bIsLock)
-		{
-			break;
-		}
+		////如果是锁定状态则不执行后续代码
+		//if (m_bIsLock)
+		//{
+		//	break;
+		//}
 
-		m_bIsLock = true;	//设置为锁定状态
-		m_iYSpeed = 0;
-		m_pControllerListener->jump();	//设置角色跳跃动画
+		//m_bIsLock = true;	//设置为锁定状态
+		//m_iYSpeed = 0;
+		//m_pControllerListener->jump();	//设置角色跳跃动画
 
-		break;
+		//break;
 	case EventKeyboard::KeyCode::KEY_L:
 		NotificationCenter::getInstance()->postNotification("player_check_point", (Ref*)&(m_pControllerListener->getTargetPosition()));
 		break;
@@ -445,7 +452,7 @@ void PlayerController::setPlayerPosition(Point pos)
 		destPos = pos;
 	}
 
-	Point tiledPos = tileCoordForPosition(destPos);
+	/*Point tiledPos = tileCoordForPosition(destPos);
 	
 	int tiledGid = m_pMeta->getTileGIDAt(tiledPos);
 
@@ -459,7 +466,16 @@ void PlayerController::setPlayerPosition(Point pos)
 		{
 			return;
 		}
-	}
+	}*/
 
 	this->setViewPointByPlayer(pos);
+}
+
+void PlayerController::getDamage(Ref* pSender)
+{
+	m_bIsLock = true;
+	m_iXSpeed = 0;
+	m_iYSpeed = 0;
+	m_pControllerListener->hurt();
+
 }

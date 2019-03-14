@@ -163,6 +163,7 @@ void JsonUtil::readMonsterInfo(std::vector<MonsterData>& monsterInfoList, const 
 			this->combatEntityDataLoading(monster, root[i]);
 
 			monster.i_warningRange = root[i]["warningRange"].asInt();
+			monster.i_attackCDTime = root[i]["attackCDTime"].asInt();
 			monster.b_isMonster = true;
 
 			monsterInfoList.push_back(monster);

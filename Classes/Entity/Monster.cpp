@@ -3,13 +3,10 @@
 
 Monster::Monster()
 	: m_iXSpeed(0)
-	, m_iYspeed(0)
+	, m_iYSpeed(0)
 	, m_iWarningRange(0)
-	, m_bIsRight(false)
-	, m_bIsAttack(false)
-	, m_bIsAttacked(false)
+	, m_iAttackCDTime(0)
 	, m_bIsDeath(false)
-	, m_bIsBattle(false)
 	, m_fStateTime(0.0)
 {
 	srand((unsigned)time(nullptr));
@@ -18,6 +15,108 @@ Monster::Monster()
 Monster::~Monster()
 {
 	NotificationCenter::getInstance()->removeAllObservers(this);
+}
+
+void Monster::setMonsterNumber(int monsterNumber)
+{
+	m_iMonsterNumber = monsterNumber;
+}
+
+void Monster::patrolLogic()
+{
+	if (m_fStateTime > 5)
+	{
+		m_fStateTime = 0;
+
+		int r = rand() % 2;
+		int j = rand() % 2;
+
+		if (r == 1)
+		{
+			m_iXSpeed = m_iXMaxSpeed;
+			m_bIsRight = true;
+		}
+		else
+		{
+			m_iXSpeed = -m_iXMaxSpeed;
+			m_bIsRight = false;
+		}
+
+		if (j == 1)
+		{
+			m_iYSpeed = m_iYMaxSpeed;
+		}
+		else
+		{
+			m_iYSpeed = -m_iYMaxSpeed;
+		}
+
+		m_pSprite->setFlipX(m_bIsRight);
+		this->run();
+	}
+}
+
+void Monster::warnLogic()
+{
+	Point monsterPoint = this->getPosition();
+
+	if (abs(m_pointPlayerPos.y - monsterPoint.y) >= 8)
+	{
+		if (m_pointPlayerPos.y > monsterPoint.y)
+		{
+			m_iYSpeed = m_iYMaxSpeed;
+		}
+		else if (m_pointPlayerPos.y < monsterPoint.y)
+		{
+			m_iYSpeed = -m_iYMaxSpeed;
+		}
+	}
+	else
+	{
+		m_iYSpeed = 0;
+	}
+	
+	if (m_pointPlayerPos.x < monsterPoint.x - 50)
+	{
+		m_iXSpeed = -m_iXMaxSpeed;
+		m_bIsRight = false;
+	}
+	else if (m_pointPlayerPos.x > monsterPoint.x + 50)
+	{
+		m_iXSpeed = m_iXMaxSpeed;
+		m_bIsRight = true;
+	}
+
+	m_pSprite->setFlipX(m_bIsRight);
+	this->run();
+
+}
+
+void Monster::attackLogic()
+{
+	Point monsterPoint = this->getPosition();
+
+	m_iXSpeed = 0;
+	m_iYSpeed = 0;
+
+	if (m_pointPlayerPos.x < monsterPoint.x)
+	{
+		m_bIsRight = false;
+
+	}
+	else if (m_pointPlayerPos.x > monsterPoint.x)
+	{
+		m_bIsRight = true;
+	}
+
+	m_pSprite->setFlipX(m_bIsRight);
+
+	this->attack();
+
+}
+
+void Monster::attackedLogic()
+{
 }
 
 Monster * Monster::create(const MonsterData & monsterData)
@@ -41,6 +140,7 @@ bool Monster::init(const MonsterData & monsterData)
 	CombatEntity::saveCombatEntityData(monsterData);
 
 	m_iWarningRange = monsterData.i_warningRange;
+	m_iAttackCDTime = monsterData.i_attackCDTime;
 	
 	NotificationCenter::getInstance()->addObserver(
 		this,
@@ -61,49 +161,59 @@ bool Monster::init(const MonsterData & monsterData)
 
 void Monster::update(float dt)
 {
-	if (!m_bIsBattle)
+	m_fStateTime += dt;
+
+	switch (m_enMonsterState)
 	{
-		m_fStateTime += dt;
-
-		if (m_fStateTime > 5)
-		{
-			m_fStateTime = 0;
-
-			int r = rand() % 2;
-
-			if (r == 1)
-			{
-				m_iXSpeed = m_iXMaxSpeed;
-				m_bIsRight = true;
-			}
-			else
-			{
-				m_iXSpeed = -m_iXMaxSpeed;
-				m_bIsRight = false;
-			}
-
-			m_pSprite->setFlipX(m_bIsRight);
-			this->run();
-		}
+	case en_ms_patrol:
+		this->patrolLogic();
+		break;
+	case en_ms_warn:
+		this->warnLogic();
+		break;
+	case en_ms_attack:
+		this->attackLogic();
+		break;
+	case en_ms_attacked:
+		this->attackedLogic();
+		break;
+	default:
+		break;
 	}
 
 	Point pos = this->getPosition();
 	pos.x += m_iXSpeed;
+	pos.y += m_iYSpeed;
+
+	if (pos.y > m_pointOriginalPos.y + m_iWarningRange)
+	{
+		pos.y = m_pointOriginalPos.y + m_iWarningRange;
+		m_iYSpeed = 0;
+	}
+	if (pos.y < m_pointOriginalPos.y - m_iWarningRange)
+	{
+		pos.y = m_pointOriginalPos.y - m_iWarningRange;
+		m_iYSpeed = 0;
+	}
 
 	if (pos.x < m_pointOriginalPos.x - m_iWarningRange)
 	{
 		pos.x = m_pointOriginalPos.x - m_iWarningRange;
 		m_iXSpeed = 0;
-		this->idle();
 	}
 	if (pos.x > m_pointOriginalPos.x + m_iWarningRange)
 	{
 		pos.x = m_pointOriginalPos.x + m_iWarningRange;
 		m_iXSpeed = 0;
+	}
+
+	if (m_enMonsterState == en_ms_patrol && m_iXSpeed == 0 && m_iYSpeed == 0)
+	{
 		this->idle();
 	}
 
 	this->setPosition(pos);
+
 }
 
 void Monster::setMonsterPosition(Point pos)
@@ -194,43 +304,37 @@ void Monster::checkBeHit(Ref * pSender)
 
 void Monster::checkDistanceWithPlayer(Ref * pSender)
 {
-	Point* playerPoint = (Point*)pSender;
-
-	if (playerPoint->x < m_pointOriginalPos.x - m_iWarningRange
-		|| playerPoint->x > m_pointOriginalPos.x + m_iWarningRange)
+	if (m_enActionState == en_as_attack)
 	{
-		m_bIsBattle = false;
 		return;
 	}
 
-	//if (playerPoint->y < m_pointOriginalPos.y - m_iWarningRange
-	//	|| playerPoint->y > m_pointOriginalPos.y + m_iWarningRange)
-	//{
-	//	m_bIsBattle = false;
-	//	return;
-	//}
-
+	Point* playerPoint = (Point*)pSender;
+	m_pointPlayerPos = Point(playerPoint->x, playerPoint->y);
 	Point monsterPoint = this->getPosition();
 
-	if (playerPoint->x < monsterPoint.x)
+	if (abs(m_pointPlayerPos.y - monsterPoint.y) < 8
+		&& m_pointPlayerPos.x > monsterPoint.x - 50
+		&& m_pointPlayerPos.x < monsterPoint.x + 50)
 	{
-		m_iXSpeed = -m_iXMaxSpeed;
-		m_bIsRight = false;
-	}
-	else if(playerPoint->x > monsterPoint.x)
-	{
-		m_iXSpeed = m_iXMaxSpeed;
-		m_bIsRight = true;
+		if (m_enMonsterState == en_ms_attack_end)
+		{
+			m_enMonsterState = en_ms_patrol;
+			NotificationCenter::getInstance()->postNotification("monster_attack", NULL);
+			return;
+		}
+		m_enMonsterState = en_ms_attack;
+		return;
 	}
 
-	//if (playerPoint->y > monsterPoint.y)
-	//{
-	//	m_iYspeed = m_iYMaxSpeed;
-	//}
-	//else if (playerPoint->y < monsterPoint.y)
-	//{
-	//	m_iYspeed = -m_iYMaxSpeed;
-	//}
+	if (m_pointPlayerPos.x < m_pointOriginalPos.x - m_iWarningRange
+		|| m_pointPlayerPos.x > m_pointOriginalPos.x + m_iWarningRange
+		|| m_pointPlayerPos.y < m_pointOriginalPos.y - m_iWarningRange
+		|| m_pointPlayerPos.y > m_pointOriginalPos.y + m_iWarningRange)
+	{
+		m_enMonsterState =  en_ms_patrol;
+		return;
+	}
 
-	m_bIsBattle = true;
+	m_enMonsterState = en_ms_warn;
 }

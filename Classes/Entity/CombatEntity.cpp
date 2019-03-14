@@ -9,6 +9,13 @@ CombatEntity::CombatEntity()
 	, m_iXMaxSpeed(0)
 	, m_iYMaxSpeed(0)
 	, m_bIsMonster(true)
+	//, m_bIsWait(true)
+	//, m_bIsMove(false)
+	//, m_bIsAttack(false)
+	//, m_bIsAttacked(false)
+	, m_bIsRight(false)
+	, m_enMonsterState(en_ms_patrol)
+	, m_enActionState(en_as_null)
 {
 }
 
@@ -56,6 +63,12 @@ void CombatEntity::saveCombatEntityData(const CombatEntityData & combatEntityDat
 
 void CombatEntity::idle()
 {
+	if (m_enActionState == en_as_idle)
+	{
+		return;
+	}
+	m_enActionState = en_as_idle;
+
 	//停止当前的动作
 	m_pSprite->stopAllActions();
 	//获取已经做好的动画
@@ -68,6 +81,12 @@ void CombatEntity::idle()
 
 void CombatEntity::run()
 {
+	if (m_enActionState == en_as_move)
+	{
+		return;
+	}
+	m_enActionState = en_as_move;
+
 	//停止当前的动作
 	m_pSprite->stopAllActions();
 	//获取已经做好的动画
@@ -80,6 +99,12 @@ void CombatEntity::run()
 
 void CombatEntity::attack()
 {
+	if (m_enActionState == en_as_attack)
+	{
+		return;
+	}
+	m_enActionState = en_as_attack;
+
 	//停止当前的动作
 	m_pSprite->stopAllActions();
 	//获取已经做好的动画
@@ -87,13 +112,21 @@ void CombatEntity::attack()
 	//生成动画动作
 	Animate* attackAnimate = Animate::create(attackAnimation);
 
-	auto callfunc = CallFunc::create(CC_CALLBACK_0(CombatEntity::idle, this));
-	Sequence* actionSequnence = Sequence::create(attackAnimate, callfunc, nullptr);
+	auto callfuncIdle = CallFunc::create(CC_CALLBACK_0(CombatEntity::idle, this));
+	auto callfuncAttackEnd = CallFunc::create(CC_CALLBACK_0(CombatEntity::changeMonsterState, this, en_ms_attack_end));
+
+	Sequence* actionSequnence = Sequence::create(attackAnimate, callfuncAttackEnd, callfuncIdle, nullptr);
 	m_pSprite->runAction(actionSequnence);
 }
 
 void CombatEntity::hurt()
 {
+	if (m_enActionState == en_as_attacked)
+	{
+		return;
+	}
+	m_enActionState = en_as_attacked;
+
 	m_pSprite->stopAllActions();
 
 	--m_iHP;
@@ -116,6 +149,7 @@ void CombatEntity::hurt()
 	Animate* hurtAnimate = Animate::create(hurtAnimation);
 
 	auto callfunc = CallFunc::create(CC_CALLBACK_0(CombatEntity::idle, this));
+
 	Sequence* actionSequnence = Sequence::create(hurtAnimate, callfunc, NULL);
 	m_pSprite->runAction(actionSequnence);
 }
@@ -146,4 +180,9 @@ void CombatEntity::playerDeath()
 	Sequence* actionSequnence = Sequence::create(sendScoreMsg, actionList, nullptr);
 
 	m_pSprite->runAction(actionSequnence);
+}
+
+void CombatEntity::changeMonsterState(MonsterState monsterState)
+{
+	m_enMonsterState = monsterState;
 }

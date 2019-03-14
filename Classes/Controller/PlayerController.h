@@ -21,6 +21,8 @@ public:
 	//设置玩家角色位置
 	void setPlayerPosition(Point pos);
 
+	void getDamage(Ref* pSender);
+
 	//检查控制器记录的角色状态
 	virtual void checkControllerStatus();
 

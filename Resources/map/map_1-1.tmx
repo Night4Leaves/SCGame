@@ -15,11 +15,6 @@
    eJztVklOAzEQdORc4QvsSDwBvsD6G9bPhJ/APfwELiBBcsJWKKVTVNsDFyTUJY0ycW/lXuxJKRAIBAKBQCAQCAQCgUAgEPi/eC/Px1+TCDQxzSmdjlI6Gy3Xdsr77tf/SV6tY9V/yot3ru9xsTkxfpKwAVRvMI+fcFZQfGbFdp5XZVj7DQ+7r7eOfo3zKvS8eDX39+U5L7ILIb8uazej7/zBzdbRgtcvy/sV+VGcZsJnXQMPb8+WG+uqOOBj7fbGKe2PlzK7pnyrnHA/IPamWVP1qXE2SE/txaL2xW2R3Rn5wXj5KP49ePp2XXFSdr3YVa5yAXhxhuzJ60vmhfi25l5sro93FlmgR7aK3nZDl+tWwX0LX5hVdc4MAWZ+yBmEPHKv21y0cs1yxMSax0HNlvXDteA+auXE1npi8mnPQK/HkDsANbN8uXfgC7PK54y1beUSd4HqTc+O9zEZWHcGx/TOpd5stvqogucQNlzfqTn78NuaMfV9gB5hvrPc/q6EDHt9KPqP5LvnAzrc46gNfKKuU6fu8KHuzLnzLdCSe3PZqit8VH9r5VnPC1vvTgOQfxurd05WqB4Bx9b8sOy58Hyh/Csf/F/lArVRPpWf3j3LeYOtJ2ceFUfEg88u+Kj+DvN3fc8O+ed+VP2Men4C09qqXg==
   </data>
  </layer>
- <layer id="42" name="obstacle" width="110" height="19">
-  <data encoding="base64" compression="zlib">
-   eJzt1rEJgDAQhtEjOoS76D5Z3iHEIig2VmpO3oP0P/c1iQAAAAAAyGMuEdN4vKV8vejeeXOGvU/Yb7AOue6gW0RN2K3qpltSuuXUc7e2rb3z/6nHvW/q+T953fbXbht+ahPX
-  </data>
- </layer>
  <objectgroup id="2" name="objects">
   <object id="1" name="player" x="48" y="512">
    <point/>
@@ -33,13 +28,13 @@
   <object id="15" name="monster_03" x="971" y="502">
    <point/>
   </object>
-  <object id="16" name="monster_04" x="1665" y="440">
+  <object id="16" name="monster_04" x="1577" y="428">
    <point/>
   </object>
-  <object id="17" name="monster_05" x="1666" y="514">
+  <object id="17" name="monster_05" x="1628" y="592">
    <point/>
   </object>
-  <object id="18" name="monster_06" x="1773" y="474">
+  <object id="18" name="monster_06" x="1739" y="508">
    <point/>
   </object>
   <object id="19" name="monster_07" x="2151" y="497">

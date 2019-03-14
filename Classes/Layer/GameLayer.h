@@ -10,6 +10,8 @@ USING_NS_CC;
 class Player;
 class PlayerController;
 class FlyingObject;
+class Monster;
+class Boss;
 
 class GameLayer : public Layer
 {
@@ -30,6 +32,8 @@ private:
 	PlayerData m_sctPlayerData;
 	PlayerController* m_pPlayerController;
 	Vector<FlyingObject*> vector_pAttackFlyingObject;
+	Vector<Monster*> vector_pMonster;
+	Boss* m_pBoss;
 
 	int m_iFlyingObjectFlag;
 	int m_iMonsterWarningRange;

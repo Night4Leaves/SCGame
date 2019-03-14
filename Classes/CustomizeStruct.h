@@ -55,6 +55,7 @@ struct PlayerData : CombatEntityData
 struct MonsterData : CombatEntityData
 {
 	int i_warningRange = 0;
+	int i_attackCDTime = 0;
 };
 
 /**

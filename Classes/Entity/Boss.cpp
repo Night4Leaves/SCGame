@@ -9,10 +9,7 @@ Boss::Boss()
 	, m_iSecondSkillCDTime(0)
 	, m_iThirdSkillDamage(0)
 	, m_iThirdSkillCDTime(0)
-	, m_bIsAttack(false)
-	, m_bIsAttacked(false)
 	, m_bIsLock(false)
-	, m_bIsRight(false)
 	, m_fStateTime(0.0)
 {
 }

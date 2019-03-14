@@ -94,7 +94,9 @@ void GameLayer::setGameScene_1_1(PlayerData & playerData)
 		monster->setMonsterPosition(Vec2(monsterX, monsterY));
 		monster->idle();
 		monster->setScale(0.35);
+		monster->setMonsterNumber(i - 1);
 		this->addChild(monster);
+		vector_pMonster.pushBack(monster);
 	}
 
 	ValueMap bossPoint = objGroup->getObject("boss");
@@ -115,7 +117,7 @@ void GameLayer::setGameScene_1_1(PlayerData & playerData)
 	m_sctPlayerData = playerData;
 
 	m_pPlayer = Player::create(m_sctPlayerData);
-	m_pPlayer->setPosition(Vec2(playerX, playerY));
+	m_pPlayer->setPosition(playerX, playerY);
 	m_pPlayer->idle();
 	this->addChild(m_pPlayer);
 

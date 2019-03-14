@@ -31,10 +31,7 @@ protected:
 	int m_iThirdSkillDamage;	//第三技能伤害
 	int m_iThirdSkillCDTime;	//第三技能伤害
 
-	bool m_bIsRight;	//是否向右
 	bool m_bIsLock;		//是否为锁死状态
-	bool m_bIsAttack;	//攻击状态
-	bool m_bIsAttacked;	//被攻击状态
 
 	float m_fStateTime;
 };

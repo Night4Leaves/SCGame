@@ -2,6 +2,7 @@
 
 #include "Util/CsvAnalyzeUtil.h"
 #include "Util/CsvLoadUtil.h"
+#include "Util/JsonUtil.h"
 
 #include "Json/json.h"
 
@@ -38,30 +39,27 @@ bool TestScene::init()
 {
 	do 
 	{
-		//TMXTiledMap* map = TMXTiledMap::create("map/test_map.tmx");
-		//this->addChild(map);
+		
 
-		//PlayerData playerData;
-		//playerData.str_playerName = "4_leaves";
-		//playerData.str_characterName = "player_01";
-		//playerData.i_HP = 10;
-		//playerData.i_attack = 10;
-		//playerData.i_xSpeed = 4;
-		//playerData.i_ySpeed = 4;
-		//playerData.vec_csActionName = { "idle","run","attack","jump","hurt","death" };
-		//playerData.vec_dActionTime = { 0.25, 0.04, 0.1, 0.25, 0.1, 0.25 };
-		//playerData.vec_iActionPlayTime = { -1, -1, 1, 1, 1, 1 };
+		TMXTiledMap* map = TMXTiledMap::create("map/test_map.tmx");
+		this->addChild(map);
 
-		//Player* player = Player::create(playerData);
-		//this->addChild(player);
-		//player->setPosition(400, 300);
-		//player->idle();
-		////player->setMap(map);
+		std::vector<PlayerData> m_vecCharacterList;
+		JsonUtil::getInstance()->readPlayerInfo(m_vecCharacterList);
 
-		//PlayerController* playerController = PlayerController::create();
-		//player->setController(playerController);
-		//this->addChild(playerController);
-		//playerController->setMap(map);
+		auto gameLayer = GameLayer::create();
+		this->addChild(gameLayer);
+		gameLayer->setGameScene_1_1(m_vecCharacterList[0]);
+
+		/*Player* player = Player::create(m_vecCharacterList[0]);
+		this->addChild(player);
+		player->setPosition(200, 300);
+		player->idle();
+
+		PlayerController* playerController = PlayerController::create();
+		player->setController(playerController);
+		this->addChild(playerController);
+		playerController->setMap(map);*/
 
 		//this->scheduleUpdate();
 
@@ -69,10 +67,6 @@ bool TestScene::init()
 		//this->addChild(test);
 		//test->setPosition(400, 300);
 		//test->setScale(0.5);
-
-		/*auto gameLayer = GameLayer::create();
-		this->addChild(gameLayer);
-		gameLayer->setTestGameScene();*/
 
 		/*auto test = GameMenuLayer::create();
 		this->addChild(test);
@@ -83,22 +77,14 @@ bool TestScene::init()
 
 		//HelloLua::create();
 
-		/*MonsterData monsterData;
-		monsterData.str_characterName = "boss_01";
-		monsterData.i_HP = 10;
-		monsterData.i_attack = 10;
-		std::vector<const char*> vec_csActionName = { "idle","run","attack","hurt" };
-		monsterData.vec_csActionName = vec_csActionName;
-		float p_fActionTime[4] = { 0.25f, 0.2f, 0.15f, 0.1f };
-		monsterData.p_fActionTime = p_fActionTime;
-		int m_iActionPlayTime[4] = { -1, -1, 1, 1 };
-		monsterData.p_iActionPlayTime = m_iActionPlayTime;
+		//std::vector<MonsterData> monsterInfoList;
+		//JsonUtil::getInstance()->readMonsterInfo(monsterInfoList);
 
-		Monster* monster = Monster::create(monsterData);
-		monster->setMonsterPosition(Point(400, 300));
-		monster->idle();
-		monster->setScale(0.35);
-		this->addChild(monster);*/
+		//Monster* monster = Monster::create(monsterInfoList[0]);
+		//monster->setMonsterPosition(Point(500, 300));
+		//monster->idle();
+		//monster->setScale(0.35);
+		//this->addChild(monster);
 
 
 	} while (0);
