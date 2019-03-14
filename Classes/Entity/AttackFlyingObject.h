@@ -6,6 +6,7 @@
 
 typedef FlyingObjectInitialInformation AtkFlyObjIniInfo;
 typedef FlyingObjectPositionInformation AtkFlyObjPosInfo;
+typedef FlyingObjectCheckInformation AtkFlyObjChkInfo;
 
 class AttackFlyingObject : public FlyingObject
 {

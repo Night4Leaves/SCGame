@@ -28,7 +28,7 @@ private:
 	void checkDistanceWithPlayer(Ref* pSender);
 
 private:
-	LoadingBar* m_pHPBar;
+	HpBar* m_pHPBar;
 
 	int m_iXSpeed;	//X轴移速
 	int m_iYSpeed;	//Y轴移速

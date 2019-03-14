@@ -3,6 +3,7 @@
 
 FlyingObject::FlyingObject()
 {
+	m_iAttack = 0;
 	m_fXSpeed = 0.0f;
 	m_fYSpeed = 0.0f;
 	m_fXFlightDistance = 0.0f;

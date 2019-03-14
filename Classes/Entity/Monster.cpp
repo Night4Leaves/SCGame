@@ -118,6 +118,21 @@ void Monster::attackLogic()
 
 void Monster::attackedLogic()
 {
+	m_iXSpeed = 0;
+	m_iYSpeed = 0;
+
+	m_pHPBar->setResidueHp(m_iHP / (float)m_iMaxHP * 100);
+
+	if (m_iHP == 0)
+	{
+		m_pHPBar->startFadeOut();
+		this->monsterDeath();
+		this->unscheduleUpdate();
+	}
+	else
+	{
+		this->hurt();
+	}
 }
 
 void Monster::attackEndLogic()
@@ -166,17 +181,12 @@ bool Monster::init(const MonsterData & monsterData)
 	m_iAttackCDTime = monsterData.i_attackCDTime;
 	m_iMaxHP = m_iHP;
 
-	Sprite* empty = Sprite::createWithSpriteFrameName("HP_Bar_Empty.png");
-	m_pHPBar = LoadingBar::create("HP_Bar.png");
-	empty->addChild(m_pHPBar);
-	this->addChild(empty);
+	Size size = m_pSprite->getContentSize() * getScale();
 
-	m_pHPBar->setDirection(LoadingBar::Direction::LEFT);
-	m_pHPBar->setPercent(m_iHP / m_iMaxHP * 100);
-	m_pHPBar->setPosition(Vec2(459, 44));
-
-	empty->setPosition(Vec2(10, 220));
-	empty->setScale(0.2);
+	m_pHPBar = HpBar::create();
+	m_pHPBar->setHpBarPosition(Point(20, size.height));
+	m_pHPBar->setResidueHp(m_iHP / (float)m_iMaxHP * 100);
+	this->addChild(m_pHPBar);
 	
 	NotificationCenter::getInstance()->addObserver(
 		this,
@@ -313,14 +323,14 @@ void Monster::checkAttckFlyingObjectPath(Ref * pSender)
 
 void Monster::checkBeHit(Ref * pSender)
 {
-	if (m_bIsDeath)
+	if (m_enMonsterState == en_as_attacked || m_bIsDeath)
 	{
 		return;
 	}
 
-	Point* objectPoint = (Point*)pSender;
-	float objectX = objectPoint->x;
-	float objectY = objectPoint->y;
+	FlyingObjectCheckInformation* objectPoint = (FlyingObjectCheckInformation*)pSender;
+	float objectX = objectPoint->point_checkPoint.x;
+	float objectY = objectPoint->point_checkPoint.y;
 
 	Point monsterPoint = this->getPosition();
 	Size monsterSize = m_pSprite->getContentSize() * this->getScale();
@@ -338,7 +348,12 @@ void Monster::checkBeHit(Ref * pSender)
 	if (objectX > monsterLeftXCheck && objectX < monsterRightXCheck)
 	{
 		NotificationCenter::getInstance()->postNotification("stop_flying", NULL);
-		this->hurt();
+		m_enMonsterState = en_ms_attacked;
+		m_iHP -= objectPoint->i_attack;
+		if (m_iHP < 0)
+		{
+			m_iHP = 0;
+		}
 	}
 }
 
@@ -347,7 +362,8 @@ void Monster::checkDistanceWithPlayer(Ref * pSender)
 	Point* playerPoint = (Point*)pSender;
 	m_pointPlayerPos = Point(playerPoint->x, playerPoint->y);
 
-	if (m_enActionState == en_as_attack)
+	if (m_enMonsterState == en_ms_attack
+		|| m_enMonsterState == en_ms_attacked)
 	{
 		return;
 	}

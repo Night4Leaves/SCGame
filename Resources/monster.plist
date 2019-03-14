@@ -230,15 +230,15 @@
                 <key>aliases</key>
                 <array/>
 				<key>anchor</key>
-                <string>{0.46886,0.03896}</string>
+                <string>{0.44186,0.02679}</string>
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{273,231}</string>
+                <string>{172,224}</string>
                 <key>spriteSourceSize</key>
-                <string>{273,231}</string>
+                <string>{172,224}</string>
                 <key>textureRect</key>
-                <string>{{435,771},{273,231}}</string>
+                <string>{{435,771},{172,224}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -252,13 +252,13 @@
             <key>premultiplyAlpha</key>
             <false/>
             <key>realTextureFileName</key>
-            <string>monster.png</string>
+            <string>Monster.png</string>
             <key>size</key>
             <string>{1024,1024}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:e2269592fdf6784f0b60de90b1c6e7f5:47c93a47b8a4b146b3b567b221e4bcc9:a6ae2b9304b7a9e734cf6a25f3604866$</string>
+            <string>$TexturePacker:SmartUpdate:fdc3f519c539ac3c368bd25cb6368859:184759e475a555fd210e4115a6813d5f:98f2afd2d677f0efd46026afa9a716bc$</string>
             <key>textureFileName</key>
-            <string>monster.png</string>
+            <string>Monster.png</string>
         </dict>
     </dict>
 </plist>

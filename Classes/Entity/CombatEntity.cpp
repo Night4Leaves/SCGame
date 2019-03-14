@@ -130,19 +130,19 @@ void CombatEntity::hurt()
 
 	m_pSprite->stopAllActions();
 
-	--m_iHP;
-	if (m_iHP == 0)
-	{
-		if (m_bIsMonster)
-		{
-			this->monsterDeath();
-		}
-		else
-		{
-			this->playerDeath();
-		}
-		return;
-	}
+	//--m_iHP;
+	//if (m_iHP == 0)
+	//{
+	//	if (m_bIsMonster)
+	//	{
+	//		this->monsterDeath();
+	//	}
+	//	else
+	//	{
+	//		this->playerDeath();
+	//	}
+	//	return;
+	//}
 
 	//获取已经做好的动画
 	Animation* hurtAnimation = AnimationCache::getInstance()->getAnimation(StringUtils::format("%s_hurt", m_strCharacterName.c_str()).c_str());
@@ -150,8 +150,9 @@ void CombatEntity::hurt()
 	Animate* hurtAnimate = Animate::create(hurtAnimation);
 
 	auto callfunc = CallFunc::create(CC_CALLBACK_0(CombatEntity::idle, this));
+	auto callfuncHurtEnd = CallFunc::create(CC_CALLBACK_0(CombatEntity::changeMonsterState, this, en_ms_patrol));
 
-	Sequence* actionSequnence = Sequence::create(hurtAnimate, callfunc, NULL);
+	Sequence* actionSequnence = Sequence::create(hurtAnimate, callfuncHurtEnd, callfunc, NULL);
 	m_pSprite->runAction(actionSequnence);
 }
 
@@ -159,12 +160,13 @@ void CombatEntity::monsterDeath()
 {
 	Animation* hurtAnimation = AnimationCache::getInstance()->getAnimation(StringUtils::format("%s_hurt", m_strCharacterName.c_str()).c_str());
 	Animate* hurtAnimate = Animate::create(hurtAnimation);
-	Blink* blinkAction = Blink::create(1.5f, 3);
+	Blink* blinkAction = Blink::create(1.0f, 2);
+	FadeOut* fadeOut = FadeOut::create(1.0f);
 
 	auto sendScoreMsg = CallFunc::create([&]() { NotificationCenter::getInstance()->postNotification("update_score", (Ref*)m_iMoney); });
 
 	Spawn* actionList = Spawn::create(hurtAnimate, blinkAction, nullptr);
-	Sequence* actionSequnence = Sequence::create(sendScoreMsg, actionList, nullptr);
+	Sequence* actionSequnence = Sequence::create(sendScoreMsg, actionList, fadeOut, nullptr);
 
 	m_pSprite->runAction(actionSequnence);
 }

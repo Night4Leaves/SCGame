@@ -3,8 +3,7 @@
 #define __COMBAT_ENTITY_H__
 
 #include "CustomizeStruct.h"
-#include "ui/CocosGUI.h"
-using namespace cocos2d::ui;
+#include "HpBar.h"
 
 enum MonsterState
 {

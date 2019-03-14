@@ -150,6 +150,9 @@
     <ClCompile Include="..\Classes\HeartCount.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\HpBar.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -288,6 +291,9 @@
       <Filter>src\Utils</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\HeartCount.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\HpBar.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

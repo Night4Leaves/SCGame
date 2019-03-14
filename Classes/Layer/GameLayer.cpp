@@ -126,7 +126,7 @@ void GameLayer::setGameScene_1_1(PlayerData & playerData)
 
 	m_pPlayerController->setMap(m_pMap);
 
-	AtkFlyObjIniInfo fireballInfo = { "fireball", Vec2(m_sctPlayerData.i_attack, 0), Vec2(m_sctPlayerData.i_xSpeed + 1, 0) };
+	AtkFlyObjIniInfo fireballInfo = { "fireball", Vec2(m_sctPlayerData.i_attackRange, 0), Vec2(m_sctPlayerData.i_xSpeed + 1, 0), m_sctPlayerData.i_attack };
 	for (int i = 0; i < 3; i++)
 	{
 		AttackFlyingObject* flyingObject = AttackFlyingObject::create(fireballInfo);

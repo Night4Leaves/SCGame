@@ -113,12 +113,14 @@ struct NPCSetInfo
  *	@cs_objectName	飞行物名称
  *	@vec2_changeDistance	飞行物飞行距离
  *	@vec2_speed	飞行物速度
+ *	@i_attack	飞行物攻击力
  */
 struct FlyingObjectInitialInformation
 {
 	const char* cs_objectName;
 	Point vec2_flightDistance;
 	Point vec2_speed;
+	int i_attack;
 };
 
 /**
@@ -134,6 +136,17 @@ struct FlyingObjectPositionInformation
 	bool b_isRight;
 	Point vec2_launcherPoint;
 	Point vec2_flightDistance;
+};
+
+/**
+ *	飞行物检查信息
+ *	@point_checkPoint	飞行物判定位置
+ *	@i_attack	飞行物攻击力
+ */
+struct FlyingObjectCheckInformation
+{
+	Point point_checkPoint;
+	int i_attack;
 };
 
 #define poslog(name, x, y) log("%s x:%f, y:%f", name, x, y);

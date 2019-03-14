@@ -4,9 +4,6 @@
 
 #include "Entity.h"
 
-#define HORIZONTAL_DISTANCE 150
-#define VERTICAL_DISTANCE 0
-
 class FlyingObject : public Entity
 {
 public:
@@ -17,6 +14,8 @@ protected:
 	const char* m_strObjectName;	//飞行物名称
 	Vec2 m_vec2Speed;	//飞行物速度
 	Point m_vec2FlightDistance;		//飞行距离
+
+	int m_iAttack;
 
 	float m_fXSpeed;	//X轴速度
 	float m_fYSpeed;	//Y轴速度

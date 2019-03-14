@@ -20,6 +20,7 @@ AttackFlyingObject * AttackFlyingObject::create(const AtkFlyObjIniInfo & objectI
 
 bool AttackFlyingObject::init(const AtkFlyObjIniInfo & objectInfo)
 {
+	m_iAttack = objectInfo.i_attack;
 	m_strObjectName = objectInfo.cs_objectName;
 	m_vec2FlightDistance = objectInfo.vec2_flightDistance;
 	m_vec2Speed = objectInfo.vec2_speed;
@@ -60,12 +61,14 @@ void AttackFlyingObject::update(float dt)
 	if (m_fXSpeed > 0)
 	{
 		Point checkPoint = Point(pos.x + spriteWidth, pos.y);
-		NotificationCenter::getInstance()->postNotification("attack_flying_object_check_point", (Ref*)&checkPoint);
+		AtkFlyObjChkInfo checkInfo = { checkPoint, m_iAttack };
+		NotificationCenter::getInstance()->postNotification("attack_flying_object_check_point", (Ref*)&checkInfo);
 	}
 	else if (m_fXSpeed < 0)
 	{
 		Point checkPoint = Point(pos.x - spriteWidth, pos.y);
-		NotificationCenter::getInstance()->postNotification("attack_flying_object_check_point", (Ref*)&checkPoint);
+		AtkFlyObjChkInfo checkInfo = { checkPoint, m_iAttack };
+		NotificationCenter::getInstance()->postNotification("attack_flying_object_check_point", (Ref*)&checkInfo);
 	}
 }
 
