@@ -10,14 +10,14 @@ public:
 	SCController();
 	virtual ~SCController();
 
-	//ÉèÖÃ¼àÌı¶ÔÏó
+	/*è®¾ç½®ç›‘å¬å¯¹è±¡*/
 	void setControllerListner(GeneralControllerListener* controllerListener);
 
-	//¼ì²é¿ØÖÆÆ÷ÖĞ±£´æµÄ¿ØÖÆ½ÇÉ«µÄ×´Ì¬
+	/*æ£€æŸ¥æ§åˆ¶å™¨ä¸­ä¿å­˜çš„æ§åˆ¶è§’è‰²çš„çŠ¶æ€*/
 	virtual void checkControllerStatus() = 0;
 
 protected:
-	//¼ÇÂ¼±»¿ØÖÆ¶ÔÏó
+	//è®°å½•è¢«æ§åˆ¶å¯¹è±¡
 	GeneralControllerListener* m_pControllerListener;
 };
 

@@ -10,7 +10,7 @@ Monster::Monster()
 	, m_fStateTime(0.0)
 	, m_fAttackTime(0.0)
 {
-	srand((unsigned)time(nullptr));
+	srand((unsigned)time(nullptr));	//更新随机数种子
 }
 
 Monster::~Monster()
@@ -20,12 +20,12 @@ Monster::~Monster()
 
 void Monster::patrolLogic()
 {
+	//5秒左右更新一次状态
 	if (m_fStateTime > 5)
 	{
 		m_fStateTime = 0;
 
 		int r = rand() % 2;
-		int j = rand() % 2;
 
 		if (r == 1)
 		{
@@ -38,15 +38,6 @@ void Monster::patrolLogic()
 			m_bIsRight = false;
 		}
 
-		if (j == 1)
-		{
-			m_iYSpeed = m_iYMaxSpeed;
-		}
-		else
-		{
-			m_iYSpeed = -m_iYMaxSpeed;
-		}
-
 		m_pSprite->setFlipX(m_bIsRight);
 		this->run();
 	}
@@ -56,6 +47,7 @@ void Monster::warnLogic()
 {
 	Point monsterPoint = this->getPosition();
 
+	//如果玩家与怪物在Y轴上的距离相差大于等于8,怪物会向玩家移动
 	if (abs(m_pointPlayerPos.y - monsterPoint.y) >= 8)
 	{
 		if (m_pointPlayerPos.y > monsterPoint.y)
@@ -72,6 +64,7 @@ void Monster::warnLogic()
 		m_iYSpeed = 0;
 	}
 	
+	//如果玩家不在怪物的攻击距离内,怪物会向玩家移动
 	if (m_pointPlayerPos.x < monsterPoint.x - m_iAttackRange)
 	{
 		m_iXSpeed = -m_iXMaxSpeed;
@@ -90,9 +83,10 @@ void Monster::warnLogic()
 
 void Monster::attackLogic()
 {
+	//攻击间隔大于冷却时间才会进行攻击动作
 	if (m_fAttackTime > m_iAttackCDTime)
 	{
-		m_fAttackTime = 0;
+		m_fAttackTime = 0;	//攻击间隔清0
 
 		Point monsterPoint = this->getPosition();
 
@@ -102,7 +96,6 @@ void Monster::attackLogic()
 		if (m_pointPlayerPos.x < monsterPoint.x)
 		{
 			m_bIsRight = false;
-
 		}
 		else if (m_pointPlayerPos.x > monsterPoint.x)
 		{
@@ -321,6 +314,7 @@ void Monster::checkAttckFlyingObjectPath(Ref * pSender)
 	}
 }
 
+//根据飞行物发来的数据，判定自己是否会被击中
 void Monster::checkBeHit(Ref * pSender)
 {
 	if (m_enMonsterState == en_as_attacked || m_bIsDeath)
@@ -357,6 +351,7 @@ void Monster::checkBeHit(Ref * pSender)
 	}
 }
 
+//根据玩家角色发送的数据，切换自己的行动状态
 void Monster::checkDistanceWithPlayer(Ref * pSender)
 {
 	Point* playerPoint = (Point*)pSender;

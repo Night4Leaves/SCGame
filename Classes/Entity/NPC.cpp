@@ -41,11 +41,9 @@ bool NPC::init(const NPCSetInfo& npcSetInfo)
 	float scale = npcSetInfo.f_scale;
 
 	//创建精灵对象
-	Sprite* sprite = Sprite::createWithSpriteFrameName(wait.c_str());
-
-	this->bindSprite(sprite);
-
-	sprite->setScale(scale);
+	m_pSprite = Sprite::createWithSpriteFrameName(wait.c_str());
+	
+	m_pSprite->setScale(scale);
 
 	//如果待机动画帧数量不为1，意味NPC采用动态待机动画
 	if (num > 1)
@@ -54,7 +52,7 @@ bool NPC::init(const NPCSetInfo& npcSetInfo)
 		
 		Animation* animation = AnimationUtil::createAnimationWithFrameNameAndNum(idle.c_str(), delay, loops, num);
 		Animate* animate = Animate::create(animation);
-		sprite->runAction(animate);
+		m_pSprite->runAction(animate);
 	}
 
 	NotificationCenter::getInstance()->addObserver(
@@ -75,15 +73,12 @@ void NPC::checkPlayerPoint(Ref * pSender)
 
 	float xPlayer = playerPoint->x;
 	float yPlayer = playerPoint->y;
-	poslog("player", xPlayer, yPlayer);
 
 	float xNPC = npcPoint.x;
 	float yNPC = npcPoint.y;
-	poslog(m_strNPCName.c_str(), xNPC, yNPC);
 
 	float npcWidth = npcSize.width * scale;
 	float npcHeight = npcSize.height * scale;
-	poslog(m_strNPCName.c_str(), npcWidth, npcHeight);
 
 	if ((xPlayer - (xNPC - npcWidth * 0.5)) > 0
 		&& (xPlayer - (xNPC + npcWidth * 0.5)) < 0

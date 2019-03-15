@@ -109,11 +109,13 @@ void PaneLayer::selectCharacter()
 {
 	log("PaneLayer::selectCharacter");
 
+	//创建点击屏蔽层
 	this->addChild(ShieldLayer::create());
 
 	auto backColor = LayerColor::create(Color4B::BLACK);
 	this->addChild(backColor);
 
+	//读取玩家角色数据
 	JsonUtil::getInstance()->readPlayerInfo(m_vecCharacterList);
 
 	auto menu = Menu::create();
@@ -148,6 +150,7 @@ void PaneLayer::loadFile()
 {
 	log("PaneLayer::loadFile");
 
+	//创建点击屏蔽层
 	this->addChild(ShieldLayer::create());
 
 	auto backColor = LayerColor::create(Color4B::BLACK);

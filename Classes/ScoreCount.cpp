@@ -42,6 +42,7 @@ bool ScoreCount::init(Array * presenters, int digit)
 			++i;
 		}
 		
+		//显示遮罩层，可以只显示图片的指定要显示地一部分
 		ClippingNode* cliper = ClippingNode::create();
 		DrawNode* drawNode = DrawNode::create();
 

@@ -4,20 +4,16 @@
 bool Portal::init()
 {
 
-	Sprite* tpBackSprite = Sprite::createWithSpriteFrameName("tp_back.png");
+	m_pSprite = Sprite::createWithSpriteFrameName("tp_back.png");
 	Sprite* tpfrontSprite = Sprite::createWithSpriteFrameName("tp_front.png");
 
-	this->bindSprite(tpBackSprite);
-
-	tpBackSprite->addChild(tpfrontSprite);
-
-	Size tpBackSize = tpBackSprite->getContentSize();
+	Size tpBackSize = m_pSprite->getContentSize();
 	tpfrontSprite->setPosition(tpBackSize.width * 0.5, tpBackSize.height * 0.5);
 
 	auto test1 = RotateBy::create(5.0f, -90.0f);
 	auto test2 = RotateBy::create(5.0f, 180.0f);
 
-	tpBackSprite->runAction(RepeatForever::create(test1));
+	m_pSprite->runAction(RepeatForever::create(test1));
 	tpfrontSprite->runAction(RepeatForever::create(test2));
 
 	NotificationCenter::getInstance()->addObserver(
@@ -38,15 +34,12 @@ void Portal::checkPlayerPoint(Ref * pSender)
 	
 	float xPlayer = playerPoint->x;
 	float yPlayer = playerPoint->y;
-	poslog("player", xPlayer, yPlayer);
 
 	float xPortal = portalPoint.x;
 	float yPortal = portalPoint.y;
-	poslog("portal pos", xPortal, yPortal);
 
 	float portalWidth = portalSize.width * scale;
 	float portalHeight = portalSize.height * scale;
-	poslog("portal size", portalWidth, portalHeight);
 
 	if ((xPlayer - (xPortal - portalWidth * 0.5)) > 0
 		&& (xPlayer - (xPortal + portalWidth * 0.5)) < 0

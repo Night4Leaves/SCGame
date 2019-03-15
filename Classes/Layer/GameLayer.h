@@ -24,19 +24,22 @@ public:
 
 	void addAttackFlyingObject(Ref* pSender);
 
+	/**
+	 *	设置第一关场景
+	 *	@playerData	玩家数据结构体
+	 */
 	void setGameScene_1_1(PlayerData &playerData);
 
 private:
-	TMXTiledMap* m_pMap;
-	Player* m_pPlayer;
-	PlayerData m_sctPlayerData;
-	PlayerController* m_pPlayerController;
-	Vector<FlyingObject*> vector_pAttackFlyingObject;
-	Vector<Monster*> vector_pMonster;
-	Boss* m_pBoss;
+	TMXTiledMap* m_pMap;	//地图
+	Player* m_pPlayer;	//玩家
+	PlayerData m_sctPlayerData;	//玩家数据
+	PlayerController* m_pPlayerController;	//玩家控制器
+	Vector<FlyingObject*> vector_pAttackFlyingObject;	//飞行物
+	Vector<Monster*> vector_pMonster;	//怪物
+	Boss* m_pBoss;	//Boss
 
-	int m_iFlyingObjectFlag;
-	int m_iMonsterWarningRange;
+	int m_iFlyingObjectFlag;	//飞行物计数器
 
 };
 

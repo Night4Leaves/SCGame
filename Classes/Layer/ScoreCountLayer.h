@@ -12,14 +12,21 @@ public:
 	ScoreCountLayer();
 	~ScoreCountLayer();
 
+	/*创建记分器显示层*/
 	static ScoreCountLayer* create(int number);
 	virtual bool init(int number);
 
+	/**
+	 *	设置分数
+	 *	@number	分数
+	 *	@ceiling	分数上限
+	 */
 	void setNumber(int number, int ceiling = 999);
+	/*获取分数*/
 	int getNumber();
 
 private:
-	int i_number;
+	int i_number;	//分数
 };
 
 #endif // !__SCORE_COUNT_LAYRE_H__

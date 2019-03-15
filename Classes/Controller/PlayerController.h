@@ -14,20 +14,27 @@ public:
 	virtual bool init();
 	virtual void update(float dt);
 
+	/*获取玩家是否朝右*/
 	bool getIsRight();
+	/*保存块地图*/
 	void setMap(TMXTiledMap* p_map);
-	//根据玩家设置显示地图
+	/*根据玩家设置显示地图*/
 	void setViewPointByPlayer(Point pos);
-	//设置玩家角色位置
+	/*设置玩家角色位置*/
 	void setPlayerPosition(Point pos);
 
+	/*受到伤害*/
 	void getDamage(Ref* pSender);
 
-	//检查控制器记录的角色状态
+	/*检查控制器记录的角色状态*/
 	virtual void checkControllerStatus();
 
 	void onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event);
 	void onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event);
+
+private:
+	/*计算脚下砖块在块地图中的坐标*/
+	Point tileCoordForPosition(Point pos);
 
 private:
 	TMXTiledMap* m_pMap;	//记录地图
@@ -45,7 +52,6 @@ private:
 	int m_iHorizontalRun;	//是否为左右跑动状态(判断左右移动键按下几个)
 	int m_iVerticalRun;		//是否为上下跑动状态(判断上下移动键按下几个)
 
-	Point tileCoordForPosition(Point pos);
 };
 
 #endif // !__PLAYER_CONTROLLER_H__

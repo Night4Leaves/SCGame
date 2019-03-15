@@ -12,16 +12,18 @@ public:
 	HeartCount();
 	virtual ~HeartCount();
 
+	/*创建玩家血量*/
 	static HeartCount* create(int digit);
 	virtual bool init(int digit);
 
+	/*玩家血量下降*/
 	void reduceHP();
 
 protected:
-	int m_iMaxHP;
-	int m_iHP;
+	int m_iMaxHP;	//玩家最高血量
+	int m_iHP;	//玩家目前血量
 
-	Node* node_pPresenter;
+	Node* node_pPresenter;	//表示血量的图片对象
 };
 
 #endif // !__HEART_COUNT_H__

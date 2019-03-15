@@ -39,6 +39,7 @@ bool InitialScene::init()
 		//创建开始界面菜单
 		m_pGameMenuLayer->setInitialMenu();
 
+		//初始化显示层并添加到场景中
 		m_pPaneLayer = PaneLayer::create();
 		CC_BREAK_IF(m_pPaneLayer == nullptr);
 		this->addChild(m_pPaneLayer);

@@ -27,6 +27,7 @@ bool PlayerController::init()
 	listener->onKeyReleased = CC_CALLBACK_2(PlayerController::onKeyReleased, this);
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 
+	//接收“受到伤害”的消息
 	NotificationCenter::getInstance()->addObserver(
 		this,
 		callfuncO_selector(PlayerController::getDamage),
@@ -59,8 +60,8 @@ void PlayerController::setMap(TMXTiledMap * p_map)
 {
 	m_pMap = p_map;
 
-	Size mapTiledNum = m_pMap->getMapSize();
-	Size tiledSize = m_pMap->getTileSize();
+	Size mapTiledNum = m_pMap->getMapSize();	//获得地图中块的数量
+	Size tiledSize = m_pMap->getTileSize();		//获得地图中块的尺寸
 
 	m_fMapWidth = mapTiledNum.width * tiledSize.width;
 	m_fMapHeight = mapTiledNum.height * tiledSize.height;
@@ -94,7 +95,7 @@ void PlayerController::checkControllerStatus()
 
 		//设置角色朝向
 		m_pControllerListener->turnAround(m_bIsRight);
-		//设置角色跑动动画
+		
 		m_pControllerListener->run();
 	}
 	//如果左右移动计数器为0
@@ -102,7 +103,6 @@ void PlayerController::checkControllerStatus()
 	{
 		m_iXSpeed = 0;	//角色位移速度置0
 
-		//设置角色待机动画
 		m_pControllerListener->idle();
 	}
 
@@ -211,6 +211,7 @@ void PlayerController::onKeyPressed(EventKeyboard::KeyCode keyCode, Event * even
 
 		//break;
 	case EventKeyboard::KeyCode::KEY_L:
+		//发送包含角色坐标的消息，让场景可互动对象判定自己是否被触发
 		NotificationCenter::getInstance()->postNotification("player_check_point", (Ref*)&(m_pControllerListener->getTargetPosition()));
 		break;
 	default:
@@ -363,7 +364,7 @@ Point PlayerController::tileCoordForPosition(Point pos)
 
 	float x = pos.x / tiledSize.width * 1.0;
 
-	float y = (m_fMapHeight - pos.y) / tiledSize.height * 1.0;
+	float y = (m_fMapHeight - pos.y) / tiledSize.height * 1.0;	//块地图的Y轴坐标与cocos2dx是相反的
 
 	if (x - mapTiledNum.width >= 0)
 	{
@@ -439,6 +440,7 @@ void PlayerController::setPlayerPosition(Point pos)
 
 	Point destPos = Point();
 
+	//计算角色下一帧会移动到的坐标
 	if (m_iXSpeed > 0)
 	{
 		destPos = Point(pos.x + playerSize.width / 2, pos.y);
@@ -452,21 +454,25 @@ void PlayerController::setPlayerPosition(Point pos)
 		destPos = pos;
 	}
 
-	/*Point tiledPos = tileCoordForPosition(destPos);
+	//获取下一帧要移动到的砖块在块地图中的坐标
+	Point tiledPos = tileCoordForPosition(destPos);
 	
+	//根据地图块的坐标获得地图块的GID
 	int tiledGid = m_pMeta->getTileGIDAt(tiledPos);
 
 	if (tiledGid != 0)
 	{
+		//根据GID取得该图块的属性集
 		Value properties = m_pMap->getPropertiesForGID(tiledGid);
 
 		auto collidableProp = properties.asValueMap().at("Collidable");
 
 		if (collidableProp.asBool())
 		{
-			return;
+			pos.y -= m_iYSpeed;
+			m_iYSpeed = 0;
 		}
-	}*/
+	}
 
 	this->setViewPointByPlayer(pos);
 }

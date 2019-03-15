@@ -11,24 +11,33 @@ public:
 	virtual bool init(const MonsterData & monsterData);
 	virtual void update(float dt);
 
+	/*设置怪物的位置*/
 	void setMonsterPosition(Point pos);
 	
 private:
 	Monster();
 	virtual ~Monster();
 
+	/*巡逻行为*/
 	void patrolLogic();
+	/*警戒行为*/
 	void warnLogic();
+	/*攻击行为*/
 	void attackLogic();
+	/*被攻击行为*/
 	void attackedLogic();
+	/*攻击结束后的判定*/
 	void attackEndLogic();
 
+	/*根据飞行物设置信息确定自己是否会被击中*/
 	void checkAttckFlyingObjectPath(Ref* pSender);
+	/*根据飞行物判定位置确认自己是否被击中*/
 	void checkBeHit(Ref* pSender);
+	/*根据和玩家角色的距离变更自己的状态*/
 	void checkDistanceWithPlayer(Ref* pSender);
 
 private:
-	HpBar* m_pHPBar;
+	HpBar* m_pHPBar;	//血条
 
 	int m_iXSpeed;	//X轴移速
 	int m_iYSpeed;	//Y轴移速

@@ -12,6 +12,7 @@ class ShieldLayer : public Layer
 public:
 	CREATE_FUNC(ShieldLayer);
 
+	/*设置屏蔽层是否生效*/
 	void setTouchEnabled(bool value);
 private:
 	ShieldLayer();
@@ -20,7 +21,7 @@ private:
 	virtual bool init();
 
 private:
-	EventListenerTouchOneByOne* m_pListener;
+	EventListenerTouchOneByOne* m_pListener;	//点击事件监听器
 };
 
 #endif // !__SHIELD_LAYER_H__

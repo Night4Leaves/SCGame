@@ -36,18 +36,25 @@ public:
 	CREATE_FUNC(GameScene);
 	virtual bool init();
 
+	/**
+	 *	设置游戏场景
+	 *	@sign	关卡
+	 *	@player	玩家数据结构体
+	 */
 	void setScene(SceneType sign, PlayerData &player);
 
+	/*更新分数*/
 	void updateScore(Ref* pSender);
+	/*玩家损失血量*/
 	void playerReduceHeart(Ref* pSender);
 
 protected:
-	BackgroundLayer* m_pBackgroundLayer;
-	GameLayer* m_pGameLayer;
-	GameMenuLayer* m_pGameMenuLayer;
-	PaneLayer* m_pPaneLayer;
-	ScoreCountLayer* m_pScoreCountLayer;
-	HeartCount* m_pHeartCount;
+	BackgroundLayer* m_pBackgroundLayer;	//背景层
+	GameLayer* m_pGameLayer;	//游戏层
+	GameMenuLayer* m_pGameMenuLayer;	//游戏菜单层
+	PaneLayer* m_pPaneLayer;	//显示层
+	ScoreCountLayer* m_pScoreCountLayer;	//记分器层
+	HeartCount* m_pHeartCount;	//玩家血量层
 };
 
 #endif // !__GAME_SCENE_H__

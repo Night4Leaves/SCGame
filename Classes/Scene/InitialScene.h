@@ -21,9 +21,9 @@ public:
 	virtual bool init();
 
 private:
-	BackgroundLayer* m_pBackgroundLayer;
-	GameMenuLayer* m_pGameMenuLayer;
-	PaneLayer* m_pPaneLayer;
+	BackgroundLayer* m_pBackgroundLayer;	//背景层
+	GameMenuLayer* m_pGameMenuLayer;	//游戏菜单层
+	PaneLayer* m_pPaneLayer;	//显示层
 };
 
 #endif // !__INITIAL_SCENE_H__

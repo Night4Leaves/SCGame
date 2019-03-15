@@ -37,11 +37,6 @@ bool Player::init(const PlayerData & playerData)
 	return true;
 }
 
-std::string Player::getSpriteName()
-{
-	return m_strCharacterName;
-}
-
 void Player::setController(SCController * controller)
 {
 	m_pPlayerController = controller;
@@ -152,28 +147,21 @@ void Player::hurt()
 
 	m_pSprite->stopAllActions();
 
-	//--m_iHP;
-	//if (m_iHP == 0)
-	//{
-	//	if (m_bIsMonster)
-	//	{
-	//		this->monsterDeath();
-	//	}
-	//	else
-	//	{
-	//		this->playerDeath();
-	//	}
-	//	return;
-	//}
+	--m_iHP;
+	if (m_iHP <= 0)
+	{
+		m_iHP = 0;
+		this->playerDeath();
+		return;
+	}
 
 	//获取已经做好的动画
 	Animation* hurtAnimation = AnimationCache::getInstance()->getAnimation(StringUtils::format("%s_hurt", m_strCharacterName.c_str()).c_str());
 	//生成动画动作
 	Animate* hurtAnimate = Animate::create(hurtAnimation);
 
-	//auto callfunc = CallFunc::create(CC_CALLBACK_0(CombatEntity::idle, this));
 	auto checkControllerStatus = CallFunc::create([&]() {m_pPlayerController->checkControllerStatus(); });
 	
-	Sequence* actionSequnence = Sequence::create(hurtAnimate, checkControllerStatus, /*callfunc,*/ NULL);
+	Sequence* actionSequnence = Sequence::create(hurtAnimate, checkControllerStatus, NULL);
 	m_pSprite->runAction(actionSequnence);
 }

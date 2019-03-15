@@ -9,10 +9,6 @@ CombatEntity::CombatEntity()
 	, m_iXMaxSpeed(0)
 	, m_iYMaxSpeed(0)
 	, m_bIsMonster(true)
-	//, m_bIsWait(true)
-	//, m_bIsMove(false)
-	//, m_bIsAttack(false)
-	//, m_bIsAttacked(false)
 	, m_bIsRight(false)
 	, m_enMonsterState(en_ms_patrol)
 	, m_enActionState(en_as_null)
@@ -26,9 +22,9 @@ CombatEntity::~CombatEntity()
 bool CombatEntity::init(const std::vector<std::string> & actionName, const std::vector<double> & actionTime, const std::vector<int> & actionPlayTime)
 {
 	const char* characterName = m_strCharacterName.c_str();
-	std::string animationName = "";	//动画全称
-	Animation* animation = NULL;	//动画对象
-	auto num = actionName.size();	//动作数量
+	std::string animationName = "";
+	Animation* animation = NULL;
+	auto num = actionName.size();
 
 	//生成静态待机图对应的精灵
 	std::string waitAnimationName = StringUtils::format("%s_wait.png", characterName);
@@ -129,20 +125,6 @@ void CombatEntity::hurt()
 	m_enActionState = en_as_attacked;
 
 	m_pSprite->stopAllActions();
-
-	//--m_iHP;
-	//if (m_iHP == 0)
-	//{
-	//	if (m_bIsMonster)
-	//	{
-	//		this->monsterDeath();
-	//	}
-	//	else
-	//	{
-	//		this->playerDeath();
-	//	}
-	//	return;
-	//}
 
 	//获取已经做好的动画
 	Animation* hurtAnimation = AnimationCache::getInstance()->getAnimation(StringUtils::format("%s_hurt", m_strCharacterName.c_str()).c_str());

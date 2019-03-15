@@ -93,11 +93,13 @@ bool MainScene::init(PlayerData &playerData)
 
 		playerController->setMap(m_pMap);
 
+		//初始化玩家血量层并添加到场景中
 		m_pHeartCount = HeartCount::create(playerData.i_HP);
 		CC_BREAK_IF(m_pHeartCount == nullptr);
 		this->addChild(m_pHeartCount);
 		m_pHeartCount->setPosition(0, 570);
 
+		//初始化计分器层并添加到场景中
 		m_pScoreCountLayer = ScoreCountLayer::create(playerData.i_money);
 		CC_BREAK_IF(m_pScoreCountLayer == nullptr);
 		this->addChild(m_pScoreCountLayer);

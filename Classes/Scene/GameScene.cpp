@@ -35,6 +35,7 @@ bool GameScene::init()
 		this->addChild(m_pBackgroundLayer);
 		m_pBackgroundLayer->setPosition(Vec2(0, 200));
 		
+		//初始化游戏层并添加到场景中
 		m_pGameLayer = GameLayer::create();
 		CC_BREAK_IF(m_pGameLayer == nullptr);
 		this->addChild(m_pGameLayer);
@@ -49,6 +50,7 @@ bool GameScene::init()
 		CC_BREAK_IF(m_pScoreCountLayer == nullptr);
 		this->addChild(m_pScoreCountLayer);
 
+		//初始化现实层并添加到场景中
 		m_pPaneLayer = PaneLayer::create();
 		CC_BREAK_IF(m_pPaneLayer == nullptr);
 		this->addChild(m_pPaneLayer);
@@ -86,7 +88,9 @@ void GameScene::setScene(SceneType sign, PlayerData & player)
 	case Scene_1:
 		//添加背景图片
 		m_pBackgroundLayer->setBackgroundPicture("background/game_scene_01_2048x1536.png");
+		//设置场景中的角色
 		m_pGameLayer->setGameScene_1_1(player);
+		//设置分数
 		m_pScoreCountLayer->setNumber(player.i_money);
 		break;
 	case Scene_2:

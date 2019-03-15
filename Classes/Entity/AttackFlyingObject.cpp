@@ -20,12 +20,14 @@ AttackFlyingObject * AttackFlyingObject::create(const AtkFlyObjIniInfo & objectI
 
 bool AttackFlyingObject::init(const AtkFlyObjIniInfo & objectInfo)
 {
+	//获取飞行物的各属性
 	m_iAttack = objectInfo.i_attack;
 	m_strObjectName = objectInfo.cs_objectName;
 	m_vec2FlightDistance = objectInfo.vec2_flightDistance;
 	m_vec2Speed = objectInfo.vec2_speed;
 	m_bIsUserEffective = false;
 
+	//创建飞行物对象
 	std::string waitAnimationName = StringUtils::format("%s_01.png", m_strObjectName);
 	Sprite* sprite = Sprite::createWithSpriteFrameName(waitAnimationName.c_str());
 	this->bindSprite(sprite);
@@ -49,6 +51,7 @@ void AttackFlyingObject::update(float dt)
 	Vec2 pos = this->getPosition();
 	pos.x += m_fXSpeed;
 
+	//到达预定目标，调用停止飞行函数
 	if ((m_fXSpeed > 0 && pos.x >= m_vec2TargetPoint.x) || (m_fXSpeed < 0 && pos.x <= m_vec2TargetPoint.x))
 	{
 		this->stopFlying(NULL);
@@ -58,6 +61,7 @@ void AttackFlyingObject::update(float dt)
 
 	this->setPosition(pos);
 
+	//还在飞行则把坐标发送给怪物
 	if (m_fXSpeed > 0)
 	{
 		Point checkPoint = Point(pos.x + spriteWidth, pos.y);
@@ -78,6 +82,7 @@ void AttackFlyingObject::setFlyingInformation(AtkFlyObjPosInfo & objectFlyingInf
 	m_vec2LauncherPoint = objectFlyingInfo.vec2_launcherPoint;
 	m_bIsRight = objectFlyingInfo.b_isRight;
 
+	//根据飞行方向设置速度
 	if (!m_bIsRight)
 	{
 		m_fXSpeed = -m_vec2Speed.x;
@@ -93,6 +98,7 @@ void AttackFlyingObject::setFlyingInformation(AtkFlyObjPosInfo & objectFlyingInf
 	float y = m_vec2CurrentPoint.y + m_fYFlightDistance;
 	m_vec2TargetPoint = Point(x, y);
 
+	//把预定飞行轨迹发送给怪物
 	objectFlyingInfo.vec2_flightDistance = Point(m_fXFlightDistance, m_fYFlightDistance);
 	NotificationCenter::getInstance()->postNotification("attack_flying_object_point", (Ref*)&objectFlyingInfo);
 
