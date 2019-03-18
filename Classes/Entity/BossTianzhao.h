@@ -17,6 +17,7 @@ public:
 
 	virtual void checkAttckFlyingObjectPath(Ref* pSender);
 	virtual void checkBeHit(Ref* pSender);
+	virtual void checkDistanceWithPlayer(Ref* pSender);
 
 private:
 	BossTianzhao();

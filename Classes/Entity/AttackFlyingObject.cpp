@@ -29,13 +29,12 @@ bool AttackFlyingObject::init(const AtkFlyObjIniInfo & objectInfo)
 
 	//创建飞行物对象
 	std::string waitAnimationName = StringUtils::format("%s_01.png", m_strObjectName);
-	Sprite* sprite = Sprite::createWithSpriteFrameName(waitAnimationName.c_str());
-	this->bindSprite(sprite);
+	m_pSprite = Sprite::createWithSpriteFrameName(waitAnimationName.c_str());
 
 	Animation* animation = AnimationUtil::createAnimationWithSingleFrameName(m_strObjectName, 0.1f, -1);
 	Animate* animate = Animate::create(animation);
-	sprite->runAction(animate);
-	sprite->setOpacity(0);
+	m_pSprite->runAction(animate);
+	m_pSprite->setOpacity(0);
 
 	NotificationCenter::getInstance()->addObserver(
 		this,

@@ -25,39 +25,39 @@ public:
 	void savePlayerData(PlayerData &playerData);
 
 private:
-	/*显示层*/
+	//显示层
 	void showPaneLayer(Ref* pSender);
 
-	/*打开商店*/
+	//打开商店
 	void openStore();
-	/*暂停*/
+	//暂停
 	void startPause();
-	/*显示选择游戏关卡界面*/
+	//显示选择游戏关卡界面
 	void selectGameScene();
 
-	/*打开背包*/
+	//打开背包
 	void openBackpack();
-	/*打开技能列表*/
+	//打开技能列表
 	void openSkilllist();
 
-	/*创建选择的关卡场景*/
+	//创建选择的关卡场景
 	void changeGameScene(Ref* pSender);
-	/*进入主场景*/
+	//进入主场景
 	void enterMainScene(PlayerData &playerData);
-	/*切换到主场景*/
+	//切换到主场景
 	void changeMainScene(Ref* pSender);;
 
-	/*关闭当前显示的界面*/
+	//关闭当前显示的界面
 	void menuCloseCallback(Ref* pSender);
-	/*创建新存档数据*/
+	//创建新存档数据
 	void createNewData();
 
-	/*选择玩家角色*/
+	//选择玩家角色
 	void selectCharacter();
 	void selectPlayer_1(Ref* pSender);
 	void selectPlayer_2(Ref* pSender);
 
-	/*选择载入的存档*/
+	//选择载入的存档
 	void loadFile();
 	void selectSavedata_1(Ref* pSender);
 	void selectSavedata_2(Ref* pSender);

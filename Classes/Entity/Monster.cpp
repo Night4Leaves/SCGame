@@ -1,5 +1,6 @@
 #include "Monster.h"
 #include "Util/AnimationUtil.h"
+#include "GameManager.h"
 
 Monster::Monster()
 	: m_iXSpeed(0)
@@ -174,7 +175,7 @@ bool Monster::init(const MonsterData & monsterData)
 	m_iAttackCDTime = monsterData.i_attackCDTime;
 	m_iMaxHP = m_iHP;
 
-	Size size = m_pSprite->getContentSize() * getScale();
+	Size size = m_pSprite->getContentSize();
 
 	m_pHPBar = HpBar::create();
 	m_pHPBar->setHpBarPosition(Point(20, size.height));
@@ -255,11 +256,11 @@ void Monster::update(float dt)
 		this->idle();
 	}
 
-	this->setPosition(pos);
+	this->setMonsterPositon(pos);
 
 }
 
-void Monster::setMonsterPosition(Point pos)
+void Monster::setMonsterOriginPosition(Point pos)
 {
 	m_pointOriginalPos = pos;
 	setPosition(pos);
@@ -383,4 +384,23 @@ void Monster::checkDistanceWithPlayer(Ref * pSender)
 	}
 
 	m_enMonsterState = en_ms_warn;
+}
+
+void Monster::setMonsterPositon(Point pos)
+{
+	//防止跑到下边界外
+	pos.y = std::max(0.0f, pos.y);
+
+	//获取坐标所在砖块在块地图中的坐标
+	Point tiledPos = GameManager::getInstance()->tileCoordForPosition(pos);
+
+	bool notGo = GameManager::getInstance()->checkBoolAttribute(tiledPos, "Collidable");
+
+	if (notGo)
+	{
+		pos.y -= m_iYSpeed;
+		m_iYSpeed = 0;
+	}
+
+	this->setPosition(pos);
 }

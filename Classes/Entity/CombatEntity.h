@@ -5,7 +5,7 @@
 #include "CustomizeStruct.h"
 #include "HpBar.h"
 
-/*怪物状态*/
+//怪物状态
 enum MonsterState
 {
 	en_ms_patrol,	//巡逻
@@ -15,7 +15,7 @@ enum MonsterState
 	en_ms_attacked	//被攻击
 };
 
-/*动作状态*/
+//动作状态
 enum ActionState
 {
 	en_as_null,	//空
@@ -42,20 +42,20 @@ public:
 	 */
 	void saveCombatEntityData(const CombatEntityData & combatEntityData);
 
-	/*待机*/
+	//待机
 	void idle();
-	/*移动*/
+	//移动
 	void run();
-	/*攻击*/
+	//攻击
 	virtual void attack();
-	/*受伤*/
+	//受伤
 	virtual void hurt();
-	/*怪物死亡*/
+	//怪物死亡
 	void monsterDeath();
-	/*玩家死亡*/
+	//玩家死亡
 	void playerDeath();
 
-	/*改变怪物状态*/
+	//改变怪物状态
 	void changeMonsterState(MonsterState monsterState);
 
 protected:

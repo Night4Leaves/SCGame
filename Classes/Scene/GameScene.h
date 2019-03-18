@@ -43,9 +43,9 @@ public:
 	 */
 	void setScene(SceneType sign, PlayerData &player);
 
-	/*更新分数*/
+	//更新分数
 	void updateScore(Ref* pSender);
-	/*玩家损失血量*/
+	//玩家损失血量
 	void playerReduceHeart(Ref* pSender);
 
 protected:

@@ -10,10 +10,10 @@ public:
 	SCController();
 	virtual ~SCController();
 
-	/*设置监听对象*/
+	//设置监听对象
 	void setControllerListner(GeneralControllerListener* controllerListener);
 
-	/*检查控制器中保存的控制角色的状态*/
+	//检查控制器中保存的控制角色的状态
 	virtual void checkControllerStatus() = 0;
 
 protected:

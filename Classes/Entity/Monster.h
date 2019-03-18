@@ -11,30 +11,32 @@ public:
 	virtual bool init(const MonsterData & monsterData);
 	virtual void update(float dt);
 
-	/*设置怪物的位置*/
-	void setMonsterPosition(Point pos);
+	//设置怪物的位置
+	void setMonsterOriginPosition(Point pos);
 	
 private:
 	Monster();
 	virtual ~Monster();
 
-	/*巡逻行为*/
+	//巡逻行为
 	void patrolLogic();
-	/*警戒行为*/
+	//警戒行为
 	void warnLogic();
-	/*攻击行为*/
+	//攻击行为
 	void attackLogic();
-	/*被攻击行为*/
+	//被攻击行为
 	void attackedLogic();
-	/*攻击结束后的判定*/
+	//攻击结束后的判定
 	void attackEndLogic();
 
-	/*根据飞行物设置信息确定自己是否会被击中*/
+	//根据飞行物设置信息确定自己是否会被击中
 	void checkAttckFlyingObjectPath(Ref* pSender);
-	/*根据飞行物判定位置确认自己是否被击中*/
+	//根据飞行物判定位置确认自己是否被击中
 	void checkBeHit(Ref* pSender);
-	/*根据和玩家角色的距离变更自己的状态*/
+	//根据和玩家角色的距离变更自己的状态
 	void checkDistanceWithPlayer(Ref* pSender);
+	//设置位置
+	void setMonsterPositon(Point pos);
 
 private:
 	HpBar* m_pHPBar;	//血条
@@ -43,7 +45,7 @@ private:
 	int m_iYSpeed;	//Y轴移速
 	int m_iWarningRange;	//怪物巡逻警戒半径
 	int m_iAttackCDTime;	//怪物攻击冷却时间
-	int m_iMaxHP;		//当前血量
+	int m_iMaxHP;		//最大血量
 
 	bool m_bIsDeath;	//是否为死亡状态
 

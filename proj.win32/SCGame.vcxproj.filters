@@ -72,9 +72,6 @@
     <ClCompile Include="..\Classes\Scene\GameScene.cpp">
       <Filter>src\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Entity\Entity.cpp">
-      <Filter>src\Entity</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\Layer\PaneLayer.cpp">
       <Filter>src\Layer</Filter>
     </ClCompile>
@@ -153,6 +150,9 @@
     <ClCompile Include="..\Classes\HpBar.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\GameManager.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -187,9 +187,6 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Scene\GameScene.h">
       <Filter>src\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Entity\Entity.h">
-      <Filter>src\Entity</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Layer\PaneLayer.h">
       <Filter>src\Layer</Filter>
@@ -294,6 +291,9 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\HpBar.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameManager.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

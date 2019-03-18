@@ -12,11 +12,11 @@ public:
 	HeartCount();
 	virtual ~HeartCount();
 
-	/*创建玩家血量*/
+	//创建玩家血量
 	static HeartCount* create(int digit);
 	virtual bool init(int digit);
 
-	/*玩家血量下降*/
+	//玩家血量下降
 	void reduceHP();
 
 protected:

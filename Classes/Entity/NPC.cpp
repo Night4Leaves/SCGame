@@ -44,6 +44,7 @@ bool NPC::init(const NPCSetInfo& npcSetInfo)
 	m_pSprite = Sprite::createWithSpriteFrameName(wait.c_str());
 	
 	m_pSprite->setScale(scale);
+	this->addChild(m_pSprite);
 
 	//如果待机动画帧数量不为1，意味NPC采用动态待机动画
 	if (num > 1)

@@ -39,22 +39,16 @@ bool TestScene::init()
 {
 	do 
 	{
-		hp = 100;
-		dtCount = 0;
+		std::vector<BossData> bossDataList;
+		JsonUtil::getInstance()->readBossInfo(bossDataList);
 
-		Sprite* empty = Sprite::createWithSpriteFrameName("HP_Bar_Empty.png");
-		hpBar = LoadingBar::create("HP_Bar.png");
-		empty->addChild(hpBar);
-		this->addChild(empty);
+		BossTianzhao* boss = BossTianzhao::create(bossDataList[0]);
+		this->addChild(boss);
+		boss->setBossPosition(Point(300, 300));
+		boss->idle();
+		boss->setScale(0.45);
 
-		hpBar->setDirection(LoadingBar::Direction::LEFT);
-		hpBar->setPercent(hp);
-		hpBar->setPosition(Vec2(459, 44));
-
-		empty->setPosition(Vec2(400, 300));
-		empty->setScale(0.5);
-
-		this->scheduleUpdate();
+		//this->scheduleUpdate();
 
 		/*TMXTiledMap* map = TMXTiledMap::create("map/test_map.tmx");
 		this->addChild(map);
@@ -109,13 +103,7 @@ bool TestScene::init()
 
 void TestScene::update(float dt)
 {
-	dtCount += dt;
-	if (dtCount > 2 && hp > 0)
-	{
-		hp -= 10;
-		hpBar->setPercent(hp);
-		dtCount = 0;
-	}
+	
 }
 
 void TestScene::readJson()

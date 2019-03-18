@@ -41,14 +41,14 @@ bool ScoreCount::init(Array * presenters, int digit)
 			node->setPosition(Point(0, node->getContentSize().height * i * 0.15));
 			++i;
 		}
-		
+
 		//显示遮罩层，可以只显示图片的指定要显示地一部分
 		ClippingNode* cliper = ClippingNode::create();
 		DrawNode* drawNode = DrawNode::create();
 
 		drawNode->drawSolidRect(Vec2(0, 0), Vec2(15, 20), Color4F::WHITE);
 		drawNode->setPosition(-8, -10);
-		
+
 		cliper->setStencil(drawNode);
 		cliper->addChild(node_pPresenter);
 

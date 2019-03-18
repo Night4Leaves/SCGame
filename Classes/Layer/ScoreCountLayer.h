@@ -12,7 +12,7 @@ public:
 	ScoreCountLayer();
 	~ScoreCountLayer();
 
-	/*创建记分器显示层*/
+	//创建记分器显示层
 	static ScoreCountLayer* create(int number);
 	virtual bool init(int number);
 
@@ -22,7 +22,7 @@ public:
 	 *	@ceiling	分数上限
 	 */
 	void setNumber(int number, int ceiling = 999);
-	/*获取分数*/
+	//获取分数
 	int getNumber();
 
 private:

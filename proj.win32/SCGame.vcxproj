@@ -157,12 +157,12 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\Entity\Boss.cpp" />
     <ClCompile Include="..\Classes\Entity\BossTianzhao.cpp" />
     <ClCompile Include="..\Classes\Entity\CombatEntity.cpp" />
-    <ClCompile Include="..\Classes\Entity\Entity.cpp" />
     <ClCompile Include="..\Classes\Entity\FlyingObject.cpp" />
     <ClCompile Include="..\Classes\Entity\Monster.cpp" />
     <ClCompile Include="..\Classes\Entity\NPC.cpp" />
     <ClCompile Include="..\Classes\Entity\Player.cpp" />
     <ClCompile Include="..\Classes\Entity\Portal.cpp" />
+    <ClCompile Include="..\Classes\GameManager.cpp" />
     <ClCompile Include="..\Classes\HeartCount.cpp" />
     <ClCompile Include="..\Classes\HpBar.cpp" />
     <ClCompile Include="..\Classes\Json\json_reader.cpp" />
@@ -200,12 +200,12 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\Entity\Boss.h" />
     <ClInclude Include="..\Classes\Entity\BossTianzhao.h" />
     <ClInclude Include="..\Classes\Entity\CombatEntity.h" />
-    <ClInclude Include="..\Classes\Entity\Entity.h" />
     <ClInclude Include="..\Classes\Entity\FlyingObject.h" />
     <ClInclude Include="..\Classes\Entity\Monster.h" />
     <ClInclude Include="..\Classes\Entity\NPC.h" />
     <ClInclude Include="..\Classes\Entity\Player.h" />
     <ClInclude Include="..\Classes\Entity\Portal.h" />
+    <ClInclude Include="..\Classes\GameManager.h" />
     <ClInclude Include="..\Classes\HeartCount.h" />
     <ClInclude Include="..\Classes\HpBar.h" />
     <ClInclude Include="..\Classes\Json\autolink.h" />

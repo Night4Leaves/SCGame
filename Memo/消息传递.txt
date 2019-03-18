@@ -4,7 +4,7 @@ PlayerController-----player_check_point-----Portal
 PlayerController-----player_point-----Monster
 
 Monster-----stop_flying-----AttackFlyingObject
-Monster(CombatEntity)-----monster_attack_end-----PlayerController
+Monster-----monster_attack-----PlayerController
 
 Player-----set_attack_flying_object-----GameLayer
 
@@ -20,3 +20,13 @@ CombatEntity-----game_over-----
 Portal-----show_PaneLayer-----PaneLayer
 
 GameMenuLayer-----show_PaneLayer-----PaneLayer
+
+NotificationCenter::getInstance()->postNotification("monster_attack", NULL);
+
+NotificationCenter::getInstance()->addObserver(
+		this,
+		callfuncO_selector(Monster::checkDistanceWithPlayer),
+		"player_point",
+		NULL);
+		
+		NotificationCenter::getInstance()->removeAllObservers(this);

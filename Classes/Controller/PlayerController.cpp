@@ -1,4 +1,5 @@
 #include "PlayerController.h"
+#include "GameManager.h"
 
 PlayerController::PlayerController()
 	: m_fMapWidth(0.0)
@@ -7,6 +8,7 @@ PlayerController::PlayerController()
 	, m_iYSpeed(0)
 	, m_bIsRight(true)
 	, m_bIsLock(false)
+	, m_bIsBossBattle(false)
 	, m_iHorizontalRun(0)
 	, m_iVerticalRun(0)
 {
@@ -357,44 +359,9 @@ void PlayerController::onKeyReleased(EventKeyboard::KeyCode keyCode, Event * eve
 	}
 }
 
-Point PlayerController::tileCoordForPosition(Point pos)
-{
-	Size mapTiledNum = m_pMap->getMapSize();
-	Size tiledSize = m_pMap->getTileSize();
-
-	float x = pos.x / tiledSize.width * 1.0;
-
-	float y = (m_fMapHeight - pos.y) / tiledSize.height * 1.0;	//块地图的Y轴坐标与cocos2dx是相反的
-
-	if (x - mapTiledNum.width >= 0)
-	{
-		x = mapTiledNum.width - 1;
-	}
-	else if (x < 0)
-	{
-		x = 0;
-	}
-
-	if (y - mapTiledNum.height >= 0)
-	{
-		y = mapTiledNum.height - 1;
-	}
-	else if (y < 0)
-	{
-		y = 0;
-	}
-
-	return Point(x, y);
-}
-
 void PlayerController::setViewPointByPlayer(Point pos)
 {
 	Node* parent = (Node*)getParent();
-	//获得地图中图块的数量和尺寸，并计算出地图尺寸
-	Size mapTiledNum = m_pMap->getMapSize();
-	Size tiledSize = m_pMap->getTileSize();
-	Size mapSize = Size(mapTiledNum.width * tiledSize.width,
-		mapTiledNum.height * tiledSize.height);
 	//获取屏幕显示尺寸
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	//获取被控制角色精灵大小尺寸
@@ -406,9 +373,21 @@ void PlayerController::setViewPointByPlayer(Point pos)
 	}
 
 	//与右边界比较，防止跑到右边界外
-	float x = std::min(pos.x, mapSize.width - (contentSize.width / 2 - 10));
+	float x = std::min(pos.x, m_fMapWidth - (contentSize.width / 2 - 10));
 	//与左边界比较，防止跑到左边界外
-	x = std::max(x, contentSize.width / 2 - 10);
+	if (!m_bIsBossBattle)
+	{
+		if (x > m_fMapWidth - visibleSize.width)
+		{
+			m_bIsBossBattle = true;
+		}
+		x = std::max(x, contentSize.width / 2 - 10);
+	}
+	else
+	{
+		x = std::max(x, contentSize.width / 2 - 10 + m_fMapWidth - visibleSize.width);
+	}
+	
 	//防止跑到下边界外
 	float y = std::max(0.0f, pos.y);
 
@@ -418,11 +397,18 @@ void PlayerController::setViewPointByPlayer(Point pos)
 	NotificationCenter::getInstance()->postNotification("player_point", (Ref*)&playerPos);
 
 	//如果主角坐标位于屏幕中点的左下方，则取屏幕中点坐标，否则取主角坐标
-	x = std::max(pos.x, visibleSize.width / 2);
+	if (!m_bIsBossBattle)
+	{
+		x = std::max(pos.x, visibleSize.width / 2);
+	}
+	else
+	{
+		x = std::max(pos.x, m_fMapWidth - visibleSize.width / 2);
+	}
 	y = std::max(pos.y, visibleSize.height / 2);
 	//如果X、Y的坐标大于右上角的极限值，则取极限值坐标
-	x = std::min(x, mapSize.width - visibleSize.width / 2);
-	y = std::min(y, mapSize.height - visibleSize.height / 2);
+	x = std::min(x, m_fMapWidth - visibleSize.width / 2);
+	y = std::min(y, m_fMapHeight - visibleSize.height / 2);
 
 	//目标点
 	Point destPosition = Point(x, y);
@@ -440,7 +426,7 @@ void PlayerController::setPlayerPosition(Point pos)
 
 	Point destPos = Point();
 
-	//计算角色下一帧会移动到的坐标
+	//计算角色移动到该位置后形象边界坐标
 	if (m_iXSpeed > 0)
 	{
 		destPos = Point(pos.x + playerSize.width / 2, pos.y);
@@ -454,24 +440,15 @@ void PlayerController::setPlayerPosition(Point pos)
 		destPos = pos;
 	}
 
-	//获取下一帧要移动到的砖块在块地图中的坐标
-	Point tiledPos = tileCoordForPosition(destPos);
-	
-	//根据地图块的坐标获得地图块的GID
-	int tiledGid = m_pMeta->getTileGIDAt(tiledPos);
+	//获取坐标所在砖块在块地图中的坐标
+	Point tiledPos = GameManager::getInstance()->tileCoordForPosition(destPos);
 
-	if (tiledGid != 0)
+	bool notGo = GameManager::getInstance()->checkBoolAttribute(tiledPos, "Collidable");
+
+	if (notGo)
 	{
-		//根据GID取得该图块的属性集
-		Value properties = m_pMap->getPropertiesForGID(tiledGid);
-
-		auto collidableProp = properties.asValueMap().at("Collidable");
-
-		if (collidableProp.asBool())
-		{
-			pos.y -= m_iYSpeed;
-			m_iYSpeed = 0;
-		}
+		pos.y -= m_iYSpeed;
+		m_iYSpeed = 0;
 	}
 
 	this->setViewPointByPlayer(pos);

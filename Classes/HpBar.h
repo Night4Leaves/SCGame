@@ -14,11 +14,11 @@ public:
 	CREATE_FUNC(HpBar);
 	virtual bool init();
 
-	/*设置血条显示的位置*/
+	//设置血条显示的位置
 	void setHpBarPosition(Point pos);
-	/*设置血条显示*/
+	//设置血条显示
 	void setResidueHp(float residue);
-	/*血条消失*/
+	//血条消失
 	void startFadeOut();
 
 private:

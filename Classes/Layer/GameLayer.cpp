@@ -3,10 +3,10 @@
 #include "Entity/Monster.h"
 #include "Entity/AttackFlyingObject.h"
 #include "Controller/PlayerController.h"
+#include "GameManager.h"
 
 GameLayer::GameLayer()
 	: m_iFlyingObjectFlag(0)
-	, m_iMonsterWarningRange(0)
 {
 }
 
@@ -76,6 +76,8 @@ void GameLayer::setGameScene_1_1(PlayerData & playerData)
 	}
 	this->addChild(m_pMap);
 
+	GameManager::getInstance()->setMap(m_pMap);
+
 	//获取地图文件中预设的坐标信息
 	TMXObjectGroup* objGroup = m_pMap->getObjectGroup("objects");
 
@@ -96,7 +98,7 @@ void GameLayer::setGameScene_1_1(PlayerData & playerData)
 		float monsterY = monsterPoint.at("y").asFloat();
 
 		Monster* monster = Monster::create(monsterInfoList[0]);
-		monster->setMonsterPosition(Vec2(monsterX, monsterY));
+		monster->setMonsterOriginPosition(Vec2(monsterX, monsterY));
 		monster->idle();
 		monster->setScale(0.35);
 		this->addChild(monster);
@@ -109,7 +111,7 @@ void GameLayer::setGameScene_1_1(PlayerData & playerData)
 	float bossY = bossPoint.at("y").asFloat();
 
 	Monster* boss = Monster::create(monsterInfoList[0]);
-	boss->setMonsterPosition(Vec2(bossX, bossY));
+	boss->setMonsterOriginPosition(Vec2(bossX, bossY));
 	boss->idle();
 	this->addChild(boss);
 

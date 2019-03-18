@@ -12,7 +12,7 @@ public:
 	CREATE_FUNC(Portal);
 	virtual bool init();
 
-	/*根据玩家坐标判定是否打开关卡选择界面*/
+	//根据玩家坐标判定是否打开关卡选择界面
 	void checkPlayerPoint(Ref* pSender);
 
 private:

@@ -14,7 +14,7 @@ public:
 	static NPC* create(const NPCSetInfo& npcSetInfo);
 	virtual bool init(const NPCSetInfo& npcSetInfo);
 
-	/*根据角色坐标判定哪位NPC响应*/
+	//根据角色坐标判定哪位NPC响应
 	void checkPlayerPoint(Ref* pSender);
 
 private:

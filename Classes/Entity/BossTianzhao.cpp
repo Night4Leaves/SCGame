@@ -29,6 +29,15 @@ bool BossTianzhao::init(const BossData & bossData)
 {
 	Boss::init(bossData);
 
+	m_iMaxHP = bossData.i_HP;
+
+	Size size = m_pSprite->getContentSize();
+
+	m_pHPBar = HpBar::create();
+	m_pHPBar->setHpBarPosition(Point(0, size.height + 5));
+	m_pHPBar->setResidueHp(m_iHP / (float)m_iMaxHP * 100);
+	this->addChild(m_pHPBar);
+
 	NotificationCenter::getInstance()->addObserver(
 		this,
 		callfuncO_selector(BossTianzhao::checkAttckFlyingObjectPath),
@@ -65,4 +74,10 @@ void BossTianzhao::checkAttckFlyingObjectPath(Ref * pSender)
 
 void BossTianzhao::checkBeHit(Ref * pSender)
 {
+}
+
+void BossTianzhao::checkDistanceWithPlayer(Ref * pSender)
+{
+	Point* playerPos = (Point*)pSender;
+	Point bossPos = this->getPosition();
 }

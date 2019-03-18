@@ -7,6 +7,7 @@
         "xSpeed" : 6,
         "ySpeed" : 6,
         "attackRange" : 50,
+        "attackCDTime" : 5,
         "actionName" : ["idle","run","attack","hurt"],
 		"actionTime" : [0.25, 0.2, 0.15, 0.1],
         "actionPlayTime" : [-1, -1, 1, 1],

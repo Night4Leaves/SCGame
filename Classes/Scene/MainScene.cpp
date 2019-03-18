@@ -9,6 +9,7 @@
 #include "Controller/PlayerController.h"
 #include "Util/AnimationUtil.h"
 #include "HeartCount.h"
+#include "GameManager.h"
 
 MainScene::MainScene()
 {
@@ -50,6 +51,8 @@ bool MainScene::init(PlayerData &playerData)
 		m_pMap = TMXTiledMap::create("map/scene_main.tmx");
 		CC_BREAK_IF(m_pMap == nullptr);
 		this->addChild(m_pMap);
+
+		GameManager::getInstance()->setMap(m_pMap);
 
 		TMXObjectGroup* objGroup = m_pMap->getObjectGroup("objects");
 

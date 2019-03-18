@@ -2,15 +2,19 @@
 #ifndef __FLYING_OBJECT_H__
 #define __FLYING_OBJECT_H__
 
-#include "Entity.h"
+#include "cocos2d.h"
+#include "CustomizeStruct.h"
 
-class FlyingObject : public Entity
+USING_NS_CC;
+
+class FlyingObject : public Node
 {
 public:
 	FlyingObject();
 	~FlyingObject();
 
 protected:
+	Sprite* m_pSprite;	//绑定飞行物图像
 	const char* m_strObjectName;	//飞行物名称
 	Vec2 m_vec2Speed;	//飞行物速度
 	Point m_vec2FlightDistance;		//飞行距离

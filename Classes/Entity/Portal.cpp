@@ -9,6 +9,9 @@ bool Portal::init()
 
 	Size tpBackSize = m_pSprite->getContentSize();
 	tpfrontSprite->setPosition(tpBackSize.width * 0.5, tpBackSize.height * 0.5);
+	
+	m_pSprite->addChild(tpfrontSprite);
+	this->addChild(m_pSprite);
 
 	auto test1 = RotateBy::create(5.0f, -90.0f);
 	auto test2 = RotateBy::create(5.0f, 180.0f);

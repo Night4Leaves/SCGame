@@ -12,16 +12,16 @@ public:
 	ScoreCount();
 	virtual ~ScoreCount();
 
-	/*创建计分器*/
+	//创建计分器
 	static ScoreCount* create(Array* presenters, int digit = 0);
 	virtual bool init(Array* presenters, int digit);
 
-	/*数字滚动动画*/
+	//数字滚动动画
 	void animation(int digit);
 
-	/*获取分数*/
+	//获取分数
 	int getDigit();
-	/*设置分数*/
+	//设置分数
 	void setDigit(int digit);
 
 protected:
