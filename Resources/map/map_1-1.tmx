@@ -16,7 +16,7 @@
   </data>
  </layer>
  <objectgroup id="2" name="objects">
-  <object id="1" name="player" x="48" y="512">
+  <object id="1" name="player" x="50" y="510">
    <point/>
   </object>
   <object id="2" name="monster_01" x="815" y="577">
@@ -49,7 +49,7 @@
   <object id="22" name="monster_10" x="2517" y="465">
    <point/>
   </object>
-  <object id="23" name="boss" x="3376" y="511">
+  <object id="23" name="boss" x="3375" y="510">
    <point/>
   </object>
   <object id="25" name="sceneitem_01" x="1237" y="478">

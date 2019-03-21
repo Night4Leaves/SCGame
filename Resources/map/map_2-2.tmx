@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.1" orientation="orthogonal" renderorder="left-down" width="100" height="19" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="3">
+<map version="1.2" tiledversion="1.2.1" orientation="orthogonal" renderorder="left-down" width="100" height="19" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="4">
  <tileset firstgid="1" source="tilesheet_complete.tsx"/>
  <tileset firstgid="1057" source="block.tsx"/>
  <layer id="1" name="terrain" width="100" height="19">
@@ -13,10 +13,13 @@
   </data>
  </layer>
  <objectgroup id="3" name="objects">
-  <object id="1" name="player" x="42" y="512">
+  <object id="1" name="player" x="50" y="510">
    <point/>
   </object>
   <object id="2" name="monster" x="394" y="442">
+   <point/>
+  </object>
+  <object id="3" name="boss" x="3055" y="510">
    <point/>
   </object>
  </objectgroup>

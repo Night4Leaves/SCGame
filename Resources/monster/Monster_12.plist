@@ -4,241 +4,241 @@
     <dict>
         <key>frames</key>
         <dict>
-            <key>boss_01_attack_01.png</key>
+            <key>monster_12_attack_01.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
-				<key>anchor</key>
-                <string>{0.54000,0.02609}</string>
+                <key>anchor</key>
+                <string>{0.368421,0.308989}</string>
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{200,230}</string>
+                <string>{209,178}</string>
                 <key>spriteSourceSize</key>
-                <string>{200,230}</string>
+                <string>{209,178}</string>
                 <key>textureRect</key>
-                <string>{{2,2},{200,230}}</string>
+                <string>{{2,2},{209,178}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>boss_01_attack_02.png</key>
+            <key>monster_12_attack_02.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
-				<key>anchor</key>
-                <string>{0.32800,0.02691}</string>
+                <key>anchor</key>
+                <string>{0.436893,0.363184}</string>
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{250,223}</string>
+                <string>{309,201}</string>
                 <key>spriteSourceSize</key>
-                <string>{250,223}</string>
+                <string>{309,201}</string>
                 <key>textureRect</key>
-                <string>{{204,2},{250,223}}</string>
+                <string>{{213,2},{309,201}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>boss_01_attack_03.png</key>
+            <key>monster_12_attack_03.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
-				<key>anchor</key>
-                <string>{0.34825,0.02294}</string>
+                <key>anchor</key>
+                <string>{0.448276,0.419355}</string>
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{257,218}</string>
+                <string>{319,155}</string>
                 <key>spriteSourceSize</key>
-                <string>{257,218}</string>
+                <string>{319,155}</string>
                 <key>textureRect</key>
-                <string>{{456,2},{257,218}}</string>
+                <string>{{524,2},{319,155}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>boss_01_attack_04.png</key>
+            <key>monster_12_attack_04.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
-				<key>anchor</key>
-                <string>{0.67297,0.19055}</string>
+                <key>anchor</key>
+                <string>{0.143251,0.29148}</string>
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{370,307}</string>
+                <string>{363,223}</string>
                 <key>spriteSourceSize</key>
-                <string>{370,307}</string>
+                <string>{363,223}</string>
                 <key>textureRect</key>
-                <string>{{2,234},{370,307}}</string>
+                <string>{{2,205},{363,223}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>boss_01_attack_05.png</key>
+            <key>monster_12_hurt_01.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
-				<key>anchor</key>
-                <string>{0.71752,0.21533}</string>
+                <key>anchor</key>
+                <string>{0.333333,0.418699}</string>
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{331,274}</string>
+                <string>{312,246}</string>
                 <key>spriteSourceSize</key>
-                <string>{331,274}</string>
+                <string>{312,246}</string>
                 <key>textureRect</key>
-                <string>{{374,234},{331,274}}</string>
+                <string>{{367,205},{312,246}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>boss_01_hurt_01.png</key>
+            <key>monster_12_idle_01.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
-				<key>anchor</key>
-                <string>{0.28909,0.09630}</string>
+                <key>anchor</key>
+                <string>{0.353488,0.263374}</string>
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{275,270}</string>
+                <string>{215,243}</string>
                 <key>spriteSourceSize</key>
-                <string>{275,270}</string>
+                <string>{215,243}</string>
                 <key>textureRect</key>
-                <string>{{707,234},{275,270}}</string>
+                <string>{{681,205},{215,243}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>boss_01_idle_01.png</key>
+            <key>monster_12_idle_02.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
-				<key>anchor</key>
-                <string>{0.44186,0.02679}</string>
+                <key>anchor</key>
+                <string>{0.348624,0.226087}</string>
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{172,224}</string>
+                <string>{218,230}</string>
                 <key>spriteSourceSize</key>
-                <string>{172,224}</string>
+                <string>{218,230}</string>
                 <key>textureRect</key>
-                <string>{{2,543},{172,224}}</string>
+                <string>{{2,453},{218,230}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>boss_01_idle_02.png</key>
+            <key>monster_12_idle_03.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
-				<key>anchor</key>
-                <string>{0.41243,0.02667}</string>
+                <key>anchor</key>
+                <string>{0.316832,0.236181}</string>
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{177,225}</string>
+                <string>{202,199}</string>
                 <key>spriteSourceSize</key>
-                <string>{177,225}</string>
+                <string>{202,199}</string>
                 <key>textureRect</key>
-                <string>{{176,543},{177,225}}</string>
+                <string>{{222,453},{202,199}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>boss_01_idle_03.png</key>
+            <key>monster_12_idle_04.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
-				<key>anchor</key>
-                <string>{0.43605,0.02679}</string>
+                <key>anchor</key>
+                <string>{0.303922,0.244541}</string>
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{172,224}</string>
+                <string>{204,229}</string>
                 <key>spriteSourceSize</key>
-                <string>{172,224}</string>
+                <string>{204,229}</string>
                 <key>textureRect</key>
-                <string>{{355,543},{172,224}}</string>
+                <string>{{426,453},{204,229}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>boss_01_idle_04.png</key>
+            <key>monster_12_run_01.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
-				<key>anchor</key>
-                <string>{0.45143,0.02212}</string>
+                <key>anchor</key>
+                <string>{0.227468,0.233945}</string>
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{175,226}</string>
+                <string>{233,218}</string>
                 <key>spriteSourceSize</key>
-                <string>{175,226}</string>
+                <string>{233,218}</string>
                 <key>textureRect</key>
-                <string>{{529,543},{175,226}}</string>
+                <string>{{632,453},{233,218}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>boss_01_run_01.png</key>
+            <key>monster_12_run_02.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
-				<key>anchor</key>
-                <string>{0.46847,0.02381}</string>
+                <key>anchor</key>
+                <string>{0.206897,0.298913}</string>
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{222,210}</string>
+                <string>{232,184}</string>
                 <key>spriteSourceSize</key>
-                <string>{222,210}</string>
+                <string>{232,184}</string>
                 <key>textureRect</key>
-                <string>{{706,543},{222,210}}</string>
+                <string>{{2,685},{232,184}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>boss_01_run_02.png</key>
+            <key>monster_12_run_03.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
-				<key>anchor</key>
-                <string>{0.49537,0.03302}</string>
+                <key>anchor</key>
+                <string>{0.229665,0.242857}</string>
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{216,212}</string>
+                <string>{209,210}</string>
                 <key>spriteSourceSize</key>
-                <string>{216,212}</string>
+                <string>{209,210}</string>
                 <key>textureRect</key>
-                <string>{{2,771},{216,212}}</string>
+                <string>{{236,685},{209,210}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>boss_01_run_03.png</key>
+            <key>monster_12_run_04.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
-				<key>anchor</key>
-                <string>{0.50235,0.03333}</string>
+                <key>anchor</key>
+                <string>{0.211618,0.267281}</string>
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{213,210}</string>
+                <string>{241,217}</string>
                 <key>spriteSourceSize</key>
-                <string>{213,210}</string>
+                <string>{241,217}</string>
                 <key>textureRect</key>
-                <string>{{220,771},{213,210}}</string>
+                <string>{{447,685},{241,217}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>boss_01_wait.png</key>
+            <key>monster_12_wait.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
-				<key>anchor</key>
-                <string>{0.44186,0.02679}</string>
+                <key>anchor</key>
+                <string>{0.348837,0.259259}</string>
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{172,224}</string>
+                <string>{215,243}</string>
                 <key>spriteSourceSize</key>
-                <string>{172,224}</string>
+                <string>{215,243}</string>
                 <key>textureRect</key>
-                <string>{{435,771},{172,224}}</string>
+                <string>{{690,685},{215,243}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -252,13 +252,13 @@
             <key>premultiplyAlpha</key>
             <false/>
             <key>realTextureFileName</key>
-            <string>Monster.png</string>
+            <string>Monster_12.png</string>
             <key>size</key>
-            <string>{1024,1024}</string>
+            <string>{907,930}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:fdc3f519c539ac3c368bd25cb6368859:184759e475a555fd210e4115a6813d5f:98f2afd2d677f0efd46026afa9a716bc$</string>
+            <string>$TexturePacker:SmartUpdate:f077e59e08d15ed5db050d3e2f536330:2effe2c1b275a90a93e0053f3d693adf:b1c335a34241431bae74713fa8d6e3ee$</string>
             <key>textureFileName</key>
-            <string>Monster.png</string>
+            <string>Monster_12.png</string>
         </dict>
     </dict>
 </plist>

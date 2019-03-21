@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.1" orientation="orthogonal" renderorder="left-down" width="100" height="19" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="3">
+<map version="1.2" tiledversion="1.2.1" orientation="orthogonal" renderorder="left-down" width="100" height="19" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="4">
  <tileset firstgid="1" source="tilesheet_complete.tsx"/>
+ <tileset firstgid="1057" source="block.tsx"/>
  <layer id="1" name="terrain" width="100" height="19">
   <data encoding="base64" compression="zlib">
    eJztjtkJgEAMBdejG/HoRjz61hIsw/dnDCrr/ggyA0Pg5SAhAAAAAAAAAMDXVMXhkoew5ufM62eudmLupO7afswvKXff9J/+sdldrTXTyFZ2sjcWsnSZ189c7cTcSd21/ZhfUu6+6T/9Y7O7OshRTnKWW4aIiIiI+F93RZy+1w==
@@ -12,16 +13,19 @@
   </data>
  </layer>
  <objectgroup id="3" name="objects">
-  <object id="1" name="player" x="42" y="512">
+  <object id="1" name="player" x="50" y="510">
    <point/>
   </object>
   <object id="2" name="monster" x="374" y="446">
    <point/>
   </object>
+  <object id="3" name="boss" x="3055" y="510">
+   <point/>
+  </object>
  </objectgroup>
  <layer id="4" name="meta" width="100" height="19">
   <data encoding="base64" compression="zlib">
-   eJztwTEBAAAAwqD1T20MH6AAAAAAAAAAeBgdsAAB
+   eJztw0EJAAAIBLB7WMT+JU3gW5ANlgAAAADXutQtAAB8Nr2HHOk=
   </data>
  </layer>
 </map>
