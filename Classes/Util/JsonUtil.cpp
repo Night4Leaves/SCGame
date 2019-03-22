@@ -165,6 +165,8 @@ void JsonUtil::readMonsterInfo(std::vector<MonsterData>& monsterInfoList, const 
 
 			monster.i_warningRange = root[i]["warningRange"].asInt();
 			monster.i_attackCDTime = root[i]["attackCDTime"].asInt();
+			monster.b_isFlying = root[i]["flying"].asBool();
+			monster.b_isAttackMove = root[i]["attackMove"].asBool();
 			monster.b_isMonster = true;
 
 			monsterInfoList.push_back(monster);

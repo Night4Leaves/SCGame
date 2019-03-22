@@ -60,18 +60,11 @@ bool PlayerController::getIsRight()
 
 void PlayerController::setMap(TMXTiledMap * p_map)
 {
-	m_pMap = p_map;
-
-	Size mapTiledNum = m_pMap->getMapSize();	//获得地图中块的数量
-	Size tiledSize = m_pMap->getTileSize();		//获得地图中块的尺寸
+	Size mapTiledNum = p_map->getMapSize();	//获得地图中块的数量
+	Size tiledSize = p_map->getTileSize();		//获得地图中块的尺寸
 
 	m_fMapWidth = mapTiledNum.width * tiledSize.width;
 	m_fMapHeight = mapTiledNum.height * tiledSize.height;
-	
-	m_pMeta = p_map->getLayer("meta");
-
-	m_pMeta->setVisible(false);
-
 }
 
 void PlayerController::checkControllerStatus()
@@ -199,19 +192,6 @@ void PlayerController::onKeyPressed(EventKeyboard::KeyCode keyCode, Event * even
 		m_pControllerListener->attack();	//调用角色攻击动画
 
 		break;
-	//case EventKeyboard::KeyCode::KEY_K:	//跳跃
-
-		////如果是锁定状态则不执行后续代码
-		//if (m_bIsLock)
-		//{
-		//	break;
-		//}
-
-		//m_bIsLock = true;	//设置为锁定状态
-		//m_iYSpeed = 0;
-		//m_pControllerListener->jump();	//设置角色跳跃动画
-
-		//break;
 	case EventKeyboard::KeyCode::KEY_L:
 		//发送包含角色坐标的消息，让场景可互动对象判定自己是否被触发
 		NotificationCenter::getInstance()->postNotification("player_check_point", (Ref*)&(m_pControllerListener->getTargetPosition()));

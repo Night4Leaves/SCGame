@@ -52,11 +52,16 @@ struct PlayerData : CombatEntityData
 /**
  *	怪物信息
  *	@i_warningRange	怪物警戒范围
+ *	@i_attackCDTime	攻击间隔
+ *	@b_isFlying	是否为飞行
+ *	@b_isAttackMove	攻击是否会移动
  */
 struct MonsterData : CombatEntityData
 {
 	int i_warningRange = 0;
 	int i_attackCDTime = 0;
+	bool b_isFlying = false;
+	bool b_isAttackMove = false;
 };
 
 /**

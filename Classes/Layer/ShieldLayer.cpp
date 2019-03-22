@@ -28,6 +28,10 @@ bool ShieldLayer::init()
 	{
 		CC_BREAK_IF(!Layer::init());
 
+		auto backColor = LayerColor::create(Color4B::BLACK);
+		backColor->setOpacity(100);
+		this->addChild(backColor);
+
 		m_pListener = EventListenerTouchOneByOne::create();
 		m_pListener->onTouchBegan = [](Touch* touch, Event* event) {
 			log("ShieldLayer");

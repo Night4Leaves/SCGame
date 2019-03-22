@@ -38,10 +38,11 @@ bool BossTianzhao::init(const BossData & bossData)
 	m_pHPBar->setResidueHp(m_iHP / (float)m_iMaxHP * 100);
 	this->addChild(m_pHPBar);
 
+
 	NotificationCenter::getInstance()->addObserver(
 		this,
-		callfuncO_selector(BossTianzhao::checkAttckFlyingObjectPath),
-		"attack_flying_object_point",
+		callfuncO_selector(BossTianzhao::checkDistanceWithPlayer),
+		"player_point",
 		NULL);
 
 	return true;
@@ -49,6 +50,9 @@ bool BossTianzhao::init(const BossData & bossData)
 
 void BossTianzhao::update(float dt)
 {
+	Point pos = getPosition();
+	pos.x += m_iXSpeed;
+	setBossPosition(pos);
 }
 
 void BossTianzhao::firstSkill()
@@ -65,11 +69,7 @@ void BossTianzhao::thirdSkill()
 
 void BossTianzhao::checkAttckFlyingObjectPath(Ref * pSender)
 {
-	NotificationCenter::getInstance()->addObserver(
-		this,
-		callfuncO_selector(BossTianzhao::checkBeHit),
-		"attack_flying_object_check_point",
-		NULL);
+
 }
 
 void BossTianzhao::checkBeHit(Ref * pSender)
@@ -80,4 +80,9 @@ void BossTianzhao::checkDistanceWithPlayer(Ref * pSender)
 {
 	Point* playerPos = (Point*)pSender;
 	Point bossPos = this->getPosition();
+	if (bossPos.x - playerPos->x < 655)
+	{
+		this->scheduleUpdate();
+		NotificationCenter::getInstance()->removeObserver(this, "player_point");
+	}
 }

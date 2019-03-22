@@ -8,6 +8,8 @@ Monster::Monster()
 	, m_iWarningRange(0)
 	, m_iAttackCDTime(0)
 	, m_bIsDeath(false)
+	, m_bIsFlying(false)
+	, m_bIsAttackMove(false)
 	, m_fStateTime(0.0)
 	, m_fAttackTime(0.0)
 {
@@ -173,6 +175,8 @@ bool Monster::init(const MonsterData & monsterData)
 
 	m_iWarningRange = monsterData.i_warningRange;
 	m_iAttackCDTime = monsterData.i_attackCDTime;
+	m_bIsFlying = monsterData.b_isFlying;
+	m_bIsAttackMove = monsterData.b_isAttackMove;
 	m_iMaxHP = m_iHP;
 
 	Size size = m_pSprite->getContentSize();
@@ -262,7 +266,14 @@ void Monster::update(float dt)
 
 void Monster::setMonsterOriginPosition(Point pos)
 {
-	m_pointOriginalPos = pos;
+	if (!m_bIsFlying)
+	{
+		m_pointOriginalPos = pos;
+	}
+	else
+	{
+		pos.y -= 50;
+	}
 	setPosition(pos);
 }
 

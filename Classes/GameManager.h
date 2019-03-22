@@ -14,6 +14,8 @@ public:
 
 	//保存块地图
 	void setMap(TMXTiledMap* map);
+	//获取地图尺寸
+	Size getMapSize();
 
 	//计算脚下砖块在块地图中的坐标
 	Point tileCoordForPosition(Point pos);

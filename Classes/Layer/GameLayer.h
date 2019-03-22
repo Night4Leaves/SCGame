@@ -25,10 +25,19 @@ public:
 	void addAttackFlyingObject(Ref* pSender);
 
 	/**
-	 *	设置第一关场景
+	 *	设置各关场景
 	 *	@playerData	玩家数据结构体
 	 */
 	void setGameScene_1_1(PlayerData &playerData);
+	void setGameScene_1_2(PlayerData &playerData);
+	void setGameScene_2_1(PlayerData &playerData);
+	void setGameScene_2_2(PlayerData &playerData);
+	void setGameScene_3_1(PlayerData &playerData);
+	void setGameScene_3_2(PlayerData &playerData);
+	void setGameScene_4_1(PlayerData &playerData);
+
+private:
+	void setPlayer(const Point & pos);
 
 private:
 	TMXTiledMap* m_pMap;	//地图
@@ -38,6 +47,9 @@ private:
 	Vector<FlyingObject*> vector_pAttackFlyingObject;	//飞行物
 	Vector<Monster*> vector_pMonster;	//怪物
 	Boss* m_pBoss;	//Boss
+
+	std::vector<MonsterData> monsterInfoList;
+	std::vector<BossData> bossDataList;
 
 	int m_iFlyingObjectFlag;	//飞行物计数器
 

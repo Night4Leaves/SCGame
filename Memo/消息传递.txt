@@ -2,6 +2,7 @@ post-----Notification-----addObserver
 
 PlayerController-----player_check_point-----Portal
 PlayerController-----player_point-----Monster
+PlayerController-----player_point-----Monster
 
 Monster-----stop_flying-----AttackFlyingObject
 Monster-----monster_attack-----PlayerController

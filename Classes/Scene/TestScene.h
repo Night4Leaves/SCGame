@@ -7,6 +7,8 @@
 using namespace cocos2d::ui;
 USING_NS_CC;
 
+#include "Entity/Monster.h"
+
 class HeartCount;
 
 /*测试用场景类，最后要删除*/
@@ -20,6 +22,7 @@ public:
 	CREATE_FUNC(TestScene);
 	virtual bool init();
 	virtual void update(float dt);
+	void changeGameScene(Ref* pSender);
 
 	void readJson();
 	void readArrayJson();
@@ -28,8 +31,7 @@ public:
 private:
 	int hp;
 	float dtCount;
-	LoadingBar* hpBar;
-	HeartCount* test;
+	Monster* monster;
 
 };
 #endif // !__TEST_SCENE_H__

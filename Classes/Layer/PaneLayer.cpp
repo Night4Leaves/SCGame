@@ -58,6 +58,12 @@ void PaneLayer::showPaneLayer(Ref * pSender)
 	case en_paneMsg_selectGameScene:
 		this->selectGameScene();
 		break;
+	case en_paneMsg_gameClear:
+		this->gameEnd(true);
+		break;
+	case en_paneMsg_gameOver:
+		this->gameEnd(false);
+		break;
 	case en_paneMsg_openItemStore:
 		this->openStore();
 		break;
@@ -74,13 +80,6 @@ void PaneLayer::showPaneLayer(Ref * pSender)
 		break;
 	}
 
-}
-
-void PaneLayer::changeGameScene(Ref * pSender)
-{
-	GameScene* gameScene = GameScene::create();
-	gameScene->setScene(Scene_1, m_sctPlayerData);
-	Director::getInstance()->replaceScene(gameScene);
 }
 
 void PaneLayer::enterMainScene(PlayerData & playerData)
@@ -215,10 +214,6 @@ void PaneLayer::openStore()
 
 	this->addChild(ShieldLayer::create());
 
-	auto backColor = LayerColor::create(Color4B::BLACK);
-	backColor->setOpacity(100);
-	this->addChild(backColor);
-
 	Sprite* test = Sprite::createWithSpriteFrameName("backpack.png");
 	test->setScale(0.5);
 	test->setPosition(400, 300);
@@ -276,46 +271,123 @@ void PaneLayer::selectGameScene()
 	this->addChild(backMenu);
 	backMenu->setPosition(400, 110);
 
-	Sprite* normalButton = Sprite::create("background/game_scene_01_2048x1536.png");
-	Sprite* selectButton = Sprite::create("background/game_scene_01_2048x1536.png");
-	MenuItemSprite* aButtonSprite = MenuItemSprite::create(normalButton, selectButton, this, menu_selector(PaneLayer::changeGameScene));
-	aButtonSprite->setScale(0.1);
-	Sprite* normalButton_1 = Sprite::create("background/game_scene_02_2048x1536.png");
-	Sprite* selectButton_1 = Sprite::create("background/game_scene_02_2048x1536.png");
-	MenuItemSprite* bButtonSprite = MenuItemSprite::create(normalButton_1, selectButton_1, nullptr, nullptr);
-	bButtonSprite->setScale(0.1);
-	Sprite* normalButton_2 = Sprite::create("background/initial_scene_01_2048x1536.png");
-	Sprite* selectButton_2 = Sprite::create("background/initial_scene_01_2048x1536.png");
-	MenuItemSprite* cButtonSprite = MenuItemSprite::create(normalButton_2, selectButton_2, nullptr, nullptr);
-	cButtonSprite->setScale(0.1);
-	Sprite* normalButton_3 = Sprite::create("background/main_scene_01_2048x1536.png");
-	Sprite* selectButton_3 = Sprite::create("background/main_scene_01_2048x1536.png");
-	MenuItemSprite* dButtonSprite = MenuItemSprite::create(normalButton_3, selectButton_3, nullptr, nullptr);
-	dButtonSprite->setScale(0.1);
+	TTFConfig ttf = { "fonts/arial.ttf", 40 };
+	Size visibleSize = Director::getInstance()->getVisibleSize();
 
-	Menu* menu_1 = Menu::create(aButtonSprite, bButtonSprite, NULL);
-	Menu* menu_2 = Menu::create(cButtonSprite, dButtonSprite, NULL);
-	if (menu_1 == nullptr)
-	{
-		log("selectGameSceneMenu set failed!");
-		return;
-	}
-	else
-	{
-		this->addChild(menu_1);
+	//第一组
+	Point pos = Point(visibleSize.width / 4 + 60, visibleSize.height / 4 * 3 - 30);
 
-		//设置菜单位置
-		Size winSize = Director::getInstance()->getWinSize();
-		menu_1->setPosition(winSize.width * 0.5, winSize.height * 0.5 + 120);
-		menu_1->alignItemsHorizontallyWithPadding(20);
+	Sprite* buttonBG = Sprite::create("background/game_scene_01_2048x1536.png");
+	buttonBG->setScale(0.1);
+	buttonBG->setPosition(pos);
 
-		this->addChild(menu_2);
+	this->addChild(buttonBG);
 
-		//设置菜单位置
-		menu_2->setPosition(winSize.width * 0.5, winSize.height * 0.5 - 60);
-		menu_2->alignItemsHorizontallyWithPadding(20);
+	ButtonWithFontType aButtonInfo = { "Button_Select_Game_Scene", "1-1", ttf, 1, this, menu_selector(PaneLayer::selectGameScene_1_1) };
+	MenuItemSprite* aButtonSprite = MenuItemUtil::createMenuItemSprite(aButtonInfo);
+	ButtonWithFontType bButtonInfo = { "Button_Select_Game_Scene", "1-2", ttf, 1, this, menu_selector(PaneLayer::selectGameScene_1_2) };
+	MenuItemSprite* bButtonSprite = MenuItemUtil::createMenuItemSprite(bButtonInfo);
 
-	}
+	Menu* menu = Menu::create(aButtonSprite, bButtonSprite, NULL);
+
+	this->addChild(menu);
+
+	menu->alignItemsVerticallyWithPadding(1);
+	menu->setOpacity(100);
+	menu->setPosition(pos);
+
+	//第二组
+	pos = Point(visibleSize .width / 4 * 3 - 60, visibleSize.height / 4 * 3 - 30);
+
+	buttonBG = Sprite::create("background/game_scene_02_2048x1536.png");
+	buttonBG->setScale(0.1);
+	buttonBG->setPosition(pos);
+
+	this->addChild(buttonBG);
+
+	aButtonInfo = { "Button_Select_Game_Scene", "2-1", ttf, 1, this, menu_selector(PaneLayer::selectGameScene_2_1) };
+	aButtonSprite = MenuItemUtil::createMenuItemSprite(aButtonInfo);
+	bButtonInfo = { "Button_Select_Game_Scene", "2-2", ttf, 1, this, menu_selector(PaneLayer::selectGameScene_2_2) };
+	bButtonSprite = MenuItemUtil::createMenuItemSprite(bButtonInfo);
+
+	menu = Menu::create(aButtonSprite, bButtonSprite, NULL);
+
+	this->addChild(menu);
+
+	menu->alignItemsVerticallyWithPadding(1);
+	menu->setOpacity(100);
+	menu->setPosition(pos);
+
+	//第三组
+	pos = Point(visibleSize.width / 4 + 60, visibleSize.height / 4 + 70);
+
+	buttonBG = Sprite::create("background/initial_scene_01_2048x1536.png");
+	buttonBG->setScale(0.1);
+	buttonBG->setPosition(pos);
+
+	this->addChild(buttonBG);
+
+	aButtonInfo = { "Button_Select_Game_Scene", "3-1", ttf, 1, this, menu_selector(PaneLayer::selectGameScene_3_1) };
+	aButtonSprite = MenuItemUtil::createMenuItemSprite(aButtonInfo);
+	bButtonInfo = { "Button_Select_Game_Scene", "3-2", ttf, 1, this, menu_selector(PaneLayer::selectGameScene_3_2) };
+	bButtonSprite = MenuItemUtil::createMenuItemSprite(bButtonInfo);
+
+	menu = Menu::create(aButtonSprite, bButtonSprite, NULL);
+
+	this->addChild(menu);
+
+	menu->alignItemsVerticallyWithPadding(1);
+	menu->setOpacity(100);
+	menu->setPosition(pos);
+}
+
+void PaneLayer::selectGameScene_1_1(Ref * pSender)
+{
+	GameScene* gameScene = GameScene::create();
+	gameScene->setScene(Scene_1, m_sctPlayerData);
+	Director::getInstance()->replaceScene(gameScene);
+}
+
+void PaneLayer::selectGameScene_1_2(Ref * pSender)
+{
+	GameScene* gameScene = GameScene::create();
+	gameScene->setScene(Scene_2, m_sctPlayerData);
+	Director::getInstance()->replaceScene(gameScene);
+}
+
+void PaneLayer::selectGameScene_2_1(Ref * pSender)
+{
+	GameScene* gameScene = GameScene::create();
+	gameScene->setScene(Scene_3, m_sctPlayerData);
+	Director::getInstance()->replaceScene(gameScene);
+}
+
+void PaneLayer::selectGameScene_2_2(Ref * pSender)
+{
+	GameScene* gameScene = GameScene::create();
+	gameScene->setScene(Scene_4, m_sctPlayerData);
+	Director::getInstance()->replaceScene(gameScene);
+}
+
+void PaneLayer::selectGameScene_3_1(Ref * pSender)
+{
+	GameScene* gameScene = GameScene::create();
+	gameScene->setScene(Scene_5, m_sctPlayerData);
+	Director::getInstance()->replaceScene(gameScene);
+}
+
+void PaneLayer::selectGameScene_3_2(Ref * pSender)
+{
+	GameScene* gameScene = GameScene::create();
+	gameScene->setScene(Scene_6, m_sctPlayerData);
+	Director::getInstance()->replaceScene(gameScene);
+}
+
+void PaneLayer::selectGameScene_4_1(Ref * pSender)
+{
+	GameScene* gameScene = GameScene::create();
+	gameScene->setScene(Scene_7, m_sctPlayerData);
+	Director::getInstance()->replaceScene(gameScene);
 }
 
 void PaneLayer::openBackpack()
@@ -330,10 +402,6 @@ void PaneLayer::openBackpack()
 	log("PaneLayer::openStore");
 
 	this->addChild(ShieldLayer::create());
-
-	auto backColor = LayerColor::create(Color4B::BLACK);
-	backColor->setOpacity(100);
-	this->addChild(backColor);
 
 	Sprite* test = Sprite::createWithSpriteFrameName("backpack.png");
 	test->setScale(0.5);
@@ -368,10 +436,6 @@ void PaneLayer::openSkilllist()
 	log("PaneLayer::openSkilllist");
 
 	this->addChild(ShieldLayer::create());
-
-	auto backColor = LayerColor::create(Color4B::BLACK);
-	backColor->setOpacity(100);
-	this->addChild(backColor);
 
 	Sprite* test = Sprite::createWithSpriteFrameName("skill_list.png");
 	test->setScale(0.4);
@@ -493,4 +557,22 @@ void PaneLayer::selectSavedata_4(Ref * pSender)
 {
 	log("selectSavedata_4");
 	this->enterMainScene(m_vecSavedataList[3]);
+}
+
+void PaneLayer::gameEnd(bool isSuccess)
+{
+	this->addChild(ShieldLayer::create());
+
+	if (isSuccess)
+	{
+		auto myLabel = Label::createWithTTF("Game Clear", "fonts/Marker Felt.ttf", 50);
+		this->addChild(myLabel);
+		myLabel->setPosition(400, 300);
+	}
+	else
+	{
+		auto myLabel = Label::createWithTTF("Game Over", "fonts/Marker Felt.ttf", 50);
+		this->addChild(myLabel);
+		myLabel->setPosition(400, 300);
+	}
 }

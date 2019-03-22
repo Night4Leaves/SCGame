@@ -11,7 +11,9 @@ enum PaneLayerStatus
 	en_paneMsg_pause,
 	en_paneMsg_selectGameScene,
 	en_paneMsg_openBackpack,
-	en_paneMsg_openSkilllist
+	en_paneMsg_openSkilllist,
+	en_paneMsg_gameOver,
+	en_paneMsg_gameClear
 };
 
 #endif // !__CUSTOMIZE_ENUM_H__

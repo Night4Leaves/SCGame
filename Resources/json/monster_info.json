@@ -1,23 +1,25 @@
 [
     {
         "characterName" : "monster_01",
-        "HP" : 100,
+        "HP" : 25,
         "attack" : 10,
-        "money" : 10,
+        "money" : 2,
         "xSpeed" : 4,
         "ySpeed" : 4,
-        "attackRange" : 70,
-        "attackCDTime" : 5,
+        "attackRange" : 30,
+        "attackCDTime" : 3,
         "actionName" : ["idle","run","attack","hurt"],
 		"actionTime" : [0.25, 0.25, 0.2, 0.5],
         "actionPlayTime" : [-1, -1, 1, 1],
-        "warningRange" : 100        
+        "warningRange" : 200,
+        "flying" : true,
+        "attackMove" : false        
     },
     {
         "characterName" : "monster_02",
-        "HP" : 100,
+        "HP" : 35,
         "attack" : 10,
-        "money" : 10,
+        "money" : 3,
         "xSpeed" : 4,
         "ySpeed" : 4,
         "attackRange" : 70,
@@ -25,25 +27,29 @@
         "actionName" : ["idle","run","attack","hurt"],
 		"actionTime" : [0.25, 0.2, 0.25, 0.5],
         "actionPlayTime" : [-1, -1, 1, 1],
-        "warningRange" : 100        
+        "warningRange" : 200,
+        "flying" : false,
+        "attackMove" : false      
     },
     {
         "characterName" : "monster_03",
-        "HP" : 100,
+        "HP" : 55,
         "attack" : 10,
         "money" : 10,
         "xSpeed" : 4,
         "ySpeed" : 4,
-        "attackRange" : 70,
+        "attackRange" : 30,
         "attackCDTime" : 5,
         "actionName" : ["idle","run","attack","hurt"],
 		"actionTime" : [0.25, 0.25, 0.25, 0.5],
         "actionPlayTime" : [-1, -1, 1, 1],
-        "warningRange" : 100        
+        "warningRange" : 200,
+        "flying" : false,
+        "attackMove" : true           
     },
     {
         "characterName" : "monster_04",
-        "HP" : 100,
+        "HP" : 20,
         "attack" : 10,
         "money" : 10,
         "xSpeed" : 4,
@@ -53,11 +59,13 @@
         "actionName" : ["idle","run","attack","hurt"],
 		"actionTime" : [0.2, 0.5, 0.125, 0.5],
         "actionPlayTime" : [-1, -1, 1, 1],
-        "warningRange" : 100        
+        "warningRange" : 200,
+        "flying" : false,
+        "attackMove" : true          
     },
     {
         "characterName" : "monster_05",
-        "HP" : 100,
+        "HP" : 25,
         "attack" : 10,
         "money" : 10,
         "xSpeed" : 4,
@@ -67,11 +75,13 @@
         "actionName" : ["idle","run","attack","hurt"],
 		"actionTime" : [0.25, 0.2, 0.25, 0.5],
         "actionPlayTime" : [-1, -1, 1, 1],
-        "warningRange" : 100        
+        "warningRange" : 200,
+        "flying" : false,
+        "attackMove" : false        
     },
     {
         "characterName" : "monster_06",
-        "HP" : 100,
+        "HP" : 30,
         "attack" : 10,
         "money" : 10,
         "xSpeed" : 4,
@@ -81,11 +91,13 @@
         "actionName" : ["idle","run","attack","hurt"],
 		"actionTime" : [0.2, 0.2, 0.2, 0.5],
         "actionPlayTime" : [-1, -1, 1, 1],
-        "warningRange" : 100        
+        "warningRange" : 200,
+        "flying" : false,
+        "attackMove" : false           
     },
     {
         "characterName" : "monster_07",
-        "HP" : 100,
+        "HP" : 30,
         "attack" : 10,
         "money" : 10,
         "xSpeed" : 4,
@@ -95,11 +107,13 @@
         "actionName" : ["idle","run","attack","hurt"],
 		"actionTime" : [0.2, 0.25, 0.2, 0.5],
         "actionPlayTime" : [-1, -1, 1, 1],
-        "warningRange" : 100        
+        "warningRange" : 200,
+        "flying" : false,
+        "attackMove" : false           
     },
     {
         "characterName" : "monster_08",
-        "HP" : 100,
+        "HP" : 35,
         "attack" : 10,
         "money" : 10,
         "xSpeed" : 4,
@@ -109,11 +123,13 @@
         "actionName" : ["idle","run","attack","hurt"],
 		"actionTime" : [0.2, 0.2, 0.25, 0.5],
         "actionPlayTime" : [-1, -1, 1, 1],
-        "warningRange" : 100        
+        "warningRange" : 200,
+        "flying" : true,
+        "attackMove" : false           
     },
     {
         "characterName" : "monster_09",
-        "HP" : 100,
+        "HP" : 40,
         "attack" : 10,
         "money" : 10,
         "xSpeed" : 4,
@@ -123,11 +139,13 @@
         "actionName" : ["idle","run","attack","hurt"],
 		"actionTime" : [0.2, 0.2, 0.25, 0.5],
         "actionPlayTime" : [-1, -1, 1, 1],
-        "warningRange" : 100        
+        "warningRange" : 200,
+        "flying" : true,
+        "attackMove" : false           
     },
     {
         "characterName" : "monster_10",
-        "HP" : 100,
+        "HP" : 40,
         "attack" : 10,
         "money" : 10,
         "xSpeed" : 4,
@@ -137,11 +155,13 @@
         "actionName" : ["idle","run","attack","hurt"],
 		"actionTime" : [0.25, 0.25, 0.25, 0.5],
         "actionPlayTime" : [-1, -1, 1, 1],
-        "warningRange" : 100        
+        "warningRange" : 200,
+        "flying" : false,
+        "attackMove" : false           
     },
     {
         "characterName" : "monster_11",
-        "HP" : 100,
+        "HP" : 50,
         "attack" : 10,
         "money" : 10,
         "xSpeed" : 4,
@@ -151,11 +171,13 @@
         "actionName" : ["idle","run","attack","hurt"],
 		"actionTime" : [0.25, 0.2, 0.2, 0.5],
         "actionPlayTime" : [-1, -1, 1, 1],
-        "warningRange" : 100        
+        "warningRange" : 200,
+        "flying" : false,
+        "attackMove" : false           
     },
     {
         "characterName" : "monster_12",
-        "HP" : 100,
+        "HP" : 25,
         "attack" : 10,
         "money" : 10,
         "xSpeed" : 4,
@@ -165,11 +187,13 @@
         "actionName" : ["idle","run","attack","hurt"],
 		"actionTime" : [0.2, 0.25, 0.25, 0.5],
         "actionPlayTime" : [-1, -1, 1, 1],
-        "warningRange" : 100        
+        "warningRange" : 200,
+        "flying" : true,
+        "attackMove" : false           
     },
     {
         "characterName" : "monster_13",
-        "HP" : 100,
+        "HP" : 50,
         "attack" : 10,
         "money" : 10,
         "xSpeed" : 4,
@@ -179,11 +203,13 @@
         "actionName" : ["idle","run","attack","hurt"],
 		"actionTime" : [0.25, 0.2, 0.2, 0.5],
         "actionPlayTime" : [-1, -1, 1, 1],
-        "warningRange" : 100        
+        "warningRange" : 200,
+        "flying" : false,
+        "attackMove" : true           
     },
     {
         "characterName" : "monster_14",
-        "HP" : 100,
+        "HP" : 50,
         "attack" : 10,
         "money" : 10,
         "xSpeed" : 4,
@@ -193,11 +219,13 @@
         "actionName" : ["idle","run","attack","hurt"],
 		"actionTime" : [0.25, 0.2, 0.2, 0.5],
         "actionPlayTime" : [-1, -1, 1, 1],
-        "warningRange" : 100        
+        "warningRange" : 200,
+        "flying" : false,
+        "attackMove" : true           
     },
     {
         "characterName" : "monster_15",
-        "HP" : 100,
+        "HP" : 40,
         "attack" : 10,
         "money" : 10,
         "xSpeed" : 4,
@@ -207,6 +235,8 @@
         "actionName" : ["idle","run","attack","hurt"],
 		"actionTime" : [0.25, 0.25, 0.25, 0.5],
         "actionPlayTime" : [-1, -1, 1, 1],
-        "warningRange" : 100        
+        "warningRange" : 200,
+        "flying" : false,
+        "attackMove" : false           
     }
 ]

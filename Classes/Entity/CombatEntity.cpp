@@ -1,5 +1,6 @@
 #include "CombatEntity.h"
 #include "Util/AnimationUtil.h"
+#include "CustomizeEnum.h"
 
 CombatEntity::CombatEntity()
 	: m_strCharacterName("")
@@ -140,6 +141,8 @@ void CombatEntity::hurt()
 
 void CombatEntity::monsterDeath()
 {
+	m_pSprite->stopAllActions();
+
 	Animation* hurtAnimation = AnimationCache::getInstance()->getAnimation(StringUtils::format("%s_hurt", m_strCharacterName.c_str()).c_str());
 	Animate* hurtAnimate = Animate::create(hurtAnimation);
 	Blink* blinkAction = Blink::create(1.0f, 2);
@@ -159,10 +162,10 @@ void CombatEntity::playerDeath()
 	Animate* hurtAnimate = Animate::create(hurtAnimation);
 	Blink* blinkAction = Blink::create(1.5f, 3);
 
-	auto sendScoreMsg = CallFunc::create([&]() { NotificationCenter::getInstance()->postNotification("game_over", NULL); });
+	auto sendScoreMsg = CallFunc::create([&]() { NotificationCenter::getInstance()->postNotification("show_PaneLayer", (Ref*)en_paneMsg_gameOver); });
 
 	Spawn* actionList = Spawn::create(hurtAnimate, blinkAction, nullptr);
-	Sequence* actionSequnence = Sequence::create(sendScoreMsg, actionList, nullptr);
+	Sequence* actionSequnence = Sequence::create(actionList, sendScoreMsg, nullptr);
 
 	m_pSprite->runAction(actionSequnence);
 }

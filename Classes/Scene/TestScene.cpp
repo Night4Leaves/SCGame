@@ -1,8 +1,7 @@
 #include "TestScene.h"
 
-#include "Util/CsvAnalyzeUtil.h"
-#include "Util/CsvLoadUtil.h"
 #include "Util/JsonUtil.h"
+#include "Util/MenuItemUtil.h"
 
 #include "Json/json.h"
 
@@ -13,6 +12,7 @@
 
 #include "CustomizeEnum.h"
 #include "HeartCount.h"
+#include "GameManager.h"
 
 #include "Entity/Player.h"
 #include "Entity/Monster.h"
@@ -39,26 +39,31 @@ bool TestScene::init()
 {
 	do 
 	{
-		std::vector<BossData> bossDataList;
-		JsonUtil::getInstance()->readBossInfo(bossDataList);
+		//dtCount = 0;
 
-		BossTianzhao* boss = BossTianzhao::create(bossDataList[0]);
-		this->addChild(boss);
-		boss->setBossPosition(Point(300, 300));
-		boss->idle();
-		boss->setScale(0.45);
+		//TMXTiledMap* map = TMXTiledMap::create("map/test_map.tmx");
+		//this->addChild(map);
+
+		//GameManager::getInstance()->setMap(map);
+
+		//std::vector<MonsterData> monsterInfoList;
+		//JsonUtil::getInstance()->readMonsterInfo(monsterInfoList);
+
+		//monster = Monster::create(monsterInfoList[14]);
+		//monster->setMonsterOriginPosition(Point(500, 300));
+		//monster->idle();
+		//monster->setScale(0.35);
+		//this->addChild(monster);
 
 		//this->scheduleUpdate();
-
-		/*TMXTiledMap* map = TMXTiledMap::create("map/test_map.tmx");
-		this->addChild(map);
+		
 
 		std::vector<PlayerData> m_vecCharacterList;
 		JsonUtil::getInstance()->readPlayerInfo(m_vecCharacterList);
 
 		auto gameLayer = GameLayer::create();
 		this->addChild(gameLayer);
-		gameLayer->setGameScene_1_1(m_vecCharacterList[0]);*/
+		gameLayer->setGameScene_4_1(m_vecCharacterList[0]);
 
 		/*Player* player = Player::create(m_vecCharacterList[0]);
 		this->addChild(player);
@@ -70,7 +75,14 @@ bool TestScene::init()
 		this->addChild(playerController);
 		playerController->setMap(map);*/
 
-		
+		/*std::vector<BossData> bossDataList;
+		JsonUtil::getInstance()->readBossInfo(bossDataList);
+
+		boss = BossTianzhao::create(bossDataList[5]);
+		this->addChild(boss);
+		boss->setBossPosition(Point(300, 300));
+		boss->idle();
+		boss->setScale(0.45);*/
 
 		//auto test = Sprite::createWithSpriteFrameName("backpack.png");
 		//this->addChild(test);
@@ -79,22 +91,10 @@ bool TestScene::init()
 
 		/*auto test = GameMenuLayer::create();
 		this->addChild(test);
-		test->setInitialMenu();
+		test->setInitialMenu();*/
 
-		auto panetest = PaneLayer::create();
-		this->addChild(panetest);*/
-
-		//HelloLua::create();
-
-		//std::vector<MonsterData> monsterInfoList;
-		//JsonUtil::getInstance()->readMonsterInfo(monsterInfoList);
-
-		//Monster* monster = Monster::create(monsterInfoList[0]);
-		//monster->setMonsterPosition(Point(500, 300));
-		//monster->idle();
-		//monster->setScale(0.35);
-		//this->addChild(monster);
-
+		//auto panetest = PaneLayer::create();
+		//this->addChild(panetest);
 
 	} while (0);
 
@@ -103,7 +103,25 @@ bool TestScene::init()
 
 void TestScene::update(float dt)
 {
-	
+	dtCount += dt;
+
+	if (dtCount > 6)
+	{
+		monster->attack();
+	}
+	else if (dtCount > 4)
+	{
+		monster->run();
+	}
+	else if (dtCount > 2)
+	{
+		monster->hurt();
+	}
+}
+
+void TestScene::changeGameScene(Ref * pSender)
+{
+	log("ok");
 }
 
 void TestScene::readJson()

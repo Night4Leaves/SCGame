@@ -35,6 +35,7 @@ bool AttackFlyingObject::init(const AtkFlyObjIniInfo & objectInfo)
 	Animate* animate = Animate::create(animation);
 	m_pSprite->runAction(animate);
 	m_pSprite->setOpacity(0);
+	this->addChild(m_pSprite);
 
 	NotificationCenter::getInstance()->addObserver(
 		this,

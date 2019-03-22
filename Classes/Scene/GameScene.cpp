@@ -83,6 +83,8 @@ void GameScene::setScene(SceneType sign, PlayerData & player)
 	this->addChild(m_pHeartCount);
 	m_pHeartCount->setPosition(0, 570);
 
+	m_pScoreCountLayer->setNumber(player.i_money);
+
 	switch (sign)
 	{
 	case Scene_1:
@@ -90,20 +92,42 @@ void GameScene::setScene(SceneType sign, PlayerData & player)
 		m_pBackgroundLayer->setBackgroundPicture("background/game_scene_01_2048x1536.png");
 		//设置场景中的角色
 		m_pGameLayer->setGameScene_1_1(player);
-		//设置分数
-		m_pScoreCountLayer->setNumber(player.i_money);
 		break;
 	case Scene_2:
+		//添加背景图片
+		m_pBackgroundLayer->setBackgroundPicture("background/game_scene_01_2048x1536.png");
+		//设置场景中的角色
+		m_pGameLayer->setGameScene_1_2(player);
 		break;
 	case Scene_3:
+		//添加背景图片
+		m_pBackgroundLayer->setBackgroundPicture("background/game_scene_01_2048x1536.png");
+		//设置场景中的角色
+		m_pGameLayer->setGameScene_2_1(player);
 		break;
 	case Scene_4:
+		//添加背景图片
+		m_pBackgroundLayer->setBackgroundPicture("background/game_scene_01_2048x1536.png");
+		//设置场景中的角色
+		m_pGameLayer->setGameScene_2_2(player);
 		break;
 	case Scene_5:
+		//添加背景图片
+		m_pBackgroundLayer->setBackgroundPicture("background/game_scene_01_2048x1536.png");
+		//设置场景中的角色
+		m_pGameLayer->setGameScene_3_1(player);
 		break;
 	case Scene_6:
+		//添加背景图片
+		m_pBackgroundLayer->setBackgroundPicture("background/game_scene_01_2048x1536.png");
+		//设置场景中的角色
+		m_pGameLayer->setGameScene_3_2(player);
 		break;
 	case Scene_7:
+		//添加背景图片
+		m_pBackgroundLayer->setBackgroundPicture("background/game_scene_01_2048x1536.png");
+		//设置场景中的角色
+		m_pGameLayer->setGameScene_4_1(player);
 		break;
 	default:
 		break;

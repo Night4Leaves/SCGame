@@ -32,16 +32,22 @@ private:
 	void openStore();
 	//暂停
 	void startPause();
+
 	//显示选择游戏关卡界面
 	void selectGameScene();
+	void selectGameScene_1_1(Ref* pSender);
+	void selectGameScene_1_2(Ref* pSender);
+	void selectGameScene_2_1(Ref* pSender);
+	void selectGameScene_2_2(Ref* pSender);
+	void selectGameScene_3_1(Ref* pSender);
+	void selectGameScene_3_2(Ref* pSender);
+	void selectGameScene_4_1(Ref* pSender);
 
 	//打开背包
 	void openBackpack();
 	//打开技能列表
 	void openSkilllist();
 
-	//创建选择的关卡场景
-	void changeGameScene(Ref* pSender);
 	//进入主场景
 	void enterMainScene(PlayerData &playerData);
 	//切换到主场景
@@ -63,6 +69,8 @@ private:
 	void selectSavedata_2(Ref* pSender);
 	void selectSavedata_3(Ref* pSender);
 	void selectSavedata_4(Ref* pSender);
+
+	void gameEnd(bool isSuccess);
 
 	/**
 	 *	创建角色选择按钮

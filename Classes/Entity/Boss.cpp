@@ -2,7 +2,7 @@
 
 Boss::Boss()
 	: m_iXSpeed(0)
-	, m_iYspeed(0)
+	, m_iYSpeed(0)
 	, m_iFirstSkillDamage(0)
 	, m_iFirstSkillCDTime(0)
 	, m_iFirstSkillTime(0)
@@ -37,5 +37,24 @@ bool Boss::init(const BossData & bossData)
 
 void Boss::setBossPosition(Point pos)
 {
+	Size mapSize = GameManager::getInstance()->getMapSize();
+	Size spriteSize = m_pSprite->getContentSize();
+	Size visible = Director::getInstance()->getVisibleSize();
+
+	pos.x = std::max(pos.x, mapSize.width - visible.width + spriteSize.width / 2);
+	pos.x = std::min(pos.x, mapSize.width - spriteSize.width / 2);
+	//防止跑到下边界外
+	pos.y = std::max(0.0f, pos.y);
+
+	//获取坐标所在砖块在块地图中的坐标
+	Point tiledPos = GameManager::getInstance()->tileCoordForPosition(pos);
+
+	bool notGo = GameManager::getInstance()->checkBoolAttribute(tiledPos, "Collidable");
+
+	if (notGo)
+	{
+		pos.y -= m_iYSpeed;
+		m_iYSpeed = 0;
+	}
 	setPosition(pos);
 }

@@ -31,12 +31,19 @@ void GameManager::setMap(TMXTiledMap * map)
 	m_pMap = map;
 	m_pMeta = m_pMap->getLayer("meta");
 
+	m_pMeta->setVisible(false);
+
 	Size mapTiledNum = m_pMap->getMapSize();	//获得地图中块的数量
 	Size tiledSize = m_pMap->getTileSize();		//获得地图中块的尺寸
 
 	m_sizeMap = Size(mapTiledNum.width * tiledSize.width,
 					mapTiledNum.height * tiledSize.height);
 
+}
+
+Size GameManager::getMapSize()
+{
+	return m_sizeMap;
 }
 
 Point GameManager::tileCoordForPosition(Point pos)

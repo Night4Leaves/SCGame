@@ -102,17 +102,8 @@
     <ClCompile Include="..\Classes\Entity\Portal.cpp">
       <Filter>src\Entity</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Util\CsvAnalyzeUtil.cpp">
-      <Filter>src\Utils</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\Scene\TestScene.cpp">
       <Filter>src\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\CsvData.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Util\CsvLoadUtil.cpp">
-      <Filter>src\Utils</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Json\json_reader.cpp">
       <Filter>src\Json</Filter>
@@ -152,6 +143,9 @@
     </ClCompile>
     <ClCompile Include="..\Classes\GameManager.cpp">
       <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Util\EnemyDataLoadUtil.cpp">
+      <Filter>src\Utils</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -224,17 +218,8 @@
     <ClInclude Include="..\Classes\Entity\Portal.h">
       <Filter>src\Entity</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Util\CsvAnalyzeUtil.h">
-      <Filter>src\Utils</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\Scene\TestScene.h">
       <Filter>src\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\CsvData.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Util\CsvLoadUtil.h">
-      <Filter>src\Utils</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Json\autolink.h">
       <Filter>src\Json</Filter>
@@ -295,6 +280,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\GameManager.h">
       <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Util\EnemyDataLoadUtil.h">
+      <Filter>src\Utils</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

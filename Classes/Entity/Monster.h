@@ -14,7 +14,7 @@ public:
 	//设置怪物的位置
 	void setMonsterOriginPosition(Point pos);
 	
-private:
+protected:
 	Monster();
 	virtual ~Monster();
 
@@ -38,7 +38,7 @@ private:
 	//设置位置
 	void setMonsterPositon(Point pos);
 
-private:
+protected:
 	HpBar* m_pHPBar;	//血条
 
 	int m_iXSpeed;	//X轴移速
@@ -48,6 +48,8 @@ private:
 	int m_iMaxHP;		//最大血量
 
 	bool m_bIsDeath;	//是否为死亡状态
+	bool m_bIsFlying;	//是否为飞行系
+	bool m_bIsAttackMove;	//攻击是否会移动
 
 	float m_fStateTime;	//巡逻计时器
 	float m_fAttackTime;	//攻击冷却计时器

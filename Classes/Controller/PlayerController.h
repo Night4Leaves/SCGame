@@ -34,9 +34,6 @@ private:
 	void getDamage(Ref* pSender);
 
 private:
-	TMXTiledMap* m_pMap;	//记录地图
-	TMXLayer* m_pMeta;		//障碍判定层
-
 	float m_fMapWidth;	//地图宽度
 	float m_fMapHeight;	//地图高度
 

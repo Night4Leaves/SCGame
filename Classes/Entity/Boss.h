@@ -3,6 +3,7 @@
 #define __BOSS_H__
 
 #include "CombatEntity.h"
+#include "GameManager.h"
 
 class Boss : public CombatEntity
 {
@@ -27,7 +28,7 @@ protected:
 
 	int m_iMaxHP;		//最大血量
 	int m_iXSpeed;	//X轴移速
-	int m_iYspeed;	//Y轴移速
+	int m_iYSpeed;	//Y轴移速
 	int m_iFirstSkillDamage;	//第一技能伤害
 	int m_iFirstSkillCDTime;	//第一技能冷却时间
 	int m_iFirstSkillTime;		//第一技能据上次使用间隔
