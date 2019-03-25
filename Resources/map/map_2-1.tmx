@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.1" orientation="orthogonal" renderorder="left-down" width="100" height="19" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="4">
+<map version="1.2" tiledversion="1.2.1" orientation="orthogonal" renderorder="left-down" width="100" height="19" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="6">
  <tileset firstgid="1" source="tilesheet_complete.tsx"/>
  <tileset firstgid="1057" source="block.tsx"/>
  <layer id="1" name="terrain" width="100" height="19">
   <data encoding="base64" compression="zlib">
-   eJztjtkJgEAMBdejG/HoRjz61hIsw/dnDCrr/ggyA0Pg5SAhAAAAAAAAAMDXVMXhkoew5ufM62eudmLupO7afswvKXff9J/+sdldrTXTyFZ2sjcWsnSZ189c7cTcSd21/ZhfUu6+6T/9Y7O7OshRTnKWW4aIiIiI+F93RZy+1w==
+   eJztlcENgzAMRdPQbSraboOg7A0jdIz+njAG0pBDc3lPeopkx5aVKBACAAAAAAAAANTm1ixOMYQ5rmNev2evJqdPaa3N58xS0vdMPjWPjR2trfbc5UM+ZWds5NXFvH7PXk1On9Jam8+ZpaTvmXxqHhs7Wns5yJcc5fuCiF+HuF6xzvkj4tbU94m387/zT8X4h9S9l1939AHjtbeu
   </data>
  </layer>
  <layer id="2" name="decoration" width="100" height="19">
   <data encoding="base64" compression="zlib">
-   eJztwTEBAAAAwqD1T20MH6AAAAAAAAAAeBgdsAAB
+   eJztlulxwkAMhXfdSo52QtJBaIMkHUAbOTpw+jF1RB7Q5I3QamX77/v+AIOOp8OCUgghhBBCCCGEEEII+edhKOVx2BbjXfw/NsZAUNNBXt8asTN5vfp6fkt64um7k8/3Q2yDjLWU33p5/yx2Lxt7+S3+P4meTZLzXH071IyaPuX1qxEb875K3H2NY2X0Wh/slTcnT9+TfN4NsQ3OTPuCvcJ6LOP1O9XTmzfGs7W3di/qe4aj5DrVdbGi2nuzXYrmsjObwV5pPdov7JvOT/Vk6sX+IJmasD+t+W29s+jf0jrj1YrPjIK7HWmLcnlov5bsQrRfEfaOj9cYqBl1oH1Wn73lSuTfm/VUb21wtzV2b25r8Oqx/dfnx7ONbpu9ZXMca4+zad1964O90rugmjMa7aw8n8w+TM69ydbgzRLrsXm8OXu2+LzbnRphrlrzmt8R64O90l3RufY0eng+SHQfsvfGaoj++3j5ov8oLX1W0wS7rzX/ASgyePM=
   </data>
  </layer>
  <objectgroup id="3" name="objects">
@@ -20,6 +20,12 @@
    <point/>
   </object>
   <object id="3" name="boss" x="3055" y="510">
+   <point/>
+  </object>
+  <object id="4" name="remonster_01" x="3084" y="444">
+   <point/>
+  </object>
+  <object id="5" name="remonster_02" x="3086" y="570">
    <point/>
   </object>
  </objectgroup>

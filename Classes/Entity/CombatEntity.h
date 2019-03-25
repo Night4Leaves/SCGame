@@ -4,6 +4,7 @@
 
 #include "CustomizeStruct.h"
 #include "HpBar.h"
+#include "PauseDevice.h"
 
 //怪物状态
 enum MonsterState

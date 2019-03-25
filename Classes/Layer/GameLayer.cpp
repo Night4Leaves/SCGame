@@ -205,7 +205,7 @@ void GameLayer::setGameScene_2_1(PlayerData & playerData)
 	float bossX = bossPoint.at("x").asFloat();
 	float bossY = bossPoint.at("y").asFloat();
 
-	BossTianzhao* boss = BossTianzhao::create(bossDataList[2]);
+	BossTianzhao* boss = BossTianzhao::create(bossDataList[4]);
 	boss->setBossPosition(Vec2(bossX, bossY));
 	boss->idle();
 	boss->setScale(0.45);
@@ -287,7 +287,7 @@ void GameLayer::setGameScene_3_1(PlayerData & playerData)
 	float bossX = bossPoint.at("x").asFloat();
 	float bossY = bossPoint.at("y").asFloat();
 
-	BossTianzhao* boss = BossTianzhao::create(bossDataList[4]);
+	BossTianzhao* boss = BossTianzhao::create(bossDataList[2]);
 	boss->setBossPosition(Vec2(bossX, bossY));
 	boss->idle();
 	boss->setScale(0.45);

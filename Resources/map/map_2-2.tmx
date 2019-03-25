@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.1" orientation="orthogonal" renderorder="left-down" width="100" height="19" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="4">
+<map version="1.2" tiledversion="1.2.1" orientation="orthogonal" renderorder="left-down" width="100" height="19" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="7">
  <tileset firstgid="1" source="tilesheet_complete.tsx"/>
  <tileset firstgid="1057" source="block.tsx"/>
  <layer id="1" name="terrain" width="100" height="19">
   <data encoding="base64" compression="zlib">
-   eJztw4kJgEAQBLATy/E5u/HtH8twuliQBNIaAAAAUG0arTrnkmv23HK37JFnXnnnk++gqqr//QGkDrJ5
+   eJztlEsOwjAMRAsch/K5DVB6f7HpHTCLSCYy/tCAs5iRnqI6UarO1B4GCIIgCIIgCIIgCIKytd+BLEbiQByJE3EmLiCNK3EjJuJOzMRj0w/T9n2V9iN7pVZYhFoPjIx/+qx57Tnv+bbI2ZKPJ6dfZtkyD81f6X+1vJe8jfobOfN65jVpv+f+8PrPPa1XyWNrXkn+eL2q38X7Irs3rDw0v6P5RGaS5cO3M8h7f0YOa/ujlfee2bUos8qbjeZzxlxqnYfH509zaU3udRa8bvWB1YM9wPN4AtEizm4=
   </data>
  </layer>
  <layer id="2" name="decoration" width="100" height="19">
   <data encoding="base64" compression="zlib">
-   eJztwTEBAAAAwqD1T20MH6AAAAAAAAAAeBgdsAAB
+   eJztlbtNBEEMhmevBeiAxx00AR3wuIP8SDkJcjheOaQgQc6zAegA+oAOIOYfaS2MsWdmdxMCf5K1j7FnvLbXDsFxHMdxHMdxHMdxHMdx/i8LvRAWe/racxXCS9XM7hjvTiB9yMDYNzLGvjvG3pGcvcUMZLa5mckcfJhnfrxC3gptLd0lfPey8e0bOGuzPo9iSbzD5qPALkK5e8S7J8gQMkrE8xy6F4l8pOyln5wVyCp7TtWb5AB6h5Ap5Ki2WcN1ndl/Qr7q+z3IftDjvit04/Okvt/Cd29Xv3Un4S8UyzakcsdpW/ecJn7KuonImidu8e4Ocg95MPbn+b2G3ISfuPOYXkKuEs+hcE07V9ZYqj5zaHXfpce08U3WfG5PjpbfiBbTVF/i9KEzyMwFfq70gepT8zs3FzRkj2mC5VuKXP61mKdia8WT9yXZk6jXRYbQGdV6cmZb+S/125oLlCOr9saKjdbbuvybBM+/NjM0eGxlv+PxjPB5Qnmg/4fWqNdRnkmvtO93hXJk5VvLo9bbusw4jZKZETmFb2e1f7zf8Ton+ByXfYyvRSjPpPcNzARlkw==
   </data>
  </layer>
  <objectgroup id="3" name="objects">
@@ -20,6 +20,12 @@
    <point/>
   </object>
   <object id="3" name="boss" x="3055" y="510">
+   <point/>
+  </object>
+  <object id="4" name="remonster_01" x="3086" y="440">
+   <point/>
+  </object>
+  <object id="5" name="remonster_02" x="3088" y="564">
    <point/>
   </object>
  </objectgroup>

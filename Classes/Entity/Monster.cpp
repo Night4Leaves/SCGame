@@ -188,8 +188,8 @@ bool Monster::init(const MonsterData & monsterData)
 	
 	NotificationCenter::getInstance()->addObserver(
 		this,
-		callfuncO_selector(Monster::checkAttckFlyingObjectPath),
-		"attack_flying_object_point",
+		callfuncO_selector(Monster::checkBeHit),
+		"attack_flying_object_check_point",
 		NULL);
 
 	NotificationCenter::getInstance()->addObserver(
@@ -277,53 +277,12 @@ void Monster::setMonsterOriginPosition(Point pos)
 	setPosition(pos);
 }
 
-void Monster::checkAttckFlyingObjectPath(Ref * pSender)
+void Monster::startPause(Ref * pSender)
 {
-	if (m_bIsDeath)
-	{
-		return;
-	}
+}
 
-	FlyingObjectPositionInformation* flyingObjectInfo = (FlyingObjectPositionInformation*)pSender;
-	Point vec2_monsterPoint = this->getPosition();
-
-	float f_xMonster = vec2_monsterPoint.x;
-	float f_yMonster = vec2_monsterPoint.y;
-
-	Point vec2_launcherPoint = flyingObjectInfo->vec2_launcherPoint;
-	float f_yLauncher = vec2_launcherPoint.y;
-
-	//玩家坐标Y轴和怪物坐标Y轴判断双方是不是一直线
-	if (abs(f_yLauncher - f_yMonster) > 7)
-	{
-		return;
-	}
-
-	Point vec2_currentPoint = flyingObjectInfo->vec2_currentPoint;
-	float f_xObject = vec2_currentPoint.x;
-
-	Size size_monsterSize = m_pSprite->getContentSize();
-
-	//飞行物向右，初始位置在怪物右边；或者飞行物向左，初始位置在怪物左边
-	if ((flyingObjectInfo->b_isRight && f_xObject - (f_xMonster + size_monsterSize.width / 2) > 0)
-		|| (!(flyingObjectInfo->b_isRight) && f_xObject - (f_xMonster - size_monsterSize.width / 2) < 0))
-	{
-		return;
-	}
-
-	Point vec2_flightDistance = flyingObjectInfo->vec2_flightDistance;
-	float f_xFlight = vec2_flightDistance.x;
-
-	//玩家怪物一直线的情况下用飞行物的初始位置加飞行距离判断能不能打到怪
-	if ((flyingObjectInfo->b_isRight && (f_xObject + f_xFlight) - (f_xMonster - size_monsterSize.width / 2) > 0)
-		|| (!(flyingObjectInfo->b_isRight) && (f_xObject + f_xFlight) - (f_xMonster + size_monsterSize.width / 2) < 0))
-	{
-		NotificationCenter::getInstance()->addObserver(
-			this,
-			callfuncO_selector(Monster::checkBeHit),
-			"attack_flying_object_check_point",
-			NULL);
-	}
+void Monster::endPause(Ref * pSender)
+{
 }
 
 //根据飞行物发来的数据，判定自己是否会被击中
@@ -334,20 +293,25 @@ void Monster::checkBeHit(Ref * pSender)
 		return;
 	}
 
+	//飞行物坐标
 	FlyingObjectCheckInformation* objectPoint = (FlyingObjectCheckInformation*)pSender;
 	float objectX = objectPoint->point_checkPoint.x;
 	float objectY = objectPoint->point_checkPoint.y;
 
+	//怪物坐标与尺寸
 	Point monsterPoint = this->getPosition();
 	Size monsterSize = m_pSprite->getContentSize() * this->getScale();
 
-	float monsterYCheck = monsterPoint.y + monsterSize.height / 2;
+	//Y轴碰撞检测范围
+	float monsterYCheckDown = monsterPoint.y + monsterSize.height * 0.5;
+	float monsterYCheckUp = monsterPoint.y + monsterSize.height * 0.7;
 
-	if (abs(monsterYCheck - objectY) > 7)
+	if (objectY < monsterYCheckDown || objectY > monsterYCheckUp)
 	{
 		return;
 	}
 
+	//X轴碰撞检测范围
 	float monsterLeftXCheck = monsterPoint.x - monsterSize.width / 2;
 	float monsterRightXCheck = monsterPoint.x + monsterSize.width / 2;
 

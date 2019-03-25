@@ -1,7 +1,7 @@
 [
     {
         "characterName" : "boss_01",
-        "HP" : 200,
+        "HP" : 80,
         "attack" : 30,
         "money" : 50,
         "xSpeed" : 6,
@@ -20,7 +20,7 @@
     },
     {
         "characterName" : "boss_02",
-        "HP" : 200,
+        "HP" : 100,
         "attack" : 30,
         "money" : 50,
         "xSpeed" : 6,
@@ -39,7 +39,7 @@
     },
     {
         "characterName" : "boss_03",
-        "HP" : 200,
+        "HP" : 120,
         "attack" : 30,
         "money" : 50,
         "xSpeed" : 6,
@@ -58,7 +58,7 @@
     },
     {
         "characterName" : "boss_04",
-        "HP" : 200,
+        "HP" : 135,
         "attack" : 30,
         "money" : 50,
         "xSpeed" : 6,
@@ -77,7 +77,7 @@
     },
     {
         "characterName" : "boss_05",
-        "HP" : 200,
+        "HP" : 150,
         "attack" : 30,
         "money" : 50,
         "xSpeed" : 6,
@@ -96,7 +96,7 @@
     },
     {
         "characterName" : "boss_06",
-        "HP" : 200,
+        "HP" : 170,
         "attack" : 30,
         "money" : 50,
         "xSpeed" : 6,
@@ -115,7 +115,7 @@
     },
     {
         "characterName" : "boss_07",
-        "HP" : 200,
+        "HP" : 210,
         "attack" : 30,
         "money" : 50,
         "xSpeed" : 6,

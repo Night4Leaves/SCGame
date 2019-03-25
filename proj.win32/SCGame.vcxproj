@@ -174,6 +174,8 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\Layer\PaneLayer.cpp" />
     <ClCompile Include="..\Classes\Layer\ScoreCountLayer.cpp" />
     <ClCompile Include="..\Classes\Layer\ShieldLayer.cpp" />
+    <ClCompile Include="..\Classes\PauseDevice.cpp" />
+    <ClCompile Include="..\Classes\PropBank.cpp" />
     <ClCompile Include="..\Classes\Scene\GameScene.cpp" />
     <ClCompile Include="..\Classes\Scene\InitialScene.cpp" />
     <ClCompile Include="..\Classes\Scene\MainScene.cpp" />
@@ -221,6 +223,8 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\Layer\PaneLayer.h" />
     <ClInclude Include="..\Classes\Layer\ScoreCountLayer.h" />
     <ClInclude Include="..\Classes\Layer\ShieldLayer.h" />
+    <ClInclude Include="..\Classes\PauseDevice.h" />
+    <ClInclude Include="..\Classes\PropBank.h" />
     <ClInclude Include="..\Classes\Scene\GameScene.h" />
     <ClInclude Include="..\Classes\Scene\InitialScene.h" />
     <ClInclude Include="..\Classes\Scene\MainScene.h" />

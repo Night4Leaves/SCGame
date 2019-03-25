@@ -13,6 +13,9 @@ public:
 
 	//设置怪物的位置
 	void setMonsterOriginPosition(Point pos);
+
+	virtual void startPause(Ref* pSender);
+	virtual void endPause(Ref* pSender);
 	
 protected:
 	Monster();
@@ -29,8 +32,6 @@ protected:
 	//攻击结束后的判定
 	void attackEndLogic();
 
-	//根据飞行物设置信息确定自己是否会被击中
-	void checkAttckFlyingObjectPath(Ref* pSender);
 	//根据飞行物判定位置确认自己是否被击中
 	void checkBeHit(Ref* pSender);
 	//根据和玩家角色的距离变更自己的状态

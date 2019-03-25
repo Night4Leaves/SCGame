@@ -165,3 +165,11 @@ void Player::hurt()
 	Sequence* actionSequnence = Sequence::create(hurtAnimate, checkControllerStatus, NULL);
 	m_pSprite->runAction(actionSequnence);
 }
+
+void Player::startPause(Ref * pSender)
+{
+}
+
+void Player::endPause(Ref * pSender)
+{
+}

@@ -38,51 +38,23 @@ bool BossTianzhao::init(const BossData & bossData)
 	m_pHPBar->setResidueHp(m_iHP / (float)m_iMaxHP * 100);
 	this->addChild(m_pHPBar);
 
-
-	NotificationCenter::getInstance()->addObserver(
-		this,
-		callfuncO_selector(BossTianzhao::checkDistanceWithPlayer),
-		"player_point",
-		NULL);
-
 	return true;
-}
-
-void BossTianzhao::update(float dt)
-{
-	Point pos = getPosition();
-	pos.x += m_iXSpeed;
-	setBossPosition(pos);
 }
 
 void BossTianzhao::firstSkill()
 {
+	log("skill-1");
+	this->attack();
 }
 
 void BossTianzhao::secondSkill()
 {
+	log("skill-2");
+	this->attack();
 }
 
 void BossTianzhao::thirdSkill()
 {
-}
-
-void BossTianzhao::checkAttckFlyingObjectPath(Ref * pSender)
-{
-
-}
-
-void BossTianzhao::checkBeHit(Ref * pSender)
-{
-}
-
-void BossTianzhao::checkDistanceWithPlayer(Ref * pSender)
-{
-	Point* playerPos = (Point*)pSender;
-	Point bossPos = this->getPosition();
-	if (bossPos.x - playerPos->x < 655)
-	{
-		this->scheduleUpdate();
-		NotificationCenter::getInstance()->removeObserver(this, "player_point");
-	}
+	log("skill-3");
+	this->attack();
 }

@@ -40,6 +40,9 @@ public:
 	//受伤
 	virtual void hurt();
 
+	virtual void startPause(Ref* pSender);
+	virtual void endPause(Ref* pSender);
+
 private:
 	Player();
 	virtual ~Player();

@@ -63,7 +63,7 @@ bool TestScene::init()
 
 		auto gameLayer = GameLayer::create();
 		this->addChild(gameLayer);
-		gameLayer->setGameScene_4_1(m_vecCharacterList[0]);
+		gameLayer->setGameScene_1_1(m_vecCharacterList[0]);
 
 		/*Player* player = Player::create(m_vecCharacterList[0]);
 		this->addChild(player);

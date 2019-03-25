@@ -98,9 +98,7 @@ void AttackFlyingObject::setFlyingInformation(AtkFlyObjPosInfo & objectFlyingInf
 	float y = m_vec2CurrentPoint.y + m_fYFlightDistance;
 	m_vec2TargetPoint = Point(x, y);
 
-	//把预定飞行轨迹发送给怪物
 	objectFlyingInfo.vec2_flightDistance = Point(m_fXFlightDistance, m_fYFlightDistance);
-	NotificationCenter::getInstance()->postNotification("attack_flying_object_point", (Ref*)&objectFlyingInfo);
 
 	m_pSprite->setFlipX(!m_bIsRight);
 	m_pSprite->setOpacity(255);
