@@ -2,6 +2,7 @@
 #ifndef __CUSTOMIZE_STRUCT_H__
 #define __CUSTOMIZE_STRUCT_H__
 
+#include "CustomizeEnum.h"
 #include "cocos2d.h"
 
 USING_NS_CC;
@@ -152,6 +153,23 @@ struct FlyingObjectCheckInformation
 {
 	Point point_checkPoint;
 	int i_attack;
+};
+
+/**
+ *	场景道具信息
+ *	@str_itemName	道具名称
+ *	@point_setPosition	道具位置
+ *	@b_isMoveable	道具是否可移动
+ *	@enum_type	道具种类（物理/化学/特殊）
+ *	@enum_ph	道具酸碱值（默认中性，化学道具专用）
+ */
+struct SceneItemInfomation
+{
+	std::string str_itemName;
+	Point point_setPosition;
+	bool b_isMoveable;
+	SceneItemType enum_type;
+	PH enum_ph = en_ph_neutral;
 };
 
 #define poslog(name, x, y) log("%s x:%f, y:%f", name, x, y);

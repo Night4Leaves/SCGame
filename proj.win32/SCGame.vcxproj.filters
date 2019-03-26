@@ -153,6 +153,10 @@
     <ClCompile Include="..\Classes\PropBank.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\Layer\SceneItemLayer.cpp">
+      <Filter>src\Layer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Entity\SeneItem.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -295,6 +299,12 @@
     </ClInclude>
     <ClInclude Include="..\Classes\PropBank.h">
       <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Layer\SceneItemLayer.h">
+      <Filter>src\Layer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Entity\SeneItem.h">
+      <Filter>src\Entity</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

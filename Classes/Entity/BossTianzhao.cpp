@@ -44,6 +44,8 @@ bool BossTianzhao::init(const BossData & bossData)
 void BossTianzhao::firstSkill()
 {
 	log("skill-1");
+
+	m_enSkillType = en_st_closeCombet;
 	this->attack();
 }
 

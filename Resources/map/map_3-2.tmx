@@ -4,12 +4,12 @@
  <tileset firstgid="1057" source="block.tsx"/>
  <layer id="1" name="terrain" width="100" height="19">
   <data encoding="base64" compression="zlib">
-   eJztw8kJgEAUBbBBy3EZu3Ht/2wJvi4+SAJpDQAAAKg2jVadc8k1e265W/bIM6+888l3UFXV//4Ab5PLFQ==
+   eJzt1bkNgDAQRFHLlMPZDdf2HxNQABMjQTor+X/pyY49gUshIiIiIiIiInd9B5dBRplklkVW2GyyyyGnhFwV2cTHHXmwi1+8TvbJuQX8e0T9/1da2e02btHie2fzAPZPwdk=
   </data>
  </layer>
  <layer id="2" name="decoration" width="100" height="19">
   <data encoding="base64" compression="zlib">
-   eJztwTEBAAAAwqD1T20MH6AAAAAAAAAAeBgdsAAB
+   eJztlUkOwjAMRVNuC3u4CezhNgwSXIZBggVmUcmy/B1HDbD5T0JqS/w9xE5KIYQQQgghhBBCCCHE5ziUchr+HcV0lpLDqkMeZ9G4GJ2p2pG99XeX50eDLy/eb6F7ZT4rZTHDa7eybmfiQjZRfZ7y/WX+09qof7Uvu8aLLfJXi79mH83YXn4H53tmLnWvrCWuDcgXoW00UX1qoP7Vvlp7HDFqts6n53/UuMrzLWkzxZ+l5zls+zTTtz3x+qfl7EAav6R1v6P9s3OG5g5h69WjV9DZ0dMH0sjMK1rjaXp3oM4PaUV3J7L57IWtF+oVq5GtaS0fD6vt+UIamVlDazzN6A6NtCI7ZNMyS1YjO+O1fDystn5/AzaFfzU=
   </data>
  </layer>
  <objectgroup id="3" name="objects">

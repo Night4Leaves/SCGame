@@ -204,3 +204,7 @@ void JsonUtil::readBossInfo(std::vector<BossData>& bossInfoList, const char * fi
 		}
 	}
 }
+
+void JsonUtil::writeSavedata(std::vector<PlayerData>& playerInfoList, const char * fileName)
+{
+}

@@ -5,6 +5,16 @@
 #include "CombatEntity.h"
 #include "GameManager.h"
 
+enum SkillType
+{
+	en_st_closeCombet,
+	en_st_beam,
+	en_st_missile,
+	en_st_summon,
+	en_st_debuff,
+	en_st_recovery
+};
+
 class Boss : public CombatEntity
 {
 public:
@@ -58,6 +68,7 @@ protected:
 	float m_fThirdSkillTime;		//第三技能据上次使用间隔
 
 	Point m_pointPlayerPos;		//玩家坐标
+	SkillType m_enSkillType;	//使用第几种技能
 
 };
 

@@ -232,24 +232,33 @@ void Boss::warnLogic()
 
 void Boss::attackLogic()
 {
+	if (m_bIsLock)
+	{
+		return;
+	}
+	m_bIsLock = true;
+
 	Point monsterPos = getPosition();
-	if (abs(monsterPos.x - m_pointPlayerPos.x) > 50 && m_fSecondSkillTime > m_iSecondSkillCDTime)
+	if (abs(monsterPos.x - m_pointPlayerPos.x) > m_iAttackRange && m_fSecondSkillTime > m_iSecondSkillCDTime)
 	{
 		m_iXSpeed = 0;
 		m_fSecondSkillTime = 0;
 		this->secondSkill();
+		return;
 	}
-	if (abs(monsterPos.x - m_pointPlayerPos.x) < 50 && m_fFirstSkillTime > m_iFirstSkillCDTime)
+	if (abs(monsterPos.x - m_pointPlayerPos.x) < m_iAttackRange && m_fFirstSkillTime > m_iFirstSkillCDTime)
 	{
 		m_iXSpeed = 0;
 		m_fFirstSkillTime = 0;
 		this->firstSkill();
+		return;
 	}
 	if (m_fThirdSkillTime > m_iThirdSkillCDTime)
 	{
 		m_iXSpeed = 0;
 		m_fThirdSkillTime = 0;
 		this->thirdSkill();
+		return;
 	}
 }
 
@@ -270,9 +279,51 @@ void Boss::attackedLogic()
 	{
 		this->hurt();
 	}
+	m_enMonsterState = en_ms_patrol;
 }
 
 void Boss::attackEndLogic()
 {
+	Point monsterPoint = this->getPosition();
+
+	switch (m_enSkillType)
+	{
+	case en_st_closeCombet:
+		if (abs(m_pointPlayerPos.y - monsterPoint.y) < 10)
+		{
+			if ((!m_bIsRight
+				&& m_pointPlayerPos.x < monsterPoint.x
+				&& m_pointPlayerPos.x > monsterPoint.x - m_iAttackRange)
+				||
+				(m_bIsRight
+				&& m_pointPlayerPos.x > monsterPoint.x
+				&& m_pointPlayerPos.x < monsterPoint.x + m_iAttackRange)
+				)
+			{
+				NotificationCenter::getInstance()->postNotification("monster_attack", NULL);
+			}
+		}
+		break;
+	case en_st_beam:
+		break;
+	case en_st_missile:
+		break;
+	case en_st_summon:
+		break;
+	case en_st_debuff:
+		break;
+	case en_st_recovery:
+		m_iHP += m_iThirdSkillDamage;
+		if (m_iHP > m_iMaxHP)
+		{
+			m_iHP = m_iMaxHP;
+		}
+		m_pHPBar->setResidueHp(m_iHP / (float)m_iMaxHP * 100);
+		break;
+	default:
+		break;
+	}
+
 	m_enMonsterState = en_ms_patrol;
+	m_bIsLock = false;
 }

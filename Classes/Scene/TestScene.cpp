@@ -9,6 +9,8 @@
 #include "Layer/ScoreCountLayer.h"
 #include "Layer/GameMenuLayer.h"
 #include "Layer/GameLayer.h"
+#include "Layer/ShieldLayer.h"
+#include "Layer/SceneItemLayer.h"
 
 #include "CustomizeEnum.h"
 #include "HeartCount.h"
@@ -41,10 +43,10 @@ bool TestScene::init()
 	{
 		//dtCount = 0;
 
-		//TMXTiledMap* map = TMXTiledMap::create("map/test_map.tmx");
-		//this->addChild(map);
+		/*TMXTiledMap* map = TMXTiledMap::create("map/test_map.tmx");
+		this->addChild(map);
 
-		//GameManager::getInstance()->setMap(map);
+		GameManager::getInstance()->setMap(map);*/
 
 		//std::vector<MonsterData> monsterInfoList;
 		//JsonUtil::getInstance()->readMonsterInfo(monsterInfoList);
@@ -65,6 +67,8 @@ bool TestScene::init()
 		this->addChild(gameLayer);
 		gameLayer->setGameScene_1_1(m_vecCharacterList[0]);
 
+		
+
 		/*Player* player = Player::create(m_vecCharacterList[0]);
 		this->addChild(player);
 		player->setPosition(200, 300);
@@ -72,8 +76,7 @@ bool TestScene::init()
 
 		PlayerController* playerController = PlayerController::create();
 		player->setController(playerController);
-		this->addChild(playerController);
-		playerController->setMap(map);*/
+		this->addChild(playerController);*/
 
 		/*std::vector<BossData> bossDataList;
 		JsonUtil::getInstance()->readBossInfo(bossDataList);

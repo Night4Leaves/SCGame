@@ -6,6 +6,8 @@
 #include "Controller/PlayerController.h"
 #include "GameManager.h"
 
+#include "Layer/SceneItemLayer.h"
+
 GameLayer::GameLayer()
 	: m_iFlyingObjectFlag(0)
 {
@@ -81,6 +83,8 @@ void GameLayer::setGameScene_1_1(PlayerData & playerData)
 	}
 	this->addChild(m_pMap);
 
+	this->addChild(SceneItemLayer::create());
+
 	GameManager::getInstance()->setMap(m_pMap);
 
 	//获取地图文件中预设的坐标信息
@@ -88,34 +92,34 @@ void GameLayer::setGameScene_1_1(PlayerData & playerData)
 
 	//根据读取到的怪物信息创建怪物对象
 	//根据地图文件中预设的坐标信息放置怪物对象
-	int i = 1;
-	while (true)
-	{
-		std::string monsterPointID = StringUtils::format("monster_%02d", i++);
-		ValueMap monsterPoint = objGroup->getObject(monsterPointID.c_str());
-		CC_BREAK_IF(monsterPoint.empty());
+	//int i = 1;
+	//while (true)
+	//{
+	//	std::string monsterPointID = StringUtils::format("monster_%02d", i++);
+	//	ValueMap monsterPoint = objGroup->getObject(monsterPointID.c_str());
+	//	CC_BREAK_IF(monsterPoint.empty());
 
-		float monsterX = monsterPoint.at("x").asFloat();
-		float monsterY = monsterPoint.at("y").asFloat();
+	//	float monsterX = monsterPoint.at("x").asFloat();
+	//	float monsterY = monsterPoint.at("y").asFloat();
 
-		if (i % 2 == 0)
-		{
-			Monster* monster = Monster::create(monsterInfoList[3]);
-			monster->setMonsterOriginPosition(Point(monsterX, monsterY));
-			monster->idle();
-			monster->setScale(0.35);
-			this->addChild(monster);
-		}
-		else
-		{
-			Monster* monster = Monster::create(monsterInfoList[6]);
-			monster->setMonsterOriginPosition(Point(monsterX, monsterY));
-			monster->idle();
-			monster->setScale(0.35);
-			this->addChild(monster);
-		}
-		
-	}
+	//	if (i % 2 == 0)
+	//	{
+	//		Monster* monster = Monster::create(monsterInfoList[3]);
+	//		monster->setMonsterOriginPosition(Point(monsterX, monsterY));
+	//		monster->idle();
+	//		monster->setScale(0.35);
+	//		this->addChild(monster);
+	//	}
+	//	else
+	//	{
+	//		Monster* monster = Monster::create(monsterInfoList[6]);
+	//		monster->setMonsterOriginPosition(Point(monsterX, monsterY));
+	//		monster->idle();
+	//		monster->setScale(0.35);
+	//		this->addChild(monster);
+	//	}
+	//	
+	//}
 
 	//创建Boss对象并设置
 	ValueMap bossPoint = objGroup->getObject("boss");
