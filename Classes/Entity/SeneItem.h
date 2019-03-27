@@ -27,6 +27,8 @@ private:
 	Sprite* m_pSprite;	//保存形象的精灵
 	
 	bool m_bIsMoveable;	//是否可移动
+	bool m_bIsTrigger;	//是否激活
+	bool m_bIsUsed;	//是否被使用
 
 	SceneItemType m_enSceneItemType;	//场景道具种类
 	PH m_enPH;	//PH值（化学系道具使用的属性）

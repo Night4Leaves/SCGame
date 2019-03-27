@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.1" orientation="orthogonal" renderorder="left-down" width="100" height="19" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="7">
+<map version="1.2" tiledversion="1.2.1" orientation="orthogonal" renderorder="left-down" width="100" height="19" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="16">
  <tileset firstgid="1" source="tilesheet_complete.tsx"/>
  <tileset firstgid="1057" source="block.tsx"/>
  <layer id="1" name="terrain" width="100" height="19">
@@ -9,14 +9,14 @@
  </layer>
  <layer id="2" name="decoration" width="100" height="19">
   <data encoding="base64" compression="zlib">
-   eJztlesJQjEMhescPtbxsYEuoUvoErqErqGgC+gaCvrDCBZCaB63yFXhfFCQ27QniUmaEgAAAAAAAAAAAAAA/8Gc1uIHtae0Zi1pfZJjJ6VTp/78mtbm/XtLa9fg3i7t9xSbSD65tmRJayW+WT5x3yNafbpnEMzbnuwOQd072T0Ktp5/Jc60Ls69nCHtjxQbns9o7J6d5RP3ndeJVhdj2p8YWvzclexuAV2LiF1bPSxjr81RFF4npT7jaHWrnaup8yjWvNDw/InMKS9Hno7UaDJ7JLluZW1qs5jXuTbHuH/WrMtosVrvQcmfF3Km51zL+DRNrUet/pb/p9dXkbdQ1qY1izPaHOP+WbMuo8Ua8UGizXQZn6ZZ06NNibyF3+QJ+Odexw==
+   eJztlctNRDEMRT3zgCb4tMOnA2iC6WDYQBPQAWygDZCGHR+JaYORYMFdEMkyseM8EALpHsnS6MXJdTy2I0IIIYQQQgghhBBCyP/gGDb7g9qHsKNf0vpJFhOR+8n4/eewi8/f17CbjnM3sb7l+GTyqbUtp7Az8y2KScee0drGOTvJvN3C7y6p+wa/94pvK74aL7Bl41zNLtb3HB+dz+zdW35RTDp2XSdeXexj/SDQ0vte4bdK6EZk/Hp6eA47Sfpa7N17cjRGV9dJrc80Xt16+8bUeZZoXlguYVeJeDJzqpUjUTpFN9LomT2WUre2Nr1ZrOvcm2M6vmjWFbycRu/BA+xRvvadnekl1/Z+nqbXo0Wn6Grs/9maPZm30NZm6bGnqcjztL7Hm2M6vmjWFbxZFr0HA76vVda8mW7v52m2etTT7SHzFnqsDyIbw/f0W3wAX+loqw==
   </data>
  </layer>
  <objectgroup id="3" name="objects">
   <object id="1" name="player" x="50" y="510">
    <point/>
   </object>
-  <object id="2" name="monster" x="446" y="494">
+  <object id="2" name="monster_01" x="614" y="446">
    <point/>
   </object>
   <object id="3" name="boss" x="3055" y="510">
@@ -29,6 +29,33 @@
    <point/>
   </object>
   <object id="6" name="remonster_03" x="3120" y="574">
+   <point/>
+  </object>
+  <object id="7" name="monster_02" x="790" y="568">
+   <point/>
+  </object>
+  <object id="8" name="monster_03" x="988" y="470">
+   <point/>
+  </object>
+  <object id="9" name="monster_04" x="1100" y="566">
+   <point/>
+  </object>
+  <object id="10" name="monster_05" x="1394" y="434">
+   <point/>
+  </object>
+  <object id="11" name="monster_06" x="1738" y="516">
+   <point/>
+  </object>
+  <object id="12" name="monster_07" x="1412" y="524">
+   <point/>
+  </object>
+  <object id="13" name="monster_08" x="1870" y="452">
+   <point/>
+  </object>
+  <object id="14" name="monster_09" x="2256" y="490">
+   <point/>
+  </object>
+  <object id="15" name="monster_10" x="2004" y="548">
    <point/>
   </object>
  </objectgroup>

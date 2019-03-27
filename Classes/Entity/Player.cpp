@@ -168,8 +168,10 @@ void Player::hurt()
 
 void Player::startPause(Ref * pSender)
 {
+	log("Player pause");
 }
 
 void Player::endPause(Ref * pSender)
 {
+	log("Player end pause");
 }

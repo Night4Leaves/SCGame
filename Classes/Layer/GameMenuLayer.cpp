@@ -55,8 +55,6 @@ void GameMenuLayer::setInitialMenu()
 
 void GameMenuLayer::setMainMenu()
 {
-	TTFConfig fontConfig = { "fonts/arial.ttf", 40 };
-
 	Menu* menu = Menu::create();
 
 	ButtonOnlyImageType buttonInfo = { "menubar_01.png", "menubar_01.png", 0.5, this, menu_selector(GameMenuLayer::openBackpack) };
@@ -71,6 +69,18 @@ void GameMenuLayer::setMainMenu()
 	Size winSize = Director::getInstance()->getWinSize();
 	menu->setPosition(winSize.width * 0.87, winSize.height * 0.06);
 	menu->alignItemsHorizontallyWithPadding(8);
+	this->addChild(menu);
+}
+
+void GameMenuLayer::setGameMenu()
+{
+	Menu* menu = Menu::create();
+
+	ButtonOnlyImageType buttonInfo = { "Game_Pause_Normal.png", "Game_Pause_Selected.png", 0.3, this, menu_selector(GameMenuLayer::gamePause) };
+	menu->addChild(MenuItemUtil::createMenuItemSpriteByPicture(buttonInfo));
+
+	Size winSize = Director::getInstance()->getWinSize();
+	menu->setPosition(winSize.width * 0.95, winSize.height * 0.95);
 	this->addChild(menu);
 }
 
@@ -111,4 +121,11 @@ void GameMenuLayer::openSkillList(Ref * sender)
 void GameMenuLayer::openOption(Ref * sender)
 {
 	log("openOption");
+}
+
+void GameMenuLayer::gamePause(Ref * sender)
+{
+	log("gamePause");
+	NotificationCenter::getInstance()->postNotification("start_pause", NULL);
+	NotificationCenter::getInstance()->postNotification("show_PaneLayer", (Ref*)en_paneMsg_pause);
 }

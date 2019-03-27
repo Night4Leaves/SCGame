@@ -192,9 +192,13 @@ void PlayerController::onKeyPressed(EventKeyboard::KeyCode keyCode, Event * even
 		m_pControllerListener->attack();	//调用角色攻击动画
 
 		break;
+	case EventKeyboard::KeyCode::KEY_K:
+		//发送包含角色坐标的消息，将可放置道具添加到场景中
+		NotificationCenter::getInstance()->postNotification("keyword_k", (Ref*)&(m_pControllerListener->getTargetPosition()));
+		break;
 	case EventKeyboard::KeyCode::KEY_L:
 		//发送包含角色坐标的消息，让场景可互动对象判定自己是否被触发
-		NotificationCenter::getInstance()->postNotification("player_check_point", (Ref*)&(m_pControllerListener->getTargetPosition()));
+		NotificationCenter::getInstance()->postNotification("keyword_l", (Ref*)&(m_pControllerListener->getTargetPosition()));
 		break;
 	default:
 		break;

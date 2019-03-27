@@ -37,12 +37,6 @@ bool SceneItem::init(const SceneItemInfomation & sceneItemInfo)
 			"keyword_l",
 			NULL);
 
-		NotificationCenter::getInstance()->addObserver(
-			this,
-			callfuncO_selector(SceneItem::checkPlayerPoint),
-			"keyword_k",
-			NULL);
-
 		if (m_bIsMoveable)
 		{
 			NotificationCenter::getInstance()->addObserver(
@@ -58,6 +52,8 @@ bool SceneItem::init(const SceneItemInfomation & sceneItemInfo)
 }
 
 SceneItem::SceneItem()
+	: m_bIsTrigger(false)
+	, m_bIsUsed(false)
 {
 }
 
@@ -68,6 +64,16 @@ SceneItem::~SceneItem()
 
 void SceneItem::checkPlayerPoint(Ref * pSender)
 {
+	Point* temp = (Point*)pSender;
+	Point playerPos = Point(temp->x, temp->y);
+	Point itemPos = getPosition();
+
+	if (fabs(playerPos.x - itemPos.x) < 50
+		&& fabs(playerPos.y - itemPos.y) < 50
+		&& !m_bIsUsed)
+	{
+		m_bIsTrigger = true;
+	}
 }
 
 void SceneItem::mouseClick(Ref * pSender)

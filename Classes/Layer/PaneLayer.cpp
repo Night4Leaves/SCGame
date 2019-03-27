@@ -98,6 +98,7 @@ void PaneLayer::menuCloseCallback(Ref * pSender)
 	log("ok");
 	this->removeAllChildren();
 	m_isOpen = false;
+	NotificationCenter::getInstance()->postNotification("end_pause", NULL);
 }
 
 void PaneLayer::createNewData()
@@ -237,7 +238,26 @@ void PaneLayer::openStore()
 
 void PaneLayer::startPause()
 {
+	m_isOpen = true;
+
 	log("PaneLayer::startPause");
+
+	this->addChild(ShieldLayer::create());
+
+	Sprite* buttonNormal = Sprite::createWithSpriteFrameName("Button_Close_Normal.png");
+	Sprite* buttonSelected = Sprite::createWithSpriteFrameName("Button_Close_Selected.png");
+
+	auto closeMenuItem = MenuItemSprite::create(
+		buttonNormal,
+		buttonSelected,
+		this,
+		menu_selector(PaneLayer::menuCloseCallback)
+	);
+	closeMenuItem->setScale(0.2);
+
+	Menu* closeMenu = Menu::create(closeMenuItem, NULL);
+	this->addChild(closeMenu);
+	closeMenu->setPosition(400, 110);
 }
 
 void PaneLayer::selectGameScene()
@@ -292,7 +312,7 @@ void PaneLayer::selectGameScene()
 
 	this->addChild(menu);
 
-	menu->alignItemsVerticallyWithPadding(1);
+	menu->alignItemsVerticallyWithPadding(0);
 	menu->setOpacity(100);
 	menu->setPosition(pos);
 
@@ -314,7 +334,7 @@ void PaneLayer::selectGameScene()
 
 	this->addChild(menu);
 
-	menu->alignItemsVerticallyWithPadding(1);
+	menu->alignItemsVerticallyWithPadding(0);
 	menu->setOpacity(100);
 	menu->setPosition(pos);
 
@@ -336,7 +356,29 @@ void PaneLayer::selectGameScene()
 
 	this->addChild(menu);
 
-	menu->alignItemsVerticallyWithPadding(1);
+	menu->alignItemsVerticallyWithPadding(0);
+	menu->setOpacity(100);
+	menu->setPosition(pos);
+
+	//第四组
+	pos = Point(visibleSize.width / 4 * 3 - 60, visibleSize.height / 4 + 70);
+
+	buttonBG = Sprite::create("background/main_scene_01_2048x1536.png");
+	buttonBG->setScale(0.1);
+	buttonBG->setPosition(pos);
+
+	this->addChild(buttonBG);
+
+	aButtonInfo = { "Button_Select_Game_Scene", "4-1", ttf, 1, this, menu_selector(PaneLayer::selectGameScene_4_1) };
+	aButtonSprite = MenuItemUtil::createMenuItemSprite(aButtonInfo);
+	bButtonInfo = { "Button_Select_Game_Scene", "", ttf, 1, this, menu_selector(PaneLayer::selectGameScene_4_1) };
+	bButtonSprite = MenuItemUtil::createMenuItemSprite(bButtonInfo);
+
+	menu = Menu::create(aButtonSprite, bButtonSprite, NULL);
+
+	this->addChild(menu);
+
+	menu->alignItemsVerticallyWithPadding(0);
 	menu->setOpacity(100);
 	menu->setPosition(pos);
 }
@@ -458,7 +500,11 @@ void PaneLayer::openSkilllist()
 	closeMenu->setPosition(400, 70);
 }
 
-MenuItemSprite * PaneLayer::createCharacterSelectItem(const std::vector<PlayerData>& vec_characterInfoList, int i, const SEL_MenuHandler & selector, bool is_savedata)
+MenuItemSprite * PaneLayer::createCharacterSelectItem(
+	const std::vector<PlayerData>& vec_characterInfoList,
+	int i,
+	const SEL_MenuHandler & selector,
+	bool is_savedata)
 {
 	log("name = %s", vec_characterInfoList[i].str_characterName.c_str());
 	log("%s", StringUtils::format("%s_wait.png", vec_characterInfoList[i].str_characterName.c_str()).c_str());

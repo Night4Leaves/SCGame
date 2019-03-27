@@ -47,7 +47,7 @@ private:
 	Vector<FlyingObject*> vector_pAttackFlyingObject;	//飞行物
 	Vector<Monster*> vector_pMonster;	//怪物
 	Boss* m_pBoss;	//Boss
-
+	
 	std::vector<MonsterData> monsterInfoList;
 	std::vector<BossData> bossDataList;
 

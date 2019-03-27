@@ -59,7 +59,7 @@ bool NPC::init(const NPCSetInfo& npcSetInfo)
 	NotificationCenter::getInstance()->addObserver(
 		this,
 		callfuncO_selector(NPC::checkPlayerPoint),
-		"player_check_point",
+		"keyword_l",
 		NULL);
 
 	return true;

@@ -4,6 +4,36 @@
     <dict>
         <key>frames</key>
         <dict>
+            <key>Game_Pause_Normal.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{123,123}</string>
+                <key>spriteSourceSize</key>
+                <string>{123,123}</string>
+                <key>textureRect</key>
+                <string>{{400,2},{123,123}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>Game_Pause_Selected.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{123,123}</string>
+                <key>spriteSourceSize</key>
+                <string>{123,123}</string>
+                <key>textureRect</key>
+                <string>{{275,2},{123,123}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
             <key>first_skill_icon.png</key>
             <dict>
                 <key>aliases</key>
@@ -45,7 +75,7 @@
                 <key>spriteSourceSize</key>
                 <string>{720,1145}</string>
                 <key>textureRect</key>
-                <string>{{184,2},{720,1145}}</string>
+                <string>{{2,127},{720,1145}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -60,7 +90,7 @@
                 <key>spriteSourceSize</key>
                 <string>{89,90}</string>
                 <key>textureRect</key>
-                <string>{{906,2},{89,90}}</string>
+                <string>{{184,2},{89,90}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -76,9 +106,9 @@
             <key>realTextureFileName</key>
             <string>UI_02.png</string>
             <key>size</key>
-            <string>{997,1149}</string>
+            <string>{724,1274}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:1ae482056764391591e57c9f2026ac86:d805e404471053f358e2210b1956452c:c19f315fc34c19e4a98fc1b6ca97716b$</string>
+            <string>$TexturePacker:SmartUpdate:a778c85941bb415eae0ca6a3cb5d0ba8:3da1525c904f532d4248cfada7fe90fe:c19f315fc34c19e4a98fc1b6ca97716b$</string>
             <key>textureFileName</key>
             <string>UI_02.png</string>
         </dict>

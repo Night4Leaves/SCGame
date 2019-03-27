@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.1" orientation="orthogonal" renderorder="left-down" width="110" height="19" tilewidth="32" tileheight="32" infinite="0" nextlayerid="44" nextobjectid="28">
+<map version="1.2" tiledversion="1.2.1" orientation="orthogonal" renderorder="left-down" width="110" height="19" tilewidth="32" tileheight="32" infinite="0" nextlayerid="44" nextobjectid="29">
  <tileset firstgid="1" source="block.tsx"/>
  <tileset firstgid="49" source="tilesheet_complete.tsx"/>
  <layer id="40" name="terrain" width="110" height="19">
@@ -12,53 +12,56 @@
  </layer>
  <layer id="41" name="decoration" width="110" height="19">
   <data encoding="base64" compression="zlib">
-   eJztVklOAzEQ9GhyhS+wI/EE+AIQ+A3rZ8JP4B5+AheQIDlhKymlU1TbAxck1CWNMnFv5e52e1IKBAKBQCAQCAQCgUAgEAgE/i8+8vP51yQCVUz7lM67lMbdam0vv+8v/0/69ToW/ed+8c71Pc02Z8ZPEjaA6g3m8RPOCorPLNvO+3UZ1n7Dw+7rvaFf4rwJPS9eyf1Dfi6y7FLIb/LabfedP7jZOlrw+lV+vyY/itNM+Cxr4OHt2XJjXRUHfKzdwSilw9FKZteUb5UT7gfE3jZrqj4lzhbpqb1YlL64y7J7Iz8arR7FvwVP364rTsquFbvIVS4AL86QPXl9ybwQ39bci8318WaRBXpkJ+vtVnS5bgXct/CFs6rmzBDgzA+ZQcgj97rNRS3XLEdMrHkc1NmyfrgW3Ee1nNhaT0w+7Qz0egy5A1Azy5d7B75wVnnOWNtaLnEXqN707Hgfk4F1Z3BMby61zmatjwr4HMKG6zs1sw+/tTOmvg/QI8x31te/KyHDXh+z/hP5bvmADvc4agOfqOvUqTt8qDtz7nwL1OTeuRwyczeyv83lfsadf6cByL+N1ZqTBapHwLF2flj2krm+Uv6VD/6vcoHaKJ/KT+ue5bzB1pMzj4IT4sGzCzjuF7qs79kh/9yPqp9Rzy+cMqdM
+   eJztVklOw0AQHMu5whfYkXgCfAEI/Ib1M+En4R5+AheQwJyYUVJyp6geGy5IqEuykvRa093TcUqBQCAQCAQCgUAgEAgEAoHA/8V7fj7+mkSgikWb0nmT0rTpZXv5+/7q96xd72Oxf2qX37m/p9nnzMRJwgdQs8E8fsJZQfHpsu9nu66D7Dc87LneBuxLnldh5+UrtX/Iz0XWXQr9TZbdNt/5g5vtowXLr/L3a4qjOHUiZpGBh3dmy41tVR7wsX4Hk5QOJ73OylRsVROeB+TeNjLVn5Jni+zUWSzKXNxl3b3RH036R/Efgmdv5YqT8hvKXfSqFoCXZ8yZvLlkXshve+7l5v54u8gCM7KT7XYrtty3Ap5bxMJdVXtmDHDnx+wg1JFn3daiVmvWIydkHgd1t2wc7gXPUa0mttczU0+7A70ZQ+0A9Mzy5dlBLNxV3jPWt1ZL/Beo2fT8+ByzkX1ncE5vLw3dzdocFfA9hA/3d2F2Hz5rd0y9H2BGmG/X1t8rocNZ59n+kWIPxYANz7j3nrRw+o4YsAMXyL396um9ezlm527keJur80wb/z8NQP1trqE9WaBmBBxr94d1z5nrC9VfxeDfqha1/2kVh2OAC+RcN/h6esXjhM7Guws4bpe2bO/5of58ZjXP6OcX3POnTA==
   </data>
  </layer>
  <objectgroup id="2" name="objects">
   <object id="1" name="player" x="50" y="510">
    <point/>
   </object>
-  <object id="2" name="monster_01" x="815" y="577">
+  <object id="2" name="monster_01" x="1203" y="577">
    <point/>
   </object>
-  <object id="14" name="monster_02" x="936" y="534">
+  <object id="14" name="monster_02" x="900" y="462">
    <point/>
   </object>
-  <object id="15" name="monster_03" x="825" y="464">
+  <object id="15" name="monster_03" x="1159" y="450">
    <point/>
   </object>
-  <object id="16" name="monster_04" x="1577" y="428">
+  <object id="16" name="monster_04" x="809" y="516">
    <point/>
   </object>
-  <object id="17" name="monster_05" x="1628" y="592">
+  <object id="17" name="monster_05" x="1308" y="496">
    <point/>
   </object>
-  <object id="18" name="monster_06" x="1739" y="508">
+  <object id="18" name="monster_06" x="861" y="596">
    <point/>
   </object>
-  <object id="19" name="monster_07" x="2151" y="497">
+  <object id="19" name="monster_07" x="1907" y="497">
    <point/>
   </object>
-  <object id="20" name="monster_08" x="2334" y="524">
+  <object id="20" name="monster_08" x="2124" y="446">
    <point/>
   </object>
-  <object id="21" name="monster_09" x="2447" y="599">
+  <object id="21" name="monster_09" x="2227" y="491">
    <point/>
   </object>
-  <object id="22" name="monster_10" x="2517" y="465">
+  <object id="22" name="monster_10" x="2097" y="575">
    <point/>
   </object>
   <object id="23" name="boss" x="3375" y="510">
    <point/>
   </object>
-  <object id="25" name="sceneitem_01" x="1237" y="478">
+  <object id="25" name="sceneitem_01" x="1209" y="384">
    <point/>
   </object>
-  <object id="26" name="sceneitem_02" x="1329" y="416">
+  <object id="26" name="sceneitem_02" x="1357" y="384">
    <point/>
   </object>
-  <object id="27" name="sceneitem_03" x="1240" y="510">
+  <object id="27" name="sceneitem_03" x="1084" y="384">
+   <point/>
+  </object>
+  <object id="28" name="monster_11" x="2350" y="552">
    <point/>
   </object>
  </objectgroup>

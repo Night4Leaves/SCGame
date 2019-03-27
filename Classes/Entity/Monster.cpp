@@ -266,23 +266,33 @@ void Monster::update(float dt)
 
 void Monster::setMonsterOriginPosition(Point pos)
 {
-	if (!m_bIsFlying)
-	{
-		m_pointOriginalPos = pos;
-	}
-	else
+	if (m_bIsFlying)
 	{
 		pos.y -= 50;
+		
 	}
+	m_pointOriginalPos = pos;
 	setPosition(pos);
 }
 
 void Monster::startPause(Ref * pSender)
 {
+	if (!m_bIsDeath)
+	{
+		log("Monster pause");
+		this->unscheduleUpdate();
+		m_pSprite->pause();
+	}
 }
 
 void Monster::endPause(Ref * pSender)
 {
+	if (!m_bIsDeath)
+	{
+		log("Monster end pause");
+		this->scheduleUpdate();
+		m_pSprite->resume();
+	}
 }
 
 //根据飞行物发来的数据，判定自己是否会被击中

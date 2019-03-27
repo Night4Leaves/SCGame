@@ -15,7 +15,7 @@ bool SceneItemLayer::init()
 	{
 		CC_BREAK_IF(!Layer::init());
 
-		SceneItemInfomation itemInfo = { "sceneitem_03", Point(400, 300), true, en_sceneItem_physics };
+		SceneItemInfomation itemInfo = { "scene_item_rod", Point(400, 300), true, en_sceneItem_physics };
 		SceneItem* sceneItem = SceneItem::create(itemInfo);
 		this->addChild(sceneItem);
 
@@ -40,6 +40,12 @@ bool SceneItemLayer::init()
 			NotificationCenter::getInstance()->postNotification("mouse_end_point", (Ref*)&clickPos);
 			return true;
 		};
+
+		//NotificationCenter::getInstance()->addObserver(
+		//	this,
+		//	nullptr,
+		//	"keyword_k",
+		//	NULL);
 
 		m_pListener->setSwallowTouches(true);
 		m_pListener->retain();

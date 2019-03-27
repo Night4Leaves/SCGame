@@ -22,7 +22,7 @@ bool Portal::init()
 	NotificationCenter::getInstance()->addObserver(
 		this,
 		callfuncO_selector(Portal::checkPlayerPoint),
-		"player_check_point",
+		"keyword_l",
 		NULL);
 
 	return true;

@@ -156,7 +156,9 @@
     <ClCompile Include="..\Classes\Layer\SceneItemLayer.cpp">
       <Filter>src\Layer</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Entity\SeneItem.cpp" />
+    <ClCompile Include="..\Classes\Entity\SeneItem.cpp">
+      <Filter>src\Entity</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">

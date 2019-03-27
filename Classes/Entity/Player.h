@@ -4,6 +4,7 @@
 
 #include "CombatEntity.h"
 #include "Controller/SCController.h"
+#include "PauseDevice.h"
 
 class Player : public CombatEntity, public GeneralControllerListener
 {

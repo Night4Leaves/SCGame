@@ -21,6 +21,9 @@ public:
 	//设置主界面的菜单选项
 	void setMainMenu();
 
+	//设置关卡中的菜单选项
+	void setGameMenu();
+
 private:
 	//初始界面功能
 	void startGame(Ref* sender);
@@ -32,6 +35,9 @@ private:
 	void openBackpack(Ref* sender);
 	void openSkillList(Ref* sender);
 	void openOption(Ref* sender);
+
+	//关卡界面功能
+	void gamePause(Ref* sender);
 };
 
-#endif // !1
+#endif // !__GAME_MENU_LAYER_H__

@@ -44,13 +44,14 @@ bool GameScene::init()
 		m_pGameMenuLayer = GameMenuLayer::create();
 		CC_BREAK_IF(m_pGameMenuLayer == nullptr);
 		this->addChild(m_pGameMenuLayer);
+		m_pGameMenuLayer->setGameMenu();
 
 		//初始化分数显示层并添加到场景中
 		m_pScoreCountLayer = ScoreCountLayer::create(0);
 		CC_BREAK_IF(m_pScoreCountLayer == nullptr);
 		this->addChild(m_pScoreCountLayer);
 
-		//初始化现实层并添加到场景中
+		//初始化显示层并添加到场景中
 		m_pPaneLayer = PaneLayer::create();
 		CC_BREAK_IF(m_pPaneLayer == nullptr);
 		this->addChild(m_pPaneLayer);

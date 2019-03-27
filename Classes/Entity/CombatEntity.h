@@ -26,7 +26,7 @@ enum ActionState
 	en_as_attacked	//被攻击
 };
 
-class CombatEntity : public Node
+class CombatEntity :public PauseDevice
 {
 public:
 	/**

@@ -19,6 +19,9 @@ Portal-----show_PaneLayer-----PaneLayer
 
 GameMenuLayer-----show_PaneLayer-----PaneLayer
 
+
+
+
 NotificationCenter::getInstance()->postNotification("monster_attack", NULL);
 
 NotificationCenter::getInstance()->addObserver(

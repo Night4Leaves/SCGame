@@ -62,10 +62,22 @@ void Boss::checkDistanceWithPlayer(Ref * pSender)
 
 void Boss::startPause(Ref * pSender)
 {
+	if (m_bIsactivated)
+	{
+		log("Boss pause");
+		this->unscheduleUpdate();
+		m_pSprite->pause();
+	}
 }
 
 void Boss::endPause(Ref * pSender)
 {
+	if (m_bIsactivated)
+	{
+		log("Boss end pause");
+		this->scheduleUpdate();
+		m_pSprite->resume();
+	}
 }
 
 Boss::Boss()
