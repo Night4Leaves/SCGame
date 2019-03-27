@@ -169,9 +169,11 @@ void Player::hurt()
 void Player::startPause(Ref * pSender)
 {
 	log("Player pause");
+	m_pSprite->pause();
 }
 
 void Player::endPause(Ref * pSender)
 {
 	log("Player end pause");
+	m_pSprite->resume();
 }

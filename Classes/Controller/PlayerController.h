@@ -25,6 +25,9 @@ public:
 	void onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event);
 	void onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event);
 
+	virtual void startPause(Ref* pSender);
+	virtual void endPause(Ref* pSender);
+
 private:
 	//根据玩家设置显示地图
 	void setViewPointByPlayer(Point pos);
@@ -32,8 +35,12 @@ private:
 	void setPlayerPosition(Point pos);
 	//受到伤害
 	void getDamage(Ref* pSender);
+	//设置键盘监听是否生效
+	void setKeywordListenerEnabled(bool value);
 
 private:
+	EventListenerKeyboard* m_pListener;
+
 	float m_fMapWidth;	//地图宽度
 	float m_fMapHeight;	//地图高度
 

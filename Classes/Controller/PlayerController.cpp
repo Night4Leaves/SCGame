@@ -17,6 +17,7 @@ PlayerController::PlayerController()
 PlayerController::~PlayerController()
 {
 	NotificationCenter::getInstance()->removeAllObservers(this);
+	m_pListener->release();
 }
 
 bool PlayerController::init()
@@ -24,10 +25,12 @@ bool PlayerController::init()
 	this->scheduleUpdate();
 
 	//注册键盘监听事件
-	auto listener = EventListenerKeyboard::create();
-	listener->onKeyPressed = CC_CALLBACK_2(PlayerController::onKeyPressed, this);
-	listener->onKeyReleased = CC_CALLBACK_2(PlayerController::onKeyReleased, this);
-	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
+	m_pListener = EventListenerKeyboard::create();
+	m_pListener->onKeyPressed = CC_CALLBACK_2(PlayerController::onKeyPressed, this);
+	m_pListener->onKeyReleased = CC_CALLBACK_2(PlayerController::onKeyReleased, this);
+	m_pListener->retain();
+	setKeywordListenerEnabled(true);
+	
 
 	//接收“受到伤害”的消息
 	NotificationCenter::getInstance()->addObserver(
@@ -343,6 +346,25 @@ void PlayerController::onKeyReleased(EventKeyboard::KeyCode keyCode, Event * eve
 	}
 }
 
+void PlayerController::startPause(Ref * pSender)
+{
+	log("PlayerController pause");
+	setKeywordListenerEnabled(false);
+	this->unscheduleUpdate();
+}
+
+void PlayerController::endPause(Ref * pSender)
+{
+	log("PlayerController end pause");
+	setKeywordListenerEnabled(true);
+	m_iHorizontalRun = 0;
+	m_iVerticalRun = 0;
+	m_iXSpeed = 0;
+	m_iYSpeed = 0;
+	m_pControllerListener->idle();
+	this->scheduleUpdate();
+}
+
 void PlayerController::setViewPointByPlayer(Point pos)
 {
 	Node* parent = (Node*)getParent();
@@ -445,4 +467,17 @@ void PlayerController::getDamage(Ref* pSender)
 	m_iYSpeed = 0;
 	m_pControllerListener->hurt();
 
+}
+
+void PlayerController::setKeywordListenerEnabled(bool value)
+{
+	if (value)
+	{
+		_eventDispatcher->removeEventListener(m_pListener);
+		_eventDispatcher->addEventListenerWithSceneGraphPriority(m_pListener, this);
+	}
+	else
+	{
+		_eventDispatcher->removeEventListener(m_pListener);
+	}
 }

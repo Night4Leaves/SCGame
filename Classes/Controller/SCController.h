@@ -3,8 +3,9 @@
 #define __SC_CONTROLLER_H__
 
 #include "GeneralControllerListener.h"
+#include "PauseDevice.h"
 
-class SCController : public Node
+class SCController : public PauseDevice
 {
 public:
 	SCController();
