@@ -52,6 +52,8 @@ private:
 	void enterMainScene(PlayerData &playerData);
 	//切换到主场景
 	void changeMainScene(Ref* pSender);;
+	//退出关卡
+	void exitGameScene(Ref* pSender);
 
 	//关闭当前显示的界面
 	void menuCloseCallback(Ref* pSender);

@@ -13,7 +13,7 @@ public:
 	static SceneItem * create(const SceneItemInfomation & sceneItemInfo);
 	virtual bool init(const SceneItemInfomation & sceneItemInfo);
 
-private:
+protected:
 	SceneItem();
 	virtual ~SceneItem();
 

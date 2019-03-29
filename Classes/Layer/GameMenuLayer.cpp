@@ -27,8 +27,6 @@ bool GameMenuLayer::init()
 
 void GameMenuLayer::setInitialMenu()
 {
-	TTFConfig fontConfig = { "fonts/arial.ttf", 40 };
-
 	Menu* menu = Menu::create();
 
 	//创建菜单选项

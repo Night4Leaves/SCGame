@@ -313,8 +313,8 @@ void Monster::checkBeHit(Ref * pSender)
 	Size monsterSize = m_pSprite->getContentSize() * this->getScale();
 
 	//Y轴碰撞检测范围
-	float monsterYCheckDown = monsterPoint.y + monsterSize.height * 0.5;
-	float monsterYCheckUp = monsterPoint.y + monsterSize.height * 0.7;
+	float monsterYCheckDown = monsterPoint.y + monsterSize.height * 0.25;
+	float monsterYCheckUp = monsterPoint.y + monsterSize.height * 0.55;
 
 	if (objectY < monsterYCheckDown || objectY > monsterYCheckUp)
 	{

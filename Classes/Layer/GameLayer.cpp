@@ -1,4 +1,5 @@
 #include "GameLayer.h"
+#include "Scene/MainScene.h"
 #include "Entity/Player.h"
 #include "Entity/Monster.h"
 #include "Entity/AttackFlyingObject.h"
@@ -31,6 +32,18 @@ bool GameLayer::init()
 			this,
 			callfuncO_selector(GameLayer::addAttackFlyingObject),
 			"set_attack_flying_object",
+			NULL);
+
+		NotificationCenter::getInstance()->addObserver(
+			this,
+			callfuncO_selector(GameLayer::updateScore),
+			"update_score",
+			NULL);
+
+		NotificationCenter::getInstance()->addObserver(
+			this,
+			callfuncO_selector(GameLayer::enterMainScene),
+			"exit_game_scene",
 			NULL);
 
 		return true;
@@ -83,43 +96,56 @@ void GameLayer::setGameScene_1_1(PlayerData & playerData)
 	}
 	this->addChild(m_pMap);
 
-	this->addChild(SceneItemLayer::create());
+	auto sceneItemLayer = SceneItemLayer::create();
+	this->addChild(sceneItemLayer);
 
 	GameManager::getInstance()->setMap(m_pMap);
 
 	//获取地图文件中预设的坐标信息
 	TMXObjectGroup* objGroup = m_pMap->getObjectGroup("objects");
 
+	ValueMap stonePoint = objGroup->getObject("scene_item_stone");
+	SceneItemInfomation itemInfo = { "scene_item_stone", Point(stonePoint.at("x").asFloat(), stonePoint.at("y").asFloat()), false, en_sceneItem_physics };
+	sceneItemLayer->setSceneitem(itemInfo);
+
+	ValueMap fulcrumPoint = objGroup->getObject("scene_item_fulcrum");
+	itemInfo = { "scene_item_fulcrum", Point(fulcrumPoint.at("x").asFloat(), fulcrumPoint.at("y").asFloat()), false, en_sceneItem_physics };
+	sceneItemLayer->setSceneitem(itemInfo);
+
+	ValueMap rodPoint = objGroup->getObject("scene_item_rod");
+	itemInfo = { "scene_item_rod", Point(rodPoint.at("x").asFloat(), rodPoint.at("y").asFloat()), true, en_sceneItem_physics };
+	sceneItemLayer->setSceneitem(itemInfo);
+
 	//根据读取到的怪物信息创建怪物对象
 	//根据地图文件中预设的坐标信息放置怪物对象
-	int i = 1;
-	while (true)
-	{
-		std::string monsterPointID = StringUtils::format("monster_%02d", i++);
-		ValueMap monsterPoint = objGroup->getObject(monsterPointID.c_str());
-		CC_BREAK_IF(monsterPoint.empty());
+	//int i = 1;
+	//while (true)
+	//{
+	//	std::string monsterPointID = StringUtils::format("monster_%02d", i++);
+	//	ValueMap monsterPoint = objGroup->getObject(monsterPointID.c_str());
+	//	CC_BREAK_IF(monsterPoint.empty());
 
-		float monsterX = monsterPoint.at("x").asFloat();
-		float monsterY = monsterPoint.at("y").asFloat();
+	//	float monsterX = monsterPoint.at("x").asFloat();
+	//	float monsterY = monsterPoint.at("y").asFloat();
 
-		if (i % 2 == 0)
-		{
-			Monster* monster = Monster::create(monsterInfoList[3]);
-			monster->setMonsterOriginPosition(Point(monsterX, monsterY));
-			monster->idle();
-			monster->setScale(0.35);
-			this->addChild(monster);
-		}
-		else
-		{
-			Monster* monster = Monster::create(monsterInfoList[6]);
-			monster->setMonsterOriginPosition(Point(monsterX, monsterY));
-			monster->idle();
-			monster->setScale(0.35);
-			this->addChild(monster);
-		}
+	//	if (i % 2 == 0)
+	//	{
+	//		Monster* monster = Monster::create(monsterInfoList[3]);
+	//		monster->setMonsterOriginPosition(Point(monsterX, monsterY));
+	//		monster->idle();
+	//		monster->setScale(0.35);
+	//		this->addChild(monster);
+	//	}
+	//	else
+	//	{
+	//		Monster* monster = Monster::create(monsterInfoList[6]);
+	//		monster->setMonsterOriginPosition(Point(monsterX, monsterY));
+	//		monster->idle();
+	//		monster->setScale(0.35);
+	//		this->addChild(monster);
+	//	}
 
-	}
+	//}
 
 	//创建Boss对象并设置
 	ValueMap bossPoint = objGroup->getObject("boss");
@@ -622,4 +648,15 @@ void GameLayer::setPlayer(const Point & pos)
 		vector_pAttackFlyingObject.pushBack(flyingObject);
 		this->addChild(flyingObject);
 	}
+}
+
+void GameLayer::updateScore(Ref * pSender)
+{
+	m_sctPlayerData.i_money += (int)pSender;
+}
+
+void GameLayer::enterMainScene(Ref * pSender)
+{
+	MainScene* mainScene = MainScene::create(m_sctPlayerData);
+	Director::getInstance()->replaceScene(mainScene);
 }

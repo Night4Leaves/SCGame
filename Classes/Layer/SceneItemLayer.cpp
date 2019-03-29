@@ -15,10 +15,6 @@ bool SceneItemLayer::init()
 	{
 		CC_BREAK_IF(!Layer::init());
 
-		SceneItemInfomation itemInfo = { "scene_item_rod", Point(400, 300), true, en_sceneItem_physics };
-		SceneItem* sceneItem = SceneItem::create(itemInfo);
-		this->addChild(sceneItem);
-
 		m_pListener = EventListenerTouchOneByOne::create();
 		m_pListener->onTouchBegan = [&](Touch* touch, Event* event) {
 			log("touch begin");
@@ -55,4 +51,10 @@ bool SceneItemLayer::init()
 		return true;
 	} while (0);
 	return false;
+}
+
+void SceneItemLayer::setSceneitem(SceneItemInfomation itemInfo)
+{
+	SceneItem* sceneItem = SceneItem::create(itemInfo);
+	this->addChild(sceneItem);
 }

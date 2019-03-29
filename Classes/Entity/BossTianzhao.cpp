@@ -52,11 +52,14 @@ void BossTianzhao::firstSkill()
 void BossTianzhao::secondSkill()
 {
 	log("skill-2");
+	m_enSkillType = en_st_beam;
 	this->attack();
 }
 
 void BossTianzhao::thirdSkill()
 {
 	log("skill-3");
+
+	m_enSkillType = en_st_missile;
 	this->attack();
 }

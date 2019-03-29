@@ -161,7 +161,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\Entity\NPC.cpp" />
     <ClCompile Include="..\Classes\Entity\Player.cpp" />
     <ClCompile Include="..\Classes\Entity\Portal.cpp" />
-    <ClCompile Include="..\Classes\Entity\SeneItem.cpp" />
+    <ClCompile Include="..\Classes\Entity\SceneItem.cpp" />
     <ClCompile Include="..\Classes\GameManager.cpp" />
     <ClCompile Include="..\Classes\HeartCount.cpp" />
     <ClCompile Include="..\Classes\HpBar.cpp" />
@@ -206,7 +206,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\Entity\NPC.h" />
     <ClInclude Include="..\Classes\Entity\Player.h" />
     <ClInclude Include="..\Classes\Entity\Portal.h" />
-    <ClInclude Include="..\Classes\Entity\SeneItem.h" />
+    <ClInclude Include="..\Classes\Entity\SceneItem.h" />
     <ClInclude Include="..\Classes\GameManager.h" />
     <ClInclude Include="..\Classes\HeartCount.h" />
     <ClInclude Include="..\Classes\HpBar.h" />

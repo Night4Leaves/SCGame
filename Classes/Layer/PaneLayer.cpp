@@ -93,6 +93,11 @@ void PaneLayer::changeMainScene(Ref * pSender)
 	this->enterMainScene(m_sctPlayerData);
 }
 
+void PaneLayer::exitGameScene(Ref * pSender)
+{
+	NotificationCenter::getInstance()->postNotification("exit_game_scene", NULL);
+}
+
 void PaneLayer::menuCloseCallback(Ref * pSender)
 {
 	log("ok");
@@ -244,6 +249,14 @@ void PaneLayer::startPause()
 
 	this->addChild(ShieldLayer::create());
 
+	Menu* menu = Menu::create();
+	
+	ButtonWithTextPicture buttonType = { "Button", "option", 0.5, this, nullptr };
+	menu->addChild(MenuItemUtil::createMenuItemSpriteByPicture(buttonType));
+
+	buttonType = { "Button", "exit_game_scene", 0.5, this, menu_selector(PaneLayer::exitGameScene) };
+	menu->addChild(MenuItemUtil::createMenuItemSpriteByPicture(buttonType));
+
 	Sprite* buttonNormal = Sprite::createWithSpriteFrameName("Button_Close_Normal.png");
 	Sprite* buttonSelected = Sprite::createWithSpriteFrameName("Button_Close_Selected.png");
 
@@ -251,13 +264,14 @@ void PaneLayer::startPause()
 		buttonNormal,
 		buttonSelected,
 		this,
-		menu_selector(PaneLayer::menuCloseCallback)
-	);
-	closeMenuItem->setScale(0.2);
+		menu_selector(PaneLayer::menuCloseCallback));
 
-	Menu* closeMenu = Menu::create(closeMenuItem, NULL);
-	this->addChild(closeMenu);
-	closeMenu->setPosition(400, 110);
+	closeMenuItem->setScale(0.2);
+	menu->addChild(closeMenuItem);
+
+	this->addChild(menu);
+	menu->setPosition(400, 300);
+	menu->alignItemsVerticallyWithPadding(10);
 }
 
 void PaneLayer::selectGameScene()
@@ -502,9 +516,7 @@ void PaneLayer::openSkilllist()
 
 MenuItemSprite * PaneLayer::createCharacterSelectItem(
 	const std::vector<PlayerData>& vec_characterInfoList,
-	int i,
-	const SEL_MenuHandler & selector,
-	bool is_savedata)
+	int i, const SEL_MenuHandler & selector, bool is_savedata)
 {
 	log("name = %s", vec_characterInfoList[i].str_characterName.c_str());
 	log("%s", StringUtils::format("%s_wait.png", vec_characterInfoList[i].str_characterName.c_str()).c_str());
@@ -621,4 +633,10 @@ void PaneLayer::gameEnd(bool isSuccess)
 		this->addChild(myLabel);
 		myLabel->setPosition(400, 300);
 	}
+
+	Menu* menu = Menu::create();
+	ButtonWithTextPicture buttonType = { "Button", "exit_game_scene", 0.5, this, menu_selector(PaneLayer::exitGameScene) };
+	menu->addChild(MenuItemUtil::createMenuItemSpriteByPicture(buttonType));
+	this->addChild(menu);
+	menu->setPosition(400, 200);
 }

@@ -52,13 +52,13 @@
   <object id="23" name="boss" x="3375" y="510">
    <point/>
   </object>
-  <object id="25" name="sceneitem_01" x="1209" y="384">
+  <object id="25" name="scene_item_rod" x="445" y="526">
    <point/>
   </object>
-  <object id="26" name="sceneitem_02" x="1357" y="384">
+  <object id="26" name="scene_item_stone" x="559" y="348">
    <point/>
   </object>
-  <object id="27" name="sceneitem_03" x="1084" y="384">
+  <object id="27" name="scene_item_fulcrum" x="400" y="446">
    <point/>
   </object>
   <object id="28" name="monster_11" x="2350" y="552">

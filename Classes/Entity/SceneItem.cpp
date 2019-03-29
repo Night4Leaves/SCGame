@@ -1,4 +1,4 @@
-#include "SeneItem.h"
+#include "SceneItem.h"
 
 SceneItem * SceneItem::create(const SceneItemInfomation & sceneItemInfo)
 {
@@ -80,15 +80,12 @@ void SceneItem::mouseClick(Ref * pSender)
 {
 	Node* parent = (Node*)getParent();	//场景道具层
 	parent = (Node*)parent->getParent();	//游戏层
-	Point parentPos = parent->getPosition();
+	Point parentPos = parent->getPosition(); 
 
 	Point* temp = (Point*)pSender;
 	Point clickPos = Point(temp->x - parentPos.x, temp->y);
 	Point itemPos = getPosition();
 	Size itemSize = m_pSprite->getContentSize();
-
-	poslog("clickPos", clickPos.x - parentPos.x, clickPos.y);
-	poslog("item", itemPos.x, itemPos.y);
 
 	if (clickPos.x > itemPos.x - itemSize.width / 2
 		&& clickPos.x < itemPos.x + itemSize.width / 2

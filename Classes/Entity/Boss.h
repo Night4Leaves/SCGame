@@ -34,6 +34,9 @@ public:
 	//攻击结束后的判定
 	void attackEndLogic();
 
+	//怪物死亡
+	void bossDeath();
+
 	virtual void firstSkill() = 0;
 	virtual void secondSkill() = 0;
 	virtual void thirdSkill() = 0;

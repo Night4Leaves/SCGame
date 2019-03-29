@@ -284,8 +284,8 @@ void Boss::attackedLogic()
 	if (m_iHP == 0)
 	{
 		m_pHPBar->startFadeOut();
-		//此处为死亡时的处理函数
 		this->unscheduleUpdate();
+		this->bossDeath();
 	}
 	else
 	{
@@ -338,4 +338,21 @@ void Boss::attackEndLogic()
 
 	m_enMonsterState = en_ms_patrol;
 	m_bIsLock = false;
+}
+
+void Boss::bossDeath()
+{
+	m_pSprite->stopAllActions();
+
+	Animation* hurtAnimation = AnimationCache::getInstance()->getAnimation(StringUtils::format("%s_hurt", m_strCharacterName.c_str()).c_str());
+	Animate* hurtAnimate = Animate::create(hurtAnimation);
+	Blink* blinkAction = Blink::create(1.0f, 2);
+	FadeOut* fadeOut = FadeOut::create(1.0f);
+
+	auto sendScoreMsg = CallFunc::create([&]() { NotificationCenter::getInstance()->postNotification("show_PaneLayer", (Ref*)en_paneMsg_gameClear); });
+
+	Spawn* actionList = Spawn::create(hurtAnimate, blinkAction, nullptr);
+	Sequence* actionSequnence = Sequence::create(sendScoreMsg, actionList, fadeOut, nullptr);
+
+	m_pSprite->runAction(actionSequnence);
 }
