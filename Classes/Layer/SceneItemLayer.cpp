@@ -53,8 +53,7 @@ bool SceneItemLayer::init()
 	return false;
 }
 
-void SceneItemLayer::setSceneitem(SceneItemInfomation itemInfo)
+void SceneItemLayer::setSceneitem(SceneItem * sceneItem)
 {
-	SceneItem* sceneItem = SceneItem::create(itemInfo);
 	this->addChild(sceneItem);
 }

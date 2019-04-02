@@ -162,6 +162,9 @@
     <ClCompile Include="..\Classes\Entity\SceneItem.cpp">
       <Filter>src\Entity\SceneItem</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\Entity\LeverSceneItem.cpp">
+      <Filter>src\Entity\SceneItem</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -309,6 +312,9 @@
       <Filter>src\Layer</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Entity\SceneItem.h">
+      <Filter>src\Entity\SceneItem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Entity\LeverSceneItem.h">
       <Filter>src\Entity\SceneItem</Filter>
     </ClInclude>
   </ItemGroup>

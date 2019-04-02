@@ -35,4 +35,20 @@ enum SceneItemType
 	en_sceneItem_chemistry	//化学类
 };
 
+//物理系场景道具所属分组
+enum PhysicsSceneItemGroup
+{
+	en_psig_null,	//无组别
+	en_psig_lever,	//杠杆组
+	en_psig_pulley,	//滑轮组
+	en_psig_electromagnetism	//电磁组
+};
+
+//杠杆部件
+enum LeverPart
+{
+	en_leverPart_fulcrum,	//杠杆支点
+	en_leverPart_rod,	//杠杆
+	en_leverPart_stone	//杠杆阻力物
+};
 #endif // !__CUSTOMIZE_ENUM_H__

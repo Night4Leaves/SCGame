@@ -162,6 +162,7 @@ struct FlyingObjectCheckInformation
  *	@b_isMoveable	道具是否可移动
  *	@enum_type	道具种类（物理/化学/特殊）
  *	@enum_ph	道具酸碱值（默认中性，化学道具专用）
+ *	@enum_psig	道具所属组别(默认无，物理道具专用)
  */
 struct SceneItemInfomation
 {
@@ -170,6 +171,7 @@ struct SceneItemInfomation
 	bool b_isMoveable;
 	SceneItemType enum_type;
 	PH enum_ph = en_ph_neutral;
+	PhysicsSceneItemGroup enum_psig = en_psig_null;
 };
 
 #define poslog(name, x, y) log("%s x:%f, y:%f", name, x, y);

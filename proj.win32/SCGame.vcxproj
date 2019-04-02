@@ -157,6 +157,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\Entity\BossTianzhao.cpp" />
     <ClCompile Include="..\Classes\Entity\CombatEntity.cpp" />
     <ClCompile Include="..\Classes\Entity\FlyingObject.cpp" />
+    <ClCompile Include="..\Classes\Entity\LeverSceneItem.cpp" />
     <ClCompile Include="..\Classes\Entity\Monster.cpp" />
     <ClCompile Include="..\Classes\Entity\NPC.cpp" />
     <ClCompile Include="..\Classes\Entity\Player.cpp" />
@@ -202,6 +203,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\Entity\BossTianzhao.h" />
     <ClInclude Include="..\Classes\Entity\CombatEntity.h" />
     <ClInclude Include="..\Classes\Entity\FlyingObject.h" />
+    <ClInclude Include="..\Classes\Entity\LeverSceneItem.h" />
     <ClInclude Include="..\Classes\Entity\Monster.h" />
     <ClInclude Include="..\Classes\Entity\NPC.h" />
     <ClInclude Include="..\Classes\Entity\Player.h" />

@@ -2,7 +2,7 @@
 #ifndef __SCENE_ITEM_LAYER_H__
 #define __SCENE_ITEM_LAYER_H__
 
-#include "Entity/SceneItem.h"
+#include "Entity/LeverSceneItem.h"
 
 #include "cocos2d.h"
 USING_NS_CC;
@@ -12,7 +12,7 @@ class SceneItemLayer : public Layer
 public:
 	CREATE_FUNC(SceneItemLayer);
 
-	void setSceneitem(SceneItemInfomation itemInfo);
+	void setSceneitem(SceneItem * sceneItem);
 
 private:
 	SceneItemLayer();

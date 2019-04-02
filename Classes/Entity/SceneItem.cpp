@@ -1,21 +1,5 @@
 #include "SceneItem.h"
 
-SceneItem * SceneItem::create(const SceneItemInfomation & sceneItemInfo)
-{
-	SceneItem *pRet = new(std::nothrow) SceneItem();
-	if (pRet && pRet->init(sceneItemInfo))
-	{
-		pRet->autorelease();
-		return pRet;
-	}
-	else
-	{
-		delete pRet;
-		pRet = nullptr;
-		return nullptr;
-	}
-}
-
 bool SceneItem::init(const SceneItemInfomation & sceneItemInfo)
 {
 	do
@@ -24,18 +8,13 @@ bool SceneItem::init(const SceneItemInfomation & sceneItemInfo)
 
 		m_enSceneItemType = sceneItemInfo.enum_type;
 		m_enPH = sceneItemInfo.enum_ph;
+		m_enPSIG = sceneItemInfo.enum_psig;
 		m_bIsMoveable = sceneItemInfo.b_isMoveable;
 
 		std::string spriteName = StringUtils::format("%s.png", sceneItemInfo.str_itemName.c_str());
 		m_pSprite = Sprite::createWithSpriteFrameName(spriteName.c_str());
 		this->addChild(m_pSprite);
 		this->setPosition(sceneItemInfo.point_setPosition);
-
-		NotificationCenter::getInstance()->addObserver(
-			this,
-			callfuncO_selector(SceneItem::checkPlayerPoint),
-			"keyword_l",
-			NULL);
 
 		if (m_bIsMoveable)
 		{
@@ -60,20 +39,6 @@ SceneItem::SceneItem()
 SceneItem::~SceneItem()
 {
 	NotificationCenter::getInstance()->removeAllObservers(this);
-}
-
-void SceneItem::checkPlayerPoint(Ref * pSender)
-{
-	Point* temp = (Point*)pSender;
-	Point playerPos = Point(temp->x, temp->y);
-	Point itemPos = getPosition();
-
-	if (fabs(playerPos.x - itemPos.x) < 50
-		&& fabs(playerPos.y - itemPos.y) < 50
-		&& !m_bIsUsed)
-	{
-		m_bIsTrigger = true;
-	}
 }
 
 void SceneItem::mouseClick(Ref * pSender)
@@ -114,7 +79,7 @@ void SceneItem::mouseMove(Ref * pSender)
 
 	Point* temp = (Point*)pSender;
 	Point clickPos = Point(temp->x - parentPos.x, temp->y);
-	setPosition(Point(clickPos.x, clickPos.y));
+	setPosition(clickPos);
 }
 
 void SceneItem::mouseEnd(Ref * pSender)
@@ -125,8 +90,10 @@ void SceneItem::mouseEnd(Ref * pSender)
 
 	Point* temp = (Point*)pSender;
 	Point clickPos = Point(temp->x - parentPos.x, temp->y);
-	setPosition(Point(clickPos.x, clickPos.y));
+	setPosition(clickPos);
 
 	NotificationCenter::getInstance()->removeObserver(this, "mouse_move_point");
 	NotificationCenter::getInstance()->removeObserver(this, "mouse_end_point");
+
+	NotificationCenter::getInstance()->postNotification("scene_item_move_end", (Ref*)m_enPSIG);
 }
