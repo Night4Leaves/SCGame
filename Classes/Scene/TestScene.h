@@ -32,6 +32,7 @@ private:
 	int hp;
 	float dtCount;
 	Monster* monster;
+	Sprite* sprite;
 
 };
 #endif // !__TEST_SCENE_H__

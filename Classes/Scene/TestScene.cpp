@@ -60,12 +60,12 @@ bool TestScene::init()
 		//this->scheduleUpdate();
 		
 
-		std::vector<PlayerData> m_vecCharacterList;
+		/*std::vector<PlayerData> m_vecCharacterList;
 		JsonUtil::getInstance()->readPlayerInfo(m_vecCharacterList);
 
 		auto gameLayer = GameLayer::create();
 		this->addChild(gameLayer);
-		gameLayer->setGameScene_1_1(m_vecCharacterList[0]);
+		gameLayer->setGameScene_1_1(m_vecCharacterList[0]);*/
 
 		
 
@@ -108,7 +108,13 @@ void TestScene::update(float dt)
 {
 	dtCount += dt;
 
-	if (dtCount > 6)
+	if (dtCount > 3)
+	{
+		sprite->setSpriteFrame("scene_item_fulcrum.png");
+		this->unscheduleUpdate();
+	}
+
+	/*if (dtCount > 6)
 	{
 		monster->attack();
 	}
@@ -119,7 +125,7 @@ void TestScene::update(float dt)
 	else if (dtCount > 2)
 	{
 		monster->hurt();
-	}
+	}*/
 }
 
 void TestScene::changeGameScene(Ref * pSender)

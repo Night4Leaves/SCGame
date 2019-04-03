@@ -16,8 +16,6 @@ public:
 	virtual void endPause(Ref* pSender);
 
 protected:
-	virtual bool init(const SceneItemInfomation & sceneItemInfo);
-
 	LeverSceneItem();
 	virtual ~LeverSceneItem();
 

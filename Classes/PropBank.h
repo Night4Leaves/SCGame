@@ -11,9 +11,6 @@ public:
 	static PropBank * getInstance();
 	virtual bool init();
 
-	void getItem1Num();
-	void getItem2Num();
-
 private:
 	PropBank();
 	~PropBank();
@@ -21,7 +18,11 @@ private:
 private:
 	static PropBank* m_pPropBank;
 
-	int m_iItemNum;	//道具数
+	int m_iConsumableItemMaxNum;	//消耗型道具最大数目
+	int m_iPlacementProp;	//放置型道具最大数目
+
+	std::map<std::string, int> m_mapConsumableProp;	//消耗型道具数量
+	std::map<std::string, int> m_mapPlacementProp;	//放置型道具数量
 };
 
 #endif // !__PROP_BANK_H__

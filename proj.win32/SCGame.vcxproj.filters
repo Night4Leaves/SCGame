@@ -165,6 +165,12 @@
     <ClCompile Include="..\Classes\Entity\LeverSceneItem.cpp">
       <Filter>src\Entity\SceneItem</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\Entity\PulleySceneItem.cpp">
+      <Filter>src\Entity\SceneItem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Entity\RailgunSceneItem.cpp">
+      <Filter>src\Entity\SceneItem</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -315,6 +321,12 @@
       <Filter>src\Entity\SceneItem</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Entity\LeverSceneItem.h">
+      <Filter>src\Entity\SceneItem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Entity\PulleySceneItem.h">
+      <Filter>src\Entity\SceneItem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Entity\RailgunSceneItem.h">
       <Filter>src\Entity\SceneItem</Filter>
     </ClInclude>
   </ItemGroup>

@@ -27,7 +27,6 @@ bool PropBank::init()
 }
 
 PropBank::PropBank()
-	: m_iItemNum(5)
 {
 }
 

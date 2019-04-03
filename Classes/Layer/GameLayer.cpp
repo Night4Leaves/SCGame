@@ -5,6 +5,8 @@
 #include "Entity/AttackFlyingObject.h"
 #include "Entity/BossTianzhao.h"
 #include "Entity/LeverSceneItem.h"
+#include "Entity/PulleySceneItem.h"
+#include "Entity/RailgunSceneItem.h"
 #include "Controller/PlayerController.h"
 #include "GameManager.h"
 
@@ -105,23 +107,35 @@ void GameLayer::setGameScene_1_1(PlayerData & playerData)
 	//获取地图文件中预设的坐标信息
 	TMXObjectGroup* objGroup = m_pMap->getObjectGroup("objects");
 
-	ValueMap stonePoint = objGroup->getObject("scene_item_stone");
-	SceneItemInfomation itemInfo = { "scene_item_stone", Point(stonePoint.at("x").asFloat(), stonePoint.at("y").asFloat()), false, en_sceneItem_physics };
-	LeverSceneItem* sceneItem = LeverSceneItem::create(itemInfo);
-	sceneItem->setLeverPart(en_leverPart_stone);
+	ValueMap fulcrumPoint = objGroup->getObject("scene_item_pulley_fulcrum");
+	SceneItemInfomation itemInfo = { "scene_item_pulley", Point(fulcrumPoint.at("x").asFloat(), fulcrumPoint.at("y").asFloat()), false, en_sceneItem_physics };
+	PulleySceneItem* sceneItem = PulleySceneItem::create(itemInfo);
+	sceneItem->setPulleyPart(en_pulleyPart_fulcrum);
 	sceneItemLayer->setSceneitem(sceneItem);
 
-	ValueMap fulcrumPoint = objGroup->getObject("scene_item_fulcrum");
-	itemInfo = { "scene_item_fulcrum", Point(fulcrumPoint.at("x").asFloat(), fulcrumPoint.at("y").asFloat()), false, en_sceneItem_physics };
-	sceneItem = LeverSceneItem::create(itemInfo);
-	sceneItem->setLeverPart(en_leverPart_fulcrum);
+	ValueMap pulleyPoint = objGroup->getObject("scene_item_pulley_pulley");
+	itemInfo = { "scene_item_pulley", Point(pulleyPoint.at("x").asFloat(), pulleyPoint.at("y").asFloat()), true, en_sceneItem_physics };
+	sceneItem = PulleySceneItem::create(itemInfo);
+	sceneItem->setPulleyPart(en_pulleyPart_pulley);
 	sceneItemLayer->setSceneitem(sceneItem);
 
-	ValueMap rodPoint = objGroup->getObject("scene_item_rod");
-	itemInfo = { "scene_item_rod", Point(rodPoint.at("x").asFloat(), rodPoint.at("y").asFloat()), true, en_sceneItem_physics };
-	sceneItem = LeverSceneItem::create(itemInfo);
-	sceneItem->setLeverPart(en_leverPart_rod);
-	sceneItemLayer->setSceneitem(sceneItem);
+	//ValueMap stonePoint = objGroup->getObject("scene_item_stone");
+	//SceneItemInfomation itemInfo = { "scene_item_stone", Point(stonePoint.at("x").asFloat(), stonePoint.at("y").asFloat()), false, en_sceneItem_physics };
+	//LeverSceneItem* sceneItem = LeverSceneItem::create(itemInfo);
+	//sceneItem->setLeverPart(en_leverPart_stone);
+	//sceneItemLayer->setSceneitem(sceneItem);
+
+	//ValueMap fulcrumPoint = objGroup->getObject("scene_item_fulcrum");
+	//itemInfo = { "scene_item_fulcrum", Point(fulcrumPoint.at("x").asFloat(), fulcrumPoint.at("y").asFloat()), false, en_sceneItem_physics };
+	//sceneItem = LeverSceneItem::create(itemInfo);
+	//sceneItem->setLeverPart(en_leverPart_fulcrum);
+	//sceneItemLayer->setSceneitem(sceneItem);
+
+	//ValueMap rodPoint = objGroup->getObject("scene_item_rod");
+	//itemInfo = { "scene_item_rod", Point(rodPoint.at("x").asFloat(), rodPoint.at("y").asFloat()), true, en_sceneItem_physics };
+	//sceneItem = LeverSceneItem::create(itemInfo);
+	//sceneItem->setLeverPart(en_leverPart_rod);
+	//sceneItemLayer->setSceneitem(sceneItem);
 
 	//根据读取到的怪物信息创建怪物对象
 	//根据地图文件中预设的坐标信息放置怪物对象

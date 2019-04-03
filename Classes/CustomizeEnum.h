@@ -51,4 +51,22 @@ enum LeverPart
 	en_leverPart_rod,	//杠杆
 	en_leverPart_stone	//杠杆阻力物
 };
+
+//滑轮部件
+enum PulleyPart
+{
+	en_pulleyPart_pulley,	//滑轮
+	en_pulleyPart_fulcrum,	//支点
+	en_pulleyPart_bracket,	//支架
+	en_pulleyPart_rope	//绳子
+};
+
+//电磁部件
+enum RailgunPart
+{
+	en_railgunPart_battery,	//电池
+	en_railgunPart_powerBox,	//电池盒
+	en_railgunPart_barrel,	//主体
+	en_railgunPart_shell	//发射物
+};
 #endif // !__CUSTOMIZE_ENUM_H__

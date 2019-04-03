@@ -33,18 +33,6 @@ void LeverSceneItem::update(float dt)
 	setPosition(pos);
 }
 
-bool LeverSceneItem::init(const SceneItemInfomation & sceneItemInfo)
-{
-	do
-	{
-		CC_BREAK_IF(!SceneItem::init(sceneItemInfo));
-
-		return true;
-	} while (0);
-
-	return false;
-}
-
 LeverSceneItem::LeverSceneItem()
 	: m_fStateTime(0.0)
 {
@@ -61,14 +49,13 @@ void LeverSceneItem::checkEnd(Ref * pSender)
 	{
 		return;
 	}
-	Point currentPos = getPosition();
-	if (m_enLeverPart == en_leverPart_fulcrum)
-	{
-		Size spriteSize = m_pSprite->getContentSize();
-		Vec2 checkPoint = Vec2(currentPos.x, currentPos.y + spriteSize.height / 2);
 
-		NotificationCenter::getInstance()->postNotification("fulcrum_point", (Ref*)&checkPoint);
-	}
+	Point currentPos = getPosition();
+	Size spriteSize = m_pSprite->getContentSize();
+	Vec2 checkPoint = Vec2(currentPos.x, currentPos.y + spriteSize.height / 2);
+
+	NotificationCenter::getInstance()->postNotification("lever_fulcrum_point", (Ref*)&checkPoint);
+
 }
 
 void LeverSceneItem::checkFulcrumPoint(Ref * pSender)
@@ -79,7 +66,7 @@ void LeverSceneItem::checkFulcrumPoint(Ref * pSender)
 	
 	if (checkPoint->x > currentPos.x
 		&& checkPoint->x < currentPos.x + spriteSize.width / 2
-		&& checkPoint->y + 15 > currentPos.y + spriteSize.height / 2
+		&& checkPoint->y + 20 > currentPos.y + spriteSize.height / 2
 		&& checkPoint->y < currentPos.y - spriteSize.height / 2)
 	{
 		NotificationCenter::getInstance()->removeObserver(this, "mouse_click_point");
@@ -141,7 +128,7 @@ void LeverSceneItem::setLeverPart(LeverPart leverPart)
 		NotificationCenter::getInstance()->addObserver(
 			this,
 			callfuncO_selector(LeverSceneItem::checkFulcrumPoint),
-			"fulcrum_point",
+			"lever_fulcrum_point",
 			NULL);
 		break;
 	case en_leverPart_stone:
