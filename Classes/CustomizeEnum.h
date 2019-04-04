@@ -69,4 +69,13 @@ enum RailgunPart
 	en_railgunPart_barrel,	//主体
 	en_railgunPart_shell	//发射物
 };
+
+enum ConsumableItemType
+{
+	en_consumableItemType_recovery,
+	en_consumableItemType_sceneItem,
+	en_consumableItemType_fe,
+	en_consumableItemType_cu,
+	en_consumableItemType_ag
+};
 #endif // !__CUSTOMIZE_ENUM_H__

@@ -69,3 +69,21 @@ void HeartCount::reduceHP()
 	node->runAction(spawn);
 	--m_iHP;
 }
+
+void HeartCount::recoverHP()
+{
+	m_iHP++;
+	if (m_iHP > m_iMaxHP)
+	{
+		m_iHP = m_iMaxHP;
+		return;
+	}
+
+	Node* node = (Node*)node_pPresenter->getChildByTag(m_iHP - 1);
+
+	MoveBy* moveBy = MoveBy::create(1.5f, Vec2(0, -15));
+	FadeIn* fadeIn = FadeIn::create(1.5f);
+	Spawn* spawn = Spawn::create(moveBy, fadeIn, NULL);
+
+	node->runAction(spawn);
+}

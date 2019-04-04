@@ -68,6 +68,12 @@ bool GameScene::init()
 			"monster_attack",
 			NULL);
 
+		NotificationCenter::getInstance()->addObserver(
+			this,
+			callfuncO_selector(GameScene::playerRecoverHeart),
+			"prop_type",
+			NULL);
+
 		return true;
 	} while (0);
 
@@ -145,4 +151,13 @@ void GameScene::updateScore(Ref * pSender)
 void GameScene::playerReduceHeart(Ref * pSender)
 {
 	m_pHeartCount->reduceHP();
+}
+
+void GameScene::playerRecoverHeart(Ref * pSender)
+{
+	int check = (int)pSender;
+	if (check == en_consumableItemType_recovery)
+	{
+		m_pHeartCount->recoverHP();
+	}
 }

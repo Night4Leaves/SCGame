@@ -47,6 +47,8 @@ public:
 	void updateScore(Ref* pSender);
 	//玩家损失血量
 	void playerReduceHeart(Ref* pSender);
+	//玩家恢复血量
+	void playerRecoverHeart(Ref* pSender);
 
 protected:
 	BackgroundLayer* m_pBackgroundLayer;	//背景层

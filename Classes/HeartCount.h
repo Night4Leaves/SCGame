@@ -18,6 +18,7 @@ public:
 
 	//玩家血量下降
 	void reduceHP();
+	void recoverHP();
 
 protected:
 	int m_iMaxHP;	//玩家最高血量

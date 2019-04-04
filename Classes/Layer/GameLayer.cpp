@@ -107,35 +107,35 @@ void GameLayer::setGameScene_1_1(PlayerData & playerData)
 	//获取地图文件中预设的坐标信息
 	TMXObjectGroup* objGroup = m_pMap->getObjectGroup("objects");
 
-	ValueMap fulcrumPoint = objGroup->getObject("scene_item_pulley_fulcrum");
-	SceneItemInfomation itemInfo = { "scene_item_pulley", Point(fulcrumPoint.at("x").asFloat(), fulcrumPoint.at("y").asFloat()), false, en_sceneItem_physics };
-	PulleySceneItem* sceneItem = PulleySceneItem::create(itemInfo);
-	sceneItem->setPulleyPart(en_pulleyPart_fulcrum);
+	//ValueMap fulcrumPoint = objGroup->getObject("scene_item_pulley_fulcrum");
+	//SceneItemInfomation itemInfo = { "scene_item_pulley", Point(fulcrumPoint.at("x").asFloat(), fulcrumPoint.at("y").asFloat()), false, en_sceneItem_physics };
+	//PulleySceneItem* sceneItem = PulleySceneItem::create(itemInfo);
+	//sceneItem->setPulleyPart(en_pulleyPart_fulcrum);
+	//sceneItemLayer->setSceneitem(sceneItem);
+
+	//ValueMap pulleyPoint = objGroup->getObject("scene_item_pulley_pulley");
+	//itemInfo = { "scene_item_pulley", Point(pulleyPoint.at("x").asFloat(), pulleyPoint.at("y").asFloat()), true, en_sceneItem_physics };
+	//sceneItem = PulleySceneItem::create(itemInfo);
+	//sceneItem->setPulleyPart(en_pulleyPart_pulley);
+	//sceneItemLayer->setSceneitem(sceneItem);
+
+	ValueMap stonePoint = objGroup->getObject("scene_item_stone");
+	SceneItemInfomation itemInfo = { "scene_item_stone", Point(stonePoint.at("x").asFloat(), stonePoint.at("y").asFloat()), false, en_sceneItem_physics, en_ph_neutral, en_psig_lever };
+	LeverSceneItem* sceneItem = LeverSceneItem::create(itemInfo);
+	sceneItem->setLeverPart(en_leverPart_stone);
 	sceneItemLayer->setSceneitem(sceneItem);
 
-	ValueMap pulleyPoint = objGroup->getObject("scene_item_pulley_pulley");
-	itemInfo = { "scene_item_pulley", Point(pulleyPoint.at("x").asFloat(), pulleyPoint.at("y").asFloat()), true, en_sceneItem_physics };
-	sceneItem = PulleySceneItem::create(itemInfo);
-	sceneItem->setPulleyPart(en_pulleyPart_pulley);
+	ValueMap fulcrumPoint = objGroup->getObject("scene_item_fulcrum");
+	itemInfo = { "scene_item_fulcrum", Point(fulcrumPoint.at("x").asFloat(), fulcrumPoint.at("y").asFloat()), false, en_sceneItem_physics, en_ph_neutral, en_psig_lever };
+	sceneItem = LeverSceneItem::create(itemInfo);
+	sceneItem->setLeverPart(en_leverPart_fulcrum);
 	sceneItemLayer->setSceneitem(sceneItem);
 
-	//ValueMap stonePoint = objGroup->getObject("scene_item_stone");
-	//SceneItemInfomation itemInfo = { "scene_item_stone", Point(stonePoint.at("x").asFloat(), stonePoint.at("y").asFloat()), false, en_sceneItem_physics };
-	//LeverSceneItem* sceneItem = LeverSceneItem::create(itemInfo);
-	//sceneItem->setLeverPart(en_leverPart_stone);
-	//sceneItemLayer->setSceneitem(sceneItem);
-
-	//ValueMap fulcrumPoint = objGroup->getObject("scene_item_fulcrum");
-	//itemInfo = { "scene_item_fulcrum", Point(fulcrumPoint.at("x").asFloat(), fulcrumPoint.at("y").asFloat()), false, en_sceneItem_physics };
-	//sceneItem = LeverSceneItem::create(itemInfo);
-	//sceneItem->setLeverPart(en_leverPart_fulcrum);
-	//sceneItemLayer->setSceneitem(sceneItem);
-
-	//ValueMap rodPoint = objGroup->getObject("scene_item_rod");
-	//itemInfo = { "scene_item_rod", Point(rodPoint.at("x").asFloat(), rodPoint.at("y").asFloat()), true, en_sceneItem_physics };
-	//sceneItem = LeverSceneItem::create(itemInfo);
-	//sceneItem->setLeverPart(en_leverPart_rod);
-	//sceneItemLayer->setSceneitem(sceneItem);
+	ValueMap rodPoint = objGroup->getObject("scene_item_rod");
+	itemInfo = { "scene_item_rod", Point(rodPoint.at("x").asFloat(), rodPoint.at("y").asFloat()), true, en_sceneItem_physics, en_ph_neutral, en_psig_lever };
+	sceneItem = LeverSceneItem::create(itemInfo);
+	sceneItem->setLeverPart(en_leverPart_rod);
+	sceneItemLayer->setSceneitem(sceneItem);
 
 	//根据读取到的怪物信息创建怪物对象
 	//根据地图文件中预设的坐标信息放置怪物对象
@@ -360,12 +360,37 @@ void GameLayer::setGameScene_2_2(PlayerData & playerData)
 	}
 	this->addChild(m_pMap);
 
-	this->addChild(SceneItemLayer::create());
+	auto sceneItemLayer = SceneItemLayer::create();
+	this->addChild(sceneItemLayer);
 
 	GameManager::getInstance()->setMap(m_pMap);
 
 	//获取地图文件中预设的坐标信息
 	TMXObjectGroup* objGroup = m_pMap->getObjectGroup("objects");
+
+	ValueMap shellPoint = objGroup->getObject("scene_item_railgun_shell");
+	SceneItemInfomation itemInfo = { "scene_item_shell", Point(shellPoint.at("x").asFloat(), shellPoint.at("y").asFloat()), false, en_sceneItem_physics };
+	RailgunSceneItem* sceneItem = RailgunSceneItem::create(itemInfo);
+	sceneItem->setRailgunPart(en_railgunPart_shell);
+	sceneItemLayer->setSceneitem(sceneItem);
+
+	ValueMap barrelPoint = objGroup->getObject("scene_item_railgun_barrel");
+	itemInfo = { "scene_item_barrel", Point(barrelPoint.at("x").asFloat(), barrelPoint.at("y").asFloat()), false, en_sceneItem_physics };
+	sceneItem = RailgunSceneItem::create(itemInfo);
+	sceneItem->setRailgunPart(en_railgunPart_barrel);
+	sceneItemLayer->setSceneitem(sceneItem);
+
+	ValueMap powerBoxPoint = objGroup->getObject("scene_item_railgun_power_box");
+	itemInfo = { "scene_item_power_box", Point(powerBoxPoint.at("x").asFloat(), powerBoxPoint.at("y").asFloat()), false, en_sceneItem_physics };
+	sceneItem = RailgunSceneItem::create(itemInfo);
+	sceneItem->setRailgunPart(en_railgunPart_powerBox);
+	sceneItemLayer->setSceneitem(sceneItem);
+
+	ValueMap batteryPoint = objGroup->getObject("scene_item_railgun_battery");
+	itemInfo = { "scene_item_battery", Point(batteryPoint.at("x").asFloat(), batteryPoint.at("y").asFloat()), true, en_sceneItem_physics };
+	sceneItem = RailgunSceneItem::create(itemInfo);
+	sceneItem->setRailgunPart(en_railgunPart_battery);
+	sceneItemLayer->setSceneitem(sceneItem);
 
 	//根据读取到的怪物信息创建怪物对象
 	//根据地图文件中预设的坐标信息放置怪物对象
