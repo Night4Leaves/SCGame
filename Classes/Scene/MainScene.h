@@ -22,8 +22,8 @@ public:
 	~MainScene();
 
 	//根据玩家数据创建主场景
-	static MainScene* create(PlayerData &playerData);
-	virtual bool init(PlayerData &player);
+	static MainScene* create();
+	virtual bool init();
 
 private:
 	BackgroundLayer* m_pBackgroundLayer;	//背景层

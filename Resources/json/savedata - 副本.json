@@ -1,0 +1,101 @@
+[
+	{
+		"playerName" : "4_leaves",
+		"dataNumber" : 1554709236,
+		"characterName" : "player_01",
+		"HP" : 3,
+		"attack" : 10,
+		"money" : 100,
+		"xSpeed" : 6,
+		"ySpeed" : 6,
+		"attackRange" : 150,
+		"actionName" : ["idle","run","attack","jump","hurt","death"],
+		"actionTime" : [0.25, 0.04, 0.1, 0.25, 0.1, 0.25],
+		"actionPlayTime" : [-1, -1, 1, 1, 1, 1],
+		"backpackItems" : 
+		{
+			"item01name" : "bandaid",
+			"item01num" : 123,
+			"item02name" : "mirror",
+			"item02num" : 1,
+			"item03name" : "sword",
+			"item03num" : 1
+		},
+		"skillList" : 
+		{
+			"dynamics" : true,
+			"neutralization" : true,
+			"optics" : true,
+			"electromagnetism" : true,
+			"chemistry" : false,
+			"battery" : false
+		},
+		"level" : 5
+	},
+	{
+		"playerName" : "shadow",
+		"dataNumber" : 1554709237,
+		"characterName" : "player_02",
+		"HP" : 4,
+		"attack" : 15,
+		"money" : 30,
+		"xSpeed" : 6,
+		"ySpeed" : 6,
+		"attackRange" : 150,
+		"actionName" : ["idle","run","attack","jump","hurt","death"],
+		"actionTime" : [0.25, 0.04, 0.1, 0.29, 0.1, 0.25],
+		"actionPlayTime" : [-1, -1, 1, 1, 1, 1],
+		"backpackItems" : 
+		{
+			"item01name" : "bandaid",
+			"item01num" : 1,
+			"item02name" : "mirror",
+			"item02num" : 1,
+			"item03name" : "sword",
+			"item03num" : 1
+		},
+		"skillList" : 
+		{
+			"dynamics" : true,
+			"neutralization" : false,
+			"optics" : false,
+			"electromagnetism" : false,
+			"chemistry" : false,
+			"battery" : false
+		},
+		"level" : 2
+	},
+	{
+		"playerName" : "copy",
+		"dataNumber" : 1554709238,
+		"characterName" : "player_01",
+		"HP" : 3,
+		"attack" : 10,
+		"money" : 365,
+		"xSpeed" : 6,
+		"ySpeed" : 6,
+		"attackRange" : 150,
+		"actionName" : ["idle","run","attack","jump","hurt","death"],
+		"actionTime" : [0.25, 0.04, 0.1, 0.25, 0.1, 0.25],
+		"actionPlayTime" : [-1, -1, 1, 1, 1, 1],
+		"backpackItems" : 
+		{
+			"item01name" : "bandaid",
+			"item01num" : 1,
+			"item02name" : "mirror",
+			"item02num" : 3,
+			"item03name" : "sword",
+			"item03num" : 6
+		},
+		"skillList" : 
+		{
+			"dynamics" : true,
+			"neutralization" : true,
+			"optics" : true,
+			"electromagnetism" : true,
+			"chemistry" : true,
+			"battery" : true
+		},
+		"level" : 7
+	}
+]

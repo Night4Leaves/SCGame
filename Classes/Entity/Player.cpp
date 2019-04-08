@@ -29,11 +29,6 @@ bool Player::init(const PlayerData & playerData)
 {
 	CombatEntity::saveCombatEntityData(playerData);
 
-	m_strPlayerName = playerData.str_playerName;
-	m_mapBackpackItems = playerData.map_backpackItems;
-	m_mapSkillList = playerData.map_skillList;
-	m_iLevel = playerData.i_level;
-
 	return true;
 }
 

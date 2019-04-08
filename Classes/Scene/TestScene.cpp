@@ -15,6 +15,7 @@
 #include "CustomizeEnum.h"
 #include "HeartCount.h"
 #include "GameManager.h"
+#include "PlayerInfo.h"
 
 #include "Entity/Player.h"
 #include "Entity/Monster.h"
@@ -41,6 +42,13 @@ bool TestScene::init()
 {
 	do 
 	{
+		std::vector<PlayerData> vec_SavedataList;
+		JsonUtil::getInstance()->readSavedata(vec_SavedataList);
+		vec_SavedataList[0].i_dataNumber = 12037;
+		PlayerInfo::getInstance()->setPlayerData(vec_SavedataList[0]);
+		PlayerInfo::getInstance()->setMoney(999);
+		JsonUtil::getInstance()->writeSavedata(vec_SavedataList);
+
 		//dtCount = 0;
 
 		/*TMXTiledMap* map = TMXTiledMap::create("map/test_map.tmx");

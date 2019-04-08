@@ -153,9 +153,6 @@
     <ClCompile Include="..\Classes\PauseDevice.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\PropBank.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\Layer\SceneItemLayer.cpp">
       <Filter>src\Layer</Filter>
     </ClCompile>
@@ -170,6 +167,27 @@
     </ClCompile>
     <ClCompile Include="..\Classes\Entity\RailgunSceneItem.cpp">
       <Filter>src\Entity\SceneItem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Entity\ChemistrySceneItem.cpp">
+      <Filter>src\Entity\SceneItem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Entity\ConsumableProp.cpp">
+      <Filter>src\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Entity\PlacementProp.cpp">
+      <Filter>src\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Entity\PortableProp.cpp">
+      <Filter>src\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\ShopItemButton.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\PlayerInfo.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Entity\BossSkill.cpp">
+      <Filter>src\Entity</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -311,9 +329,6 @@
     <ClInclude Include="..\Classes\PauseDevice.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\PropBank.h">
-      <Filter>src</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\Layer\SceneItemLayer.h">
       <Filter>src\Layer</Filter>
     </ClInclude>
@@ -328,6 +343,27 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Entity\RailgunSceneItem.h">
       <Filter>src\Entity\SceneItem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Entity\ChemistrySceneItem.h">
+      <Filter>src\Entity\SceneItem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Entity\ConsumableProp.h">
+      <Filter>src\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Entity\PlacementProp.h">
+      <Filter>src\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Entity\PortableProp.h">
+      <Filter>src\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\ShopItemButton.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\PlayerInfo.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Entity\BossSkill.h">
+      <Filter>src\Entity</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

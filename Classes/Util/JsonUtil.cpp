@@ -1,4 +1,5 @@
 #include "JsonUtil.h"
+#include "PlayerInfo.h"
 
 JsonUtil* JsonUtil::m_pJsonLoadUtil = NULL;
 
@@ -87,6 +88,9 @@ void JsonUtil::readPlayerInfo(std::vector<PlayerData>& playerInfoList, const cha
 
 			this->combatEntityDataLoading(player, root[i]);
 
+			time_t t = time(0);
+
+			player.i_dataNumber = t;
 			player.b_isMonster = false;
 
 			player.map_skillList["dynamics"] = true;
@@ -118,6 +122,7 @@ void JsonUtil::readSavedata(std::vector<PlayerData>& playerInfoList, const char 
 			this->combatEntityDataLoading(player, root[i]);
 
 			player.str_playerName = root[i]["playerName"].asCString();
+			player.i_dataNumber = root[i]["dataNumber"].asInt();
 			player.i_level = root[i]["level"].asInt();
 			player.b_isMonster = false;
 
@@ -205,6 +210,87 @@ void JsonUtil::readBossInfo(std::vector<BossData>& bossInfoList, const char * fi
 	}
 }
 
-void JsonUtil::writeSavedata(std::vector<PlayerData>& playerInfoList, const char * fileName)
+void JsonUtil::writeSavedata(const char * fileName /*= "json/savedata.json"*/)
 {
+	std::vector<PlayerData> vec_SavedataList;
+	this->readSavedata(vec_SavedataList);
+
+	PlayerData playerData = PlayerInfo::getInstance()->getPlayerData();
+	
+	int size = vec_SavedataList.size();
+	int i = 0;
+	while (i < size)
+	{
+		if (playerData.i_dataNumber == vec_SavedataList[i].i_dataNumber)
+		{
+			vec_SavedataList[i] = playerData;
+			break;
+		}
+		i++;
+	}
+	if (i == size)
+	{
+		vec_SavedataList.push_back(playerData);
+		size++;
+	}
+
+	Json::FastWriter writer;
+	Json::Value root;
+
+	for (int i = 0; i < size; i++)
+	{
+		root[i]["playerName"] = vec_SavedataList[i].str_playerName;
+		root[i]["dataNumber"] = vec_SavedataList[i].i_dataNumber;
+		root[i]["characterName"] = vec_SavedataList[i].str_characterName;
+		root[i]["HP"] = vec_SavedataList[i].i_HP;
+		root[i]["attack"] = vec_SavedataList[i].i_attack;
+		root[i]["money"] = vec_SavedataList[i].i_money;
+		root[i]["xSpeed"] = vec_SavedataList[i].i_xSpeed;
+		root[i]["ySpeed"] = vec_SavedataList[i].i_ySpeed;
+		root[i]["attackRange"] = vec_SavedataList[i].i_attackRange;
+		root[i]["level"] = vec_SavedataList[i].i_level;
+
+		int temp = vec_SavedataList[i].vec_csActionName.size();
+		for (int j = 0; j < temp; j++)
+		{
+			root[i]["actionName"][j] = vec_SavedataList[i].vec_csActionName[j];
+		}
+
+		temp = vec_SavedataList[i].vec_dActionTime.size();
+		for (int j = 0; j < temp; j++)
+		{
+			root[i]["actionTime"][j] = vec_SavedataList[i].vec_dActionTime[j];
+		}
+
+		temp = vec_SavedataList[i].vec_iActionPlayTime.size();
+		for (int j = 0; j < temp; j++)
+		{
+			root[i]["actionPlayTime"][j] = vec_SavedataList[i].vec_iActionPlayTime[j];
+		}
+
+		temp = vec_SavedataList[i].map_backpackItems.size();
+		for (int j = 0; j < temp; j++)
+		{
+			std::string itemNamePIN = StringUtils::format("item%02dname", j + 1);
+			std::string itemNumberPIN = StringUtils::format("item%02dnum", j + 1);
+			auto test = vec_SavedataList[j].map_backpackItems.begin();
+			root[i][itemNamePIN] = test->first;
+			root[i][itemNumberPIN] = test->second;
+		}
+
+		temp = vec_SavedataList[i].map_skillList.size();
+		
+		root[i]["skillList"]["dynamics"] = vec_SavedataList[i].map_skillList["dynamics"];
+		root[i]["skillList"]["neutralization"] = vec_SavedataList[i].map_skillList["neutralization"];
+		root[i]["skillList"]["optics"] = vec_SavedataList[i].map_skillList["optics"];
+		root[i]["skillList"]["electromagnetism"] = vec_SavedataList[i].map_skillList["electromagnetism"];
+		root[i]["skillList"]["chemistry"] = vec_SavedataList[i].map_skillList["chemistry"];
+		root[i]["skillList"]["battery"] = vec_SavedataList[i].map_skillList["battery"];
+	}
+
+	std::string json_file = writer.write(root);
+
+	FILE* file = fopen(fileName, "w");
+	fprintf(file, json_file.c_str());
+	fclose(file);
 }

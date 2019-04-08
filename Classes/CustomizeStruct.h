@@ -45,6 +45,7 @@ struct CombatEntityData
 struct PlayerData : CombatEntityData
 {
 	std::string str_playerName;
+	int i_dataNumber;
 	std::map<std::string, int> map_backpackItems;
 	std::map<std::string, bool> map_skillList;
 	int i_level = 1;
@@ -172,6 +173,19 @@ struct SceneItemInfomation
 	SceneItemType enum_type;
 	PH enum_ph = en_ph_neutral;
 	PhysicsSceneItemGroup enum_psig = en_psig_null;
+};
+
+/**
+ *	携带型道具信息
+ *	@str_name	道具名称
+ *	@i_num	道具数量
+ *	@i_price	道具价格
+ */
+struct ShopItemInfo
+{
+	std::string str_name;
+	int i_num;
+	int i_price;
 };
 
 #define poslog(name, x, y) log("%s x:%f, y:%f", name, x, y);

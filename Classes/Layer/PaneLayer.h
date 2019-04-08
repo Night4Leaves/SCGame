@@ -18,12 +18,6 @@ public:
 	CREATE_FUNC(PaneLayer);
 	virtual bool init();	
 
-	/**
-	 *	保存玩家数据
-	 *	@playerData	玩家数据结构体
-	 */
-	void savePlayerData(PlayerData &playerData);
-
 private:
 	//显示层
 	void showPaneLayer(Ref* pSender);
@@ -49,7 +43,7 @@ private:
 	void openSkilllist();
 
 	//进入主场景
-	void enterMainScene(PlayerData &playerData);
+	void enterMainScene();
 	//切换到主场景
 	void changeMainScene(Ref* pSender);;
 	//退出关卡
@@ -89,7 +83,6 @@ private:
 
 	std::vector<PlayerData> m_vecCharacterList;	//玩家角色数据列表
 	std::vector<PlayerData> m_vecSavedataList;	//存档数据列表
-	PlayerData m_sctPlayerData;	//玩家数据结构
 };
 
 #endif // !__PANE_LAYER_H__

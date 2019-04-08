@@ -41,6 +41,11 @@ void GameManager::setMap(TMXTiledMap * map)
 
 }
 
+TMXTiledMap * GameManager::getMap()
+{
+	return m_pMap;
+}
+
 Size GameManager::getMapSize()
 {
 	return m_sizeMap;

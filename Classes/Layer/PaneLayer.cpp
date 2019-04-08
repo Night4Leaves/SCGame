@@ -8,6 +8,8 @@
 #include "Entity/Player.h"
 #include "CustomizeEnum.h"
 #include "ShieldLayer.h"
+#include "ShopItemButton.h"
+#include "PlayerInfo.h"
 
 PaneLayer::PaneLayer()
 	: m_isOpen(false)
@@ -35,11 +37,6 @@ bool PaneLayer::init()
 		return true;
 	} while (0);
 	return false;
-}
-
-void PaneLayer::savePlayerData(PlayerData & playerData)
-{
-	m_sctPlayerData = playerData;
 }
 
 void PaneLayer::showPaneLayer(Ref * pSender)
@@ -82,15 +79,15 @@ void PaneLayer::showPaneLayer(Ref * pSender)
 
 }
 
-void PaneLayer::enterMainScene(PlayerData & playerData)
+void PaneLayer::enterMainScene()
 {
-	MainScene* mainScene = MainScene::create(playerData);
+	MainScene* mainScene = MainScene::create();
 	Director::getInstance()->replaceScene(mainScene);
 }
 
 void PaneLayer::changeMainScene(Ref * pSender)
 {
-	this->enterMainScene(m_sctPlayerData);
+	this->enterMainScene();
 }
 
 void PaneLayer::exitGameScene(Ref * pSender)
@@ -220,10 +217,28 @@ void PaneLayer::openStore()
 
 	this->addChild(ShieldLayer::create());
 
-	Sprite* test = Sprite::createWithSpriteFrameName("backpack.png");
-	test->setScale(0.5);
-	test->setPosition(400, 300);
-	this->addChild(test);
+	Sprite* storeBG = Sprite::createWithSpriteFrameName("backpack.png");
+	storeBG->setScale(0.5);
+	storeBG->setPosition(400, 300);
+	this->addChild(storeBG);
+
+	ShopItemInfo itemInfo = { "bandaid", 1, 20 };
+	ShopItemButton* item = ShopItemButton::create(itemInfo);
+	item->setStoreVol();
+	this->addChild(item);
+	item->setPosition(400, 400);
+
+	itemInfo = { "mirror", 1, 50 };
+	item = ShopItemButton::create(itemInfo);
+	item->setStoreVol();
+	this->addChild(item);
+	item->setPosition(400, 300);
+
+	itemInfo = { "sword", 1, 200 };
+	item = ShopItemButton::create(itemInfo);
+	item->setStoreVol();
+	this->addChild(item);
+	item->setPosition(400, 200);
 
 	Sprite* buttonNormal = Sprite::createWithSpriteFrameName("Button_Close_Normal.png");
 	Sprite* buttonSelected = Sprite::createWithSpriteFrameName("Button_Close_Selected.png");
@@ -400,49 +415,49 @@ void PaneLayer::selectGameScene()
 void PaneLayer::selectGameScene_1_1(Ref * pSender)
 {
 	GameScene* gameScene = GameScene::create();
-	gameScene->setScene(Scene_1, m_sctPlayerData);
+	gameScene->setScene(Scene_1);
 	Director::getInstance()->replaceScene(gameScene);
 }
 
 void PaneLayer::selectGameScene_1_2(Ref * pSender)
 {
 	GameScene* gameScene = GameScene::create();
-	gameScene->setScene(Scene_2, m_sctPlayerData);
+	gameScene->setScene(Scene_2);
 	Director::getInstance()->replaceScene(gameScene);
 }
 
 void PaneLayer::selectGameScene_2_1(Ref * pSender)
 {
 	GameScene* gameScene = GameScene::create();
-	gameScene->setScene(Scene_3, m_sctPlayerData);
+	gameScene->setScene(Scene_3);
 	Director::getInstance()->replaceScene(gameScene);
 }
 
 void PaneLayer::selectGameScene_2_2(Ref * pSender)
 {
 	GameScene* gameScene = GameScene::create();
-	gameScene->setScene(Scene_4, m_sctPlayerData);
+	gameScene->setScene(Scene_4);
 	Director::getInstance()->replaceScene(gameScene);
 }
 
 void PaneLayer::selectGameScene_3_1(Ref * pSender)
 {
 	GameScene* gameScene = GameScene::create();
-	gameScene->setScene(Scene_5, m_sctPlayerData);
+	gameScene->setScene(Scene_5);
 	Director::getInstance()->replaceScene(gameScene);
 }
 
 void PaneLayer::selectGameScene_3_2(Ref * pSender)
 {
 	GameScene* gameScene = GameScene::create();
-	gameScene->setScene(Scene_6, m_sctPlayerData);
+	gameScene->setScene(Scene_6);
 	Director::getInstance()->replaceScene(gameScene);
 }
 
 void PaneLayer::selectGameScene_4_1(Ref * pSender)
 {
 	GameScene* gameScene = GameScene::create();
-	gameScene->setScene(Scene_7, m_sctPlayerData);
+	gameScene->setScene(Scene_7);
 	Director::getInstance()->replaceScene(gameScene);
 }
 
@@ -463,6 +478,24 @@ void PaneLayer::openBackpack()
 	test->setScale(0.5);
 	test->setPosition(400, 300);
 	this->addChild(test);
+
+	ShopItemInfo itemInfo = { "bandaid", 1, 20 };
+	ShopItemButton* item = ShopItemButton::create(itemInfo);
+	item->setBackpackVol();
+	this->addChild(item);
+	item->setPosition(400, 400);
+
+	itemInfo = { "mirror", 1, 50 };
+	item = ShopItemButton::create(itemInfo);
+	item->setBackpackVol();
+	this->addChild(item);
+	item->setPosition(400, 300);
+
+	itemInfo = { "sword", 1, 200 };
+	item = ShopItemButton::create(itemInfo);
+	item->setBackpackVol();
+	this->addChild(item);
+	item->setPosition(400, 200);
 
 	Sprite* buttonNormal = Sprite::createWithSpriteFrameName("Button_Close_Normal.png");
 	Sprite* buttonSelected = Sprite::createWithSpriteFrameName("Button_Close_Selected.png");
@@ -578,7 +611,8 @@ void PaneLayer::selectPlayer_1(Ref * pSender)
 		return;
 	}
 
-	this->enterMainScene(m_vecCharacterList[0]);
+	PlayerInfo::getInstance()->setPlayerData(m_vecCharacterList[0]);
+	this->enterMainScene();
 }
 
 void PaneLayer::selectPlayer_2(Ref * pSender)
@@ -590,31 +624,36 @@ void PaneLayer::selectPlayer_2(Ref * pSender)
 		return;
 	}
 
-	this->enterMainScene(m_vecCharacterList[1]);
+	PlayerInfo::getInstance()->setPlayerData(m_vecCharacterList[1]);
+	this->enterMainScene();
 }
 
 void PaneLayer::selectSavedata_1(Ref * pSender)
 {
 	log("selectSavedata_1");
-	this->enterMainScene(m_vecSavedataList[0]);
+	PlayerInfo::getInstance()->setPlayerData(m_vecSavedataList[0]);
+	this->enterMainScene();
 }
 
 void PaneLayer::selectSavedata_2(Ref * pSender)
 {
 	log("selectSavedata_2");
-	this->enterMainScene(m_vecSavedataList[1]);
+	PlayerInfo::getInstance()->setPlayerData(m_vecSavedataList[1]);
+	this->enterMainScene();
 }
 
 void PaneLayer::selectSavedata_3(Ref * pSender)
 {
 	log("selectSavedata_3");
-	this->enterMainScene(m_vecSavedataList[2]);
+	PlayerInfo::getInstance()->setPlayerData(m_vecSavedataList[2]);
+	this->enterMainScene();
 }
 
 void PaneLayer::selectSavedata_4(Ref * pSender)
 {
 	log("selectSavedata_4");
-	this->enterMainScene(m_vecSavedataList[3]);
+	PlayerInfo::getInstance()->setPlayerData(m_vecSavedataList[3]);
+	this->enterMainScene();
 }
 
 void PaneLayer::gameEnd(bool isSuccess)

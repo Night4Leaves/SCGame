@@ -11,6 +11,7 @@ void ResourcesLoadingUtil::preloadResources()
 	spriteFrameCache->addSpriteFramesWithFile("Scene_Item.plist");
 	spriteFrameCache->addSpriteFramesWithFile("Number.plist");
 	spriteFrameCache->addSpriteFramesWithFile("attack.plist");
+	spriteFrameCache->addSpriteFramesWithFile("Shop_Item.plist");
 
 	spriteFrameCache->addSpriteFramesWithFile("character/player_01.plist");
 	spriteFrameCache->addSpriteFramesWithFile("character/player_02.plist");

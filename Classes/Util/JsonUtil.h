@@ -51,10 +51,9 @@ public:
 
 	/**
 	*	写入存档文件
-	*	@playerInfoList	存放角色数据结构体(struct)的vector
 	*	@fileName	存档的文件地址，默认地址为Resources下的"json/savedata.json"
 	*/
-	void writeSavedata(std::vector<PlayerData>& playerInfoList, const char * fileName = "json/savedata.json");
+	void writeSavedata(const char * fileName = "json/savedata.json");
 
 private:
 	JsonUtil();

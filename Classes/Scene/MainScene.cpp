@@ -10,6 +10,7 @@
 #include "Util/AnimationUtil.h"
 #include "HeartCount.h"
 #include "GameManager.h"
+#include "PlayerInfo.h"
 
 MainScene::MainScene()
 {
@@ -19,10 +20,10 @@ MainScene::~MainScene()
 {
 }
 
-MainScene * MainScene::create(PlayerData &playerData)
+MainScene * MainScene::create()
 {
 	MainScene *pRet = new(std::nothrow) MainScene();
-	if (pRet && pRet->init(playerData))
+	if (pRet && pRet->init())
 	{
 		pRet->autorelease();
 		return pRet;
@@ -35,7 +36,7 @@ MainScene * MainScene::create(PlayerData &playerData)
 	}
 }
 
-bool MainScene::init(PlayerData &playerData)
+bool MainScene::init()
 {
 	do {
 		CC_BREAK_IF(!Scene::init());
@@ -78,6 +79,7 @@ bool MainScene::init(PlayerData &playerData)
 		m_pNPCLayer->setMainSceneNPC(objGroup);
 
 		//创建角色
+		PlayerData playerData = PlayerInfo::getInstance()->getPlayerData();
 		Player* player = Player::create(playerData);
 
 		ValueMap playerPoint = objGroup->getObject("player");
@@ -118,7 +120,6 @@ bool MainScene::init(PlayerData &playerData)
 		m_pPaneLayer = PaneLayer::create();
 		CC_BREAK_IF(m_pPaneLayer == nullptr);
 		this->addChild(m_pPaneLayer);
-		m_pPaneLayer->savePlayerData(playerData);
 
 		return true;
 	} while (0);

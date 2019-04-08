@@ -9,6 +9,7 @@
 #include "Entity/Player.h"
 
 #include "HeartCount.h"
+#include "PlayerInfo.h"
 
 GameScene::GameScene()
 {
@@ -58,12 +59,6 @@ bool GameScene::init()
 
 		NotificationCenter::getInstance()->addObserver(
 			this,
-			callfuncO_selector(GameScene::updateScore),
-			"update_score",
-			NULL);
-
-		NotificationCenter::getInstance()->addObserver(
-			this,
 			callfuncO_selector(GameScene::playerReduceHeart),
 			"monster_attack",
 			NULL);
@@ -82,9 +77,9 @@ bool GameScene::init()
 	return false;
 }
 
-void GameScene::setScene(SceneType sign, PlayerData & player)
+void GameScene::setScene(SceneType sign)
 {
-	m_pPaneLayer->savePlayerData(player);
+	PlayerData player = PlayerInfo::getInstance()->getPlayerData();
 
 	m_pHeartCount = HeartCount::create(player.i_HP);
 	this->addChild(m_pHeartCount);
@@ -139,13 +134,6 @@ void GameScene::setScene(SceneType sign, PlayerData & player)
 	default:
 		break;
 	}
-}
-
-void GameScene::updateScore(Ref * pSender)
-{
-	int number = m_pScoreCountLayer->getNumber();
-	number += (int)pSender;
-	m_pScoreCountLayer->setNumber(number);
 }
 
 void GameScene::playerReduceHeart(Ref * pSender)

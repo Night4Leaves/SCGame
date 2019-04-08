@@ -3,11 +3,11 @@
 PortableProp::PortableProp()
 	: m_bIsTake(false)
 {
-	NotificationCenter::getInstance()->addObserver(
+	/*NotificationCenter::getInstance()->addObserver(
 		this,
 		callfuncO_selector(checkPropType),
 		"keyword_k",
-		NULL);
+		NULL);*/
 }
 
 PortableProp::~PortableProp()

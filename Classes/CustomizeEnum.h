@@ -78,4 +78,14 @@ enum ConsumableItemType
 	en_consumableItemType_cu,
 	en_consumableItemType_ag
 };
+
+enum SkillType
+{
+	en_st_closeCombet,
+	en_st_beam,
+	en_st_missile,
+	en_st_summon,
+	en_st_debuff,
+	en_st_recovery
+};
 #endif // !__CUSTOMIZE_ENUM_H__

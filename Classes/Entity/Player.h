@@ -49,14 +49,7 @@ private:
 	virtual ~Player();
 
 private:
-	
 	SCController* m_pPlayerController;	//记录控制器
-	
-	std::string m_strPlayerName;	//记录玩家名
-	std::map<std::string, int> m_mapBackpackItems;	//记录玩家背包
-	std::map<std::string, bool> m_mapSkillList;	//记录玩家技能
-	
-	int m_iLevel;	//记录玩家等级(地图解锁情况)
 };
 
 #endif // !__PLAYER_H__

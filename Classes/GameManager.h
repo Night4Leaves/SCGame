@@ -14,6 +14,7 @@ public:
 
 	//保存块地图
 	void setMap(TMXTiledMap* map);
+	TMXTiledMap* getMap();
 	//获取地图尺寸
 	Size getMapSize();
 

@@ -1,6 +1,7 @@
 #include "CombatEntity.h"
 #include "Util/AnimationUtil.h"
 #include "CustomizeEnum.h"
+#include "PlayerInfo.h"
 
 CombatEntity::CombatEntity()
 	: m_strCharacterName("")
@@ -148,7 +149,11 @@ void CombatEntity::monsterDeath()
 	Blink* blinkAction = Blink::create(1.0f, 2);
 	FadeOut* fadeOut = FadeOut::create(1.0f);
 
-	auto sendScoreMsg = CallFunc::create([&]() { NotificationCenter::getInstance()->postNotification("update_score", (Ref*)m_iMoney); });
+	auto sendScoreMsg = CallFunc::create([&]() { 
+		int temp = PlayerInfo::getInstance()->getMoney(); 
+		temp += m_iMoney;
+		PlayerInfo::getInstance()->setMoney(temp);
+	});
 
 	Spawn* actionList = Spawn::create(hurtAnimate, blinkAction, nullptr);
 	Sequence* actionSequnence = Sequence::create(sendScoreMsg, actionList, fadeOut, nullptr);

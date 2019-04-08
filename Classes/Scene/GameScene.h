@@ -41,10 +41,8 @@ public:
 	 *	@sign	关卡
 	 *	@player	玩家数据结构体
 	 */
-	void setScene(SceneType sign, PlayerData &player);
+	void setScene(SceneType sign);
 
-	//更新分数
-	void updateScore(Ref* pSender);
 	//玩家损失血量
 	void playerReduceHeart(Ref* pSender);
 	//玩家恢复血量

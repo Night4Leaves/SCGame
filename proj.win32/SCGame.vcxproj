@@ -89,7 +89,7 @@
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>lua51.lib;libcurl.lib;%(AdditionalDependencies);$(_COCOS_LIB_WIN32_BEGIN);$(_COCOS_LIB_WIN32_END)</AdditionalDependencies>
+      <AdditionalDependencies>libcurl.lib;%(AdditionalDependencies);$(_COCOS_LIB_WIN32_BEGIN);$(_COCOS_LIB_WIN32_END)</AdditionalDependencies>
       <OutputFile>$(OutDir)$(ProjectName).exe</OutputFile>
       <AdditionalLibraryDirectories>$(OutDir);%(AdditionalLibraryDirectories);$(_COCOS_LIB_PATH_WIN32_BEGIN);$(_COCOS_LIB_PATH_WIN32_END)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -154,13 +154,18 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\Controller\SCController.cpp" />
     <ClCompile Include="..\Classes\Entity\AttackFlyingObject.cpp" />
     <ClCompile Include="..\Classes\Entity\Boss.cpp" />
+    <ClCompile Include="..\Classes\Entity\BossSkill.cpp" />
     <ClCompile Include="..\Classes\Entity\BossTianzhao.cpp" />
+    <ClCompile Include="..\Classes\Entity\ChemistrySceneItem.cpp" />
     <ClCompile Include="..\Classes\Entity\CombatEntity.cpp" />
+    <ClCompile Include="..\Classes\Entity\ConsumableProp.cpp" />
     <ClCompile Include="..\Classes\Entity\FlyingObject.cpp" />
     <ClCompile Include="..\Classes\Entity\LeverSceneItem.cpp" />
     <ClCompile Include="..\Classes\Entity\Monster.cpp" />
     <ClCompile Include="..\Classes\Entity\NPC.cpp" />
+    <ClCompile Include="..\Classes\Entity\PlacementProp.cpp" />
     <ClCompile Include="..\Classes\Entity\Player.cpp" />
+    <ClCompile Include="..\Classes\Entity\PortableProp.cpp" />
     <ClCompile Include="..\Classes\Entity\Portal.cpp" />
     <ClCompile Include="..\Classes\Entity\PulleySceneItem.cpp" />
     <ClCompile Include="..\Classes\Entity\RailgunSceneItem.cpp" />
@@ -180,12 +185,13 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\Layer\ScoreCountLayer.cpp" />
     <ClCompile Include="..\Classes\Layer\ShieldLayer.cpp" />
     <ClCompile Include="..\Classes\PauseDevice.cpp" />
-    <ClCompile Include="..\Classes\PropBank.cpp" />
+    <ClCompile Include="..\Classes\PlayerInfo.cpp" />
     <ClCompile Include="..\Classes\Scene\GameScene.cpp" />
     <ClCompile Include="..\Classes\Scene\InitialScene.cpp" />
     <ClCompile Include="..\Classes\Scene\MainScene.cpp" />
     <ClCompile Include="..\Classes\Scene\TestScene.cpp" />
     <ClCompile Include="..\Classes\ScoreCount.cpp" />
+    <ClCompile Include="..\Classes\ShopItemButton.cpp" />
     <ClCompile Include="..\Classes\Util\AnimationUtil.cpp" />
     <ClCompile Include="..\Classes\Util\EnemyDataLoadUtil.cpp" />
     <ClCompile Include="..\Classes\Util\JsonUtil.cpp" />
@@ -202,13 +208,18 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\CustomizeStruct.h" />
     <ClInclude Include="..\Classes\Entity\AttackFlyingObject.h" />
     <ClInclude Include="..\Classes\Entity\Boss.h" />
+    <ClInclude Include="..\Classes\Entity\BossSkill.h" />
     <ClInclude Include="..\Classes\Entity\BossTianzhao.h" />
+    <ClInclude Include="..\Classes\Entity\ChemistrySceneItem.h" />
     <ClInclude Include="..\Classes\Entity\CombatEntity.h" />
+    <ClInclude Include="..\Classes\Entity\ConsumableProp.h" />
     <ClInclude Include="..\Classes\Entity\FlyingObject.h" />
     <ClInclude Include="..\Classes\Entity\LeverSceneItem.h" />
     <ClInclude Include="..\Classes\Entity\Monster.h" />
     <ClInclude Include="..\Classes\Entity\NPC.h" />
+    <ClInclude Include="..\Classes\Entity\PlacementProp.h" />
     <ClInclude Include="..\Classes\Entity\Player.h" />
+    <ClInclude Include="..\Classes\Entity\PortableProp.h" />
     <ClInclude Include="..\Classes\Entity\Portal.h" />
     <ClInclude Include="..\Classes\Entity\PulleySceneItem.h" />
     <ClInclude Include="..\Classes\Entity\RailgunSceneItem.h" />
@@ -234,12 +245,13 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\Layer\ScoreCountLayer.h" />
     <ClInclude Include="..\Classes\Layer\ShieldLayer.h" />
     <ClInclude Include="..\Classes\PauseDevice.h" />
-    <ClInclude Include="..\Classes\PropBank.h" />
+    <ClInclude Include="..\Classes\PlayerInfo.h" />
     <ClInclude Include="..\Classes\Scene\GameScene.h" />
     <ClInclude Include="..\Classes\Scene\InitialScene.h" />
     <ClInclude Include="..\Classes\Scene\MainScene.h" />
     <ClInclude Include="..\Classes\Scene\TestScene.h" />
     <ClInclude Include="..\Classes\ScoreCount.h" />
+    <ClInclude Include="..\Classes\ShopItemButton.h" />
     <ClInclude Include="..\Classes\Util\AnimationUtil.h" />
     <ClInclude Include="..\Classes\Util\EnemyDataLoadUtil.h" />
     <ClInclude Include="..\Classes\Util\JsonUtil.h" />

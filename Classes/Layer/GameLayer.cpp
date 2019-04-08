@@ -119,19 +119,19 @@ void GameLayer::setGameScene_1_1(PlayerData & playerData)
 	//sceneItem->setPulleyPart(en_pulleyPart_pulley);
 	//sceneItemLayer->setSceneitem(sceneItem);
 
-	ValueMap stonePoint = objGroup->getObject("scene_item_stone");
+	ValueMap stonePoint = objGroup->getObject("scene_item_lever_stone");
 	SceneItemInfomation itemInfo = { "scene_item_stone", Point(stonePoint.at("x").asFloat(), stonePoint.at("y").asFloat()), false, en_sceneItem_physics, en_ph_neutral, en_psig_lever };
 	LeverSceneItem* sceneItem = LeverSceneItem::create(itemInfo);
 	sceneItem->setLeverPart(en_leverPart_stone);
 	sceneItemLayer->setSceneitem(sceneItem);
 
-	ValueMap fulcrumPoint = objGroup->getObject("scene_item_fulcrum");
+	ValueMap fulcrumPoint = objGroup->getObject("scene_item_lever_fulcrum");
 	itemInfo = { "scene_item_fulcrum", Point(fulcrumPoint.at("x").asFloat(), fulcrumPoint.at("y").asFloat()), false, en_sceneItem_physics, en_ph_neutral, en_psig_lever };
 	sceneItem = LeverSceneItem::create(itemInfo);
 	sceneItem->setLeverPart(en_leverPart_fulcrum);
 	sceneItemLayer->setSceneitem(sceneItem);
 
-	ValueMap rodPoint = objGroup->getObject("scene_item_rod");
+	ValueMap rodPoint = objGroup->getObject("scene_item_lever_rod");
 	itemInfo = { "scene_item_rod", Point(rodPoint.at("x").asFloat(), rodPoint.at("y").asFloat()), true, en_sceneItem_physics, en_ph_neutral, en_psig_lever };
 	sceneItem = LeverSceneItem::create(itemInfo);
 	sceneItem->setLeverPart(en_leverPart_rod);
@@ -703,6 +703,6 @@ void GameLayer::updateScore(Ref * pSender)
 
 void GameLayer::enterMainScene(Ref * pSender)
 {
-	MainScene* mainScene = MainScene::create(m_sctPlayerData);
+	MainScene* mainScene = MainScene::create();
 	Director::getInstance()->replaceScene(mainScene);
 }

@@ -5,16 +5,6 @@
 #include "CombatEntity.h"
 #include "GameManager.h"
 
-enum SkillType
-{
-	en_st_closeCombet,
-	en_st_beam,
-	en_st_missile,
-	en_st_summon,
-	en_st_debuff,
-	en_st_recovery
-};
-
 class Boss : public CombatEntity
 {
 public:

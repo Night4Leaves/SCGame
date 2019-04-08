@@ -25,6 +25,9 @@ public:
 	//获取分数
 	int getNumber();
 
+	//更新分数
+	void updateScore(Ref* pSender);
+
 private:
 	int i_number;	//分数
 };

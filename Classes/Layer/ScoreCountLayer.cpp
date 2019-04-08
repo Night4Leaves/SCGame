@@ -1,6 +1,7 @@
 #include "ScoreCountLayer.h"
 #include "ScoreCount.h"
 #include "HeartCount.h"
+#include "PlayerInfo.h"
 
 ScoreCountLayer::ScoreCountLayer()
 {
@@ -8,6 +9,7 @@ ScoreCountLayer::ScoreCountLayer()
 
 ScoreCountLayer::~ScoreCountLayer()
 {
+	NotificationCenter::getInstance()->removeAllObservers(this);
 }
 
 ScoreCountLayer * ScoreCountLayer::create(int number)
@@ -60,6 +62,12 @@ bool ScoreCountLayer::init(int number)
 		
 		this->setNumber(number);
 
+		NotificationCenter::getInstance()->addObserver(
+			this,
+			callfuncO_selector(ScoreCountLayer::updateScore),
+			"update_score",
+			NULL);
+
 	} while (0);
 	return true;
 }
@@ -89,3 +97,8 @@ int ScoreCountLayer::getNumber()
 	return i_number;
 }
 
+void ScoreCountLayer::updateScore(Ref * pSender)
+{
+	int number = PlayerInfo::getInstance()->getMoney();
+	this->setNumber(number);
+}
