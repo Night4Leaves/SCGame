@@ -10,12 +10,12 @@
 #include "ShieldLayer.h"
 #include "ShopItemButton.h"
 #include "PlayerInfo.h"
+#include "CharacterSelector.h"
 
 PaneLayer::PaneLayer()
 	: m_isOpen(false)
 	, m_isLoadSavedata(true)
 {
-	JsonUtil::getInstance()->readSavedata(m_vecSavedataList);
 }
 
 PaneLayer::~PaneLayer()
@@ -120,17 +120,15 @@ void PaneLayer::selectCharacter()
 	//读取玩家角色数据
 	JsonUtil::getInstance()->readPlayerInfo(m_vecCharacterList);
 
-	auto menu = Menu::create();
+	auto test = CharacterSelector::create(m_vecCharacterList[0]);
+	test->setCreateNewDataVol();
+	this->addChild(test);
+	test->setPosition(-100, 0);
 
-	auto menuItem = this->createCharacterSelectItem(m_vecCharacterList, 0, menu_selector(PaneLayer::selectPlayer_1), false);
-	menu->addChild(menuItem);
-
-	menuItem = this->createCharacterSelectItem(m_vecCharacterList, 1, menu_selector(PaneLayer::selectPlayer_2), false);
-	menu->addChild(menuItem);
-
-	menu->setPosition(400, 300);
-	menu->alignItemsHorizontallyWithPadding(50);
-	this->addChild(menu);
+	test = CharacterSelector::create(m_vecCharacterList[1]);
+	test->setCreateNewDataVol();
+	this->addChild(test);
+	test->setPosition(100, 0);
 
 	Sprite* buttonNormal = Sprite::createWithSpriteFrameName("Button_Back_Normal.png");
 	Sprite* buttonSelected = Sprite::createWithSpriteFrameName("Button_Back_Selected.png");
@@ -158,6 +156,7 @@ void PaneLayer::loadFile()
 	auto backColor = LayerColor::create(Color4B::BLACK);
 	this->addChild(backColor);
 
+	JsonUtil::getInstance()->readSavedata(m_vecSavedataList);
 	auto savedataNum = m_vecSavedataList.size();
 	log("save data num is %d", m_vecSavedataList.size());
 
@@ -176,31 +175,17 @@ void PaneLayer::loadFile()
 	this->addChild(backMenu);
 	backMenu->setPosition(400, 180);
 
-	Menu* savedataListMenu = Menu::create();
-	MenuItemSprite* menuItem;
-
-	switch (savedataNum)
+	if (savedataNum > 0)
 	{
-	case 0:
-		log("no save data");
-		return;
-	case 4:
-		menuItem = this->createCharacterSelectItem(m_vecSavedataList, 3, menu_selector(PaneLayer::selectSavedata_4), true);
-		savedataListMenu->addChild(menuItem);
-	case 3:
-		menuItem = this->createCharacterSelectItem(m_vecSavedataList, 2, menu_selector(PaneLayer::selectSavedata_3), true);
-		savedataListMenu->addChild(menuItem);
-	case 2:
-		menuItem = this->createCharacterSelectItem(m_vecSavedataList, 1, menu_selector(PaneLayer::selectSavedata_2), true);
-		savedataListMenu->addChild(menuItem);
-	case 1:
-		menuItem = this->createCharacterSelectItem(m_vecSavedataList, 0, menu_selector(PaneLayer::selectSavedata_1), true);
-		savedataListMenu->addChild(menuItem);
-	default:
-		savedataListMenu->setPosition(400, 300);
-		savedataListMenu->alignItemsHorizontallyWithPadding(45);
-		this->addChild(savedataListMenu);
-		break;
+		while (savedataNum != 0)
+		{
+			CharacterSelector* test = CharacterSelector::create(m_vecSavedataList[savedataNum - 1]);
+			test->setLoadSaveDataVol();
+			this->addChild(test);
+			int x = (savedataNum - 1) * 150 - 230;
+			test->setPosition(x, 0);
+			savedataNum--;
+		}
 	}
 }
 
@@ -545,115 +530,6 @@ void PaneLayer::openSkilllist()
 	Menu* closeMenu = Menu::create(closeMenuItem, NULL);
 	this->addChild(closeMenu);
 	closeMenu->setPosition(400, 70);
-}
-
-MenuItemSprite * PaneLayer::createCharacterSelectItem(
-	const std::vector<PlayerData>& vec_characterInfoList,
-	int i, const SEL_MenuHandler & selector, bool is_savedata)
-{
-	log("name = %s", vec_characterInfoList[i].str_characterName.c_str());
-	log("%s", StringUtils::format("%s_wait.png", vec_characterInfoList[i].str_characterName.c_str()).c_str());
-	Sprite *sprite = Sprite::createWithSpriteFrameName(StringUtils::format("%s_wait.png", vec_characterInfoList[i].str_characterName.c_str()).c_str());
-	auto animation = AnimationUtil::createAnimationWithSingleFrameName(StringUtils::format("%s_idle", vec_characterInfoList[i].str_characterName.c_str()).c_str(), 0.25f, -1);
-	auto animate = Animate::create(animation);
-
-	sprite->setPosition(100, 80);
-	sprite->setScale(1 / 0.35);
-	sprite->runAction(animate);
-
-	std::string displayName = "";
-	Label* firstLabel = NULL;
-	Label* secondLabel = NULL;
-
-	if (is_savedata)
-	{
-		displayName = vec_characterInfoList[i].str_playerName;
-		firstLabel = Label::create(StringUtils::format("money:%d", vec_characterInfoList[i].i_money), "fonts/arial.ttf", 15);
-		secondLabel = Label::create(StringUtils::format("level:%d", vec_characterInfoList[i].i_level), "fonts/arial.ttf", 15);
-	}
-	else
-	{
-		displayName = vec_characterInfoList[i].str_characterName;
-		firstLabel = Label::create(StringUtils::format("HP:%d", vec_characterInfoList[i].i_HP), "fonts/arial.ttf", 15);
-		secondLabel = Label::create(StringUtils::format("atk:%d", vec_characterInfoList[i].i_attack), "fonts/arial.ttf", 15);
-	}
-
-	auto nameLabel = Label::create(StringUtils::format("%s", displayName.c_str()), "fonts/arial.ttf", 20);
-	nameLabel->setPosition(205, 360);
-	nameLabel->setScale(1 / 0.35);
-	nameLabel->setColor(Color3B::GRAY);
-
-	firstLabel->setPosition(275, 220);
-	firstLabel->setScale(1 / 0.35);
-	firstLabel->setColor(Color3B::GRAY);
-
-	secondLabel->setPosition(275, 130);
-	secondLabel->setScale(1 / 0.35);
-	secondLabel->setColor(Color3B::GRAY);
-
-	ButtonOnlyImageType menuItemInfo = { "charater_select.png", "charater_select.png", 0.35, this, selector };
-	MenuItemSprite* menuItem = MenuItemUtil::createMenuItemSpriteByPicture(menuItemInfo);
-
-	menuItem->addChild(sprite);
-	menuItem->addChild(nameLabel);
-	menuItem->addChild(firstLabel);
-	menuItem->addChild(secondLabel);
-
-	return menuItem;
-}
-
-void PaneLayer::selectPlayer_1(Ref * pSender)
-{
-	log("selectPlayer_1");
-	int dataNum = m_vecSavedataList.size();
-	if (dataNum == 4)
-	{
-		return;
-	}
-
-	PlayerInfo::getInstance()->setPlayerData(m_vecCharacterList[0]);
-	this->enterMainScene();
-}
-
-void PaneLayer::selectPlayer_2(Ref * pSender)
-{
-	log("selectPlayer_2");
-	int dataNum = m_vecSavedataList.size();
-	if (dataNum == 4)
-	{
-		return;
-	}
-
-	PlayerInfo::getInstance()->setPlayerData(m_vecCharacterList[1]);
-	this->enterMainScene();
-}
-
-void PaneLayer::selectSavedata_1(Ref * pSender)
-{
-	log("selectSavedata_1");
-	PlayerInfo::getInstance()->setPlayerData(m_vecSavedataList[0]);
-	this->enterMainScene();
-}
-
-void PaneLayer::selectSavedata_2(Ref * pSender)
-{
-	log("selectSavedata_2");
-	PlayerInfo::getInstance()->setPlayerData(m_vecSavedataList[1]);
-	this->enterMainScene();
-}
-
-void PaneLayer::selectSavedata_3(Ref * pSender)
-{
-	log("selectSavedata_3");
-	PlayerInfo::getInstance()->setPlayerData(m_vecSavedataList[2]);
-	this->enterMainScene();
-}
-
-void PaneLayer::selectSavedata_4(Ref * pSender)
-{
-	log("selectSavedata_4");
-	PlayerInfo::getInstance()->setPlayerData(m_vecSavedataList[3]);
-	this->enterMainScene();
 }
 
 void PaneLayer::gameEnd(bool isSuccess)

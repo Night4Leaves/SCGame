@@ -52,7 +52,7 @@
   <object id="23" name="boss" x="3375" y="510">
    <point/>
   </object>
-  <object id="25" name="scene_item_lever_rod" x="947" y="520">
+  <object id="25" name="scene_item_lever_rod" x="407" y="541.333">
    <point/>
   </object>
   <object id="26" name="scene_item_lever_stone" x="559" y="348">
@@ -64,7 +64,7 @@
   <object id="28" name="monster_11" x="2350" y="552">
    <point/>
   </object>
-  <object id="29" name="scene_item_pulley_fulcrum" x="650" y="416">
+  <object id="29" name="scene_item_pulley_fulcrum" x="927.333" y="520">
    <point/>
   </object>
   <object id="30" name="scene_item_pulley_pulley" x="1110" y="520">

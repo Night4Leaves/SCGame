@@ -4,22 +4,22 @@
     <dict>
         <key>frames</key>
         <dict>
-            <key>Game_Pause_Normal.png</key>
+            <key>Button_Delete.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{123,123}</string>
+                <string>{161,164}</string>
                 <key>spriteSourceSize</key>
-                <string>{123,123}</string>
+                <string>{161,164}</string>
                 <key>textureRect</key>
-                <string>{{400,2},{123,123}}</string>
+                <string>{{525,2},{161,164}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Game_Pause_Selected.png</key>
+            <key>Game_Pause_Normal.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -34,22 +34,22 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>first_skill_icon.png</key>
+            <key>Game_Pause_Selected.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{89,90}</string>
+                <string>{123,123}</string>
                 <key>spriteSourceSize</key>
-                <string>{89,90}</string>
+                <string>{123,123}</string>
                 <key>textureRect</key>
-                <string>{{2,2},{89,90}}</string>
+                <string>{{400,2},{123,123}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>second_skill_icon.png</key>
+            <key>first_skill_icon.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -64,6 +64,21 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
+            <key>second_skill_icon.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{89,90}</string>
+                <key>spriteSourceSize</key>
+                <string>{89,90}</string>
+                <key>textureRect</key>
+                <string>{{2,2},{89,90}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
             <key>skill_list.png</key>
             <dict>
                 <key>aliases</key>
@@ -75,7 +90,7 @@
                 <key>spriteSourceSize</key>
                 <string>{720,1145}</string>
                 <key>textureRect</key>
-                <string>{{2,127},{720,1145}}</string>
+                <string>{{2,168},{720,1145}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -106,9 +121,9 @@
             <key>realTextureFileName</key>
             <string>UI_02.png</string>
             <key>size</key>
-            <string>{724,1274}</string>
+            <string>{724,1315}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:a778c85941bb415eae0ca6a3cb5d0ba8:3da1525c904f532d4248cfada7fe90fe:c19f315fc34c19e4a98fc1b6ca97716b$</string>
+            <string>$TexturePacker:SmartUpdate:d5fcb288de6705fc2179a27bfaa6786a:422feac0b95587b2ba384cfa561b12f9:c19f315fc34c19e4a98fc1b6ca97716b$</string>
             <key>textureFileName</key>
             <string>UI_02.png</string>
         </dict>

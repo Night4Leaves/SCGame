@@ -189,6 +189,9 @@
     <ClCompile Include="..\Classes\Entity\BossSkill.cpp">
       <Filter>src\Entity</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\CharacterSelector.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -364,6 +367,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Entity\BossSkill.h">
       <Filter>src\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\CharacterSelector.h">
+      <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

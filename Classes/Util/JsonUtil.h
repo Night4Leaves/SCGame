@@ -2,9 +2,6 @@
 #ifndef __JSON_UTIL_H__
 #define __JSON_UTIL_H__
 
-#include "cocos2d.h"
-USING_NS_CC;
-
 #include "Json/json.h"
 #include "CustomizeStruct.h"
 
@@ -55,12 +52,21 @@ public:
 	*/
 	void writeSavedata(const char * fileName = "json/savedata.json");
 
+	/**
+	*	删除存档
+	*	@dataNumber	存档编号
+	*/
+	void deleteSavedata(int dataNumber);
+
 private:
 	JsonUtil();
 	~JsonUtil();
 
 private:
 	static JsonUtil* m_pJsonLoadUtil;
+
+	std::vector<PlayerData> m_vecPlayerSavedata;
+	bool m_bIsFirst;
 };
 
 #endif // !__JSON_UTIL_H__

@@ -16,6 +16,7 @@
 #include "HeartCount.h"
 #include "GameManager.h"
 #include "PlayerInfo.h"
+#include "CharacterSelector.h"
 
 #include "Entity/Player.h"
 #include "Entity/Monster.h"
@@ -42,12 +43,39 @@ bool TestScene::init()
 {
 	do 
 	{
-		std::vector<PlayerData> vec_SavedataList;
+		std::vector<PlayerData> m_vecSavedataList;
+		JsonUtil::getInstance()->readSavedata(m_vecSavedataList);
+
+		//创建点击屏蔽层
+		this->addChild(ShieldLayer::create());
+
+		auto backColor = LayerColor::create(Color4B::BLACK);
+		this->addChild(backColor);
+
+		auto savedataNum = m_vecSavedataList.size();
+		log("save data num is %d", m_vecSavedataList.size());
+
+		if (savedataNum > 0)
+		{
+			while (savedataNum != 0)
+			{
+				CharacterSelector* test = CharacterSelector::create(m_vecSavedataList[savedataNum - 1]);
+				test->setLoadSaveDataVol();
+				this->addChild(test);
+				int x = (savedataNum - 1) * 150 - 230;
+				test->setPosition(x, 0);
+				savedataNum--;
+			}
+		}
+
+		//JsonUtil::getInstance()->deleteSavedata(1554709236);
+
+		/*std::vector<PlayerData> vec_SavedataList;
 		JsonUtil::getInstance()->readSavedata(vec_SavedataList);
 		vec_SavedataList[0].i_dataNumber = 12037;
 		PlayerInfo::getInstance()->setPlayerData(vec_SavedataList[0]);
 		PlayerInfo::getInstance()->setMoney(999);
-		JsonUtil::getInstance()->writeSavedata(vec_SavedataList);
+		JsonUtil::getInstance()->writeSavedata();*/
 
 		//dtCount = 0;
 

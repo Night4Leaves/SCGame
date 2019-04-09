@@ -56,26 +56,11 @@ private:
 
 	//选择玩家角色
 	void selectCharacter();
-	void selectPlayer_1(Ref* pSender);
-	void selectPlayer_2(Ref* pSender);
 
 	//选择载入的存档
 	void loadFile();
-	void selectSavedata_1(Ref* pSender);
-	void selectSavedata_2(Ref* pSender);
-	void selectSavedata_3(Ref* pSender);
-	void selectSavedata_4(Ref* pSender);
 
 	void gameEnd(bool isSuccess);
-
-	/**
-	 *	创建角色选择按钮
-	 *	@vec_characterInfoList	玩家角色数据列表
-	 *	@i	列表中的第几个数据
-	 *	@selector	选择后调用的函数
-	 *	@is_savedata	是否为存档数据
-	 */
-	MenuItemSprite* createCharacterSelectItem(const std::vector<PlayerData> &vec_characterInfoList, int i, const SEL_MenuHandler &selector, bool is_savedata);
 
 private:
 	bool m_isOpen;	//层中是否显示内容
