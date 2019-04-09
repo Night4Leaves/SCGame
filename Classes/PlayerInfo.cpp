@@ -42,6 +42,14 @@ int PlayerInfo::getMoney()
 	return m_sctData.i_money;
 }
 
+void PlayerInfo::setLevel(int level)
+{
+	if (m_sctData.i_level == level)
+	{
+		++m_sctData.i_level;
+	}
+}
+
 int PlayerInfo::getLevel()
 {
 	return m_sctData.i_level;

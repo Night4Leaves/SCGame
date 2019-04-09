@@ -1,1 +1,1 @@
-null
+[{"HP":8,"actionName":["idle","run","attack","jump","hurt","death"],"actionPlayTime":[-1,-1,1,1,1,1],"actionTime":[0.250,0.040,0.10,0.250,0.10,0.250],"attack":10,"attackRange":150,"characterName":"player_01","dataNumber":1554802889,"level":2,"money":0,"playerName":"","skillList":{"battery":false,"chemistry":false,"dynamics":true,"electromagnetism":false,"neutralization":false,"optics":false},"xSpeed":6,"ySpeed":6}]

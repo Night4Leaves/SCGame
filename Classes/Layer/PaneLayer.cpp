@@ -499,6 +499,11 @@ void PaneLayer::selectGameScene_1_1(Ref * pSender)
 
 void PaneLayer::selectGameScene_1_2(Ref * pSender)
 {
+	int level = PlayerInfo::getInstance()->getLevel();
+	if (level <= Scene_2)
+	{
+		return;
+	}
 	GameScene* gameScene = GameScene::create();
 	gameScene->setScene(Scene_2);
 	Director::getInstance()->replaceScene(gameScene);
@@ -506,6 +511,11 @@ void PaneLayer::selectGameScene_1_2(Ref * pSender)
 
 void PaneLayer::selectGameScene_2_1(Ref * pSender)
 {
+	int level = PlayerInfo::getInstance()->getLevel();
+	if (level <= Scene_3)
+	{
+		return;
+	}
 	GameScene* gameScene = GameScene::create();
 	gameScene->setScene(Scene_3);
 	Director::getInstance()->replaceScene(gameScene);
@@ -513,6 +523,11 @@ void PaneLayer::selectGameScene_2_1(Ref * pSender)
 
 void PaneLayer::selectGameScene_2_2(Ref * pSender)
 {
+	int level = PlayerInfo::getInstance()->getLevel();
+	if (level <= Scene_4)
+	{
+		return;
+	}
 	GameScene* gameScene = GameScene::create();
 	gameScene->setScene(Scene_4);
 	Director::getInstance()->replaceScene(gameScene);
@@ -520,6 +535,11 @@ void PaneLayer::selectGameScene_2_2(Ref * pSender)
 
 void PaneLayer::selectGameScene_3_1(Ref * pSender)
 {
+	int level = PlayerInfo::getInstance()->getLevel();
+	if (level <= Scene_5)
+	{
+		return;
+	}
 	GameScene* gameScene = GameScene::create();
 	gameScene->setScene(Scene_5);
 	Director::getInstance()->replaceScene(gameScene);
@@ -527,6 +547,11 @@ void PaneLayer::selectGameScene_3_1(Ref * pSender)
 
 void PaneLayer::selectGameScene_3_2(Ref * pSender)
 {
+	int level = PlayerInfo::getInstance()->getLevel();
+	if (level <= Scene_6)
+	{
+		return;
+	}
 	GameScene* gameScene = GameScene::create();
 	gameScene->setScene(Scene_6);
 	Director::getInstance()->replaceScene(gameScene);
@@ -534,6 +559,11 @@ void PaneLayer::selectGameScene_3_2(Ref * pSender)
 
 void PaneLayer::selectGameScene_4_1(Ref * pSender)
 {
+	int level = PlayerInfo::getInstance()->getLevel();
+	if (level <= Scene_7)
+	{
+		return;
+	}
 	GameScene* gameScene = GameScene::create();
 	gameScene->setScene(Scene_7);
 	Director::getInstance()->replaceScene(gameScene);
