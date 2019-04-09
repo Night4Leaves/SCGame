@@ -157,6 +157,23 @@ struct FlyingObjectCheckInformation
 };
 
 /**
+ *	Boss飞行物信息
+ *	@str_name	飞行物名称
+ *	@point_currentPoint	飞行物起始位置
+ *	@point_targtPoint	飞行物目标位置
+ *	@b_isRight	飞行物是否朝右
+ *	@b_isRight	飞行物是否为光束
+ */
+struct BossFlyingObjectInfo
+{
+	std::string str_name;
+	Point point_currentPoint;
+	Point point_targtPoint;
+	bool b_isRight;
+	bool b_isBeam;
+};
+
+/**
  *	场景道具信息
  *	@str_itemName	道具名称
  *	@point_setPosition	道具位置

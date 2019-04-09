@@ -8,10 +8,12 @@
 class Boss : public CombatEntity
 {
 public:
+	static Boss* create(const BossData & bossData);
 	virtual bool init(const BossData & bossData);
 	virtual void update(float dt);
 
 	void setBossPosition(Point pos);
+	void setSkillType(SkillType firstSkill, SkillType secondSkill, SkillType thirdSkill);
 
 	//巡逻行为
 	void patrolLogic();
@@ -27,14 +29,12 @@ public:
 	//怪物死亡
 	void bossDeath();
 
-	virtual void firstSkill() = 0;
-	virtual void secondSkill() = 0;
-	virtual void thirdSkill() = 0;
-
 	virtual void checkBeHit(Ref* pSender);
 	virtual void checkDistanceWithPlayer(Ref* pSender);
 	virtual void startPause(Ref* pSender);
 	virtual void endPause(Ref* pSender);
+
+	void recoverHP(int recovery);
 
 protected:
 	Boss();
@@ -61,7 +61,11 @@ protected:
 	float m_fThirdSkillTime;		//第三技能据上次使用间隔
 
 	Point m_pointPlayerPos;		//玩家坐标
+
 	SkillType m_enSkillType;	//使用第几种技能
+	SkillType m_enFirstSkillType;
+	SkillType m_enSecondSkillType;
+	SkillType m_enThirdSkillType;
 
 };
 

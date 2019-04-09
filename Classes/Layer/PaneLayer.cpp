@@ -92,7 +92,7 @@ void PaneLayer::changeMainScene(Ref * pSender)
 
 void PaneLayer::exitGameScene(Ref * pSender)
 {
-	NotificationCenter::getInstance()->postNotification("exit_game_scene", NULL);
+	this->enterMainScene();
 }
 
 void PaneLayer::menuCloseCallback(Ref * pSender)
@@ -110,6 +110,15 @@ void PaneLayer::createNewData()
 void PaneLayer::selectCharacter()
 {
 	log("PaneLayer::selectCharacter");
+	
+	std::vector<PlayerData> playerData;
+	JsonUtil::getInstance()->readSavedata(playerData);
+	int num = playerData.size();
+	if (num == 4)
+	{
+		return;
+	}
+
 
 	//创建点击屏蔽层
 	this->addChild(ShieldLayer::create());
@@ -118,14 +127,14 @@ void PaneLayer::selectCharacter()
 	this->addChild(backColor);
 
 	//读取玩家角色数据
-	JsonUtil::getInstance()->readPlayerInfo(m_vecCharacterList);
+	JsonUtil::getInstance()->readPlayerInfo(playerData);
 
-	auto test = CharacterSelector::create(m_vecCharacterList[0]);
+	auto test = CharacterSelector::create(playerData[0]);
 	test->setCreateNewDataVol();
 	this->addChild(test);
 	test->setPosition(-100, 0);
 
-	test = CharacterSelector::create(m_vecCharacterList[1]);
+	test = CharacterSelector::create(playerData[1]);
 	test->setCreateNewDataVol();
 	this->addChild(test);
 	test->setPosition(100, 0);
@@ -150,15 +159,20 @@ void PaneLayer::loadFile()
 {
 	log("PaneLayer::loadFile");
 
+	std::vector<PlayerData> playerData;
+	JsonUtil::getInstance()->readSavedata(playerData);
+	int savedataNum = playerData.size();
+
+	if (savedataNum == 0)
+	{
+		return;
+	}
+
 	//创建点击屏蔽层
 	this->addChild(ShieldLayer::create());
 
 	auto backColor = LayerColor::create(Color4B::BLACK);
 	this->addChild(backColor);
-
-	JsonUtil::getInstance()->readSavedata(m_vecSavedataList);
-	auto savedataNum = m_vecSavedataList.size();
-	log("save data num is %d", m_vecSavedataList.size());
 
 	Sprite* buttonNormal = Sprite::createWithSpriteFrameName("Button_Back_Normal.png");
 	Sprite* buttonSelected = Sprite::createWithSpriteFrameName("Button_Back_Selected.png");
@@ -179,7 +193,7 @@ void PaneLayer::loadFile()
 	{
 		while (savedataNum != 0)
 		{
-			CharacterSelector* test = CharacterSelector::create(m_vecSavedataList[savedataNum - 1]);
+			CharacterSelector* test = CharacterSelector::create(playerData[savedataNum - 1]);
 			test->setLoadSaveDataVol();
 			this->addChild(test);
 			int x = (savedataNum - 1) * 150 - 230;
@@ -257,8 +271,8 @@ void PaneLayer::startPause()
 	buttonType = { "Button", "exit_game_scene", 0.5, this, menu_selector(PaneLayer::exitGameScene) };
 	menu->addChild(MenuItemUtil::createMenuItemSpriteByPicture(buttonType));
 
-	Sprite* buttonNormal = Sprite::createWithSpriteFrameName("Button_Close_Normal.png");
-	Sprite* buttonSelected = Sprite::createWithSpriteFrameName("Button_Close_Selected.png");
+	Sprite* buttonNormal = Sprite::createWithSpriteFrameName("Button_Back_Normal.png");
+	Sprite* buttonSelected = Sprite::createWithSpriteFrameName("Button_Back_Selected.png");
 
 	auto closeMenuItem = MenuItemSprite::create(
 		buttonNormal,

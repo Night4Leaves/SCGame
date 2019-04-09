@@ -155,8 +155,8 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\Controller\SCController.cpp" />
     <ClCompile Include="..\Classes\Entity\AttackFlyingObject.cpp" />
     <ClCompile Include="..\Classes\Entity\Boss.cpp" />
+    <ClCompile Include="..\Classes\Entity\BossFlyingObject.cpp" />
     <ClCompile Include="..\Classes\Entity\BossSkill.cpp" />
-    <ClCompile Include="..\Classes\Entity\BossTianzhao.cpp" />
     <ClCompile Include="..\Classes\Entity\ChemistrySceneItem.cpp" />
     <ClCompile Include="..\Classes\Entity\CombatEntity.cpp" />
     <ClCompile Include="..\Classes\Entity\ConsumableProp.cpp" />
@@ -210,8 +210,8 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\CustomizeStruct.h" />
     <ClInclude Include="..\Classes\Entity\AttackFlyingObject.h" />
     <ClInclude Include="..\Classes\Entity\Boss.h" />
+    <ClInclude Include="..\Classes\Entity\BossFlyingObject.h" />
     <ClInclude Include="..\Classes\Entity\BossSkill.h" />
-    <ClInclude Include="..\Classes\Entity\BossTianzhao.h" />
     <ClInclude Include="..\Classes\Entity\ChemistrySceneItem.h" />
     <ClInclude Include="..\Classes\Entity\CombatEntity.h" />
     <ClInclude Include="..\Classes\Entity\ConsumableProp.h" />

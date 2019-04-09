@@ -42,6 +42,11 @@ int PlayerInfo::getMoney()
 	return m_sctData.i_money;
 }
 
+int PlayerInfo::getLevel()
+{
+	return m_sctData.i_level;
+}
+
 void PlayerInfo::setItem(std::string item)
 {
 	m_sctData.map_backpackItems[item] = 1;

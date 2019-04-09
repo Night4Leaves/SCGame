@@ -25,6 +25,7 @@ void ResourcesLoadingUtil::preloadResources()
 	spriteFrameCache->addSpriteFramesWithFile("boss/Boss_05.plist");
 	spriteFrameCache->addSpriteFramesWithFile("boss/Boss_06.plist");
 	spriteFrameCache->addSpriteFramesWithFile("boss/Boss_07.plist");
+	spriteFrameCache->addSpriteFramesWithFile("boss/Boss_Skill.plist");
 
 	//加载普通怪物图片资源
 	spriteFrameCache->addSpriteFramesWithFile("monster/Monster_01.plist");

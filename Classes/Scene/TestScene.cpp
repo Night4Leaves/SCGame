@@ -21,12 +21,13 @@
 #include "Entity/Player.h"
 #include "Entity/Monster.h"
 #include "Entity/Boss.h"
-#include "Entity/BossTianzhao.h"
 #include "Entity/CombatEntity.h"
+
 
 #include "Controller/PlayerController.h"
 
 TestScene::TestScene()
+	: dtCount(0)
 {
 }
 
@@ -43,30 +44,12 @@ bool TestScene::init()
 {
 	do 
 	{
-		std::vector<PlayerData> m_vecSavedataList;
-		JsonUtil::getInstance()->readSavedata(m_vecSavedataList);
+		BossFlyingObjectInfo info = { "boss_beam", Point(700, 200), Point(200, 200), false, true };
 
-		//创建点击屏蔽层
-		this->addChild(ShieldLayer::create());
-
-		auto backColor = LayerColor::create(Color4B::BLACK);
-		this->addChild(backColor);
-
-		auto savedataNum = m_vecSavedataList.size();
-		log("save data num is %d", m_vecSavedataList.size());
-
-		if (savedataNum > 0)
-		{
-			while (savedataNum != 0)
-			{
-				CharacterSelector* test = CharacterSelector::create(m_vecSavedataList[savedataNum - 1]);
-				test->setLoadSaveDataVol();
-				this->addChild(test);
-				int x = (savedataNum - 1) * 150 - 230;
-				test->setPosition(x, 0);
-				savedataNum--;
-			}
-		}
+		test = BossFlyingObject::create(info);
+		this->addChild(test);
+		test->scheduleUpdate();
+		
 
 		//JsonUtil::getInstance()->deleteSavedata(1554709236);
 
@@ -76,8 +59,6 @@ bool TestScene::init()
 		PlayerInfo::getInstance()->setPlayerData(vec_SavedataList[0]);
 		PlayerInfo::getInstance()->setMoney(999);
 		JsonUtil::getInstance()->writeSavedata();*/
-
-		//dtCount = 0;
 
 		/*TMXTiledMap* map = TMXTiledMap::create("map/test_map.tmx");
 		this->addChild(map);
@@ -146,8 +127,7 @@ void TestScene::update(float dt)
 
 	if (dtCount > 3)
 	{
-		sprite->setSpriteFrame("scene_item_fulcrum.png");
-		this->unscheduleUpdate();
+		test->scheduleUpdate();
 	}
 
 	/*if (dtCount > 6)

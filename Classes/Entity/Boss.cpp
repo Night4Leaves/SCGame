@@ -1,4 +1,5 @@
 #include "Boss.h"
+#include "BossSkill.h"
 
 void Boss::checkBeHit(Ref * pSender)
 {
@@ -80,6 +81,16 @@ void Boss::endPause(Ref * pSender)
 	}
 }
 
+void Boss::recoverHP(int recovery)
+{
+	m_iHP += recovery;
+	if (m_iHP > m_iMaxHP)
+	{
+		m_iHP = m_iMaxHP;
+	}
+	m_pHPBar->setResidueHp(m_iHP / (float)m_iMaxHP * 100);
+}
+
 Boss::Boss()
 	: m_iXSpeed(0)
 	, m_iYSpeed(0)
@@ -102,6 +113,22 @@ Boss::~Boss()
 {
 }
 
+Boss * Boss::create(const BossData & bossData)
+{
+	Boss *pRet = new(std::nothrow) Boss();
+	if (pRet && pRet->init(bossData))
+	{
+		pRet->autorelease();
+		return pRet;
+	}
+	else
+	{
+		delete pRet;
+		pRet = nullptr;
+		return nullptr;
+	}
+}
+
 bool Boss::init(const BossData & bossData)
 {
 	CombatEntity::saveCombatEntityData(bossData);
@@ -112,6 +139,15 @@ bool Boss::init(const BossData & bossData)
 	m_iSecondSkillCDTime = bossData.i_secondSkillCDTime;
 	m_iThirdSkillDamage = bossData.i_thirdSkillDamage;
 	m_iThirdSkillCDTime = bossData.i_thirdSkillCDTime;
+
+	m_iMaxHP = bossData.i_HP;
+
+	Size size = m_pSprite->getContentSize();
+
+	m_pHPBar = HpBar::create();
+	m_pHPBar->setHpBarPosition(Point(0, size.height + 5));
+	m_pHPBar->setResidueHp(m_iHP / (float)m_iMaxHP * 100);
+	this->addChild(m_pHPBar);
 
 	NotificationCenter::getInstance()->addObserver(
 		this,
@@ -178,6 +214,13 @@ void Boss::setBossPosition(Point pos)
 		m_iYSpeed = 0;
 	}
 	setPosition(pos);
+}
+
+void Boss::setSkillType(SkillType firstSkill, SkillType secondSkill, SkillType thirdSkill)
+{
+	m_enFirstSkillType = firstSkill;
+	m_enSecondSkillType = secondSkill;
+	m_enThirdSkillType = thirdSkill;
 }
 
 void Boss::patrolLogic()
@@ -255,21 +298,24 @@ void Boss::attackLogic()
 	{
 		m_iXSpeed = 0;
 		m_fSecondSkillTime = 0;
-		this->secondSkill();
+		m_enSkillType = m_enFirstSkillType;
+		this->attack();
 		return;
 	}
 	if (abs(monsterPos.x - m_pointPlayerPos.x) < m_iAttackRange && m_fFirstSkillTime > m_iFirstSkillCDTime)
 	{
 		m_iXSpeed = 0;
 		m_fFirstSkillTime = 0;
-		this->firstSkill();
+		m_enSkillType = m_enSecondSkillType;
+		this->attack();
 		return;
 	}
 	if (m_fThirdSkillTime > m_iThirdSkillCDTime)
 	{
 		m_iXSpeed = 0;
 		m_fThirdSkillTime = 0;
-		this->thirdSkill();
+		m_enSkillType = m_enThirdSkillType;
+		this->attack();
 		return;
 	}
 }
@@ -316,23 +362,11 @@ void Boss::attackEndLogic()
 			}
 		}
 		break;
-	case en_st_beam:
-		break;
-	case en_st_missile:
-		break;
-	case en_st_summon:
-		break;
-	case en_st_debuff:
-		break;
 	case en_st_recovery:
-		m_iHP += m_iThirdSkillDamage;
-		if (m_iHP > m_iMaxHP)
-		{
-			m_iHP = m_iMaxHP;
-		}
-		m_pHPBar->setResidueHp(m_iHP / (float)m_iMaxHP * 100);
+		this->recoverHP(m_iThirdSkillDamage);
 		break;
 	default:
+		BossSkill::getInstance()->useSkill(m_enSkillType, m_pointPlayerPos);
 		break;
 	}
 

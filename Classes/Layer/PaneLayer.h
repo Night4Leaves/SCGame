@@ -67,7 +67,6 @@ private:
 	bool m_isLoadSavedata;	//是否为存档数据
 
 	std::vector<PlayerData> m_vecCharacterList;	//玩家角色数据列表
-	std::vector<PlayerData> m_vecSavedataList;	//存档数据列表
 };
 
 #endif // !__PANE_LAYER_H__

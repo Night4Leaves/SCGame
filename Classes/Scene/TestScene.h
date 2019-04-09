@@ -8,6 +8,7 @@ using namespace cocos2d::ui;
 USING_NS_CC;
 
 #include "Entity/Monster.h"
+#include "Entity/BossFlyingObject.h"
 
 class HeartCount;
 
@@ -33,6 +34,7 @@ private:
 	float dtCount;
 	Monster* monster;
 	Sprite* sprite;
+	BossFlyingObject* test;
 
 };
 #endif // !__TEST_SCENE_H__

@@ -6,10 +6,11 @@
 #include "Layer/PaneLayer.h"
 #include "Layer/ScoreCountLayer.h"
 
-#include "Entity/Player.h"
+#include "Entity/BossSkill.h"
 
 #include "HeartCount.h"
 #include "PlayerInfo.h"
+
 
 GameScene::GameScene()
 {
@@ -40,6 +41,7 @@ bool GameScene::init()
 		m_pGameLayer = GameLayer::create();
 		CC_BREAK_IF(m_pGameLayer == nullptr);
 		this->addChild(m_pGameLayer);
+		BossSkill::getInstance()->setGameLayer(m_pGameLayer);
 
 		//初始化菜单层并添加到场景中
 		m_pGameMenuLayer = GameMenuLayer::create();

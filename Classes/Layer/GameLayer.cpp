@@ -3,7 +3,8 @@
 #include "Entity/Player.h"
 #include "Entity/Monster.h"
 #include "Entity/AttackFlyingObject.h"
-#include "Entity/BossTianzhao.h"
+#include "Entity/BossFlyingObject.h"
+#include "Entity/Boss.h"
 #include "Entity/LeverSceneItem.h"
 #include "Entity/PulleySceneItem.h"
 #include "Entity/RailgunSceneItem.h"
@@ -43,12 +44,6 @@ bool GameLayer::init()
 			"update_score",
 			NULL);
 
-		NotificationCenter::getInstance()->addObserver(
-			this,
-			callfuncO_selector(GameLayer::enterMainScene),
-			"exit_game_scene",
-			NULL);
-
 		return true;
 	} while (0);
 
@@ -86,6 +81,17 @@ void GameLayer::addAttackFlyingObject(Ref * pSender)
 	{
 		m_iFlyingObjectFlag = 0;
 	}
+}
+
+void GameLayer::addBossFlyingObject(FlyingObject * bossFlyObj)
+{
+	this->addChild(bossFlyObj);
+	bossFlyObj->scheduleUpdate();
+}
+
+Point GameLayer::getBossPosition()
+{
+	return m_pBoss->getPosition();
 }
 
 void GameLayer::setGameScene_1_1(PlayerData & playerData)
@@ -174,11 +180,12 @@ void GameLayer::setGameScene_1_1(PlayerData & playerData)
 	float bossX = bossPoint.at("x").asFloat();
 	float bossY = bossPoint.at("y").asFloat();
 
-	BossTianzhao* boss = BossTianzhao::create(bossDataList[0]);
-	boss->setBossPosition(Vec2(bossX, bossY));
-	boss->idle();
-	boss->setScale(0.45);
-	this->addChild(boss);
+	m_pBoss = Boss::create(bossDataList[0]);
+	m_pBoss->setSkillType(en_st_closeCombet, en_st_beam, en_st_missile);
+	m_pBoss->setBossPosition(Vec2(bossX, bossY));
+	m_pBoss->idle();
+	m_pBoss->setScale(0.45);
+	this->addChild(m_pBoss);
 
 	//创建玩家角色对象并设置
 	ValueMap playerPoint = objGroup->getObject("player");
@@ -248,11 +255,12 @@ void GameLayer::setGameScene_1_2(PlayerData & playerData)
 	float bossX = bossPoint.at("x").asFloat();
 	float bossY = bossPoint.at("y").asFloat();
 
-	BossTianzhao* boss = BossTianzhao::create(bossDataList[1]);
-	boss->setBossPosition(Vec2(bossX, bossY));
-	boss->idle();
-	boss->setScale(0.45);
-	this->addChild(boss);
+	m_pBoss = Boss::create(bossDataList[1]);
+	m_pBoss->setSkillType(en_st_closeCombet, en_st_beam, en_st_missile);
+	m_pBoss->setBossPosition(Vec2(bossX, bossY));
+	m_pBoss->idle();
+	m_pBoss->setScale(0.45);
+	this->addChild(m_pBoss);
 
 	//创建玩家角色对象并设置
 	ValueMap playerPoint = objGroup->getObject("player");
@@ -330,11 +338,12 @@ void GameLayer::setGameScene_2_1(PlayerData & playerData)
 	float bossX = bossPoint.at("x").asFloat();
 	float bossY = bossPoint.at("y").asFloat();
 
-	BossTianzhao* boss = BossTianzhao::create(bossDataList[4]);
-	boss->setBossPosition(Vec2(bossX, bossY));
-	boss->idle();
-	boss->setScale(0.45);
-	this->addChild(boss);
+	m_pBoss = Boss::create(bossDataList[4]);
+	m_pBoss->setSkillType(en_st_summon, en_st_beam, en_st_recovery);
+	m_pBoss->setBossPosition(Vec2(bossX, bossY));
+	m_pBoss->idle();
+	m_pBoss->setScale(0.45);
+	this->addChild(m_pBoss);
 
 	//创建玩家角色对象并设置
 	ValueMap playerPoint = objGroup->getObject("player");
@@ -429,11 +438,12 @@ void GameLayer::setGameScene_2_2(PlayerData & playerData)
 	float bossX = bossPoint.at("x").asFloat();
 	float bossY = bossPoint.at("y").asFloat();
 
-	BossTianzhao* boss = BossTianzhao::create(bossDataList[3]);
-	boss->setBossPosition(Vec2(bossX, bossY));
-	boss->idle();
-	boss->setScale(0.45);
-	this->addChild(boss);
+	m_pBoss = Boss::create(bossDataList[3]);
+	m_pBoss->setSkillType(en_st_debuff, en_st_missile, en_st_summon);
+	m_pBoss->setBossPosition(Vec2(bossX, bossY));
+	m_pBoss->idle();
+	m_pBoss->setScale(0.45);
+	this->addChild(m_pBoss);
 
 	//创建玩家角色对象并设置
 	ValueMap playerPoint = objGroup->getObject("player");
@@ -503,11 +513,12 @@ void GameLayer::setGameScene_3_1(PlayerData & playerData)
 	float bossX = bossPoint.at("x").asFloat();
 	float bossY = bossPoint.at("y").asFloat();
 
-	BossTianzhao* boss = BossTianzhao::create(bossDataList[2]);
-	boss->setBossPosition(Vec2(bossX, bossY));
-	boss->idle();
-	boss->setScale(0.45);
-	this->addChild(boss);
+	m_pBoss = Boss::create(bossDataList[2]);
+	m_pBoss->setSkillType(en_st_closeCombet, en_st_summon, en_st_recovery);
+	m_pBoss->setBossPosition(Vec2(bossX, bossY));
+	m_pBoss->idle();
+	m_pBoss->setScale(0.45);
+	this->addChild(m_pBoss);
 
 	//创建玩家角色对象并设置
 	ValueMap playerPoint = objGroup->getObject("player");
@@ -577,11 +588,12 @@ void GameLayer::setGameScene_3_2(PlayerData & playerData)
 	float bossX = bossPoint.at("x").asFloat();
 	float bossY = bossPoint.at("y").asFloat();
 
-	BossTianzhao* boss = BossTianzhao::create(bossDataList[5]);
-	boss->setBossPosition(Vec2(bossX, bossY));
-	boss->idle();
-	boss->setScale(0.45);
-	this->addChild(boss);
+	m_pBoss = Boss::create(bossDataList[5]);
+	m_pBoss->setSkillType(en_st_debuff, en_st_beam, en_st_missile);
+	m_pBoss->setBossPosition(Vec2(bossX, bossY));
+	m_pBoss->idle();
+	m_pBoss->setScale(0.45);
+	this->addChild(m_pBoss);
 
 	//创建玩家角色对象并设置
 	ValueMap playerPoint = objGroup->getObject("player");
@@ -651,11 +663,12 @@ void GameLayer::setGameScene_4_1(PlayerData & playerData)
 	float bossX = bossPoint.at("x").asFloat();
 	float bossY = bossPoint.at("y").asFloat();
 
-	BossTianzhao* boss = BossTianzhao::create(bossDataList[6]);
-	boss->setBossPosition(Vec2(bossX, bossY));
-	boss->idle();
-	boss->setScale(0.45);
-	this->addChild(boss);
+	m_pBoss = Boss::create(bossDataList[6]);
+	m_pBoss->setSkillType(en_st_closeCombet, en_st_beam, en_st_summon);
+	m_pBoss->setBossPosition(Vec2(bossX, bossY));
+	m_pBoss->idle();
+	m_pBoss->setScale(0.45);
+	this->addChild(m_pBoss);
 
 	//创建玩家角色对象并设置
 	ValueMap playerPoint = objGroup->getObject("player");
@@ -701,8 +714,3 @@ void GameLayer::updateScore(Ref * pSender)
 	m_sctPlayerData.i_money += (int)pSender;
 }
 
-void GameLayer::enterMainScene(Ref * pSender)
-{
-	MainScene* mainScene = MainScene::create();
-	Director::getInstance()->replaceScene(mainScene);
-}

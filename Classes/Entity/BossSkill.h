@@ -4,7 +4,7 @@
 
 #include "CustomizeStruct.h"
 
-class Boss;
+class GameLayer;
 
 class BossSkill : public Ref
 {
@@ -13,7 +13,7 @@ public:
 
 	void useSkill(SkillType skillType, Point playerPoint);
 
-	void saveBoss(Boss* boss);
+	void setGameLayer(GameLayer* gameLayer);
 
 protected:
 	BossSkill();
@@ -22,17 +22,15 @@ protected:
 	virtual bool init();
 
 private:
-	void closeCombet();
 	void shootBeam(Point playerPoint);
 	void launchingMissile(Point playerPoint);
 	void summon();
 	void debuff();
-	void recovery();
 
 private:
 	static BossSkill* m_pBossSkill;
 
-	Boss* m_pBoss;
+	GameLayer* m_pGameLayer;
 };
 
 #endif // !__BOSS_SKILL_H__

@@ -135,9 +135,6 @@
     <ClCompile Include="..\Classes\Util\JsonUtil.cpp">
       <Filter>src\Utils</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Entity\BossTianzhao.cpp">
-      <Filter>src\Entity\Character\Boss</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\HeartCount.cpp">
       <Filter>src</Filter>
     </ClCompile>
@@ -191,6 +188,9 @@
     </ClCompile>
     <ClCompile Include="..\Classes\CharacterSelector.cpp">
       <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Entity\BossFlyingObject.cpp">
+      <Filter>src\Entity\FlyingObject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -308,9 +308,6 @@
     <ClInclude Include="..\Classes\Entity\Boss.h">
       <Filter>src\Entity\Character\Boss</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Entity\BossTianzhao.h">
-      <Filter>src\Entity\Character\Boss</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\Entity\CombatEntity.h">
       <Filter>src\Entity</Filter>
     </ClInclude>
@@ -370,6 +367,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\CharacterSelector.h">
       <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Entity\BossFlyingObject.h">
+      <Filter>src\Entity\FlyingObject</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

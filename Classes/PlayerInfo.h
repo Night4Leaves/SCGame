@@ -14,6 +14,7 @@ public:
 
 	void setMoney(int money);
 	int getMoney();
+	int getLevel();
 
 	void setItem(std::string item);
 	int getItemNum(std::string item);

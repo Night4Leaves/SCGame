@@ -23,6 +23,8 @@ public:
 	virtual bool init();
 
 	void addAttackFlyingObject(Ref* pSender);
+	void addBossFlyingObject(FlyingObject* bossFlyObj);
+	Point getBossPosition();
 
 	/**
 	 *	设置各关场景
@@ -40,8 +42,6 @@ private:
 	void setPlayer(const Point & pos);
 	//更新分数
 	void updateScore(Ref* pSender);
-	//进入主场景
-	void enterMainScene(Ref* pSender);
 
 private:
 	TMXTiledMap* m_pMap;	//地图
