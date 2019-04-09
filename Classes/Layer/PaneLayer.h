@@ -22,10 +22,16 @@ private:
 	//显示层
 	void showPaneLayer(Ref* pSender);
 
+	void saveData(Ref* pSender);
+	void readData(Ref* pSender);
+
 	//打开商店
 	void openStore();
 	//暂停
 	void startPause();
+	//设置界面
+	void openEasyOption(Ref* pSender);
+	void openNormalOption();
 
 	//显示选择游戏关卡界面
 	void selectGameScene();
@@ -43,16 +49,12 @@ private:
 	void openSkilllist();
 
 	//进入主场景
-	void enterMainScene();
-	//切换到主场景
-	void changeMainScene(Ref* pSender);;
-	//退出关卡
-	void exitGameScene(Ref* pSender);
+	void enterMainScene(Ref* pSender);
+	//进入初始场景
+	void enterInitialScene(Ref* pSender);
 
 	//关闭当前显示的界面
 	void menuCloseCallback(Ref* pSender);
-	//创建新存档数据
-	void createNewData();
 
 	//选择玩家角色
 	void selectCharacter();

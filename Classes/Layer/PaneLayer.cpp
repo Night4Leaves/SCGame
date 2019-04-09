@@ -46,6 +46,12 @@ void PaneLayer::showPaneLayer(Ref * pSender)
 	case en_paneMsg_pause:
 		this->startPause();
 		break;
+	case en_paneMsg_openEasyOption:
+		this->openEasyOption(NULL);
+		break;
+	case en_paneMsg_openNormalOption:
+		this->openNormalOption();
+		break;
 	case en_paneMsg_openBackpack:
 		this->openBackpack();
 		break;
@@ -79,20 +85,26 @@ void PaneLayer::showPaneLayer(Ref * pSender)
 
 }
 
-void PaneLayer::enterMainScene()
+void PaneLayer::saveData(Ref * pSender)
+{
+	JsonUtil::getInstance()->writeSavedata();
+}
+
+void PaneLayer::readData(Ref * pSender)
+{
+	this->loadFile();
+}
+
+void PaneLayer::enterMainScene(Ref * pSender)
 {
 	MainScene* mainScene = MainScene::create();
 	Director::getInstance()->replaceScene(mainScene);
 }
 
-void PaneLayer::changeMainScene(Ref * pSender)
+void PaneLayer::enterInitialScene(Ref * pSender)
 {
-	this->enterMainScene();
-}
-
-void PaneLayer::exitGameScene(Ref * pSender)
-{
-	this->enterMainScene();
+	InitialScene* initialScene = InitialScene::create();
+	Director::getInstance()->replaceScene(initialScene);
 }
 
 void PaneLayer::menuCloseCallback(Ref * pSender)
@@ -101,10 +113,6 @@ void PaneLayer::menuCloseCallback(Ref * pSender)
 	this->removeAllChildren();
 	m_isOpen = false;
 	NotificationCenter::getInstance()->postNotification("end_pause", NULL);
-}
-
-void PaneLayer::createNewData()
-{
 }
 
 void PaneLayer::selectCharacter()
@@ -265,10 +273,10 @@ void PaneLayer::startPause()
 
 	Menu* menu = Menu::create();
 	
-	ButtonWithTextPicture buttonType = { "Button", "option", 0.5, this, nullptr };
+	ButtonWithTextPicture buttonType = { "Button", "option", 0.5, this, menu_selector(PaneLayer::openEasyOption) };
 	menu->addChild(MenuItemUtil::createMenuItemSpriteByPicture(buttonType));
 
-	buttonType = { "Button", "exit_game_scene", 0.5, this, menu_selector(PaneLayer::exitGameScene) };
+	buttonType = { "Button", "exit_game_scene", 0.5, this, menu_selector(PaneLayer::enterMainScene) };
 	menu->addChild(MenuItemUtil::createMenuItemSpriteByPicture(buttonType));
 
 	Sprite* buttonNormal = Sprite::createWithSpriteFrameName("Button_Back_Normal.png");
@@ -286,6 +294,77 @@ void PaneLayer::startPause()
 	this->addChild(menu);
 	menu->setPosition(400, 300);
 	menu->alignItemsVerticallyWithPadding(10);
+}
+
+void PaneLayer::openEasyOption(Ref * pSender)
+{
+	NotificationCenter::getInstance()->postNotification("start_pause", NULL);
+
+	m_isOpen = true;
+
+	log("PaneLayer::openEasyOption");
+
+	auto backColor = LayerColor::create(Color4B::BLACK);
+	this->addChild(backColor);
+
+	this->addChild(ShieldLayer::create());
+
+	Menu* menu = Menu::create();
+
+	Sprite* buttonNormal = Sprite::createWithSpriteFrameName("Button_Back_Normal.png");
+	Sprite* buttonSelected = Sprite::createWithSpriteFrameName("Button_Back_Selected.png");
+
+	auto closeMenuItem = MenuItemSprite::create(
+		buttonNormal,
+		buttonSelected,
+		this,
+		menu_selector(PaneLayer::menuCloseCallback));
+
+	closeMenuItem->setScale(0.2);
+	menu->addChild(closeMenuItem);
+
+	this->addChild(menu);
+	menu->setPosition(400, 300);
+	menu->alignItemsVerticallyWithPadding(10);
+}
+
+void PaneLayer::openNormalOption()
+{
+	NotificationCenter::getInstance()->postNotification("start_pause", NULL);
+
+	m_isOpen = true;
+
+	log("PaneLayer::openNormalOption");
+
+	this->addChild(ShieldLayer::create());
+
+	Menu* menu = Menu::create();
+
+	ButtonWithTextPicture buttonType = { "Button", "gamestart", 0.5, this, menu_selector(PaneLayer::saveData) };
+	menu->addChild(MenuItemUtil::createMenuItemSpriteByPicture(buttonType));
+
+	buttonType = { "Button", "continue", 0.5, this, menu_selector(PaneLayer::readData) };
+	menu->addChild(MenuItemUtil::createMenuItemSpriteByPicture(buttonType));
+
+	buttonType = { "Button", "exit", 0.5, this, menu_selector(PaneLayer::enterInitialScene) };
+	menu->addChild(MenuItemUtil::createMenuItemSpriteByPicture(buttonType));
+
+	Sprite* buttonNormal = Sprite::createWithSpriteFrameName("Button_Back_Normal.png");
+	Sprite* buttonSelected = Sprite::createWithSpriteFrameName("Button_Back_Selected.png");
+
+	auto closeMenuItem = MenuItemSprite::create(
+		buttonNormal,
+		buttonSelected,
+		this,
+		menu_selector(PaneLayer::menuCloseCallback));
+
+	closeMenuItem->setScale(0.2);
+	menu->addChild(closeMenuItem);
+
+	this->addChild(menu);
+	menu->setPosition(400, 300);
+	menu->alignItemsVerticallyWithPadding(10);
+
 }
 
 void PaneLayer::selectGameScene()
@@ -564,7 +643,7 @@ void PaneLayer::gameEnd(bool isSuccess)
 	}
 
 	Menu* menu = Menu::create();
-	ButtonWithTextPicture buttonType = { "Button", "exit_game_scene", 0.5, this, menu_selector(PaneLayer::exitGameScene) };
+	ButtonWithTextPicture buttonType = { "Button", "exit_game_scene", 0.5, this, menu_selector(PaneLayer::enterMainScene) };
 	menu->addChild(MenuItemUtil::createMenuItemSpriteByPicture(buttonType));
 	this->addChild(menu);
 	menu->setPosition(400, 200);

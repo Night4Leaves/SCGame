@@ -15,6 +15,10 @@ public:
 	void setBossPosition(Point pos);
 	void setSkillType(SkillType firstSkill, SkillType secondSkill, SkillType thirdSkill);
 
+	void useFirstSkill();
+	void useSecondSkill();
+	void useThirdSkill();
+
 	//巡逻行为
 	void patrolLogic();
 	//警戒行为

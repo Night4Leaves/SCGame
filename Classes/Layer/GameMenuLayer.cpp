@@ -97,6 +97,7 @@ void GameMenuLayer::continueGame(Ref * sender)
 void GameMenuLayer::openOptionWin(Ref * sender)
 {
 	log("openOptionWin");
+	NotificationCenter::getInstance()->postNotification("show_PaneLayer", (Ref*)en_paneMsg_openEasyOption);
 }
 
 void GameMenuLayer::exitGame(Ref * sender)
@@ -119,6 +120,7 @@ void GameMenuLayer::openSkillList(Ref * sender)
 void GameMenuLayer::openOption(Ref * sender)
 {
 	log("openOption");
+	NotificationCenter::getInstance()->postNotification("show_PaneLayer", (Ref*)en_paneMsg_openNormalOption);
 }
 
 void GameMenuLayer::gamePause(Ref * sender)

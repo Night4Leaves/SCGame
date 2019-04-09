@@ -54,6 +54,12 @@ bool GameScene::init()
 		CC_BREAK_IF(m_pScoreCountLayer == nullptr);
 		this->addChild(m_pScoreCountLayer);
 
+		PlayerData player = PlayerInfo::getInstance()->getPlayerData();
+
+		m_pHeartCount = HeartCount::create(player.i_HP);
+		this->addChild(m_pHeartCount);
+		m_pHeartCount->setPosition(0, 570);
+
 		//初始化显示层并添加到场景中
 		m_pPaneLayer = PaneLayer::create();
 		CC_BREAK_IF(m_pPaneLayer == nullptr);
@@ -82,10 +88,6 @@ bool GameScene::init()
 void GameScene::setScene(SceneType sign)
 {
 	PlayerData player = PlayerInfo::getInstance()->getPlayerData();
-
-	m_pHeartCount = HeartCount::create(player.i_HP);
-	this->addChild(m_pHeartCount);
-	m_pHeartCount->setPosition(0, 570);
 
 	m_pScoreCountLayer->setNumber(player.i_money);
 

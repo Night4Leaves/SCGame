@@ -48,7 +48,7 @@ void Boss::checkDistanceWithPlayer(Ref * pSender)
 	Point bossPos = this->getPosition();
 	m_pointPlayerPos = Point(playerPos->x, playerPos->y);
 	
-	if (bossPos.x - m_pointPlayerPos.x < 655 && !m_bIsactivated)
+	if (!m_bIsactivated && bossPos.x - m_pointPlayerPos.x < 655)
 	{
 		this->scheduleUpdate();
 		m_bIsactivated = true;
@@ -58,6 +58,18 @@ void Boss::checkDistanceWithPlayer(Ref * pSender)
 			callfuncO_selector(Boss::checkBeHit),
 			"attack_flying_object_check_point",
 			NULL);
+	}
+
+	if (m_bIsactivated)
+	{
+		Point pos = getPosition();
+		if ((abs(pos.x - m_pointPlayerPos.x) < 300
+			&& abs(pos.x - m_pointPlayerPos.x) > 150)
+			|| (abs(pos.y - m_pointPlayerPos.y) < 300
+				&& abs(pos.y - m_pointPlayerPos.y) > 150))
+		{
+			m_enSkillType = m_enThirdSkillType;
+		}
 	}
 }
 
@@ -164,6 +176,8 @@ void Boss::update(float dt)
 	m_fFirstSkillTime += dt;
 	m_fSecondSkillTime += dt;
 	m_fThirdSkillTime += dt;
+
+	
 
 	switch (m_enMonsterState)
 	{

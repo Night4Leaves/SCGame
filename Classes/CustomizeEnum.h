@@ -5,6 +5,8 @@
 //显示层会收到的展示内容消息
 enum PaneLayerStatus
 {
+	en_paneMsg_openEasyOption,	//打开简易设置界面
+	en_paneMsg_openNormalOption,	//打开详细设置界面
 	en_paneMsg_selectCharacter,	//角色选择
 	en_paneMsg_loadFile,	//存档加载
 	en_paneMsg_openItemStore,	//打开道具商店
