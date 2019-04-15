@@ -57,6 +57,7 @@ void HeartCount::reduceHP()
 {
 	if (m_iHP == 0)
 	{
+		NotificationCenter::getInstance()->postNotification("hp_0");
 		return;
 	}
 

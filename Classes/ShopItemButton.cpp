@@ -26,6 +26,7 @@ bool ShopItemButton::init(ShopItemInfo itemInfo)
 		m_strName = itemInfo.str_name;
 		m_iNum = itemInfo.i_num;
 		m_iPrice = itemInfo.i_price;
+		m_enShopItemType = itemInfo.en_shopItemType;
 
 		return true;
 	} while (0);
@@ -84,6 +85,12 @@ void ShopItemButton::setBackpackVol()
 		this->addChild(numSprite);
 		temp /= 10;
 	}
+
+	Sprite* menuSprite = Sprite::createWithSpriteFrameName(spriteFrameName.c_str());
+	MenuItemSprite* menuItem = MenuItemSprite::create(menuSprite, menuSprite, this, menu_selector(ShopItemButton::equipItem));
+	Menu* test = Menu::create(menuItem, nullptr);
+	test->setPosition(0, 0);
+	this->addChild(test);
 }
 
 ShopItemButton::ShopItemButton()
@@ -108,4 +115,9 @@ void ShopItemButton::buyItem(Ref * pSender)
 		return;
 	}
 	
+}
+
+void ShopItemButton::equipItem(Ref * pSender)
+{
+	PlayerInfo::getInstance()->setShopItemType(m_enShopItemType);
 }

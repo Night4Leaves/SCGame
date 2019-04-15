@@ -76,7 +76,6 @@ void SceneItem::mouseMove(Ref * pSender)
 	Node* parent = (Node*)getParent();	//场景道具层
 	parent = (Node*)parent->getParent();	//游戏层
 	Point parentPos = parent->getPosition();
-
 	Point* temp = (Point*)pSender;
 	Point clickPos = Point(temp->x - parentPos.x, temp->y);
 	setPosition(clickPos);

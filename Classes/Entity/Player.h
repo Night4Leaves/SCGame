@@ -44,6 +44,8 @@ public:
 	virtual void startPause(Ref* pSender);
 	virtual void endPause(Ref* pSender);
 
+	virtual void noHP(Ref* pSender);
+
 private:
 	Player();
 	virtual ~Player();

@@ -1,5 +1,6 @@
 [
 	{
+		"playerName": "Alex",
 		"characterName" : "player_01",
 		"HP" : 8,
 		"attack" : 10,
@@ -12,6 +13,7 @@
 		"actionPlayTime" : [-1, -1, 1, 1, 1, 1]
 	},
 	{
+		"playerName": "Leon",
 		"characterName" : "player_02",
 		"HP" : 5,
 		"attack" : 15,

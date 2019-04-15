@@ -36,8 +36,8 @@ void GameMenuLayer::setInitialMenu()
 	buttonType = { "Button", "continue", 0.5, this, menu_selector(GameMenuLayer::continueGame) };
 	menu->addChild(MenuItemUtil::createMenuItemSpriteByPicture(buttonType));
 
-	buttonType = { "Button", "option", 0.5, this, menu_selector(GameMenuLayer::openOptionWin) };
-	menu->addChild(MenuItemUtil::createMenuItemSpriteByPicture(buttonType));
+	/*buttonType = { "Button", "option", 0.5, this, menu_selector(GameMenuLayer::openOptionWin) };
+	menu->addChild(MenuItemUtil::createMenuItemSpriteByPicture(buttonType));*/
 
 	buttonType = { "Button", "exit", 0.5, this, menu_selector(GameMenuLayer::exitGame) };
 	menu->addChild(MenuItemUtil::createMenuItemSpriteByPicture(buttonType));
@@ -58,8 +58,8 @@ void GameMenuLayer::setMainMenu()
 	ButtonOnlyImageType buttonInfo = { "menubar_01.png", "menubar_01.png", 0.5, this, menu_selector(GameMenuLayer::openBackpack) };
 	menu->addChild(MenuItemUtil::createMenuItemSpriteByPicture(buttonInfo));
 
-	buttonInfo = { "menubar_02.png", "menubar_02.png", 0.5, this, menu_selector(GameMenuLayer::openSkillList) };
-	menu->addChild(MenuItemUtil::createMenuItemSpriteByPicture(buttonInfo));
+	/*buttonInfo = { "menubar_02.png", "menubar_02.png", 0.5, this, menu_selector(GameMenuLayer::openSkillList) };
+	menu->addChild(MenuItemUtil::createMenuItemSpriteByPicture(buttonInfo));*/
 
 	buttonInfo = { "menubar_03.png", "menubar_03.png", 0.5, this, menu_selector(GameMenuLayer::openOption) };
 	menu->addChild(MenuItemUtil::createMenuItemSpriteByPicture(buttonInfo));

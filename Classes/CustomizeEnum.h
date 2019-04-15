@@ -72,13 +72,11 @@ enum RailgunPart
 	en_railgunPart_shell	//发射物
 };
 
-enum ConsumableItemType
+enum ShopItemType
 {
-	en_consumableItemType_recovery,
-	en_consumableItemType_sceneItem,
-	en_consumableItemType_fe,
-	en_consumableItemType_cu,
-	en_consumableItemType_ag
+	en_consumableItemType_bandaid,
+	en_consumableItemType_mirror,
+	en_consumableItemType_sword
 };
 
 enum SkillType
@@ -89,5 +87,14 @@ enum SkillType
 	en_st_summon,
 	en_st_debuff,
 	en_st_recovery
+};
+
+enum ChemistryType
+{
+	en_ct_HCl,
+	en_ct_NaOH,
+	en_ct_H2SO4,
+	en_ct_CAOH2,
+	en_ct_H2CO3
 };
 #endif // !__CUSTOMIZE_ENUM_H__

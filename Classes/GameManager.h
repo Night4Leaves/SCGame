@@ -23,6 +23,9 @@ public:
 	//检测指定属性的值
 	bool checkBoolAttribute(Point tiledPos, const char* attribute);
 
+	void setCheckPoint(Point pos);
+	Point getCheckPoint();
+
 private:
 	GameManager();
 	~GameManager();
@@ -34,6 +37,9 @@ private:
 	TMXLayer* m_pMeta;		//障碍判定层
 
 	Size m_sizeMap;	//地图尺寸
+
+	Point tmp_pos;
+	bool m_bCheck;
 };
 
 #endif // !__GAME_MANAGER_H__

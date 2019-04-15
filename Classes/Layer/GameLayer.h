@@ -24,6 +24,11 @@ public:
 
 	void addAttackFlyingObject(Ref* pSender);
 	void addBossFlyingObject(FlyingObject* bossFlyObj);
+	void addMonster(Monster* monster);
+	void addMirror(Ref* pSender);
+
+	void showWelcome(Ref* pSender);
+
 	Point getBossPosition();
 
 	/**
@@ -40,8 +45,6 @@ public:
 
 private:
 	void setPlayer(const Point & pos);
-	//更新分数
-	void updateScore(Ref* pSender);
 
 private:
 	TMXTiledMap* m_pMap;	//地图

@@ -34,9 +34,6 @@
     <Filter Include="src\Json">
       <UniqueIdentifier>{a8b09e56-8ebf-4863-91f1-e13e5141a4ee}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\Entity\Character\Boss">
-      <UniqueIdentifier>{02cb032b-86cd-409c-88ce-cab906056138}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\Entity\SceneItem">
       <UniqueIdentifier>{8daa9130-b915-4afb-9ed1-06a3ff87cc24}</UniqueIdentifier>
     </Filter>
@@ -105,9 +102,6 @@
     <ClCompile Include="..\Classes\Entity\Portal.cpp">
       <Filter>src\Entity</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Scene\TestScene.cpp">
-      <Filter>src\Scene</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\Json\json_reader.cpp">
       <Filter>src\Json</Filter>
     </ClCompile>
@@ -126,9 +120,6 @@
     <ClCompile Include="..\Classes\Layer\ShieldLayer.cpp">
       <Filter>src\Layer</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Entity\Boss.cpp">
-      <Filter>src\Entity\Character\Boss</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\Entity\CombatEntity.cpp">
       <Filter>src\Entity</Filter>
     </ClCompile>
@@ -143,9 +134,6 @@
     </ClCompile>
     <ClCompile Include="..\Classes\GameManager.cpp">
       <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Util\EnemyDataLoadUtil.cpp">
-      <Filter>src\Utils</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\PauseDevice.cpp">
       <Filter>src</Filter>
@@ -168,15 +156,6 @@
     <ClCompile Include="..\Classes\Entity\ChemistrySceneItem.cpp">
       <Filter>src\Entity\SceneItem</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Entity\ConsumableProp.cpp">
-      <Filter>src\Entity</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Entity\PlacementProp.cpp">
-      <Filter>src\Entity</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Entity\PortableProp.cpp">
-      <Filter>src\Entity</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\ShopItemButton.cpp">
       <Filter>src</Filter>
     </ClCompile>
@@ -191,6 +170,15 @@
     </ClCompile>
     <ClCompile Include="..\Classes\Entity\BossFlyingObject.cpp">
       <Filter>src\Entity\FlyingObject</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Entity\Door.cpp">
+      <Filter>src\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Entity\Mirror.cpp">
+      <Filter>src\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Entity\Boss.cpp">
+      <Filter>src\Entity\Character</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -263,9 +251,6 @@
     <ClInclude Include="..\Classes\Entity\Portal.h">
       <Filter>src\Entity</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Scene\TestScene.h">
-      <Filter>src\Scene</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\Json\autolink.h">
       <Filter>src\Json</Filter>
     </ClInclude>
@@ -305,9 +290,6 @@
     <ClInclude Include="..\Classes\Layer\ShieldLayer.h">
       <Filter>src\Layer</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Entity\Boss.h">
-      <Filter>src\Entity\Character\Boss</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\Entity\CombatEntity.h">
       <Filter>src\Entity</Filter>
     </ClInclude>
@@ -322,9 +304,6 @@
     </ClInclude>
     <ClInclude Include="..\Classes\GameManager.h">
       <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Util\EnemyDataLoadUtil.h">
-      <Filter>src\Utils</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\PauseDevice.h">
       <Filter>src</Filter>
@@ -347,15 +326,6 @@
     <ClInclude Include="..\Classes\Entity\ChemistrySceneItem.h">
       <Filter>src\Entity\SceneItem</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Entity\ConsumableProp.h">
-      <Filter>src\Entity</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Entity\PlacementProp.h">
-      <Filter>src\Entity</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Entity\PortableProp.h">
-      <Filter>src\Entity</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\ShopItemButton.h">
       <Filter>src</Filter>
     </ClInclude>
@@ -370,6 +340,15 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Entity\BossFlyingObject.h">
       <Filter>src\Entity\FlyingObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Entity\Door.h">
+      <Filter>src\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Entity\Mirror.h">
+      <Filter>src\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Entity\Boss.h">
+      <Filter>src\Entity\Character</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -13,11 +13,8 @@ public:
 	virtual void update(float dt);
 
 	void setBossPosition(Point pos);
+	void setBossInitialPos(Point pos);
 	void setSkillType(SkillType firstSkill, SkillType secondSkill, SkillType thirdSkill);
-
-	void useFirstSkill();
-	void useSecondSkill();
-	void useThirdSkill();
 
 	//巡逻行为
 	void patrolLogic();
@@ -65,6 +62,7 @@ protected:
 	float m_fThirdSkillTime;		//第三技能据上次使用间隔
 
 	Point m_pointPlayerPos;		//玩家坐标
+	Point m_pointInitialPos;	//初始坐标
 
 	SkillType m_enSkillType;	//使用第几种技能
 	SkillType m_enFirstSkillType;

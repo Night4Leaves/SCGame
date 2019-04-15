@@ -1,5 +1,6 @@
 #include "Boss.h"
 #include "BossSkill.h"
+#include "PlayerInfo.h"
 
 void Boss::checkBeHit(Ref * pSender)
 {
@@ -52,6 +53,7 @@ void Boss::checkDistanceWithPlayer(Ref * pSender)
 	{
 		this->scheduleUpdate();
 		m_bIsactivated = true;
+		m_enMonsterState = en_ms_patrol;
 
 		NotificationCenter::getInstance()->addObserver(
 			this,
@@ -63,12 +65,21 @@ void Boss::checkDistanceWithPlayer(Ref * pSender)
 	if (m_bIsactivated)
 	{
 		Point pos = getPosition();
-		if ((abs(pos.x - m_pointPlayerPos.x) < 300
-			&& abs(pos.x - m_pointPlayerPos.x) > 150)
-			|| (abs(pos.y - m_pointPlayerPos.y) < 300
-				&& abs(pos.y - m_pointPlayerPos.y) > 150))
+		if (((abs(pos.x - m_pointPlayerPos.x) < 300 && abs(pos.x - m_pointPlayerPos.x) > 150)
+			|| (abs(pos.y - m_pointPlayerPos.y) < 300 && abs(pos.y - m_pointPlayerPos.y) > 150))
+			&& m_fThirdSkillTime > m_iThirdSkillCDTime)
 		{
+			m_fThirdSkillTime = 0;
+			m_enMonsterState = en_ms_warn;
 			m_enSkillType = m_enThirdSkillType;
+		}
+		else if (((abs(pos.x - m_pointPlayerPos.x) < 150 && abs(pos.x - m_pointPlayerPos.x) > 50)
+			|| (abs(pos.y - m_pointPlayerPos.y) < 150 && abs(pos.y - m_pointPlayerPos.y) > 50))
+			&& m_fSecondSkillTime > m_iSecondSkillCDTime)
+		{
+			m_fSecondSkillTime = 0;
+			m_enMonsterState = en_ms_warn;
+			m_enSkillType = m_enSecondSkillType;
 		}
 	}
 }
@@ -177,8 +188,6 @@ void Boss::update(float dt)
 	m_fSecondSkillTime += dt;
 	m_fThirdSkillTime += dt;
 
-	
-
 	switch (m_enMonsterState)
 	{
 	case en_ms_patrol:
@@ -203,6 +212,34 @@ void Boss::update(float dt)
 	Point pos = getPosition();
 	pos.x += m_iXSpeed;
 	pos.y += m_iYSpeed;
+
+	if (pos.y > m_pointInitialPos.y + 150)
+	{
+		pos.y = m_pointInitialPos.y + 150;
+		m_iYSpeed = 0;
+	}
+	if (pos.y < m_pointInitialPos.y - 150)
+	{
+		pos.y = m_pointInitialPos.y - 150;
+		m_iYSpeed = 0;
+	}
+
+	if (pos.x < m_pointInitialPos.x - 150)
+	{
+		pos.x = m_pointInitialPos.x - 150;
+		m_iXSpeed = 0;
+	}
+	if (pos.x > m_pointInitialPos.x + 150)
+	{
+		pos.x = m_pointInitialPos.x + 150;
+		m_iXSpeed = 0;
+	}
+
+	if (m_iXSpeed == 0 && m_iYSpeed == 0)
+	{
+		this->idle();
+	}
+
 	setBossPosition(pos);
 }
 
@@ -230,6 +267,12 @@ void Boss::setBossPosition(Point pos)
 	setPosition(pos);
 }
 
+void Boss::setBossInitialPos(Point pos)
+{
+	m_pointInitialPos = pos;
+	setPosition(pos);
+}
+
 void Boss::setSkillType(SkillType firstSkill, SkillType secondSkill, SkillType thirdSkill)
 {
 	m_enFirstSkillType = firstSkill;
@@ -239,10 +282,51 @@ void Boss::setSkillType(SkillType firstSkill, SkillType secondSkill, SkillType t
 
 void Boss::patrolLogic()
 {
-	Point monsterPos = getPosition();
-	if (abs(monsterPos.y - m_pointPlayerPos.y) > 10)
+	//5秒左右更新一次状态
+	if (m_fStateTime > 6)
 	{
-		if (monsterPos.y > m_pointPlayerPos.y)
+		m_fStateTime = 0;
+		this->idle();
+	}
+	else if (m_fStateTime > 3)
+	{
+		m_fStateTime = 0;
+
+		int r = rand() % 2;
+
+		if (r == 1)
+		{
+			m_iXSpeed = m_iXMaxSpeed;
+			m_bIsRight = true;
+		}
+		else
+		{
+			m_iXSpeed = -m_iXMaxSpeed;
+			m_bIsRight = false;
+		}
+
+		r = rand() % 2;
+
+		if (r == 1)
+		{
+			m_iYSpeed = m_iYMaxSpeed;
+		}
+		else
+		{
+			m_iYSpeed = -m_iYMaxSpeed;
+		}
+
+		m_pSprite->setFlipX(m_bIsRight);
+		this->run();
+	}
+}
+
+void Boss::warnLogic()
+{
+	Point pos = getPosition();
+	if (abs(pos.y - m_pointPlayerPos.y) > 10)
+	{
+		if (pos.y > m_pointPlayerPos.y)
 		{
 			m_iYSpeed = -m_iYMaxSpeed;
 		}
@@ -253,49 +337,7 @@ void Boss::patrolLogic()
 	}
 	else
 	{
-		m_iYSpeed = 0;
-		m_enMonsterState = en_ms_warn;
-	}
-	
-	if (abs(monsterPos.x - m_pointPlayerPos.x) > 50)
-	{
-		if (monsterPos.x > m_pointPlayerPos.x)
-		{
-			m_iXSpeed = -m_iXMaxSpeed;
-			m_bIsRight = false;
-		}
-		else
-		{
-			m_iXSpeed = m_iXMaxSpeed;
-			m_bIsRight = true;
-		}
-		m_pSprite->setFlipX(m_bIsRight);
-	}
-	else
-	{
-		m_iXSpeed = 0;
-	}
-
-	if (m_iYSpeed == 0 && m_iXSpeed == 0)
-	{
-		this->idle();
-	}
-	else
-	{
-		this->run();
-	}
-}
-
-void Boss::warnLogic()
-{
-	if (m_fStateTime > 5)
-	{
-		m_fStateTime = 0;
-		m_enMonsterState = en_ms_attack;
-	}
-	else
-	{
-		m_enMonsterState = en_ms_patrol;
+		this->attack();
 	}
 }
 
@@ -346,6 +388,7 @@ void Boss::attackedLogic()
 		m_pHPBar->startFadeOut();
 		this->unscheduleUpdate();
 		this->bossDeath();
+		return;
 	}
 	else
 	{
@@ -391,6 +434,10 @@ void Boss::attackEndLogic()
 void Boss::bossDeath()
 {
 	m_pSprite->stopAllActions();
+
+	int temp = PlayerInfo::getInstance()->getMoney();
+	temp += m_iMoney;
+	PlayerInfo::getInstance()->setMoney(temp);
 
 	Animation* hurtAnimation = AnimationCache::getInstance()->getAnimation(StringUtils::format("%s_hurt", m_strCharacterName.c_str()).c_str());
 	Animate* hurtAnimate = Animate::create(hurtAnimation);

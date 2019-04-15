@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.1" orientation="orthogonal" renderorder="left-down" width="100" height="19" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="25">
+<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="left-down" width="100" height="19" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="26">
  <tileset firstgid="1" source="tilesheet_complete.tsx"/>
  <tileset firstgid="1057" source="block.tsx"/>
  <layer id="1" name="terrain" width="100" height="19">
@@ -70,16 +70,19 @@
   <object id="20" name="monster_15" x="1854" y="518">
    <point/>
   </object>
-  <object id="21" name="scene_item_railgun_battery" x="2029" y="590">
+  <object id="21" name="scene_item_railgun_battery" x="1334" y="558">
    <point/>
   </object>
-  <object id="22" name="scene_item_railgun_barrel" x="2151" y="504">
+  <object id="22" name="scene_item_railgun_barrel" x="1456" y="472">
    <point/>
   </object>
-  <object id="23" name="scene_item_railgun_power_box" x="2129" y="536">
+  <object id="23" name="scene_item_railgun_power_box" x="1434" y="504">
    <point/>
   </object>
-  <object id="24" name="scene_item_railgun_shell" x="2174" y="488">
+  <object id="24" name="scene_item_railgun_shell" x="1479" y="456">
+   <point/>
+  </object>
+  <object id="25" name="door" x="2363" y="502">
    <point/>
   </object>
  </objectgroup>

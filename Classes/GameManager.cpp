@@ -102,6 +102,18 @@ bool GameManager::checkBoolAttribute(Point tiledPos, const char * attribute)
 
 }
 
+void GameManager::setCheckPoint(Point pos)
+{
+	tmp_pos = pos;
+	m_bCheck = true;
+}
+
+Point GameManager::getCheckPoint()
+{
+	
+	return tmp_pos;
+}
+
 GameManager::GameManager()
 {
 }

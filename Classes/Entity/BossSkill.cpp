@@ -2,6 +2,7 @@
 #include "GameManager.h"
 #include "Layer/GameLayer.h"
 #include "Entity/BossFlyingObject.h"
+#include "Entity/Monster.h"
 
 BossSkill* BossSkill::m_pBossSkill = NULL;
 
@@ -95,7 +96,31 @@ void BossSkill::launchingMissile(Point playerPoint)
 void BossSkill::summon()
 {
 	log("summon");
-	//GameManager::getInstance()->getMap();
+	auto map = GameManager::getInstance()->getMap();
+	TMXObjectGroup* objGroup = map->getObjectGroup("objects");
+
+	std::vector<MonsterData> monsterInfoList;
+	JsonUtil::getInstance()->readMonsterInfo(monsterInfoList);
+
+	ValueMap monsterPoint = objGroup->getObject("remonster_01");
+	float monsterX = monsterPoint.at("x").asFloat();
+	float monsterY = monsterPoint.at("y").asFloat();
+
+	Monster* monster = Monster::create(monsterInfoList[13]);
+	monster->setMonsterOriginPosition(Point(monsterX, monsterY));
+	monster->idle();
+	monster->setScale(0.35);
+	m_pGameLayer->addMonster(monster);
+
+	monsterPoint = objGroup->getObject("remonster_02");
+	monsterX = monsterPoint.at("x").asFloat();
+	monsterY = monsterPoint.at("y").asFloat();
+
+	monster = Monster::create(monsterInfoList[13]);
+	monster->setMonsterOriginPosition(Point(monsterX, monsterY));
+	monster->idle();
+	monster->setScale(0.35);
+	m_pGameLayer->addMonster(monster);
 }
 
 void BossSkill::debuff()

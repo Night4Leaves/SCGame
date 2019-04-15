@@ -101,6 +101,7 @@ void LeverSceneItem::changeStoneStatus(Ref * pSender)
 		m_iStoneSpeed = 9;
 		RotateBy* rotateBy = RotateBy::create(0.5, 90.0);
 		m_pSprite->runAction(RepeatForever::create(rotateBy));
+		NotificationCenter::getInstance()->postNotification("open_door");
 		NotificationCenter::getInstance()->removeObserver(this, "stone_rush");
 	}
 	

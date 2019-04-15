@@ -31,6 +31,12 @@ bool BossFlyingObject::init(BossFlyingObjectInfo info)
 
 	this->addChild(m_pSprite);
 	this->setPosition(m_vec2CurrentPoint);
+
+	NotificationCenter::getInstance()->addObserver(
+		this,
+		callfuncO_selector(BossFlyingObject::returnFlying),
+		"mirror_pos",
+		NULL);
 	
 	return true;
 }
@@ -72,6 +78,8 @@ void BossFlyingObject::update(float dt)
 	if ((m_bIsBeam && pos.x == m_vec2TargetPoint.x)
 		|| (!m_bIsBeam && pos.y == m_vec2TargetPoint.y))
 	{
+		BossFlyingObjectCheck check = { pos, m_bIsBeam };
+		NotificationCenter::getInstance()->postNotification("boss_flying_object", (Ref*)&check);
 		this->unscheduleUpdate();
 		this->stopFlying(NULL);
 	}
@@ -84,10 +92,26 @@ void BossFlyingObject::stopFlying(Ref * pSender)
 	m_pSprite->runAction(fadeOut);
 }
 
+void BossFlyingObject::returnFlying(Ref * pSender)
+{
+	Point* pos = (Point*)pSender;
+	Point currentPos = getPosition();
+
+	if (m_bIsBeam
+		&&	abs(currentPos.y - pos->y) < 50
+		&& abs(currentPos.x - pos->x) < 50)
+	{
+		m_vec2TargetPoint = m_vec2CurrentPoint;
+		m_pSprite->setFlipX(!m_bIsRight);
+		NotificationCenter::getInstance()->removeAllObservers(this);
+	}
+}
+
 BossFlyingObject::BossFlyingObject()
 {
 }
 
 BossFlyingObject::~BossFlyingObject()
 {
+	NotificationCenter::getInstance()->removeAllObservers(this);
 }

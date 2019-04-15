@@ -37,6 +37,9 @@ private:
 	void getDamage(Ref* pSender);
 	//设置键盘监听是否生效
 	void setKeywordListenerEnabled(bool value);
+	//检查Boss攻击物
+	void checkBossObject(Ref* pSender);
+	void stopAtDoor(Ref* pSender);
 
 private:
 	EventListenerKeyboard* m_pListener;
@@ -53,6 +56,8 @@ private:
 
 	int m_iHorizontalRun;	//是否为左右跑动状态(判断左右移动键按下几个)
 	int m_iVerticalRun;		//是否为上下跑动状态(判断上下移动键按下几个)
+
+	Point checkPos;
 
 };
 

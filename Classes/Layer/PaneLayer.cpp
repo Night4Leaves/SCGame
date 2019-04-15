@@ -56,7 +56,7 @@ void PaneLayer::showPaneLayer(Ref * pSender)
 		this->openBackpack();
 		break;
 	case en_paneMsg_openSkilllist:
-		this->openSkilllist();
+		//this->openSkilllist();
 		break;
 	case en_paneMsg_selectGameScene:
 		this->selectGameScene();
@@ -71,7 +71,7 @@ void PaneLayer::showPaneLayer(Ref * pSender)
 		this->openStore();
 		break;
 	case en_paneMsg_openSkillStore:
-		this->openStore();
+		//this->openStore();
 		break;
 	case en_paneMsg_loadFile:
 		this->loadFile();
@@ -127,25 +127,11 @@ void PaneLayer::selectCharacter()
 		return;
 	}
 
-
 	//创建点击屏蔽层
 	this->addChild(ShieldLayer::create());
 
 	auto backColor = LayerColor::create(Color4B::BLACK);
 	this->addChild(backColor);
-
-	//读取玩家角色数据
-	JsonUtil::getInstance()->readPlayerInfo(playerData);
-
-	auto test = CharacterSelector::create(playerData[0]);
-	test->setCreateNewDataVol();
-	this->addChild(test);
-	test->setPosition(-100, 0);
-
-	test = CharacterSelector::create(playerData[1]);
-	test->setCreateNewDataVol();
-	this->addChild(test);
-	test->setPosition(100, 0);
 
 	Sprite* buttonNormal = Sprite::createWithSpriteFrameName("Button_Back_Normal.png");
 	Sprite* buttonSelected = Sprite::createWithSpriteFrameName("Button_Back_Selected.png");
@@ -161,6 +147,23 @@ void PaneLayer::selectCharacter()
 	Menu* backMenu = Menu::create(backMenuItem, NULL);
 	this->addChild(backMenu);
 	backMenu->setPosition(400, 180);
+
+	//读取玩家角色数据
+	JsonUtil::getInstance()->readPlayerInfo(playerData);
+	int infoNum = playerData.size();
+
+	if (infoNum > 0)
+	{
+		while (infoNum != 0)
+		{
+			CharacterSelector* test = CharacterSelector::create(playerData[infoNum - 1]);
+			test->setCreateNewDataVol();
+			this->addChild(test);
+			int x = (infoNum - 1) * 150 - 230;
+			test->setPosition(x, 0);
+			infoNum--;
+		}
+	}
 }
 
 void PaneLayer::loadFile()
@@ -229,19 +232,19 @@ void PaneLayer::openStore()
 	storeBG->setPosition(400, 300);
 	this->addChild(storeBG);
 
-	ShopItemInfo itemInfo = { "bandaid", 1, 20 };
+	ShopItemInfo itemInfo = { "bandaid", 1, 20, en_consumableItemType_bandaid };
 	ShopItemButton* item = ShopItemButton::create(itemInfo);
 	item->setStoreVol();
 	this->addChild(item);
 	item->setPosition(400, 400);
 
-	itemInfo = { "mirror", 1, 50 };
+	itemInfo = { "mirror", 1, 50, en_consumableItemType_mirror };
 	item = ShopItemButton::create(itemInfo);
 	item->setStoreVol();
 	this->addChild(item);
 	item->setPosition(400, 300);
 
-	itemInfo = { "sword", 1, 200 };
+	itemInfo = { "sword", 1, 200, en_consumableItemType_sword };
 	item = ShopItemButton::create(itemInfo);
 	item->setStoreVol();
 	this->addChild(item);
@@ -273,10 +276,10 @@ void PaneLayer::startPause()
 
 	Menu* menu = Menu::create();
 	
-	ButtonWithTextPicture buttonType = { "Button", "option", 0.5, this, menu_selector(PaneLayer::openEasyOption) };
-	menu->addChild(MenuItemUtil::createMenuItemSpriteByPicture(buttonType));
+	//ButtonWithTextPicture buttonType = { "Button", "option", 0.5, this, menu_selector(PaneLayer::openEasyOption) };
+	//menu->addChild(MenuItemUtil::createMenuItemSpriteByPicture(buttonType));
 
-	buttonType = { "Button", "exit_game_scene", 0.5, this, menu_selector(PaneLayer::enterMainScene) };
+	ButtonWithTextPicture buttonType = { "Button", "exit_game_scene", 0.5, this, menu_selector(PaneLayer::enterMainScene) };
 	menu->addChild(MenuItemUtil::createMenuItemSpriteByPicture(buttonType));
 
 	Sprite* buttonNormal = Sprite::createWithSpriteFrameName("Button_Back_Normal.png");
@@ -340,11 +343,14 @@ void PaneLayer::openNormalOption()
 
 	Menu* menu = Menu::create();
 
-	ButtonWithTextPicture buttonType = { "Button", "gamestart", 0.5, this, menu_selector(PaneLayer::saveData) };
+	ButtonWithTextPicture buttonType = { "Button", "savedata", 0.5, this, menu_selector(PaneLayer::saveData) };
 	menu->addChild(MenuItemUtil::createMenuItemSpriteByPicture(buttonType));
 
-	buttonType = { "Button", "continue", 0.5, this, menu_selector(PaneLayer::readData) };
+	buttonType = { "Button", "readdata", 0.5, this, menu_selector(PaneLayer::readData) };
 	menu->addChild(MenuItemUtil::createMenuItemSpriteByPicture(buttonType));
+
+	//buttonType = { "Button", "option", 0.5, this, menu_selector(PaneLayer::openEasyOption) };
+	//menu->addChild(MenuItemUtil::createMenuItemSpriteByPicture(buttonType));
 
 	buttonType = { "Button", "exit", 0.5, this, menu_selector(PaneLayer::enterInitialScene) };
 	menu->addChild(MenuItemUtil::createMenuItemSpriteByPicture(buttonType));
@@ -587,19 +593,19 @@ void PaneLayer::openBackpack()
 	test->setPosition(400, 300);
 	this->addChild(test);
 
-	ShopItemInfo itemInfo = { "bandaid", 1, 20 };
+	ShopItemInfo itemInfo = { "bandaid", 1, 20,en_consumableItemType_bandaid };
 	ShopItemButton* item = ShopItemButton::create(itemInfo);
 	item->setBackpackVol();
 	this->addChild(item);
 	item->setPosition(400, 400);
 
-	itemInfo = { "mirror", 1, 50 };
+	itemInfo = { "mirror", 1, 50, en_consumableItemType_mirror };
 	item = ShopItemButton::create(itemInfo);
 	item->setBackpackVol();
 	this->addChild(item);
 	item->setPosition(400, 300);
 
-	itemInfo = { "sword", 1, 200 };
+	itemInfo = { "sword", 1, 200, en_consumableItemType_sword };
 	item = ShopItemButton::create(itemInfo);
 	item->setBackpackVol();
 	this->addChild(item);
@@ -664,6 +670,7 @@ void PaneLayer::gameEnd(bool isSuccess)
 		auto myLabel = Label::createWithTTF("Game Clear", "fonts/Marker Felt.ttf", 50);
 		this->addChild(myLabel);
 		myLabel->setPosition(400, 300);
+		NotificationCenter::getInstance()->postNotification("scene_game_clear");
 	}
 	else
 	{

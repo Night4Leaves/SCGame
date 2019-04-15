@@ -174,6 +174,17 @@ struct BossFlyingObjectInfo
 };
 
 /**
+ *	Boss飞行物检查信息
+ *	@point_pos	飞行物位置
+ *	@b_isBeam	飞行物种类
+ */
+struct BossFlyingObjectCheck
+{
+	Point point_pos;
+	bool b_isBeam;
+};
+
+/**
  *	场景道具信息
  *	@str_itemName	道具名称
  *	@point_setPosition	道具位置
@@ -197,12 +208,14 @@ struct SceneItemInfomation
  *	@str_name	道具名称
  *	@i_num	道具数量
  *	@i_price	道具价格
+ *	@en_shopItemType	道具种类
  */
 struct ShopItemInfo
 {
 	std::string str_name;
 	int i_num;
 	int i_price;
+	ShopItemType en_shopItemType;
 };
 
 #define poslog(name, x, y) log("%s x:%f, y:%f", name, x, y);

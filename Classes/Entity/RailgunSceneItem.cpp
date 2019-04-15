@@ -19,11 +19,12 @@ RailgunSceneItem * RailgunSceneItem::create(const SceneItemInfomation & sceneIte
 void RailgunSceneItem::update(float dt)
 {
 	m_fStateTime += dt;
-	if (m_fStateTime > 10)
+	if (m_fStateTime > 3)
 	{
 		m_iShellSpeed = 0;
-		this->setOpacity(0);
+		m_pSprite->setOpacity(0);
 		this->unscheduleUpdate();
+		NotificationCenter::getInstance()->postNotification("open_door");
 		NotificationCenter::getInstance()->removeAllObservers(this);
 	}
 

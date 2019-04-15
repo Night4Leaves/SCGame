@@ -32,7 +32,7 @@ void CharacterSelector::setCreateNewDataVol()
 	sprite->setScale(1 / 0.35);
 	sprite->runAction(animate);
 
-	Label* nameLabel = Label::create(StringUtils::format("%s", m_sctPlayerData.str_characterName.c_str()), "fonts/arial.ttf", 20);
+	Label* nameLabel = Label::create(StringUtils::format("%s", m_sctPlayerData.str_playerName.c_str()), "fonts/arial.ttf", 20);
 	Label* firstLabel = Label::create(StringUtils::format("HP:%d", m_sctPlayerData.i_HP), "fonts/arial.ttf", 15);
 	Label* secondLabel = Label::create(StringUtils::format("atk:%d", m_sctPlayerData.i_attack), "fonts/arial.ttf", 15);
 	
@@ -70,7 +70,7 @@ void CharacterSelector::setLoadSaveDataVol()
 	sprite->setScale(1 / 0.35);
 	sprite->runAction(animate);
 
-	Label* nameLabel = Label::create(StringUtils::format("%d", m_sctPlayerData.i_dataNumber), "fonts/arial.ttf", 20);
+	Label* nameLabel = Label::create(StringUtils::format("%s", m_sctPlayerData.str_playerName.c_str()), "fonts/arial.ttf", 20);
 	Label* firstLabel = Label::create(StringUtils::format("money:%d", m_sctPlayerData.i_money), "fonts/arial.ttf", 15);
 	Label* secondLabel = Label::create(StringUtils::format("level:%d", m_sctPlayerData.i_level), "fonts/arial.ttf", 15);
 

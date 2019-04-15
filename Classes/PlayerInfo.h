@@ -16,9 +16,13 @@ public:
 	int getMoney();
 	void setLevel(int level);
 	int getLevel();
+	void setAttack(int attack);
+	int getAttack();
+	void setShopItemType(ShopItemType shopItemType);
 
 	void setItem(std::string item);
 	int getItemNum(std::string item);
+	void useItem();
 
 private:
 	virtual bool init();
@@ -29,6 +33,7 @@ private:
 private:
 	PlayerData m_sctData;
 	static PlayerInfo* m_pPlayerInfo;
+	ShopItemType m_enShopItemType;
 };
 
 #endif // !__PLAYER_INFO_H__

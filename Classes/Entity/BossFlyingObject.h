@@ -12,6 +12,7 @@ public:
 	virtual void update(float dt);
 
 	void stopFlying(Ref* pSender);
+	void returnFlying(Ref* pSender);
 
 protected:
 	BossFlyingObject();

@@ -55,15 +55,59 @@ int PlayerInfo::getLevel()
 	return m_sctData.i_level;
 }
 
+void PlayerInfo::setAttack(int attack)
+{
+	if (m_sctData.i_attack < attack)
+	{
+		m_sctData.i_attack = attack;
+	}
+}
+
+int PlayerInfo::getAttack()
+{
+	return m_sctData.i_attack;
+}
+
+void PlayerInfo::setShopItemType(ShopItemType shopItemType)
+{
+	m_enShopItemType = shopItemType;
+}
+
 void PlayerInfo::setItem(std::string item)
 {
-	m_sctData.map_backpackItems[item] = 1;
+	m_sctData.map_backpackItems[item]++;
 }
 
 int PlayerInfo::getItemNum(std::string item)
 {
 	int num = m_sctData.map_backpackItems[item];
 	return num;
+}
+
+void PlayerInfo::useItem()
+{
+	switch (m_enShopItemType)
+	{
+	case en_consumableItemType_bandaid:
+		if (m_sctData.map_backpackItems["bandaid"] > 0)
+		{
+			m_sctData.map_backpackItems["bandaid"]--;
+			NotificationCenter::getInstance()->postNotification("revocer_HP");
+		}
+		break;
+	case en_consumableItemType_mirror:
+		if (m_sctData.map_backpackItems["mirror"] > 0)
+		{
+			m_sctData.map_backpackItems["mirror"]--;
+			NotificationCenter::getInstance()->postNotification("set_mirror");
+		}
+		break;
+	case en_consumableItemType_sword:
+		m_sctData.map_backpackItems["sword"];
+		break;
+	default:
+		break;
+	}
 }
 
 bool PlayerInfo::init()

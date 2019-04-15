@@ -29,6 +29,12 @@ bool Player::init(const PlayerData & playerData)
 {
 	CombatEntity::saveCombatEntityData(playerData);
 
+	NotificationCenter::getInstance()->addObserver(
+		this,
+		callfuncO_selector(Player::noHP),
+		"hp_0",
+		NULL);
+
 	return true;
 }
 
@@ -171,4 +177,11 @@ void Player::endPause(Ref * pSender)
 {
 	log("Player end pause");
 	m_pSprite->resume();
+}
+
+void Player::noHP(Ref * pSender)
+{
+	NotificationCenter::getInstance()->removeAllObservers(this);
+	this->playerDeath();
+	NotificationCenter::getInstance()->postNotification("show_PaneLayer", (Ref*)en_paneMsg_gameOver);
 }

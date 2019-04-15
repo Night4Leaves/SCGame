@@ -9,6 +9,7 @@ void ResourcesLoadingUtil::preloadResources()
 	spriteFrameCache->addSpriteFramesWithFile("TP.plist");
 	spriteFrameCache->addSpriteFramesWithFile("text.plist");
 	spriteFrameCache->addSpriteFramesWithFile("Scene_Item.plist");
+	spriteFrameCache->addSpriteFramesWithFile("Scene_Item_01.plist");
 	spriteFrameCache->addSpriteFramesWithFile("Number.plist");
 	spriteFrameCache->addSpriteFramesWithFile("attack.plist");
 	spriteFrameCache->addSpriteFramesWithFile("Shop_Item.plist");

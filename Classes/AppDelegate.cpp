@@ -28,7 +28,6 @@
 #include "Scene/InitialScene.h"
 #include "Scene/MainScene.h"
 #include "Scene/GameScene.h"
-#include "Scene/TestScene.h"
 
 // #define USE_AUDIO_ENGINE 1
 // #define USE_SIMPLE_AUDIO_ENGINE 1
@@ -130,7 +129,6 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
     // create a scene. it's an autorelease object
     auto scene = InitialScene::createScene();
-	//auto scene = TestScene::createScene();
 
     // run
     director->runWithScene(scene);

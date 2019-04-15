@@ -2,21 +2,26 @@
 #ifndef __CHEMISTRY_SCENE_ITEM_H__
 #define __CHEMISTRY_SCENE_ITEM_H__
 
-#include "SceneItem.h"
+#include "CustomizeStruct.h"
 
-class ChemistrySceneItem : public SceneItem
+class ChemistrySceneItem : public Node
 {
 public:
-	static ChemistrySceneItem * cteate(const SceneItemInfomation & sceneItemInfo);
+	CREATE_FUNC(ChemistrySceneItem);
+	virtual bool init();
 
 	virtual void startPause(Ref* pSender);
 	virtual void endPause(Ref* pSender);
+
+	void setType(ChemistryType chemistryType);
 
 protected:
 	ChemistrySceneItem();
 	virtual ~ChemistrySceneItem();
 
-	void checkItemType(Ref* pSender);
+private:
+	ChemistryType m_enChemistryType;
+	Sprite* m_pSprite;
 };
 
 #endif // !__CHEMISTRY_SCENE_ITEM_H__

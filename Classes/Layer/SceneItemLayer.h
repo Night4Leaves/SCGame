@@ -3,6 +3,7 @@
 #define __SCENE_ITEM_LAYER_H__
 
 #include "Entity/LeverSceneItem.h"
+#include "Entity/ChemistrySceneItem.h"
 
 #include "cocos2d.h"
 USING_NS_CC;
@@ -13,6 +14,7 @@ public:
 	CREATE_FUNC(SceneItemLayer);
 
 	void setSceneitem(SceneItem * sceneItem);
+	void setChemistryItem(ChemistrySceneItem * sceneItem);
 
 private:
 	SceneItemLayer();

@@ -47,6 +47,8 @@ public:
 	void playerReduceHeart(Ref* pSender);
 	//玩家恢复血量
 	void playerRecoverHeart(Ref* pSender);
+	//通关奖励
+	void gameClear(Ref* pSender);
 
 protected:
 	BackgroundLayer* m_pBackgroundLayer;	//背景层
@@ -55,6 +57,8 @@ protected:
 	PaneLayer* m_pPaneLayer;	//显示层
 	ScoreCountLayer* m_pScoreCountLayer;	//记分器层
 	HeartCount* m_pHeartCount;	//玩家血量层
+
+	SceneType m_enSceneType;
 };
 
 #endif // !__GAME_SCENE_H__

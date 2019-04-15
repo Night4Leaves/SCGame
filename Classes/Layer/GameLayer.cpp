@@ -8,6 +8,8 @@
 #include "Entity/LeverSceneItem.h"
 #include "Entity/PulleySceneItem.h"
 #include "Entity/RailgunSceneItem.h"
+#include "Entity/Door.h"
+#include "Entity/Mirror.h"
 #include "Controller/PlayerController.h"
 #include "GameManager.h"
 
@@ -40,8 +42,14 @@ bool GameLayer::init()
 
 		NotificationCenter::getInstance()->addObserver(
 			this,
-			callfuncO_selector(GameLayer::updateScore),
-			"update_score",
+			callfuncO_selector(GameLayer::addMirror),
+			"set_mirror",
+			NULL);
+
+		NotificationCenter::getInstance()->addObserver(
+			this,
+			callfuncO_selector(GameLayer::showWelcome),
+			"show_welcome",
 			NULL);
 
 		return true;
@@ -89,10 +97,40 @@ void GameLayer::addBossFlyingObject(FlyingObject * bossFlyObj)
 	bossFlyObj->scheduleUpdate();
 }
 
+void GameLayer::addMonster(Monster * monster)
+{
+	this->addChild(monster);
+}
+
+void GameLayer::addMirror(Ref* pSender)
+{
+	Point playerPos = m_pPlayer->getPosition();
+	Size playerSize = m_pPlayer->getCollisionSize();
+
+	float x = playerPos.x + playerSize.width / 2;
+	float y = playerPos.y + playerSize.height / 2;
+
+	auto mirror = Mirror::create();
+	this->addChild(mirror);
+	mirror->setMirrorPos(Point(x, y));
+}
+
+void GameLayer::showWelcome(Ref * pSender)
+{
+	Point pos = GameManager::getInstance()->getCheckPoint();
+
+	auto myLabel = Label::createWithTTF("Welcome to scene 1-2", "fonts/Marker Felt.ttf", 50);
+	this->addChild(myLabel);
+	pos.y += 200;
+	myLabel->setPosition(pos);
+	NotificationCenter::getInstance()->removeObserver(this, "show_welcome");
+}
+
 Point GameLayer::getBossPosition()
 {
 	return m_pBoss->getPosition();
 }
+
 
 void GameLayer::setGameScene_1_1(PlayerData & playerData)
 {
@@ -113,17 +151,23 @@ void GameLayer::setGameScene_1_1(PlayerData & playerData)
 	//获取地图文件中预设的坐标信息
 	TMXObjectGroup* objGroup = m_pMap->getObjectGroup("objects");
 
-	//ValueMap fulcrumPoint = objGroup->getObject("scene_item_pulley_fulcrum");
-	//SceneItemInfomation itemInfo = { "scene_item_pulley", Point(fulcrumPoint.at("x").asFloat(), fulcrumPoint.at("y").asFloat()), false, en_sceneItem_physics };
-	//PulleySceneItem* sceneItem = PulleySceneItem::create(itemInfo);
-	//sceneItem->setPulleyPart(en_pulleyPart_fulcrum);
-	//sceneItemLayer->setSceneitem(sceneItem);
+	/*ValueMap fulcrumPoint = objGroup->getObject("scene_item_pulley_fulcrum");
+	SceneItemInfomation itemInfo = { "scene_item_pulley", Point(fulcrumPoint.at("x").asFloat(), fulcrumPoint.at("y").asFloat()), false, en_sceneItem_physics };
+	PulleySceneItem* sceneItem = PulleySceneItem::create(itemInfo);
+	sceneItem->setPulleyPart(en_pulleyPart_fulcrum);
+	sceneItemLayer->setSceneitem(sceneItem);
 
-	//ValueMap pulleyPoint = objGroup->getObject("scene_item_pulley_pulley");
-	//itemInfo = { "scene_item_pulley", Point(pulleyPoint.at("x").asFloat(), pulleyPoint.at("y").asFloat()), true, en_sceneItem_physics };
-	//sceneItem = PulleySceneItem::create(itemInfo);
-	//sceneItem->setPulleyPart(en_pulleyPart_pulley);
-	//sceneItemLayer->setSceneitem(sceneItem);
+	ValueMap pulleyPoint = objGroup->getObject("scene_item_pulley_pulley");
+	itemInfo = { "scene_item_pulley", Point(pulleyPoint.at("x").asFloat(), pulleyPoint.at("y").asFloat()), true, en_sceneItem_physics };
+	sceneItem = PulleySceneItem::create(itemInfo);
+	sceneItem->setPulleyPart(en_pulleyPart_pulley);
+	sceneItemLayer->setSceneitem(sceneItem);*/
+
+	ValueMap doorPoint = objGroup->getObject("door");
+	Point doorPos = Point(doorPoint.at("x").asFloat(), doorPoint.at("y").asFloat());
+	auto door = Door::create();
+	this->addChild(door);	
+	door->setPosition(doorPos);
 
 	ValueMap stonePoint = objGroup->getObject("scene_item_lever_stone");
 	SceneItemInfomation itemInfo = { "scene_item_stone", Point(stonePoint.at("x").asFloat(), stonePoint.at("y").asFloat()), false, en_sceneItem_physics, en_ph_neutral, en_psig_lever };
@@ -145,34 +189,34 @@ void GameLayer::setGameScene_1_1(PlayerData & playerData)
 
 	//根据读取到的怪物信息创建怪物对象
 	//根据地图文件中预设的坐标信息放置怪物对象
-	//int i = 1;
-	//while (true)
-	//{
-	//	std::string monsterPointID = StringUtils::format("monster_%02d", i++);
-	//	ValueMap monsterPoint = objGroup->getObject(monsterPointID.c_str());
-	//	CC_BREAK_IF(monsterPoint.empty());
+	int i = 1;
+	while (true)
+	{
+		std::string monsterPointID = StringUtils::format("monster_%02d", i++);
+		ValueMap monsterPoint = objGroup->getObject(monsterPointID.c_str());
+		CC_BREAK_IF(monsterPoint.empty());
 
-	//	float monsterX = monsterPoint.at("x").asFloat();
-	//	float monsterY = monsterPoint.at("y").asFloat();
+		float monsterX = monsterPoint.at("x").asFloat();
+		float monsterY = monsterPoint.at("y").asFloat();
 
-	//	if (i % 2 == 0)
-	//	{
-	//		Monster* monster = Monster::create(monsterInfoList[3]);
-	//		monster->setMonsterOriginPosition(Point(monsterX, monsterY));
-	//		monster->idle();
-	//		monster->setScale(0.35);
-	//		this->addChild(monster);
-	//	}
-	//	else
-	//	{
-	//		Monster* monster = Monster::create(monsterInfoList[6]);
-	//		monster->setMonsterOriginPosition(Point(monsterX, monsterY));
-	//		monster->idle();
-	//		monster->setScale(0.35);
-	//		this->addChild(monster);
-	//	}
+		if (i % 2 == 0)
+		{
+			Monster* monster = Monster::create(monsterInfoList[3]);
+			monster->setMonsterOriginPosition(Point(monsterX, monsterY));
+			monster->idle();
+			monster->setScale(0.35);
+			this->addChild(monster);
+		}
+		else
+		{
+			Monster* monster = Monster::create(monsterInfoList[6]);
+			monster->setMonsterOriginPosition(Point(monsterX, monsterY));
+			monster->idle();
+			monster->setScale(0.35);
+			this->addChild(monster);
+		}
 
-	//}
+	}
 
 	//创建Boss对象并设置
 	ValueMap bossPoint = objGroup->getObject("boss");
@@ -182,7 +226,7 @@ void GameLayer::setGameScene_1_1(PlayerData & playerData)
 
 	m_pBoss = Boss::create(bossDataList[0]);
 	m_pBoss->setSkillType(en_st_closeCombet, en_st_beam, en_st_missile);
-	m_pBoss->setBossPosition(Vec2(bossX, bossY));
+	m_pBoss->setBossInitialPos(Vec2(bossX, bossY));
 	m_pBoss->idle();
 	m_pBoss->setScale(0.45);
 	this->addChild(m_pBoss);
@@ -217,6 +261,17 @@ void GameLayer::setGameScene_1_2(PlayerData & playerData)
 
 	//获取地图文件中预设的坐标信息
 	TMXObjectGroup* objGroup = m_pMap->getObjectGroup("objects");
+
+	//ValueMap doorPoint = objGroup->getObject("door");
+	//Point doorPos = Point(doorPoint.at("x").asFloat(), doorPoint.at("y").asFloat());
+	//auto door = Door::create();
+	//this->addChild(door);
+	//door->setPosition(doorPos);
+
+	ValueMap checkPoint = objGroup->getObject("checkpoint");
+	float checkX = checkPoint.at("x").asFloat();
+	float checkY = checkPoint.at("y").asFloat();
+	GameManager::getInstance()->setCheckPoint(Point(checkX, checkY));
 
 	//根据读取到的怪物信息创建怪物对象
 	//根据地图文件中预设的坐标信息放置怪物对象
@@ -257,7 +312,7 @@ void GameLayer::setGameScene_1_2(PlayerData & playerData)
 
 	m_pBoss = Boss::create(bossDataList[1]);
 	m_pBoss->setSkillType(en_st_closeCombet, en_st_beam, en_st_missile);
-	m_pBoss->setBossPosition(Vec2(bossX, bossY));
+	m_pBoss->setBossInitialPos(Vec2(bossX, bossY));
 	m_pBoss->idle();
 	m_pBoss->setScale(0.45);
 	this->addChild(m_pBoss);
@@ -292,6 +347,12 @@ void GameLayer::setGameScene_2_1(PlayerData & playerData)
 
 	//获取地图文件中预设的坐标信息
 	TMXObjectGroup* objGroup = m_pMap->getObjectGroup("objects");
+
+	//ValueMap doorPoint = objGroup->getObject("door");
+	//Point doorPos = Point(doorPoint.at("x").asFloat(), doorPoint.at("y").asFloat());
+	//auto door = Door::create();
+	//this->addChild(door);
+	//door->setPosition(doorPos);
 
 	//根据读取到的怪物信息创建怪物对象
 	//根据地图文件中预设的坐标信息放置怪物对象
@@ -340,7 +401,7 @@ void GameLayer::setGameScene_2_1(PlayerData & playerData)
 
 	m_pBoss = Boss::create(bossDataList[4]);
 	m_pBoss->setSkillType(en_st_summon, en_st_beam, en_st_recovery);
-	m_pBoss->setBossPosition(Vec2(bossX, bossY));
+	m_pBoss->setBossInitialPos(Vec2(bossX, bossY));
 	m_pBoss->idle();
 	m_pBoss->setScale(0.45);
 	this->addChild(m_pBoss);
@@ -376,6 +437,12 @@ void GameLayer::setGameScene_2_2(PlayerData & playerData)
 
 	//获取地图文件中预设的坐标信息
 	TMXObjectGroup* objGroup = m_pMap->getObjectGroup("objects");
+
+	ValueMap doorPoint = objGroup->getObject("door");
+	Point doorPos = Point(doorPoint.at("x").asFloat(), doorPoint.at("y").asFloat());
+	auto door = Door::create();
+	this->addChild(door);
+	door->setPosition(doorPos);
 
 	ValueMap shellPoint = objGroup->getObject("scene_item_railgun_shell");
 	SceneItemInfomation itemInfo = { "scene_item_shell", Point(shellPoint.at("x").asFloat(), shellPoint.at("y").asFloat()), false, en_sceneItem_physics };
@@ -440,7 +507,7 @@ void GameLayer::setGameScene_2_2(PlayerData & playerData)
 
 	m_pBoss = Boss::create(bossDataList[3]);
 	m_pBoss->setSkillType(en_st_debuff, en_st_missile, en_st_summon);
-	m_pBoss->setBossPosition(Vec2(bossX, bossY));
+	m_pBoss->setBossInitialPos(Vec2(bossX, bossY));
 	m_pBoss->idle();
 	m_pBoss->setScale(0.45);
 	this->addChild(m_pBoss);
@@ -475,6 +542,12 @@ void GameLayer::setGameScene_3_1(PlayerData & playerData)
 
 	//获取地图文件中预设的坐标信息
 	TMXObjectGroup* objGroup = m_pMap->getObjectGroup("objects");
+
+	//ValueMap doorPoint = objGroup->getObject("door");
+	//Point doorPos = Point(doorPoint.at("x").asFloat(), doorPoint.at("y").asFloat());
+	//auto door = Door::create();
+	//this->addChild(door);
+	//door->setPosition(doorPos);
 
 	//根据读取到的怪物信息创建怪物对象
 	//根据地图文件中预设的坐标信息放置怪物对象
@@ -515,7 +588,7 @@ void GameLayer::setGameScene_3_1(PlayerData & playerData)
 
 	m_pBoss = Boss::create(bossDataList[2]);
 	m_pBoss->setSkillType(en_st_closeCombet, en_st_summon, en_st_recovery);
-	m_pBoss->setBossPosition(Vec2(bossX, bossY));
+	m_pBoss->setBossInitialPos(Vec2(bossX, bossY));
 	m_pBoss->idle();
 	m_pBoss->setScale(0.45);
 	this->addChild(m_pBoss);
@@ -550,6 +623,12 @@ void GameLayer::setGameScene_3_2(PlayerData & playerData)
 
 	//获取地图文件中预设的坐标信息
 	TMXObjectGroup* objGroup = m_pMap->getObjectGroup("objects");
+
+	//ValueMap doorPoint = objGroup->getObject("door");
+	//Point doorPos = Point(doorPoint.at("x").asFloat(), doorPoint.at("y").asFloat());
+	//auto door = Door::create();
+	//this->addChild(door);
+	//door->setPosition(doorPos);
 
 	//根据读取到的怪物信息创建怪物对象
 //根据地图文件中预设的坐标信息放置怪物对象
@@ -590,7 +669,7 @@ void GameLayer::setGameScene_3_2(PlayerData & playerData)
 
 	m_pBoss = Boss::create(bossDataList[5]);
 	m_pBoss->setSkillType(en_st_debuff, en_st_beam, en_st_missile);
-	m_pBoss->setBossPosition(Vec2(bossX, bossY));
+	m_pBoss->setBossInitialPos(Vec2(bossX, bossY));
 	m_pBoss->idle();
 	m_pBoss->setScale(0.45);
 	this->addChild(m_pBoss);
@@ -625,6 +704,57 @@ void GameLayer::setGameScene_4_1(PlayerData & playerData)
 
 	//获取地图文件中预设的坐标信息
 	TMXObjectGroup* objGroup = m_pMap->getObjectGroup("objects");
+
+	auto sceneItemLayer = SceneItemLayer::create();
+	this->addChild(sceneItemLayer);
+
+	ValueMap stonePoint = objGroup->getObject("scene_item_lever_stone");
+	SceneItemInfomation itemInfo = { "scene_item_stone", Point(stonePoint.at("x").asFloat(), stonePoint.at("y").asFloat()), false, en_sceneItem_physics, en_ph_neutral, en_psig_lever };
+	LeverSceneItem* leverSceneItem = LeverSceneItem::create(itemInfo);
+	leverSceneItem->setLeverPart(en_leverPart_stone);
+	sceneItemLayer->setSceneitem(leverSceneItem);
+
+	ValueMap fulcrumPoint = objGroup->getObject("scene_item_lever_fulcrum");
+	itemInfo = { "scene_item_fulcrum", Point(fulcrumPoint.at("x").asFloat(), fulcrumPoint.at("y").asFloat()), false, en_sceneItem_physics, en_ph_neutral, en_psig_lever };
+	leverSceneItem = LeverSceneItem::create(itemInfo);
+	leverSceneItem->setLeverPart(en_leverPart_fulcrum);
+	sceneItemLayer->setSceneitem(leverSceneItem);
+
+	ValueMap rodPoint = objGroup->getObject("scene_item_lever_rod");
+	itemInfo = { "scene_item_rod", Point(rodPoint.at("x").asFloat(), rodPoint.at("y").asFloat()), true, en_sceneItem_physics, en_ph_neutral, en_psig_lever };
+	leverSceneItem = LeverSceneItem::create(itemInfo);
+	leverSceneItem->setLeverPart(en_leverPart_rod);
+	sceneItemLayer->setSceneitem(leverSceneItem);
+
+	ValueMap shellPoint = objGroup->getObject("scene_item_railgun_shell");
+	itemInfo = { "scene_item_shell", Point(shellPoint.at("x").asFloat(), shellPoint.at("y").asFloat()), false, en_sceneItem_physics };
+	RailgunSceneItem* railgunSceneItem = RailgunSceneItem::create(itemInfo);
+	railgunSceneItem->setRailgunPart(en_railgunPart_shell);
+	sceneItemLayer->setSceneitem(railgunSceneItem);
+
+	ValueMap barrelPoint = objGroup->getObject("scene_item_railgun_barrel");
+	itemInfo = { "scene_item_barrel", Point(barrelPoint.at("x").asFloat(), barrelPoint.at("y").asFloat()), false, en_sceneItem_physics };
+	railgunSceneItem = RailgunSceneItem::create(itemInfo);
+	railgunSceneItem->setRailgunPart(en_railgunPart_barrel);
+	sceneItemLayer->setSceneitem(railgunSceneItem);
+
+	ValueMap powerBoxPoint = objGroup->getObject("scene_item_railgun_power_box");
+	itemInfo = { "scene_item_power_box", Point(powerBoxPoint.at("x").asFloat(), powerBoxPoint.at("y").asFloat()), false, en_sceneItem_physics };
+	railgunSceneItem = RailgunSceneItem::create(itemInfo);
+	railgunSceneItem->setRailgunPart(en_railgunPart_powerBox);
+	sceneItemLayer->setSceneitem(railgunSceneItem);
+
+	ValueMap batteryPoint = objGroup->getObject("scene_item_railgun_battery");
+	itemInfo = { "scene_item_battery", Point(batteryPoint.at("x").asFloat(), batteryPoint.at("y").asFloat()), true, en_sceneItem_physics };
+	railgunSceneItem = RailgunSceneItem::create(itemInfo);
+	railgunSceneItem->setRailgunPart(en_railgunPart_battery);
+	sceneItemLayer->setSceneitem(railgunSceneItem);
+
+	ValueMap doorPoint = objGroup->getObject("door");
+	Point doorPos = Point(doorPoint.at("x").asFloat(), doorPoint.at("y").asFloat());
+	auto door = Door::create();
+	this->addChild(door);
+	door->setPosition(doorPos);
 
 	//根据读取到的怪物信息创建怪物对象
 	//根据地图文件中预设的坐标信息放置怪物对象
@@ -665,7 +795,7 @@ void GameLayer::setGameScene_4_1(PlayerData & playerData)
 
 	m_pBoss = Boss::create(bossDataList[6]);
 	m_pBoss->setSkillType(en_st_closeCombet, en_st_beam, en_st_summon);
-	m_pBoss->setBossPosition(Vec2(bossX, bossY));
+	m_pBoss->setBossInitialPos(Vec2(bossX, bossY));
 	m_pBoss->idle();
 	m_pBoss->setScale(0.45);
 	this->addChild(m_pBoss);
@@ -709,8 +839,4 @@ void GameLayer::setPlayer(const Point & pos)
 	}
 }
 
-void GameLayer::updateScore(Ref * pSender)
-{
-	m_sctPlayerData.i_money += (int)pSender;
-}
 

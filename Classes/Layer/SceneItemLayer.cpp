@@ -57,3 +57,8 @@ void SceneItemLayer::setSceneitem(SceneItem * sceneItem)
 {
 	this->addChild(sceneItem);
 }
+
+void SceneItemLayer::setChemistryItem(ChemistrySceneItem * sceneItem)
+{
+	this->addChild(sceneItem);
+}

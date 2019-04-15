@@ -1,5 +1,7 @@
 #include "PlayerController.h"
 #include "GameManager.h"
+#include "CustomizeStruct.h"
+#include "PlayerInfo.h"
 
 PlayerController::PlayerController()
 	: m_fMapWidth(0.0)
@@ -24,6 +26,9 @@ bool PlayerController::init()
 {
 	this->scheduleUpdate();
 
+	checkPos = GameManager::getInstance()->getCheckPoint();
+	poslog("test", checkPos.x, checkPos.y);
+
 	//注册键盘监听事件
 	m_pListener = EventListenerKeyboard::create();
 	m_pListener->onKeyPressed = CC_CALLBACK_2(PlayerController::onKeyPressed, this);
@@ -37,6 +42,18 @@ bool PlayerController::init()
 		this,
 		callfuncO_selector(PlayerController::getDamage),
 		"monster_attack",
+		NULL);
+
+	NotificationCenter::getInstance()->addObserver(
+		this,
+		callfuncO_selector(PlayerController::checkBossObject),
+		"boss_flying_object",
+		NULL);
+
+	NotificationCenter::getInstance()->addObserver(
+		this,
+		callfuncO_selector(PlayerController::stopAtDoor),
+		"stop_at_door",
 		NULL);
 
 	return true;
@@ -196,8 +213,7 @@ void PlayerController::onKeyPressed(EventKeyboard::KeyCode keyCode, Event * even
 
 		break;
 	case EventKeyboard::KeyCode::KEY_K:
-		//发送包含角色坐标的消息，将可放置道具添加到场景中
-		NotificationCenter::getInstance()->postNotification("keyword_k", (Ref*)&(m_pControllerListener->getTargetPosition()));
+		PlayerInfo::getInstance()->useItem();
 		break;
 	case EventKeyboard::KeyCode::KEY_L:
 		//发送包含角色坐标的消息，让场景可互动对象判定自己是否被触发
@@ -399,6 +415,13 @@ void PlayerController::setViewPointByPlayer(Point pos)
 
 	Point playerPos = Point(x, y);
 
+	if (checkPos.x != -1
+		&& checkPos.y != -1
+		&& abs(playerPos.x - checkPos.x) < 10
+		&& abs(playerPos.y - checkPos.y) < 10)
+	{
+		NotificationCenter::getInstance()->postNotification("show_welcome");
+	}
 	m_pControllerListener->setTargetPosition(playerPos);
 	NotificationCenter::getInstance()->postNotification("player_point", (Ref*)&playerPos);
 
@@ -480,4 +503,41 @@ void PlayerController::setKeywordListenerEnabled(bool value)
 	{
 		_eventDispatcher->removeEventListener(m_pListener);
 	}
+}
+
+void PlayerController::checkBossObject(Ref * pSender)
+{
+	BossFlyingObjectCheck*  check = (BossFlyingObjectCheck*)pSender;
+	Point pos = check->point_pos;
+	Point playerPos = m_pControllerListener->getTargetPosition();
+	Size playerSize = m_pControllerListener->getCollisionSize();
+
+	if (check->b_isBeam)
+	{
+		if (abs(pos.y - 20 - playerPos.y) < 10
+			&& pos.x < playerPos.x + playerSize.width / 2
+			&& pos.x > playerPos.x - playerSize.width / 2)
+		{
+			NotificationCenter::getInstance()->postNotification("monster_attack");
+		}
+	}
+	else
+	{
+		if (abs(pos.x - playerPos.x) < 10
+			&& abs(pos.y - playerPos.y) < 10)
+		{
+			NotificationCenter::getInstance()->postNotification("monster_attack");
+		}
+	}
+}
+
+void PlayerController::stopAtDoor(Ref * pSender)
+{
+	int check = (int)pSender;
+	Point pos = m_pControllerListener->getTargetPosition();
+	if (pos.x > check)
+	{
+		pos.x = check;
+	}
+	m_pControllerListener->setTargetPosition(pos);
 }

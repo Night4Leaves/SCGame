@@ -167,10 +167,8 @@ void CombatEntity::playerDeath()
 	Animate* hurtAnimate = Animate::create(hurtAnimation);
 	Blink* blinkAction = Blink::create(1.5f, 3);
 
-	auto sendScoreMsg = CallFunc::create([&]() { NotificationCenter::getInstance()->postNotification("show_PaneLayer", (Ref*)en_paneMsg_gameOver); });
-
 	Spawn* actionList = Spawn::create(hurtAnimate, blinkAction, nullptr);
-	Sequence* actionSequnence = Sequence::create(actionList, sendScoreMsg, nullptr);
+	Sequence* actionSequnence = Sequence::create(actionList, nullptr);
 
 	m_pSprite->runAction(actionSequnence);
 }

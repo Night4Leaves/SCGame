@@ -19,8 +19,10 @@ protected:
 
 private:
 	void buyItem(Ref* pSender);
+	void equipItem(Ref* pSender);
 
 private:
+	ShopItemType m_enShopItemType;
 	std::string m_strName;
 	Sprite* m_pItemSprite;
 	Menu* m_pMenu;

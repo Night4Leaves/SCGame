@@ -92,6 +92,7 @@ void JsonUtil::readPlayerInfo(std::vector<PlayerData>& playerInfoList, const cha
 
 			time_t t = time(0);
 
+			player.str_playerName = root[i]["playerName"].asCString();
 			player.i_dataNumber = t;
 			player.b_isMonster = false;
 
@@ -278,13 +279,15 @@ void JsonUtil::writeSavedata(const char * fileName /*= "json/savedata.json"*/)
 		}
 
 		temp = m_vecPlayerSavedata[i].map_backpackItems.size();
+		auto test = m_vecPlayerSavedata[i].map_backpackItems.begin();
 		for (int j = 0; j < temp; j++)
 		{
 			std::string itemNamePIN = StringUtils::format("item%02dname", j + 1);
 			std::string itemNumberPIN = StringUtils::format("item%02dnum", j + 1);
-			auto test = m_vecPlayerSavedata[j].map_backpackItems.begin();
-			root[i][itemNamePIN] = test->first;
-			root[i][itemNumberPIN] = test->second;
+			
+			root[i]["backpackItems"][itemNamePIN] = test->first;
+			root[i]["backpackItems"][itemNumberPIN] = test->second;
+			test++;
 		}
 
 		temp = m_vecPlayerSavedata[i].map_skillList.size();

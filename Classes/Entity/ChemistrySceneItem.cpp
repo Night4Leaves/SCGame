@@ -1,19 +1,17 @@
-#include "ChemistrySceneItem.h"
+﻿#include "ChemistrySceneItem.h"
 
-ChemistrySceneItem * ChemistrySceneItem::cteate(const SceneItemInfomation & sceneItemInfo)
+bool ChemistrySceneItem::init()
 {
-	ChemistrySceneItem *pRet = new(std::nothrow) ChemistrySceneItem();
-	if (pRet && pRet->init(sceneItemInfo))
+	do
 	{
-		pRet->autorelease();
-		return pRet;
-	}
-	else
-	{
-		delete pRet;
-		pRet = nullptr;
-		return nullptr;
-	}
+		CC_BREAK_IF(!Node::init());
+
+		m_pSprite = Sprite::createWithSpriteFrameName("scene_item_chemistry.png");
+		this->addChild(m_pSprite);
+
+		return true;
+	} while (0);
+	return false;
 }
 
 void ChemistrySceneItem::startPause(Ref * pSender)
@@ -24,6 +22,35 @@ void ChemistrySceneItem::endPause(Ref * pSender)
 {
 }
 
+void ChemistrySceneItem::setType(ChemistryType chemistryType)
+{
+	m_enChemistryType = chemistryType;
+	Sprite* sprite;
+	switch (chemistryType)
+	{
+	case en_ct_HCl:
+		sprite = Sprite::createWithSpriteFrameName("hcl.png");
+		break;
+	case en_ct_NaOH:
+		sprite = Sprite::createWithSpriteFrameName("naoh.png");
+		break;
+	case en_ct_H2SO4:
+		sprite = Sprite::createWithSpriteFrameName("h2so4.png");
+		break;
+	case en_ct_CAOH2:
+		sprite = Sprite::createWithSpriteFrameName("caoh2.png");
+		break;
+	case en_ct_H2CO3:
+		sprite = Sprite::createWithSpriteFrameName("h2co3.png");
+		break;
+	default:
+		break;
+	}
+
+	this->addChild(sprite);
+	sprite->setScale(0.5);
+}
+
 ChemistrySceneItem::ChemistrySceneItem()
 {
 }
@@ -32,26 +59,3 @@ ChemistrySceneItem::~ChemistrySceneItem()
 {
 }
 
-void ChemistrySceneItem::checkItemType(Ref * pSender)
-{
-	int check = (int)pSender;
-	switch (check)
-	{
-	case en_consumableItemType_recovery:
-		break;
-	case en_consumableItemType_sceneItem:
-		break;
-	case en_consumableItemType_fe:
-		if (m_enPH == en_ph_strongAcid)
-		{
-
-		}
-		break;
-	case en_consumableItemType_cu:
-		break;
-	case en_consumableItemType_ag:
-		break;
-	default:
-		break;
-	}
-}
